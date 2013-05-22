@@ -1,5 +1,5 @@
 #!/usr/bin/ksh 
-
+#
 #To choose which Lpar id you want to active,you need to type 2 lpar_id number. 
 #First number is you want active First lpar_id number,second number is the last number you want to close lpar_id id.
 #It will scp 2 file to HMC , and you need to type the passwd for hscroot.
