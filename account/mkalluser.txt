@@ -1,0 +1,255 @@
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+sysse01:!:351:0::/home/se/sysse01:/usr/bin/ksh
+
+20120517 14:01:46 user:sysse01 already exist
+20120517 14:01:46 Change user:sysse01 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+sysse02:!:352:0::/home/se/sysse02:/usr/bin/ksh
+
+20120517 14:01:46 user:sysse02 already exist
+20120517 14:01:46 Change user:sysse02 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+useradm:!:390:7::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:useradm already exist
+20120517 14:01:46 Change user:useradm attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+seadm:!:300:10000::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:seadm already exist
+20120517 14:01:46 Change user:seadm attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+se01:!:303:10000::/home/se/se01:/usr/bin/ksh
+
+20120517 14:01:46 user:se01 already exist
+20120517 14:01:46 Change user:se01 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+se02:!:302:10000::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:se02 already exist
+20120517 14:01:46 Change user:se02 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+exadm:!:600:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:exadm already exist
+20120517 14:01:46 Change user:exadm attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+ex06:!:606:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:ex06 already exist
+20120517 14:01:46 Change user:ex06 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+ex08:!:608:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:ex08 already exist
+20120517 14:01:46 Change user:ex08 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+ex09:!:609:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:ex09 already exist
+20120517 14:01:46 Change user:ex09 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+ex11:!:611:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:ex11 already exist
+20120517 14:01:46 Change user:ex11 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+ex12:!:612:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:ex12 already exist
+20120517 14:01:46 Change user:ex12 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+ex14:!:614:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:ex14 already exist
+20120517 14:01:46 Change user:ex14 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+ex15:!:615:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:ex15 already exist
+20120517 14:01:46 Change user:ex15 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+ex16:!:616:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:ex16 already exist
+20120517 14:01:46 Change user:ex16 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:46 Groupname = se aleady exist
+exc
+20120517 14:01:46 Groupname = exc aleady exist
+tse
+20120517 14:01:46 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:46 Check user...(/etc/passwd)
+ex17:!:617:600::/home/se/:/usr/bin/ksh
+
+20120517 14:01:46 user:ex17 already exist
+20120517 14:01:47 Change user:ex17 attribute
+---------------------------------------
+---------------------------------------
+se
+20120517 14:01:47 Groupname = se aleady exist
+exc
+20120517 14:01:47 Groupname = exc aleady exist
+tse
+20120517 14:01:47 Groupname = tse aleady exist
+---------------------------------------
+---------------------------------------
+20120517 14:01:47 Check user...(/etc/passwd)
+twse:!:900:900::/home/se/:/usr/bin/ksh
+
+20120517 14:01:47 user:twse already exist
+20120517 14:01:47 Change user:twse attribute
+---------------------------------------

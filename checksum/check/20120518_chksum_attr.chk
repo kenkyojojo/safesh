@@ -1,0 +1,6 @@
+09583     5 /etc/inetd.conf
+36018     3 /etc/passwd
+55299     1 /etc/group
+55972     1 /etc/security
+29823     1 /test/test1.txt
+57784     1 /test/test2.txt
