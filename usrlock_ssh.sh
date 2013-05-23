@@ -35,7 +35,7 @@ for HOST in $HOSTLIST ; do
     print -p "echo \"$USER:$NEWPASS\"|chpasswd"
     print -p pwdadm -c $USER
     print -p CHK=`lssec -f /etc/security/lastlog -a "unsuccessful_login_count" -s $USER | awk '{print $2}' | awk -F= '{print $2}'`
-    print -p "test \$CHK == 0 && touch unlockdatafile.${HOST}"
+    print -p "test \$CHK == 0 && touch $HOMEDIR/unlockdatafile.${HOST}"
     print -p exit
     print -p exit
     wait
