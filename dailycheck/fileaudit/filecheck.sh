@@ -179,6 +179,7 @@ check_exist(){
 
 echo 
 echo "#============================================================#"
+echo "# The Hostname:$hostname"
 echo "# File or Directory exist check:"
 echo "# Total `awk 'END {print NR}' $EXISTBASE` files in the checking list"
 echo "# Date: `date +%Y/%m/%d\ %H:%M`"
@@ -272,6 +273,7 @@ if [ -f $BASEFILE ]; then #if BASEFILE exist
    echo 
    echo 
    echo "#============================================================#"
+   echo "# The Hostname:$hostname"
    echo "# Reading Basefile to compare directory changes ..."
    echo "# Total `awk 'END {print NR}' $BASEFILE` files in the checking list"
    echo "# Date: `date +%Y/%m/%d\ %H:%M`"
