@@ -28,37 +28,43 @@ case $HOSTN in
 	DAP)
 		DIR=`head -1 $CONFIGDIR/dir.conf.dap`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.dap`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.dap;sed -n '3p' $CONFIGDIR/dir.conf.dap`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.dap`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.dap;sed -n '3p' $CONFIGDIR/dir.conf.dap;sed -n '4p' $CONFIGDIR/dir.conf.dap`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.dap | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 	DAR)
 		DIR=`head -1 $CONFIGDIR/dir.conf.dar`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.dar`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.dar;sed -n '3p' $CONFIGDIR/dir.conf.dar`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.dar`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.dar;sed -n '3p' $CONFIGDIR/dir.conf.dar;sed -n '4p' $CONFIGDIR/dir.conf.dar`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.dar | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 	LOG)
 		DIR=`head -1 $CONFIGDIR/dir.conf.log`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.log`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.log;sed -n '3p' $CONFIGDIR/dir.conf.log`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.log`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.log;sed -n '3p' $CONFIGDIR/dir.conf.log;sed -n '4p' $CONFIGDIR/dir.conf.log`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.log | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 	MDS)
 		DIR=`head -1 $CONFIGDIR/dir.conf.mds`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.mds`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.mds;sed -n '3p' $CONFIGDIR/dir.conf.mds`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.mds`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.mds;sed -n '3p' $CONFIGDIR/dir.conf.mds;sed -n '4p' $CONFIGDIR/dir.conf.mds`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.mds | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 	WKL)
 		DIR=`head -1 $CONFIGDIR/dir.conf.wkl`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.wkl`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.wkl;sed -n '3p' $CONFIGDIR/dir.conf.wkl`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.wkl`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.wkl;sed -n '3p' $CONFIGDIR/dir.conf.wkl;sed -n '4p' $CONFIGDIR/dir.conf.wkl`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.wkl | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 	*)
 		DIR=`head -1 $CONFIGDIR/dir.conf`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf;sed -n '3p' $CONFIGDIR/dir.conf`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf;sed -n '3p' $CONFIGDIR/dir.conf;sed -n '4p' $CONFIGDIR/dir.conf`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 esac
@@ -189,12 +195,17 @@ if [ -f $EXISTBASE ]; then
    cat /dev/null > $CURRENT_EXIST
    for DIRNAME in $EXIST
    do
-      #find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$11}' | sort -k2 -t "/" >> $CURRENT_EXIST
-       ls -ld  $DIRNAME  2> /dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}'| sort -k2  >> $CURRENT_EXIST 
+       ls -ld  $DIRNAME  2> /dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}'  >> $CURRENT_EXIST 
    done
+
+   for DIRNAME in $DIRNOTIME #Recursive list dir, but don't list the file and directory time.
+   do
+      find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$11}'  >> $CURRENT_EXIST
+   done
+
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $CURRENT_EXIST > $TMP_EXISTCUR
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $EXISTBASE > $TMP_EXISTBASE
-#diff $CURRENT_EXIST $EXISTBASE | sed -e "/ \/etc$/d" > $TMP_EXISTCHANGE
+ #diff $CURRENT_EXIST $EXISTBASE | sed -e "/ \/etc$/d" > $TMP_EXISTCHANGE
    diff $CURRENT_EXIST $EXISTBASE  > $TMP_EXISTCHANGE
 
    if [ -s $TMP_EXISTCHANGE ]; then
@@ -241,6 +252,18 @@ if [ -f $EXISTBASE ]; then
       sort $TMP_EXISTCUR -o $TMP_EXISTCUR
       sort $TMP_EXISTBASE -o $TMP_EXISTBASE
 
+      comm -23 $TMP_EXISTCUR $TMP_EXISTBASE |grep -v '^$' > $LIST_EXISTADD #compare current and base, delete the empty line then output the added file
+      if [ -s $LIST_EXISTADD ]; then #if file not empty
+          echo "EXISTCHANGE ADD Failed" >> $RESULT_EXIST
+          echo "There are `awk 'END {print NR}' $LIST_EXISTADD` files had been ADDED"
+          awk 'NR==FNR{arr[$1];next}$4 in arr' $LIST_EXISTADD $CURRENT_EXIST #print the added file(s) with Current attributes
+          cat $LIST_EXISTADD
+          echo ---------------------------------------
+      else
+          echo No files been added!
+          echo ---------------------------------------
+      fi
+
       comm -13 $TMP_EXISTCUR $TMP_EXISTBASE |grep -v '^$' > $LIST_EXISTDEL
       if [ -s $LIST_EXISTDEL ]; then
       echo "EXISTCHANGE DEL Failed" >> $RESULT_EXIST
@@ -283,7 +306,8 @@ if [ -f $BASEFILE ]; then #if BASEFILE exist
    for DIRNAME in $DIR #import all dir_list from commandline prompt
    do
       #find $DIRNAME -ls | eval $ALLEXCLUDE | sort -k2 -t "/" >> $CURRENT
-      find $DIRNAME -ls | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
+	   find $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
+#      find $DIRNAME -ls | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
    done
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT > $TMP_CUR
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $BASEFILE > $TMP_BASE
