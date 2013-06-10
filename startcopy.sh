@@ -25,7 +25,7 @@ done
 #----------------------------------
 STEP2(){
 for HOST in $HOSTLIST ; do
-   ssh -p 2222 $HOST "/home/se/safechk/safesh/dailycheck/daily_copy.sh"
+   ssh -p 2222 $HOST "/home/se/safechk/safesh/dailycheck/daily_copy.sh" 
    execStatus=$?
    if [ $execStatus -eq 0 ]; then
       echo Date: `date +%Y/%m/%d\ %H:%M:%S` "$HOST COPY OK!" >> $LOG
