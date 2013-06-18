@@ -97,7 +97,7 @@ STEP3() {
 		if [ $CHKSTATUS -gt 0 ];then
     		cp  $LOGDIR/safelog.$hostname.fileattr.$DATE $SELOG/log/ 2>/dev/null
 		fi
-			tar -cf - $SELOG/log/safelog.*.fileattr.$DATE  | gzip  > $SELOG/log/safelog.*.fileattr.$DATE.err.tar.gz 2>/dev/null
+			tar -cf - $SELOG/log/safelog.*.fileattr.$DATE  | gzip  > $SELOG/log/safelog.fileattr.$DATE.err.tar.gz 2>/dev/null
 			find $SELOG/log/ -type f -mtime +14 -name "safelog.*.fileattr.*.err.tar.gz" -exec rm {} \;
 			rm -f $SELOG/log/safelog.*.fileattr.$DATE 2>/dev/null
 	fi
