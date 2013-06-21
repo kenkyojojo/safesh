@@ -156,8 +156,8 @@ print -n " "
 
 #----------------------------------
 # check_status 
-# 1、echo "OK" or "failed" to $CHKDIR/fileaudit.status for the /home/se/chk/'s dailycheck.
-# 2、if the fileaudit.status no file has modified, then cp the current attr.bas over write the original attr.bas .
+# 1.echo "OK" or "failed" to $CHKDIR/fileaudit.status for the /home/se/chk/'s dailycheck.
+# 2.if the fileaudit.status no file has modified, then cp the current attr.bas over write the original attr.bas .
 #----------------------------------
 daily_check_status(){
 CHKDIR=/home/se/chk/fileaudit
