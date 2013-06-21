@@ -99,7 +99,7 @@ STEP3() {
 		fi
 			tar -cf - $SELOG/log/safelog.*.fileattr.$DATE  | gzip  > $SELOG/log/safelog.fileattr.$DATE.err.tar.gz 2>/dev/null
 			chown useradm:security $SELOG/log/safelog.fileattr.$DATE.err.tar.gz
-			find $SELOG/log/ -type f -mtime +14 -name "safelog.*.fileattr.*.err.tar.gz" -exec rm {} \;
+			find $SELOG/log/ -type f -mtime +3 -name "safelog.*.fileattr.*.err.tar.gz" -exec rm {} \;
 			rm -f $SELOG/log/safelog.*.fileattr.$DATE 2>/dev/null
 	fi
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp fileaudit to Working LPAR End' >> $LOG
