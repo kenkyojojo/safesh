@@ -10,7 +10,7 @@ diff $LOG/base/syschk.${HOSTNAME}.base $LOG/check/syschk.${HOSTNAME}.now > $LOG/
 echo "########################################################" >> $LOG/syschk_diff.log
 echo "Start Time $DT" >> $LOG/syschk_diff.log
 
-if [[ -s $LOG/syschk.diff  ]];then
+if [[ -s $LOG/result/syschk.diff  ]];then
 	echo "$HOSTNAME  Error" >> $LOG/syschk_diff.log
 	echo "$HOSTNAME  Please to check the file $LOG/result/syschk.diff" >> $LOG/syschk_diff.log
 else
