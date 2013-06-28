@@ -39,15 +39,26 @@ tlog() {
 STEP1() {
 	tlog "Running STEP1 ....."    
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp csv to Working LPAR Start' >> $LOG
-    scp -P 2222 $BASEFILE $wkserver:$SELOG/chg/ 2>/dev/null
-    scp -P 2222 $CURRENT $wkserver:$SELOG/chg/ 2>/dev/null
-    scp -P 2222 $FILECHG $wkserver:$SELOG/chg/ 2>/dev/null
-    scp -P 2222 $LOGDIR/$DATE2.$hostname.*.txt $wkserver:$SELOG/log/ 2>/dev/null
-    scp -P 2222 $LOGDIR/$DATE2.$hostname.*.csv $wkserver:$SELOG/csv/ 2>/dev/null
-    scp -P 2222 $ACCOUNTDIR/result/${hostname}_`date +%Y%m%d_user_attr.rst` $wkserver:$SELOG/itm/ 2>/dev/null
-    scp -P 2222 $FILEDIR/result/${hostname}_`date +%Y%m%d_file_attr.rst` $wkserver:$SELOG/itm/ 2>/dev/null
-    scp -P 2222 /var/log/syslog/$hostname.syslog.${DATE}.tar.gz $wkserver:$SELOG/log/ 2>/dev/null
-    chown -R useradm:security $SELOG
+	if [ $hostname != "WKLPAR" ];then
+		scp -P 2222 $BASEFILE $wkserver:$SELOG/chg/ 2>/dev/null
+		scp -P 2222 $CURRENT $wkserver:$SELOG/chg/ 2>/dev/null
+		scp -P 2222 $FILECHG $wkserver:$SELOG/chg/ 2>/dev/null
+		scp -P 2222 $LOGDIR/$DATE2.$hostname.*.txt $wkserver:$SELOG/log/ 2>/dev/null
+		scp -P 2222 $LOGDIR/$DATE2.$hostname.*.csv $wkserver:$SELOG/csv/ 2>/dev/null
+		scp -P 2222 $ACCOUNTDIR/result/${hostname}_`date +%Y%m%d_user_attr.rst` $wkserver:$SELOG/itm/ 2>/dev/null
+		scp -P 2222 $FILEDIR/result/${hostname}_`date +%Y%m%d_file_attr.rst` $wkserver:$SELOG/itm/ 2>/dev/null
+		scp -P 2222 /var/log/syslog/$hostname.syslog.${DATE}.tar.gz $wkserver:$SELOG/log/ 2>/dev/null
+	else
+		cp  $BASEFILE $SELOG/chg/ 2>/dev/null
+		cp  $CURRENT $SELOG/chg/ 2>/dev/null
+		cp  $FILECHG $SELOG/chg/ 2>/dev/null
+		cp  $LOGDIR/$DATE2.$hostname.*.txt $SELOG/log/ 2>/dev/null
+		cp  $LOGDIR/$DATE2.$hostname.*.csv $SELOG/csv/ 2>/dev/null
+		cp  $ACCOUNTDIR/result/${hostname}_`date +%Y%m%d_user_attr.rst` $SELOG/itm/ 2>/dev/null
+		cp  $FILEDIR/result/${hostname}_`date +%Y%m%d_file_attr.rst` $SELOG/itm/ 2>/dev/null
+		cp  /var/log/syslog/$hostname.syslog.${DATE}.tar.gz $SELOG/log/ 2>/dev/null
+		chown -R useradm:security $SELOG
+	fi
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp csv to Working LPAR End' >> $LOG
 }
 
@@ -88,6 +99,7 @@ STEP3() {
 	tlog "Running STEP3 ....."    
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp fileaudit to Working LPAR Start' >> $LOG
 	CHKSTATUS=`grep 'Failed' $CHKDIR/fileaudit.status| wc -l`
+	CHKFILEERR=`ls -l $SELOG/log/safelog.*.fileattr.$DATE | wc -l 2>/dev/null`
 
 	if [ $hostname != "WKLPAR" ];then
 		if [ $CHKSTATUS -gt 0 ];then
@@ -97,10 +109,14 @@ STEP3() {
 		if [ $CHKSTATUS -gt 0 ];then
     		cp  $LOGDIR/safelog.$hostname.fileattr.$DATE $SELOG/log/ 2>/dev/null
 		fi
+
+		if [ $CHKFILEERR -gt 0 ];then
 			tar -cf - $SELOG/log/safelog.*.fileattr.$DATE  | gzip  > $SELOG/log/safelog.fileattr.$DATE.err.tar.gz 2>/dev/null
 			chown useradm:security $SELOG/log/safelog.fileattr.$DATE.err.tar.gz
-			find $SELOG/log/ -type f -mtime +3 -name "safelog.*.fileattr.*.err.tar.gz" -exec rm {} \;
 			rm -f $SELOG/log/safelog.*.fileattr.$DATE 2>/dev/null
+		fi
+
+			find $SELOG/log/ -type f -mtime +3 -name "safelog.*.fileattr.*.err.tar.gz" -exec rm {} \;
 	fi
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp fileaudit to Working LPAR End' >> $LOG
 }
