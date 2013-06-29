@@ -29,8 +29,8 @@ STEP1() {
    chown  seadm:se $FILEDIR/base/${hostname}_file_exist.bas
    cat $LOGDIR/safelog.${hostname}.fileattr.`date +%Y%m%d`
 
-   find $FILEDIR/base -type f -mtime +14 -name "${hostname}_file_attr.bas*" -exec rm {} \;
-   find $FILEDIR/base -type f -mtime +14 -name "${hostname}_file_exist.bas*" -exec rm {} \;
+   find $FILEDIR/base -type f -mtime +14 -name "${hostname}_file_attr.bas.[0-9]*" -exec rm {} \;
+   find $FILEDIR/base -type f -mtime +14 -name "${hostname}_file_exist.bas.[0-9]*" -exec rm {} \;
    find $FILEDIR/check -type f -mtime +14 -exec rm {} \;
    find $FILEDIR/result -type f -mtime +14 -exec rm {} \;
    find $FILEDIR/err -type f -mtime +14 -exec rm {} \;
