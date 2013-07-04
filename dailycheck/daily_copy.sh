@@ -99,7 +99,6 @@ STEP3() {
 	tlog "Running STEP3 ....."    
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp fileaudit to Working LPAR Start' >> $LOG
 	CHKSTATUS=`grep 'Failed' $CHKDIR/fileaudit.status| wc -l`
-	CHKFILEERR=`ls -l $SELOG/log/safelog.*.fileattr.$DATE | wc -l 2>/dev/null`
 
 	if [ $hostname != "WKLPAR" ];then
 		if [ $CHKSTATUS -gt 0 ];then
@@ -110,6 +109,7 @@ STEP3() {
     		cp  $LOGDIR/safelog.$hostname.fileattr.$DATE $SELOG/log/ 2>/dev/null
 		fi
 
+		CHKFILEERR=`ls -l $SELOG/log/safelog.*.fileattr.$DATE | wc -l 2>/dev/null`
 		if [ $CHKFILEERR -gt 0 ];then
 			tar -cf - $SELOG/log/safelog.*.fileattr.$DATE  | gzip  > $SELOG/log/safelog.fileattr.$DATE.err.tar.gz 2>/dev/null
 			chown useradm:security $SELOG/log/safelog.fileattr.$DATE.err.tar.gz
