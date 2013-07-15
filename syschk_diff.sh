@@ -16,3 +16,5 @@ if [[ -s $LOG/result/syschk.diff  ]];then
 else
 	echo "$HOSTNAME  OK." >> $LOG/syschk_diff.log
 fi
+
+tail -5 $LOG/syschk_diff.log
