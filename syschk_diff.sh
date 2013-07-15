@@ -5,7 +5,7 @@ DT=`date +"%y/%m/%d %H:%M:%S"`
 HOSTNAME=`hostname`
 
 $SHELL/syschk_current.sh 
-diff $LOG/base/syschk.${HOSTNAME}.base $LOG/check/syschk.${HOSTNAME}.now > $LOG/result/syschk.diff 2> $LOG/err/syschk_diff.errlog
+diff $LOG/base/syschk.${HOSTNAME}.base $LOG/check/syschk.${HOSTNAME}.now > $LOG/result/syschk.diff.`%y%m%d` 2> $LOG/err/syschk_diff.errlog
 
 echo "########################################################" >> $LOG/syschk_diff.log
 echo "Start Time $DT" >> $LOG/syschk_diff.log

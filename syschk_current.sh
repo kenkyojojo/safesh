@@ -140,3 +140,9 @@ echo "#================ ╰参癘拘砰把计 =================#" >> $LOGFILE
 vmo -a | grep -Ev 'pinnable_frames|maxpin|maxperm|minperm'>> $LOGFILE
 echo "#===== 絋粄瓃戈癟琌タ絋? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
+
+echo "" >> $LOGFILE
+echo "#================ ╰参 Memory & CPU だ场跋办 =================#" >> $LOGFILE
+lssrad -av >> $LOGFILE
+echo "#===== 絋粄瓃戈癟琌タ絋? Yes( ) NO( ) ======#" >> $LOGFILE
+echo "" >> $LOGFILE
