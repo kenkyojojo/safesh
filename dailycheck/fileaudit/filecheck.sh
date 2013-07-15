@@ -203,7 +203,7 @@ if [ -f $EXISTBASE ]; then
 
    for DIRNAME in $DIRNOTIME #Recursive list dir, but don't list the file and directory time.
    do
-      find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$11}'  >> $CURRENT_EXIST
+      find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
    done
 
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $CURRENT_EXIST > $TMP_EXISTCUR
