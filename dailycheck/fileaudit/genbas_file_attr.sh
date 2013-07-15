@@ -79,7 +79,7 @@ done
 
 for DIRNAME in $DIRNOTIME #Recursive list dir, but don't list the file and directory time. 
 do
-   find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$11}'  >> $EXISTBASE
+   find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $EXISTBASE
 done
 }
 

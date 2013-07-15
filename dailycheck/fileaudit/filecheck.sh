@@ -19,12 +19,9 @@
 # Set variable
 #----------------------------------
 hostname=`hostname`
-SHELL=filecheck.sh
 CONFIGDIR=/home/se/safechk/cfg
 FILEDIR=/home/se/safechk/file/fileaudit
 LOGDIR=/home/se/safechk/safelog
-DATEM=`date +%Y%m`
-LOG=$LOGDIR/${DATEM}.${hostname}.${SHELL}.log
 HOSTN=$(echo $hostname | cut -c 1-3)
 
 case $HOSTN in
@@ -84,8 +81,6 @@ RESULT=$FILEDIR/result/${hostname}_`date +%Y%m%d_file_attr.rst`
 RESULT_EXIST=$FILEDIR/result/${hostname}_`date +%Y%m%d_file_exist.rst`
 FILECHG=$LOGDIR/${hostname}_`date +%Y%m%d_file_attr.chg`
 FILECHG_EXIST=$LOGDIR/${hostname}_`date +%Y%m%d_file_exist.chg`
-CHKDIR=/home/se/chk/fileaudit
-debugmod="1"		# for debug! (1=on , 0=off)
 
 #----------------------------------
 # Temp file for compare and debug
@@ -105,45 +100,10 @@ TMP_EXISTCHANGE=$FILEDIR/tmp_exist_change
 LIST_EXISTADD=$FILEDIR/file_exist_add
 LIST_EXISTDEL=$FILEDIR/file_exist_del
 LIST_EXISTCHANGE=$FILEDIR/file_exist_change
-
-echo "#============================================================#" >> $LOG
-#-----------------------
-# Show running step status
-#-----------------------
-tlog() {
-    msg=$1
-	if [ "$debugmod" = "1" ]; then
-		dt=`date +"%y/%m/%d %H:%M:%S"`
-		echo "DATE: [${dt}] $msg" >> $LOG
-	fi
-}
-#----------------------------------
-# To check the  base files exists
-#----------------------------------
-check_base_file(){
-tlog "Running check_base_file start"
-BASE_FILE=`grep 'exists' $CHKDIR/fileaudit.status|wc -l`
-	cat /dev/null > $CHKDIR/fileaudit.status
-
-	if [ ! -f $BASEFILE ];then 
-		echo "Failed:The $BASEFILE file is not exists" 
-		echo "Failed:The $BASEFILE file is not exists" >> $CHKDIR/fileaudit.status
-	fi
-	if [ ! -f $EXISTBASE ];then 
-		echo "Failed:The $EXISTBASE file is not exists"
-		echo "Failed:The $EXISTBASE file is not exists" >> $CHKDIR/fileaudit.status 
-	fi
-
-	if  [ "$BASE_FILE" -ge 1 ] ;then
-		exit
-	fi
-tlog "Running check_base_file end"
-}
 #----------------------------------
 # Clear temporary files
 #----------------------------------
 clear_tmp(){
-tlog "Running clear_tmp start"
    rm $TMP_BASE
    rm $TMP_CUR
    rm $TMP_CHANGE
@@ -178,8 +138,9 @@ tlog "Running clear_tmp start"
    if [ -f $LIST_EXISTCHANGE ]; then
       rm $LIST_EXISTCHANGE
    fi
-tlog "Running clear_tmp end"
 }
+
+
 #----------------------------------
 # If item were different then show the '^' symbol below it
 #----------------------------------
@@ -199,9 +160,9 @@ print -n " "
 # 2.if the fileaudit.status no file has modified, then cp the current attr.bas over write the original attr.bas .
 #----------------------------------
 daily_check_status(){
+CHKDIR=/home/se/chk/fileaudit
 RESULT=`grep 'Failed' $RESULT|wc -l`
 RESULT_EXIST=`grep 'Failed' $RESULT_EXIST|wc -l`
-tlog "Running daily_check_status start"
 
 cat /dev/null > $CHKDIR/fileaudit.status
 
@@ -214,12 +175,10 @@ fi
 if [ "$RESULT" -ge 1 ] ;then
 	echo "Check_modified Failed" >> $CHKDIR/fileaudit.status
 else
-	tlog "Current attr.bas has over write the original attr.bas"
 	echo "Check_modified OK" >> $CHKDIR/fileaudit.status
 	cp $CURRENT $BASEFILE
 fi
  
-tlog "Running daily_check_status end"
 }
 
 #----------------------------------
@@ -227,7 +186,6 @@ tlog "Running daily_check_status end"
 #----------------------------------
 check_exist(){
 
-tlog "Running check_exist start"
 echo 
 echo "#============================================================#"
 echo "# The Hostname:$hostname"
@@ -245,7 +203,7 @@ if [ -f $EXISTBASE ]; then
 
    for DIRNAME in $DIRNOTIME #Recursive list dir, but don't list the file and directory time.
    do
-      find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$11}'  >> $CURRENT_EXIST
+      find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
    done
 
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $CURRENT_EXIST > $TMP_EXISTCUR
@@ -329,7 +287,6 @@ if [ -f $EXISTBASE ]; then
 else
    echo Basefile not exist, please execute the script '"genbas_file_attr.sh"' to create !
 fi
-tlog "Running check_exist end"
 }
 
 #----------------------------------
@@ -338,7 +295,6 @@ tlog "Running check_exist end"
 check_modified(){
 #set -x 
 
-tlog "Running check_modified start"
 if [ -f $BASEFILE ]; then #if BASEFILE exist
    echo 
    echo 
@@ -495,9 +451,8 @@ else
    echo Basefile not exist, please execute the script '"genbas_file_attr.sh"' to create !
    exit 1
 fi
-tlog "Running check_modified end"
 }
-check_base_file
+
 check_exist
 check_modified
 daily_check_status
