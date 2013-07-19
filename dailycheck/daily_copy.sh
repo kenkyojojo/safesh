@@ -5,6 +5,7 @@
 #----------------------------------
 hostname=`hostname`
 wkserver="WKLPAR"
+SITE=TSEOA1
 DATE=`date +%Y%m%d`
 DATE2=`date +%Y%m`
 
@@ -20,7 +21,8 @@ LOG=/home/se/safechk/safesh/dailycheck/dailycheck.log
 SELOG=/home/se/safechk/selog
 
 #fileaudit for Daily_chk
-cp -p $LOGDIR/safelog.$hostname.fileattr.$DATE /home/se/chk/fileaudit/safelog.fileattr.today
+rm -f /home/se/chk/fileaudit/safelog.$hostname.fileattr.*
+cp  $LOGDIR/safelog.$hostname.fileattr.$DATE /home/se/chk/fileaudit/
 
 #-----------------------
 # Show running step status
@@ -111,12 +113,13 @@ STEP3() {
 
 		CHKFILEERR=`ls -l $SELOG/log/safelog.*.fileattr.$DATE | wc -l 2>/dev/null`
 		if [ $CHKFILEERR -gt 0 ];then
-			tar -cf - $SELOG/log/safelog.*.fileattr.$DATE  | gzip  > $SELOG/log/safelog.fileattr.$DATE.err.tar.gz 2>/dev/null
-			chown useradm:security $SELOG/log/safelog.fileattr.$DATE.err.tar.gz
+			cd $SELOG/log/
+			tar -cf - safelog.*.fileattr.$DATE  | gzip  > $SITE.fileattr.$DATE.err.tar.gz 2>/dev/null
+			chown useradm:security $SELOG/log/$SITE.fileattr.$DATE.err.tar.gz
 			rm -f $SELOG/log/safelog.*.fileattr.$DATE 2>/dev/null
 		fi
 
-			find $SELOG/log/ -type f -mtime +3 -name "safelog.*.fileattr.*.err.tar.gz" -exec rm {} \;
+			find $SELOG/log/ -type f -mtime +3 -name "$SITE.fileattr.*.err.tar.gz" -exec rm {} \;
 	fi
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp fileaudit to Working LPAR End' >> $LOG
 }
