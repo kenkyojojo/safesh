@@ -1,6 +1,7 @@
 #!/bin/ksh
 LOGDIR=/home/se/safechk/file/syschk/base
 LOGFILE=$LOGDIR/syschk.`hostname`.base
+BKLOGFILE=$LOGDIR/syschk.`hostname`.base.`date +%Y%m%d`
 #######################################################
 
 echo "" > $LOGFILE
@@ -146,3 +147,6 @@ echo "#================ 系統 Memory & CPU 分部區域 =================#" >> $LOGFI
 lssrad -av >> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
+
+#Backup base file
+cp $LOGFILE $BKLOGFILE 
