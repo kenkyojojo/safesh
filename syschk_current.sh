@@ -1,7 +1,7 @@
 #!/bin/ksh
 LOGDIR=/home/se/safechk/file/syschk/check
 LOGFILE=$LOGDIR/syschk.`hostname`.now
-BKLOGFILE=$LOGDIR/syschk.`hostname`.base.`date +%Y%m%d`
+BKLOGFILE=$LOGDIR/syschk.`hostname`.now.`date +%Y%m%d`
 #######################################################
 
 echo "" > $LOGFILE
