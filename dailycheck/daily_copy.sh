@@ -21,8 +21,8 @@ LOG=/home/se/safechk/safesh/dailycheck/dailycheck.log
 SELOG=/home/se/safechk/selog
 
 #fileaudit for Daily_chk
-rm -f /home/se/chk/fileaudit/safelog.$hostname.fileattr.*
-cp  $LOGDIR/safelog.$hostname.fileattr.$DATE /home/se/chk/fileaudit/
+rm -f /home/se/chk/fileaudit/safelog.fileattr.*
+cp  $LOGDIR/safelog.$hostname.fileattr.$DATE /home/se/chk/fileaudit/safelog.fileattr.$DATE
 
 #-----------------------
 # Show running step status
