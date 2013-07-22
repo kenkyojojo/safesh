@@ -149,4 +149,4 @@ echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 
 #Backup current file
-cp $BKLOGFILE $LOGFILE
+cp $LOGFILE $BKLOGFILE
