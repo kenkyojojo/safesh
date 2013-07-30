@@ -42,18 +42,12 @@ STEP1() {
 	tlog "Running STEP1 ....."    
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp csv to Working LPAR Start' >> $LOG
 	if [ $hostname != "WKLPAR" ];then
-		scp -P 2222 $BASEFILE $wkserver:$SELOG/chg/ 2>/dev/null
-		scp -P 2222 $CURRENT $wkserver:$SELOG/chg/ 2>/dev/null
-		scp -P 2222 $FILECHG $wkserver:$SELOG/chg/ 2>/dev/null
 		scp -P 2222 $LOGDIR/$DATE2.$hostname.*.txt $wkserver:$SELOG/log/ 2>/dev/null
 		scp -P 2222 $LOGDIR/$DATE2.$hostname.*.csv $wkserver:$SELOG/csv/ 2>/dev/null
 		scp -P 2222 $ACCOUNTDIR/result/${hostname}_`date +%Y%m%d_user_attr.rst` $wkserver:$SELOG/itm/ 2>/dev/null
 		scp -P 2222 $FILEDIR/result/${hostname}_`date +%Y%m%d_file_attr.rst` $wkserver:$SELOG/itm/ 2>/dev/null
 		scp -P 2222 /var/log/syslog/$hostname.syslog.${DATE}.tar.gz $wkserver:$SELOG/log/ 2>/dev/null
 	else
-		cp  $BASEFILE $SELOG/chg/ 2>/dev/null
-		cp  $CURRENT $SELOG/chg/ 2>/dev/null
-		cp  $FILECHG $SELOG/chg/ 2>/dev/null
 		cp  $LOGDIR/$DATE2.$hostname.*.txt $SELOG/log/ 2>/dev/null
 		cp  $LOGDIR/$DATE2.$hostname.*.csv $SELOG/csv/ 2>/dev/null
 		cp  $ACCOUNTDIR/result/${hostname}_`date +%Y%m%d_user_attr.rst` $SELOG/itm/ 2>/dev/null
@@ -105,10 +99,18 @@ STEP3() {
 	if [ $hostname != "WKLPAR" ];then
 		if [ $CHKSTATUS -gt 0 ];then
     		scp -P 2222 $LOGDIR/safelog.$hostname.fileattr.$DATE $wkserver:$SELOG/log/ 2>/dev/null
+    		scp -P 2222 $LOGDIR/safelog.$hostname.fileattr.$DATE $wkserver:$SELOG/chg/ 2>/dev/null
+			scp -P 2222 $BASEFILE $wkserver:$SELOG/chg/ 2>/dev/null
+			scp -P 2222 $CURRENT $wkserver:$SELOG/chg/ 2>/dev/null
+			scp -P 2222 $FILECHG $wkserver:$SELOG/chg/ 2>/dev/null
 		fi
 	else
 		if [ $CHKSTATUS -gt 0 ];then
     		cp  $LOGDIR/safelog.$hostname.fileattr.$DATE $SELOG/log/ 2>/dev/null
+    		cp  $LOGDIR/safelog.$hostname.fileattr.$DATE $SELOG/chg/ 2>/dev/null
+			cp  $BASEFILE $SELOG/chg/ 2>/dev/null
+			cp  $CURRENT $SELOG/chg/ 2>/dev/null
+			cp  $FILECHG $SELOG/chg/ 2>/dev/null
 		fi
 
 		CHKFILEERR=`ls -l $SELOG/log/safelog.*.fileattr.$DATE | wc -l 2>/dev/null`
