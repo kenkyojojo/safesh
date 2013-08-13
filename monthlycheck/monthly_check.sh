@@ -6,7 +6,7 @@
 hostname=`hostname`
 DATE2=`date +%Y%m`
 LOGDIR=/home/se/safechk/safelog
-LOG=/home/se/safechk/safesh/monthlycheck/monthlycheck.log
+LOG=/home/se/safechk/safesh/safelog/monthlycheck.log
 BIN=/home/se/safechk/safesh
 now_year=`date +"%Y"`
 yt1=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%b %m %d", localtime(time-86400));print $str'`
