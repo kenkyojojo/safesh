@@ -3,7 +3,7 @@
 #----------------------------------
 # Set variable
 #----------------------------------
-hostname=`hostname`
+hostname=$(echo `hostname` | cut -c1-5)
 timestamp=`date +"%Y%m%d%H%M"`
 wkserver="WKLPAR"
 TIME=0
