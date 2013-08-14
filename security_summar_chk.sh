@@ -2,7 +2,7 @@
 #----------------------------------
 # Set variable
 #----------------------------------
-SITE=TSEOB1
+SITE=TSEOA1
 HOSTNAME=`hostname`
 DATE=`date +%Y%m%d`
 SHDIR=/home/se/safechk/safesh
