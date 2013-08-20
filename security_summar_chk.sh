@@ -7,6 +7,8 @@ HOSTNAME=`hostname`
 DATE=`date +%Y%m%d`
 SHDIR=/home/se/safechk/safesh
 SHCFG=/home/se/safechk/cfg
+FILEDIR=/home/se/safechk/file/fileaudit
+CHKDIR=/home/se/chk/fileaudit
 LOGDIR=/home/se/safechk/safelog
 LOG=$LOGDIR/security_summar_chk.log
 NTPCHKLOG=$LOGDIR/ntp_chk.${DATE}
@@ -105,6 +107,18 @@ chk_satus (){
 	tlog "Step[6] check_status Finished" >> $LOG
 }
 
+# Fileaudit cp current status to overwrite the base status ,and change the fileaudit.status to OK status.
+fileaudit_base (){
+
+BASEFILE=$FILEDIR/base/${HOSTNAME}_file_attr.bas
+CURRENT=$FILEDIR/check/${HOSTNAME}_`date +%Y%m%d_file_attr.chk`
+
+	tlog "Step[7] fileaudit current overwrite base Start" >> $LOG
+		  cp $CURRENT $BASEFILE
+		  echo "Check_exist OK" >  $CHKDIR/fileaudit.status
+		  echo "Check_modified OK" >> $CHKDIR/fileaudit.status
+	tlog "Step[7] fileaudit current overwrite base Finished" >> $LOG
+}
 
 #Run ssh_rcmd
 ssh_rcmd () {
@@ -147,9 +161,17 @@ HST=`echo $HOSTNAME | cut -c1-3`
 				daily_check_base > /dev/null 2>&1 & 	 
 			fi
 		;;
+		base)
+			if [[ $HST = "WKL" ]];then
+				ssh_rcmd $SHDIR/security_summar_chk.sh base
+				fileaudit_base > /dev/null 2>&1 &	 
+			else
+				fileaudit_base > /dev/null 2>&1 &	 
+			fi
+		;;
 		*)
-			tlog "Please insert boot/down Parameter."
-			tlog "Please insert boot/down Parameter." >> $LOG
+			tlog "Please insert boot/down/base Parameter."
+			tlog "Please insert boot/down/base Parameter." >> $LOG
 			exit 1
 		;;
 
