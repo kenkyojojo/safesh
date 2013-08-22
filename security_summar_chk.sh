@@ -2,7 +2,7 @@
 #----------------------------------
 # Set variable
 #----------------------------------
-SITE=TSEOA1
+SITE=TSEOB1
 HOSTNAME=`hostname`
 DATE=`date +%Y%m%d`
 SHDIR=/home/se/safechk/safesh
@@ -15,7 +15,7 @@ NTPCHKLOG=$LOGDIR/ntp_chk.${DATE}
 SYSCHKLOG=$LOGDIR/sys_chk.${DATE}
 NTPRESULT=/home/se/chk/ntp/ntp.result
 SYSRESULT=/home/se/safechk/safelog/syschk.log
-WKLPAR="WKLPAR"
+WKLPAR="WKLPAROA1"
 trailmod=1
 GARVG=$1
 

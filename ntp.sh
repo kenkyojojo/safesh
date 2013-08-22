@@ -3,9 +3,9 @@
 #----------------------------------
 # Set variable
 #----------------------------------
-hostname=$(echo `hostname` | cut -c1-5)
+hostname=`hostname`
 timestamp=`date +"%Y%m%d%H%M"`
-wkserver="WKLPAR"
+wkserver="WKLPAROA1"
 TIME=0
 
 if [ $hostname != $wkserver ]; then
