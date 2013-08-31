@@ -4,7 +4,7 @@
 # Set variable
 #----------------------------------
 hostname=`hostname`
-wkserver="WKLPAR"
+wkserver="WKLPARA1"
 SITE=TSEOA1
 DATE=`date +%Y%m%d`
 DATE2=`date +%Y%m`
@@ -41,7 +41,7 @@ tlog() {
 STEP1() {
 	tlog "Running STEP1 ....."    
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp csv to Working LPAR Start' >> $LOG
-	if [ $hostname != "WKLPAR" ];then
+	if [ $hostname != "$wkserver" ];then
 		scp -P 2222 $LOGDIR/$DATE2.$hostname.*.txt $wkserver:$SELOG/log/ 2>/dev/null
 		scp -P 2222 $LOGDIR/$DATE2.$hostname.*.csv $wkserver:$SELOG/csv/ 2>/dev/null
 		scp -P 2222 $ACCOUNTDIR/result/${hostname}_`date +%Y%m%d_user_attr.rst` $wkserver:$SELOG/itm/ 2>/dev/null
@@ -96,7 +96,7 @@ STEP3() {
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp fileaudit to Working LPAR Start' >> $LOG
 	CHKSTATUS=`grep 'Failed' $CHKDIR/fileaudit.status| wc -l`
 
-	if [ $hostname != "WKLPAR" ];then
+	if [ $hostname != "$wkserver" ];then
 		if [ $CHKSTATUS -gt 0 ];then
     		scp -P 2222 $LOGDIR/safelog.$hostname.fileattr.$DATE $wkserver:$SELOG/log/ 2>/dev/null
     		scp -P 2222 $LOGDIR/safelog.$hostname.fileattr.$DATE $wkserver:$SELOG/chg/ 2>/dev/null
