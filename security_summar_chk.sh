@@ -15,7 +15,7 @@ NTPCHKLOG=$LOGDIR/ntp_chk.${DATE}
 SYSCHKLOG=$LOGDIR/sys_chk.${DATE}
 NTPRESULT=/home/se/chk/ntp/ntp.result
 SYSRESULT=/home/se/safechk/safelog/syschk.log
-WKLPAR="WKLPAROB1"
+WKLPAR="WKLPARB1"
 trailmod=1
 GARVG=$1
 

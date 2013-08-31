@@ -4,7 +4,7 @@
 # Set variable
 #----------------------------------
 hostname=`hostname`
-wkserver="WKLPAR"
+wkserver="WKLPARB1"
 DATE2=`date +%Y%m`
 LOGDIR=/home/se/safechk/safelog
 FILEDIR=/home/se/safechk/file/fileaudit
