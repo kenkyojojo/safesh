@@ -11,8 +11,9 @@ FILEDIR=/home/se/safechk/file/fileaudit
 CHKDIR=/home/se/chk/fileaudit
 LOGDIR=/home/se/safechk/safelog
 LOG=$LOGDIR/security_summar_chk.log
-NTPCHKLOG=$LOGDIR/ntp_chk.${DATE}
-SYSCHKLOG=$LOGDIR/sys_chk.${DATE}
+ntpCHKLOG=$LOGDIR/ntp_chk.${DATE}
+sysCHKLOG=$LOGDIR/sys_chk.${DATE}
+autCHKLOG=$LOGDIR/aut_chk.${DATE}
 NTPRESULT=/home/se/chk/ntp/ntp.result
 SYSRESULT=/home/se/safechk/safelog/syschk.log
 WKLPAR="WKLPARA1"
@@ -69,40 +70,61 @@ ntp (){
 
 #check status
 chk_satus (){
+CHKTYPE=$1
+TOTLECOUNT=`cat $SHCFG/host.lst| grep -v WKLPAR |awk '{print $1}'|wc -l `
+COUNTNUM=0
+
 	tlog "Step[6] check_status Start" >> $LOG
-		TOTLECOUNT=`cat $SHCFG/host.lst| grep -v WKLPAR |awk '{print $1}'|wc -l `
-		cat /dev/null > $NTPCHKLOG
-		cat /dev/null > $SYSCHKLOG
+#cat /dev/null > $NTPCHKLOG
+#cat /dev/null > $SYSCHKLOG
 
-		COUNTNTP=0
-		while [[ $COUNTNTP -lt $TOTLECOUNT ]]
-		do
-			for HOSTLST in `cd /tmp;ls -1 *.ntptmp|awk -F '.' '{print $1}'`
+		cat /dev/null > ${CHKTYPE}CHKLOG
+#COUNTNTP=0
+#while [[ $COUNTNTP -lt $TOTLECOUNT ]]
+		if [[ $CHKTYPE = "ntp" || $CHYTYPE = "sys" ]] ; then
+			while [[ $COUNTNUM -lt $TOTLECOUNT ]]
 			do
-			echo "#-------------------------------------------------------------------------#" >> $NTPCHKLOG
-					tlog $HOSTLST >> $NTPCHKLOG
-					ssh -p 2222 $HOSTLST "cat $NTPRESULT" >> $NTPCHKLOG
-					rm -f /tmp/${HOSTLST}.ntptmp
-					COUNTNTP=$(( $COUNTNTP+1 ))
+				for HOSTLST in `cd /tmp;ls -1 *.${CHKTYPE}tmp|awk -F '.' '{print $1}'`
+				do
+				echo "#-------------------------------------------------------------------------#" >> ${CHKTYPE}CHKLOG
+						tlog $HOSTLST >> ${CHKTYPE}CHKLOG
+						ssh -p 2222 $HOSTLST "cat ${CHKTYPE}RESULT" >> ${CHKTYPE}CHKLOG
+						rm -f /tmp/${HOSTLST}.${CHKTYPE}tmp
+						COUNTNUM=$(( $COUNTNUM+1 ))
+				done
 			done
-		done
-		echo "#-------------------------------------------------------------------------#" >> $NTPCHKLOG
-		tlog $HOSTNAME >> $NTPCHKLOG
-		cat $NTPRESULT >> $NTPCHKLOG
-
-		COUNTSYS=0
-		while [[ $COUNTSYS -lt $TOTLECOUNT ]]
-		do
-			for HOSTLST in `cd /tmp;ls -1 *.systmp|awk -F '.' '{print $1}'`
+			echo "#-------------------------------------------------------------------------#" >> ${CHKTYPE}CHKLOG
+			cat ${CHKTYPE}RESULT >> ${CHKTYPE}CHKLOG
+		else
+			while [[ $COUNTNUM -lt $TOTLECOUNT ]]
 			do
-					ssh -p 2222 $HOSTLST "cat $SYSRESULT" >> $SYSCHKLOG
-					rm -f /tmp/${HOSTLST}.systmp
-					COUNTSYS=$(( $COUNTSYS+1 ))
+				for HOSTLST in `cd /tmp;ls -1 *.${CHKTYPE}tmp|awk -F '.' '{print $1}'`
+				do
+				echo "#-------------------------------------------------------------------------#" >> ${CHKTYPE}CHKLOG
+						tlog $HOSTLST >> ${CHKTYPE}CHKLOG
+						ssh -p 2222 $HOSTLST "cat ${CHKTYPE}RESULT" >> ${CHKTYPE}CHKLOG
+						rm -f /tmp/${HOSTLST}.${CHKTYPE}tmp
+						COUNTNUM=$(( $COUNTNUM+1 ))
+				done
+			done
+			echo "#-------------------------------------------------------------------------#" >> ${CHKTYPE}CHKLOG
+			cat ${CHKTYPE}RESULT >> ${CHKTYPE}CHKLOG
+		fi
+
+			tlog $HOSTNAME >> ${CHKTYPE}CHKLOG
+#		COUNTSYS=0
+#		while [[ $COUNTSYS -lt $TOTLECOUNT ]]
+#		do
+#			for HOSTLST in `cd /tmp;ls -1 *.systmp|awk -F '.' '{print $1}'`
+#			do
+#					ssh -p 2222 $HOSTLST "cat $SYSRESULT" >> $SYSCHKLOG
+#					rm -f /tmp/${HOSTLST}.systmp
+#					COUNTSYS=$(( $COUNTSYS+1 ))
 #echo 1 $COUNTSYS
-			done
+#			done
 #echo 2 $COUNTSYS
-		done
-		cat $SYSRESULT >> $SYSCHKLOG
+#		done
+#		cat $SYSRESULT >> $SYSCHKLOG
 
 	tlog "Step[6] check_status Finished" >> $LOG
 }
@@ -118,6 +140,17 @@ CURRENT=$FILEDIR/check/${HOSTNAME}_`date +%Y%m%d_file_attr.chk`
 		  echo "Check_exist OK" >  $CHKDIR/fileaudit.status
 		  echo "Check_modified OK" >> $CHKDIR/fileaudit.status
 	tlog "Step[7] fileaudit current overwrite base Finished" >> $LOG
+}
+
+# scp fileaudit failed report file to wklpar use startcopy.sh
+fileaudit_scopy (){
+
+	tlog "Step[8] $SHDIR/startcopy.sh Start" >> $LOG
+		  $SHDIR/startcopy.sh
+		  touch /tmp/${HOSTNAME}.audtmp
+		  scp -P 2222 /tmp/${HOSTNAME}.audtmp $WKLPAR:/tmp 
+		  rm -f /tmp/${HOSTNAME}.audtmp
+	tlog "Step[8] $SHDIR/startcopy.sh Finished" >> $LOG
 }
 
 #Run ssh_rcmd
@@ -146,7 +179,8 @@ HST=`echo $HOSTNAME | cut -c1-3`
 				ssh_rcmd $SHDIR/security_summar_chk.sh boot
 				syschk_check > /dev/null 2>&1 & 	 
 				daily_check > /dev/null 2>&1  &
-				chk_satus > /dev/null 2>&1  &
+				chk_satus ntp > /dev/null 2>&1  
+				chk_satus sys > /dev/null 2>&1  
 			else
 				ntp > /dev/null 2>&1 &
 				syschk_check > /dev/null 2>&1 &	
@@ -169,9 +203,18 @@ HST=`echo $HOSTNAME | cut -c1-3`
 				fileaudit_base > /dev/null 2>&1 &	 
 			fi
 		;;
+		audit)
+			if [[ $HST = "WKL" ]];then
+				ssh_rcmd $SHDIR/security_summar_chk.sh audit
+				sleep 90
+				fileaudit_scopy > /dev/null 2>&1 &	 
+			else
+				fileaudit_scopy > /dev/null 2>&1 &	 
+			fi
+		;;
 		*)
-			tlog "Please insert boot/down/base Parameter."
-			tlog "Please insert boot/down/base Parameter." >> $LOG
+			tlog "Please insert boot/down/base/audit Parameter."
+			tlog "Please insert boot/down/base/audit Parameter." >> $LOG
 			exit 1
 		;;
 
