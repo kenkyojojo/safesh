@@ -17,7 +17,7 @@ ACCOUNTDIR=/home/se/safechk/file/account
 BASEFILE=$FILEDIR/base/${hostname}_file_attr.bas
 CURRENT=$FILEDIR/check/${hostname}_`date +%Y%m%d_file_attr.chk`
 FILECHG=$LOGDIR/${hostname}_`date +%Y%m%d_file_attr.chg`
-LOG=/home/se/safechk/safesh/dailycheck/dailycheck.log
+LOG=/home/se/safechk/safelog/dailycheck.log
 SELOG=/home/se/safechk/selog
 
 #fileaudit for Daily_chk
