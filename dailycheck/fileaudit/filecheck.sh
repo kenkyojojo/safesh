@@ -20,6 +20,7 @@
 #----------------------------------
 hostname=`hostname`
 SHELL=filecheck.sh
+SITE=TSEOA1
 CONFIGDIR=/home/se/safechk/cfg
 FILEDIR=/home/se/safechk/file/fileaudit
 LOGDIR=/home/se/safechk/safelog
@@ -230,6 +231,7 @@ check_exist(){
 tlog "Running check_exist start"
 echo 
 echo "#============================================================#"
+echo "# The SITE:$SITE"
 echo "# The Hostname:$hostname"
 echo "# File or Directory exist check:"
 echo "# Total `awk 'END {print NR}' $EXISTBASE` files in the checking list"
@@ -340,14 +342,15 @@ check_modified(){
 
 tlog "Running check_modified start"
 if [ -f $BASEFILE ]; then #if BASEFILE exist
-   echo 
-   echo 
-   echo "#============================================================#"
-   echo "# The Hostname:$hostname"
-   echo "# Reading Basefile to compare directory changes ..."
-   echo "# Total `awk 'END {print NR}' $BASEFILE` files in the checking list"
-   echo "# Date: `date +%Y/%m/%d\ %H:%M`"
-   echo "#============================================================#"
+echo 
+echo 
+echo "#============================================================#"
+echo "# The SITE:$SITE"
+echo "# The Hostname:$hostname"
+echo "# Reading Basefile to compare directory changes ..."
+echo "# Total `awk 'END {print NR}' $BASEFILE` files in the checking list"
+echo "# Date: `date +%Y/%m/%d\ %H:%M`"
+echo "#============================================================#"
    cat /dev/null > $CURRENT #flush the file to make sure it's fresh
    cat /dev/null > $RESULT #flush the check_status_file
    for DIRNAME in $DIR #import all dir_list from commandline prompt
