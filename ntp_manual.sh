@@ -5,7 +5,7 @@
 #----------------------------------
 hostname=`hostname`
 timestamp=`date +"%Y%m%d%H%M"`
-wkserver="WKLPARA1"
+wkserver="WKLPART1"
 TIME=0
 
 if [ $hostname != $wkserver ]; then
