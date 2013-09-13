@@ -4,7 +4,7 @@
 # Set variable
 #----------------------------------
 hostname=`hostname`
-wkserver="WKLPART1"
+wkserver="WKLPART2"
 SITE=TSEOT1
 DATE=`date +%Y%m%d`
 DATE2=`date +%Y%m`
