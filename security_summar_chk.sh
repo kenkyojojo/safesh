@@ -276,7 +276,7 @@ usage () {
 	echo "Useage:security_summar_chk.sh sys"
 	echo ""
 	echo "daily_check parameter: Run the ssh_rcmd, daily_check"
-	echo "Useage:security_summar_chk.sh daily_check
+	echo "Useage:security_summar_chk.sh daily_check"
 
 	exit 1
 }
