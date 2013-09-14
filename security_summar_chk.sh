@@ -263,7 +263,7 @@ usage () {
 	echo "base parameter: Run the ssh_rcmd, fileaudit_base."
 	echo "Useage:security_summar_chk.sh base"
 	echo ""
-	echo "audit parameter: Run the ssh_rcmd, fileaudit_socp."
+	echo "audit parameter: Run the ssh_rcmd, fileaudit_scop."
 	echo "Useage:security_summar_chk.sh audit"
 	echo ""
 	echo "hardware_chk parameter: Run the ssh_rcmd, hardware_chk."
