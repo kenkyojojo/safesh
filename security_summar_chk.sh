@@ -251,7 +251,7 @@ SARGV=$2
 #---------------------------------------------------------------------
 usage () {
 
-	tlog "Please insert boot/down/base/audit/Hardware_chk Parameter."
+	tlog "Please insert boot/down/base/audit/Hardware_chk/ntp/sys/daily_check Parameter."
 	echo ""
 	echo "boot parameter: Run the ssh_rcmd, ntp , syschk_compare, daily_check, chk_status ntp ,chk_status sys function."
 	echo "Useage:security_summar_chk.sh boot"
