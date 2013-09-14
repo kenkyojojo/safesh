@@ -142,11 +142,5 @@ vmo -a | grep -Ev 'pinnable_frames|maxpin|maxperm|minperm'>> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 
-echo "" >> $LOGFILE
-echo "#================ 系統 Memory & CPU 分部區域 =================#" >> $LOGFILE
-lssrad -av >> $LOGFILE
-echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
-echo "" >> $LOGFILE
-
 #Backup base file
 cp $LOGFILE $BKLOGFILE 
