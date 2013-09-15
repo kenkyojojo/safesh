@@ -120,13 +120,13 @@ adm_RESULT=$LOGDIR/seadm_chk.log
 sba_RESULT=$LOGDIR/syschk_base.log
 ###########################################################################
 CHKTYPE=$1
-TOTLECOUNT=`cat $SHCFG/host.lst |awk '{print $1}'|wc -l `
+TOTLELPAR=`cat $SHCFG/host.lst |awk '{print $1}'|wc -l `
 
 #rm -f "/tmp/*.${CHKTYPE}tmp"
 
 case $CHKTYPE in 
     ntp)
-#	TOTLECOUNT=`cat $SHCFG/host.lst| grep -v WKLPAR |awk '{print $1}'|wc -l `
+#	TOTLELPAR=`cat $SHCFG/host.lst| grep -v WKLPAR |awk '{print $1}'|wc -l `
 	CHKLOG=$ntp_CHKLOG
 	RESULT=$ntp_RESULT
 	cat /dev/null > $CHKLOG
@@ -166,10 +166,10 @@ esac
 
 	tlog "Step[6] check_status $CHKTYPE Start" >> $LOG
 	COUNTNUM=0
-			while [[ $COUNTNUM -lt $TOTLECOUNT ]]
+			while [[ $COUNTNUM -lt $TOTLELPAR ]]
 			do
 #echo $CHKTYPE
-#echo $COUNTNUM:$TOTLECOUNT
+#echo $COUNTNUM:$TOTLELPAR
 				for HOSTLST in `cd /tmp;ls -1 *.${CHKTYPE}tmp|awk -F '.' '{print $1}'`
 				do
 				echo "#-------------------------------------------------------------------------#" >> $CHKLOG
