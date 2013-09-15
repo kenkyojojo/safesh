@@ -326,6 +326,7 @@ HST=`echo $HOSTNAME | cut -c1-3`
 		audit) #Test OK
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh audit
+				sleep 10
 				fileaudit_scopy > /dev/null 2>&1 &
 				chk_status aut > /dev/null 2>&1 &
 				#chk_status aut &
