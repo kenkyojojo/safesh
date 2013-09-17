@@ -91,6 +91,7 @@ HST=`echo $HOSTNAME | cut -c1-3`
 		  	chk_pointfile ntp
 		else
 	    	$SHDIR/ntp_manual.sh
+			cp -p ${CHKDIR}/ntp/ntp.result $LOGDIR/ntp.log
 		  	chk_pointfile ntp
 		fi
 	tlog "Step[5] $SHDIR/ntp_manual.sh Finished" >> $LOG
