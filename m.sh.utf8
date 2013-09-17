@@ -1903,9 +1903,8 @@ LOGDIR=/home/se/safechk/safelog
 LOG=$LOGDIR/security_summar_chk.log
 SHDIR=/home/se/safechk/safesh
 NTPSRV=$(sed -n '1p' /home/se/safechk/cfg/ntp.lst)
-NTPCMD=$(stopsrc -s xntpd;$SHDIR/ntp_manual.sh;startsrc -s xntpd)
+NTPCMD="stopsrc -s xntpd;$SHDIR/ntp_manual.sh;startsrc -s xntpd"
 SECCMD=$SHDIR/security_summar_chk.sh
-#NTPCMD="stopsrc -s xntpd;\$SHDIR/ntp_manual.sh;startsrc -s xntpd"
 timestamp=`date +"%Y%m%d%H%M"`
 CHKFLG=0
 
@@ -1923,7 +1922,7 @@ echo "        4. 系統檢核(syschk_diff.sh) "
 echo ""
 echo "        5. 系統檔案檢核(useradm's daily_check.sh) "
 echo ""
-echo "        6. 系統檔案檢核異動匯總至WKLPAR (daily_copy.sh) "
+echo "        6. 系統檔案檢核異動匯集至WKLPAR (daily_copy.sh) "
 echo ""
 echo "        7. 系統檔案檢核Base檔覆蓋 "
 echo ""
@@ -1939,7 +1938,9 @@ case $Menu_No in
  	    echo "			開始進行WKLPAR校時..."
 		sleep 1
 		echo "			執行指令：$NTPCMD"
-							      $NTPCMD
+						stopsrc -s xntpd > /dev null 
+						$SHDIR/ntp_manual.sh
+						startsrc -s xntpd > /dev/null 
  	    echo "			WKLPAR校時完成(請確認校時結果)"
 		echo ""
 		read ANSWR?"               按Enter鍵繼續 "
