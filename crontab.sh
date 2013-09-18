@@ -26,7 +26,6 @@ if [ "$HOSTNAME" == "LOG" ] ; then
 
 elif [ "$HOSTNAME" == "WKL" ]; then
    ##root
-   echo "0 5 * * *  /home/se/safechk/safesh/ntp.sh > /dev/null 2>&1" >> $RPATH/$RUSER
    echo "30 4 * * *  stopsrc -s xntpd ; /home/se/safechk/safesh/ntp.sh > /dev/null 2>&1 ; startsrc -s xntpd" >> $RPATH/$RUSER
    echo "0 1 * * *  /home/se/safechk/safesh/ckpasswd.sh > /dev/null 2>&1" >> $RPATH/$RUSER
    echo "0 4 * * *  /home/se/safechk/safesh/dailycheck/daily_check.sh > /dev/null 2>&1" >> $RPATH/$RUSER
