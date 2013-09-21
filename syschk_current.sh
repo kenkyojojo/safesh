@@ -94,7 +94,7 @@ echo "" >> $LOGFILE
 
 echo "" >> $LOGFILE
 echo "#================= CTM agent狀態 ===============#" >> $LOGFILE
-su - twse "shagent" | grep ^twse | grep -v "Password" | awk '{print $1, "\t",$5}'  >> $LOGFILE
+su - twse "shagent" | grep ^twse | grep -v "Password" | awk '{print $1, "\t",$NF}'  >> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 
