@@ -16,6 +16,7 @@ if [[ -s $LOG/result/syschk.diff.`date +"%Y%m%d"` ]];then
 	echo "$HOSTNAME  Error Please to check the file $LOG/result/syschk.diff " >> $LOG/syschk_diff.log
 	tail -3 $LOG/syschk_diff.log > $CHKLOG/syschk.log
 else
+	cp $LOG/result/syschk.diff.`date +"%Y%m%d"` $LOG/result/syschk.diff
 	echo "$HOSTNAME  OK." >> $LOG/syschk_diff.log
 	tail -3 $LOG/syschk_diff.log > $CHKLOG/syschk.log
 fi
