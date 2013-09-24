@@ -487,7 +487,7 @@ echo "#============================================================#"
 #      check_status
    else
       echo "MODIFIED OK" >> $RESULT #return the final result to file
-      echo "#============================================================#"
+#echo "#============================================================#"
       echo Congratulations!!
       echo Auditing check status SUCCESS, no files been touched.
       #clear_tmp  #Clear tmp files, mark "#" before this function to remain temp files for debug
