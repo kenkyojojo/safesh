@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-##---------------------------------------------------------------------
+#---------------------------------------------------------------------
 # Set variable
 #---------------------------------------------------------------------
 $SITE="TSEOT1";
@@ -12,9 +12,10 @@ $REPORTDIR="/home/se/safechk/selog/log";
 $LOG="$LOGDIR/security_report.log";
 $WKLPAR="WKLPART1";
 $trailmod=1;
+$TOTLELPAR=`wc -l $SHCFG/host.lst|awk '{print $1}'`;
 $GARVG=$1;
 
-##---------------------------------------------------------------------
+#---------------------------------------------------------------------
 # Set raw data variable
 #---------------------------------------------------------------------
 
@@ -24,8 +25,7 @@ $aut_CHKLOG="$LOGDIR/aut_chk.$DATE";
 $atr_CHKLOG="$LOGDIR/atr_chk.$DATE";
 $adm_CHKLOG="$LOGDIR/adm_chk.$DATE";
 $sba_CHKLOG="$LOGDIR/sba_chk.$DATE";
-
-##---------------------------------------------------------------------
+#---------------------------------------------------------------------
 # Set report file variable
 #---------------------------------------------------------------------
 
@@ -46,14 +46,33 @@ chomp (($msg)=@_);
     if ( $trailmod == 1){
 	   	chomp ($dt=`date +"%y/%m/%d %H:%M:%S"`);
 		print "$SITE [${dt}] $msg\n";
-		return "$SITE [${dt}] $msg\n";
+#		return "$SITE [${dt}] $msg\n";
 	}
 } 
 
+sub wk_ntp_report(){
+		
+	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
+		&tlog($HOSTNAME) ;
+		print "日  月    時間                                        校時主機           時間差","\n";
+		print <LOG> ;
+	close LOG;
+}
+
+sub ntp_report(){
+		
+	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
+		&tlog($HOSTNAME) ;
+		print "日  月    時間                                        校時主機           時間差","\n";
+		print <LOG> ;
+	close LOG;
+}
+
 sub main(){
-$RVR=&tlog($HOSTNAME);
+#$RVR=&tlog($HOSTNAME);
 #	&tlog($HOSTNAME);
-	print $RVR
+#	print $RVR
+	&wk_ntp_report ;
 }
 
 &main ;

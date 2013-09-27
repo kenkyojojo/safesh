@@ -1991,7 +1991,7 @@ case $Menu_No in
 	   	;;
 
 	   6)
- 	    echo "			開始進行系統檔案檢核異動匯總至WKLPAR..."
+ 	    echo "			開始進行系統檔案檢核異動匯至WKLPAR..."
 		sleep 1
 		echo "			執行指令：$SECCMD audit"
 							      $SECCMD audit
