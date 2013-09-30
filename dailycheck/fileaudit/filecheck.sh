@@ -384,12 +384,13 @@ echo "#============================================================#"
 #set -A LINE2 `grep " ${LINE}$" $CURRENT`
 			set -A LINE1 `grep " ${LINE}$" $BASEFILE | awk '$3 !~ /^l/'`
 			set -A LINE2 `grep " ${LINE}$" $CURRENT | awk '$3 !~ /^l/'`
-			 LINECURRENT=$(grep " ${LINE}$" $CURRENT)
+			 LINECURRENT=$(grep " ${LINE}$" $CURRENT|awk '$3 !~/^l/')
 			 column=`echo $LINECURRENT | awk '{print NF}'`
 
              let count=0
 			 let i=0
-           while [ $i -lt ${#LINE2[@]} ] ; do
+
+             while [ $i -lt ${#LINE2[@]} ] ; do
                     if [[ ${LINE1[$i]} = ${LINE2[$i]} ]]; then #compare LINE1 and LINE2
             			count=$count
                     else
