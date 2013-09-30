@@ -380,8 +380,10 @@ echo "#============================================================#"
 
           for LINE in `cat $LIST_CHANGE`
           do
-             set -A LINE1 `grep " ${LINE}$" $BASEFILE`
-             set -A LINE2 `grep " ${LINE}$" $CURRENT`
+#set -A LINE1 `grep " ${LINE}$" $BASEFILE`
+#set -A LINE2 `grep " ${LINE}$" $CURRENT`
+			set -A LINE1 `grep " ${LINE}$" $BASEFILE | awk '$3 !~ /^l/'`
+			set -A LINE2 `grep " ${LINE}$" $CURRENT | awk '$3 !~ /^l/'`
 			 LINECURRENT=$(grep " ${LINE}$" $CURRENT)
 			 column=`echo $LINECURRENT | awk '{print NF}'`
 
@@ -427,13 +429,15 @@ echo "#============================================================#"
 
           for LINE in `cat $LIST_CHANGE`
           do
-             set -A LINE1 `grep " ${LINE}$" $BASEFILE`
+			#set -A LINE1 `grep " ${LINE}$" $BASEFILE`
+			 set -A LINE1 `grep " ${LINE}$" $BASEFILE | awk '$3 !~ /^l/'`
              execStatus1=$?
              if [ $execStatus1 -eq 0 ]; then
                 echo "Base   :" ${LINE1[@]}
              fi
 
-             set -A LINE2 `grep " ${LINE}$" $CURRENT`
+			#set -A LINE2 `grep " ${LINE}$" $CURRENT`
+			 set -A LINE2 `grep " ${LINE}$" $CURRENT | awk '$3 !~ /^l/'`
              execStatus2=$?
              if [ $execStatus2 -eq 0 ]; then
                 echo "Current:" ${LINE2[@]}
