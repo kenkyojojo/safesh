@@ -380,14 +380,17 @@ echo "#============================================================#"
 
           for LINE in `cat $LIST_CHANGE`
           do
-             set -A LINE1 `grep " ${LINE}$" $BASEFILE`
-             set -A LINE2 `grep " ${LINE}$" $CURRENT`
-			 LINECURRENT=$(grep " ${LINE}$" $CURRENT)
+#set -A LINE1 `grep " ${LINE}$" $BASEFILE`
+#set -A LINE2 `grep " ${LINE}$" $CURRENT`
+			set -A LINE1 `grep " ${LINE}$" $BASEFILE | awk '$3 !~ /^l/'`
+			set -A LINE2 `grep " ${LINE}$" $CURRENT | awk '$3 !~ /^l/'`
+			 LINECURRENT=$(grep " ${LINE}$" $CURRENT|awk '$3 !~/^l/')
 			 column=`echo $LINECURRENT | awk '{print NF}'`
 
              let count=0
 			 let i=0
-           while [ $i -lt ${#LINE2[@]} ] ; do
+
+             while [ $i -lt ${#LINE2[@]} ] ; do
                     if [[ ${LINE1[$i]} = ${LINE2[$i]} ]]; then #compare LINE1 and LINE2
             			count=$count
                     else
@@ -427,13 +430,15 @@ echo "#============================================================#"
 
           for LINE in `cat $LIST_CHANGE`
           do
-             set -A LINE1 `grep " ${LINE}$" $BASEFILE`
+			#set -A LINE1 `grep " ${LINE}$" $BASEFILE`
+			 set -A LINE1 `grep " ${LINE}$" $BASEFILE | awk '$3 !~ /^l/'`
              execStatus1=$?
              if [ $execStatus1 -eq 0 ]; then
                 echo "Base   :" ${LINE1[@]}
              fi
 
-             set -A LINE2 `grep " ${LINE}$" $CURRENT`
+			#set -A LINE2 `grep " ${LINE}$" $CURRENT`
+			 set -A LINE2 `grep " ${LINE}$" $CURRENT | awk '$3 !~ /^l/'`
              execStatus2=$?
              if [ $execStatus2 -eq 0 ]; then
                 echo "Current:" ${LINE2[@]}
