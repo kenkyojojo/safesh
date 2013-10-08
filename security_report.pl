@@ -40,6 +40,18 @@ $sba_REPORT="$REPORTDIR/sba_report.$DATE";
 # Show running step status
 #---------------------------------------------------------------------
 
+sub count() {
+@ARGV=@_;
+#chomp (($ARGV)=@_);
+#open (FILE, $ARGV[0]) or die "Can't open '$ARGV[0]': $!";
+#open (FILE,"${SHCFG}/host.lst" ) or die "Can't open ${SHCFG}/host.lst:$!";
+	open (FILE,"${SHCFG}/$ARGV[0]" ) or die "Can't open ${SHCFG}/$ARGV[0]:$!";
+		$lines++ while (<FILE>);
+	close FILE;
+#print "$lines\n";
+	return ($lines);
+}
+
 sub tlog(){
 chomp (($msg)=@_);
 #(@msg)=@_;
@@ -51,7 +63,7 @@ chomp (($msg)=@_);
 } 
 
 sub wk_ntp_report(){
-		
+
 	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
 		&tlog($HOSTNAME) ;
 		print "日  月    時間                                        校時主機           時間差","\n";
@@ -60,19 +72,59 @@ sub wk_ntp_report(){
 }
 
 sub ntp_report(){
-		
-	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
-		&tlog($HOSTNAME) ;
-		print "日  月    時間                                        校時主機           時間差","\n";
-		print <LOG> ;
-	close LOG;
+
+	open (FILE, "$LOGDIR/ntp_chk.20130916") || die "Can't open the ntp.log:$!";
+		while ( <FILE> ) {
+			$sumlpar++ if ( $_ =~ /offset/ );
+		}
+	close FILE;
+
+#	print "LPAR 總數為:", &count('host.lst'), "台","\n";		
+#	print "LPAR 數現為:$sumlpar" ,"台","\n";		
+#	print "#","-"x73,"#","\n\n";		
+
+	open (HOSTLIST, "$SHCFG/host.lst") || die "Can't open the $SHCFG/host.lst:$!";
+	open (ROWFILE, "$LOGDIR/ntp_chk.20130916") || die "Can't open the $LOGDIR/ntp_chk.20130916:$!";
+
+		while (<ROWFILE>) {	
+			$ROW=($_);
+			chomp $ROW;
+
+			foreach $hostlist(<HOSTLIST>) {
+#			while (<HOSTLIST>){
+			$hostlist=($_);
+			chomp $hostlist;
+
+			print '$ROW ->' ,$ROW,"\n"; 
+			print '$hostlist ->' , $hostlist,"\n";
+
+#			if ( $ROW =~ /$hostlist/ ) {
+#					print \$hostlist -> $hostlist,"\n";
+#					print \$ROW-> $ROW,"\n";
+#				}
+			}
+		}
+
+#		foreach $row(<ROWFILE>){
+#			print $row ;
+#		}
+
+	close HOSTLIST;
+	close ROWFILE;
+
+#	open (ROWFILE, "$LOGDIR/ntp_chk.20130916") || die "Can't open the ntp.log:$!";
+#	print "日  月    時間                                        校時主機           時間差","\n";
+#	print <ROWFILE>;
+#	close ROWFILE;
 }
 
 sub main(){
 #$RVR=&tlog($HOSTNAME);
 #	&tlog($HOSTNAME);
 #	print $RVR
-	&wk_ntp_report ;
+#&wk_ntp_report ;
+	&ntp_report ;
+#print &count('host.lst'),"\n";
 }
 
 &main ;
