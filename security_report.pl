@@ -86,17 +86,24 @@ sub ntp_report(){
 	open (HOSTLIST, "$SHCFG/host.lst") || die "Can't open the $SHCFG/host.lst:$!";
 	open (ROWFILE, "$LOGDIR/ntp_chk.20130916") || die "Can't open the $LOGDIR/ntp_chk.20130916:$!";
 
-		while (<ROWFILE>) {	
-			$ROW=($_);
-			chomp $ROW;
+		foreach $hostlist(<HOSTLIST>) {
+			chomp ($hostlist);
+			print "\$hostlist -> $hostlist\n";
 
-			foreach $hostlist(<HOSTLIST>) {
+		while ($ROW=<ROWFILE>) {	
+#			$ROW=($_);
+			chomp ($ROW);
+			print "\$ROW-> $Row\n";
+
+#				$find=grep ($hostlist, $ROW);
+#				print "$find\n";
+#			foreach $hostlist(<HOSTLIST>) {
 #			while (<HOSTLIST>){
-			$hostlist=($_);
-			chomp $hostlist;
+#$hostlist=($_);
+#			chomp $hostlist;
 
-			print '$ROW ->' ,$ROW,"\n"; 
-			print '$hostlist ->' , $hostlist,"\n";
+#			print '$ROW ->' ,$ROW,"\n"; 
+#			print '$hostlist ->' , $hostlist,"\n";
 
 #			if ( $ROW =~ /$hostlist/ ) {
 #					print \$hostlist -> $hostlist,"\n";
