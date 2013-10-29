@@ -18,6 +18,7 @@ fi
 HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 UNAME=$1
 MUSER=$(whoami)
+UHOMEDIR=`lsuser $UNAME | awk '{print $5}' | cut -c6-`
 HOMEDIR=`lsuser $MUSER | awk '{print $5}' | cut -c6-`
 DELAY=1
 exec 4>&1
@@ -29,6 +30,7 @@ for HOST in $HOSTLIST ; do
     ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
     print -p swrole SecPolicy,sa
     print -p rmuser -p $UNAME
+    print -p rm -rf $UHOMEDIR
     print -p CHK=\`cut -f \"1\" -d : /etc/passwd \| grep "^$UNAME"\`
     print -p "test \"\$CHK\" != $UNAME && touch delusrdatafile.${HOST}"
     print -p exit
