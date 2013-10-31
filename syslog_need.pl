@@ -9,6 +9,7 @@ my $syslog_dir = '/var/log/syslog';
 ## 3.Build directory and files for ul agent	##
 ##   then check	it				##
 ##################################################
+`mkdir -p /var/log/syslog`;
 my %file_relation = (
 	"/var/log/syslog/critical_files" => "D",
 	"/var/log/syslog/auth_files" =>	"D",
@@ -81,3 +82,4 @@ sub build_file
    }
 
    return;
+}
