@@ -4,8 +4,8 @@
 #---------------------------------------------------------------------
 $SITE="TSEOT1";
 $HOSTNAME=`hostname`;
-#$DATE=`date +%Y%m%d`;
-$DATE=20130916;
+$DATE=`date +%Y%m%d`;
+#$DATE=20130916;
 $SHDIR="/home/se/safechk/safesh";
 $SHCFG="/home/se/safechk/cfg";
 $LOGDIR="/home/se/safechk/safelog";
