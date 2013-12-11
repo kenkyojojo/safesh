@@ -42,7 +42,7 @@ flag_cur=`who -a /etc/security/failedlogin| grep -v "UNKNOWN" | wc -l |awk '{pri
 		echo "App: $ApName v${ApVers} @ $hostname" >> $loginfile
 		echo "Now: $dt" >> $loginfile
 		echo "Target(Yesterday): $y_mon , $y_day" >> $loginfile
-		who -a /etc/security/failedlogin|grep -v "UNKNOWN"|tail -n $flag_dif | grep "$y_mon $y_day" >> $loginfile 
+		who -a /etc/security/failedlogin|grep -v "UNKNOWN"|tail -n $flag_dif  >> $loginfile 
 		#update the $flag_file
 		echo $flag_cur > $flag_file
 	else 
