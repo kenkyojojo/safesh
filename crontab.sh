@@ -22,7 +22,7 @@ if [ "$HOSTNAME" == "LOG" ] ; then
 
    ##seadm
    echo "45 7 * * 1-5 /home/se/chk/nmon/start_nmon.sh" >> $RPATH/$SUSER
-   echo '5 7,14 * * * /home/se/chk/check.sh "/home/se/chk" >> /home/se/chk/report/`date \+\%Y\%m\%d`.report ; tail -n 18 /home/se/chk/report/`date \+\%Y\%m\%d`.report > /home/se/chk/report/today.report' >> $RPATH/$SUSER
+   echo "5 7,14 * * * /home/se/chk/script/combind.sh check" >> $RPATH/$SUSER
 
 elif [ "$HOSTNAME" == "WKL" ]; then
    ##root
@@ -40,7 +40,7 @@ elif [ "$HOSTNAME" == "WKL" ]; then
 
    ##seadm
    echo "45 7 * * 1-5 /home/se/chk/nmon/start_nmon.sh" >> $RPATH/$SUSER
-   echo '5 7,14 * * * /home/se/chk/check.sh "/home/se/chk" >> /home/se/chk/report/`date \+\%Y\%m\%d`.report ; tail -n 14 /home/se/chk/report/`date \+\%Y\%m\%d`.report > /home/se/chk/report/today.report' >> $RPATH/$SUSER
+   echo "5 7,14 * * * /home/se/chk/script/combind.sh check" >> $RPATH/$SUSER
 
 else
    ##root
@@ -54,7 +54,7 @@ else
 
    ##seadm
    echo "45 7 * * 1-5 /home/se/chk/nmon/start_nmon.sh" >> $RPATH/$SUSER
-   echo '5 7,14 * * * /home/se/chk/check.sh "/home/se/chk" >> /home/se/chk/report/`date \+\%Y\%m\%d`.report ; tail -n 16 /home/se/chk/report/`date \+\%Y\%m\%d`.report > /home/se/chk/report/today.report' >> $RPATH/$SUSER
+   echo "5 7,14 * * * /home/se/chk/script/combind.sh check" >> $RPATH/$SUSER
 fi
 
 exit
