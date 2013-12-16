@@ -12,42 +12,40 @@ sub object{
 $WAP01="w = \"TEST_FW101_WR\"";
 $RAP01="r = \"TEST_FW101_RD\"";
 $XAP01="x = \"TEST_FW101_EX\"";
-##########################################
+#########################################
 $WAP02="w = \"TEST_FW202_WR\"";
 $RAP02="r = \"TEST_FW202_RD\"";
 $XAP02="x = \"TEST_FW202_EX\"";
 #########################################
+
 open (TARGETF,">/etc/security/audit/objects"); 
     foreach $DDLIST (@APPDIR){
     opendir (OPENDIR,"$DDLIST") or die "Please to check the directory.\n $!" ;
 	  if ($DDLIST =~ /$APP01/){
-          foreach (readdir(OPENDIR)){
-			    if ($_ =~ /[^\.]+/){
-					chomp $_;
-					print TARGETF "\n";
-					print TARGETF "${DDLIST}\/$_:\n";
-       				print TARGETF ' 'x8; print TARGETF "$WAP01\n";
-		       		print TARGETF ' 'x8; print TARGETF "$RAP01\n";
-       				print TARGETF ' 'x8; print TARGETF "$XAP01\n";
-		    	}
-          }
+        foreach (readdir(OPENDIR)){
+			if ($_ =~ /[^\.]+/){
+				chomp $_;
+				print TARGETF "\n";
+				print TARGETF "${DDLIST}\/$_:\n";
+       			print TARGETF ' 'x8; print TARGETF "$WAP01\n";
+		       	print TARGETF ' 'x8; print TARGETF "$RAP01\n";
+       			print TARGETF ' 'x8; print TARGETF "$XAP01\n";
+		    }
+        }
 	  }else{
-          foreach (readdir(OPENDIR)){
-				if ($_ =~ /[^\.]+/){
-					chomp $_;
-					print TARGETF "\n";
-					print TARGETF "${DDLIST}\/$_:\n";
-					print TARGETF ' 'x8; print TARGETF "$WAP02\n";
-					print TARGETF ' 'x8; print TARGETF "$RAP02\n";
-					print TARGETF ' 'x8; print TARGETF "$XAP02\n";
-			   }
-          }
-       }
-    close TARGETF;
-    closedir OPENDIR;
+			if ($_ =~ /[^\.]+/){
+				chomp $_;
+				print TARGETF "\n";
+				print TARGETF "${DDLIST}\/$_:\n";
+       			print TARGETF ' 'x8; print TARGETF "$WAP02\n";
+		       	print TARGETF ' 'x8; print TARGETF "$RAP02\n";
+       			print TARGETF ' 'x8; print TARGETF "$XAP02\n";
+	  }
     }
+close TARGETF;
+closedir DIR;
 }
-=cut
+
 sub event{
 
 $EVENT_W='TEST_FILE_WR = printf "mode: %o, who: %d, euid: %d egid: %d epriv: %x:%x name %s path: %s file descriptor = %d filename = %s"';
@@ -73,7 +71,6 @@ close TARGETF;
 closedir DIR;
 }
 
-=cut
 
 
 sub main {
