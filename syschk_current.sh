@@ -124,11 +124,11 @@ done
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 
-echo "" >> $LOGFILE
-echo "#================ /TWSE目錄結構 ================#" >> $LOGFILE
-find /TWSE -type d -exec ls -ld {} \; | awk '{print $1, "\t" $3, "\t" $4, "\t" $9}' >> $LOGFILE
-echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
-echo "" >> $LOGFILE
+#echo "" >> $LOGFILE
+#echo "#================ /TWSE目錄結構 ================#" >> $LOGFILE
+#find /TWSE -type d -exec ls -ld {} \; | awk '{print $1, "\t" $3, "\t" $4, "\t" $9}' >> $LOGFILE
+#echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
+#echo "" >> $LOGFILE
 
 echo "" >> $LOGFILE
 echo "#================ 系統網路參數 =================#" >> $LOGFILE
