@@ -809,6 +809,12 @@ STARTI () {
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
                ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+               ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
                ;;
@@ -1088,6 +1094,12 @@ STARTM () {
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
                ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+               ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
                ;;
@@ -1197,9 +1209,14 @@ STARTN () {
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
                ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+               ;;
            ALL)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname
-`
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
                ;;
            *)
                HOSTLIST=$HOSTN
@@ -1355,9 +1372,14 @@ STARTO () {
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
                ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+               ;;
            ALL)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname
-`
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
                ;;
            *)
                HOSTLIST=$HOSTN
@@ -1703,6 +1725,12 @@ STARTS () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`

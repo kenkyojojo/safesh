@@ -119,7 +119,7 @@ $TLOG=&tlog($HOSTNAME) ;
 	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
 	open (REPORT, ">$wkl_REPORT") || die "Can't open the ntp.log:$!";
 		@LOG=<LOG>;
-		print REPORT "æ—¥  æœˆ    æ™‚é–“                                        æ ¡æ™‚ä¸»æ©Ÿ           æ™‚é–“å·®","\n";
+		print REPORT "¤é  ¤ë    ®É¶¡                                        ®Õ®É¥D¾÷           ®É¶¡®t","\n";
 		print REPORT "#","-"x73,"#","\n";		
 		print REPORT $TLOG;
 		print REPORT @LOG ;
@@ -166,10 +166,10 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 
 	open (REPORT, ">$ntp_REPORT") || die "Can't open the ntp.log:$!";
 
-	print REPORT "LPAR æ‡‰åˆ°:", &count('host.lst'), "å°","\n";		
-	print REPORT "LPAR å¯¦åˆ°:$SUMLPAR" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°:$DIFF" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°æ¸…å–®:\n"; 
+	print REPORT "LPAR À³¨ì:", &count('host.lst'), "¥x","\n";		
+	print REPORT "LPAR ¹ê¨ì:$SUMLPAR" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì:$DIFF" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì²M³æ:\n"; 
 	foreach $host(@HOST){
 		chomp($host);
 		$FLAG=grep( /$host$/,@ROW);
@@ -178,7 +178,7 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 		}
 	}
 	print REPORT "\n","#","-"x73,"#","\n\n";		
-	print REPORT "æ—¥  æœˆ    æ™‚é–“                                        æ ¡æ™‚ä¸»æ©Ÿ           æ™‚é–“å·®","\n";
+	print REPORT "¤é  ¤ë    ®É¶¡                                        ®Õ®É¥D¾÷           ®É¶¡®t","\n";
 	print REPORT @ROW;
 	
 	close REPORT;
@@ -222,10 +222,10 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 
 	open (REPORT, ">$adm_REPORT") || die "Can't open the ntp.log:$!";
 
-	print REPORT "LPAR æ‡‰åˆ°:", &count('host.lst'), "å°","\n";		
-	print REPORT "LPAR å¯¦åˆ°:$SUMLPAR" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°:$DIFF" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°æ¸…å–®:\n"; 
+	print REPORT "LPAR À³¨ì:", &count('host.lst'), "¥x","\n";		
+	print REPORT "LPAR ¹ê¨ì:$SUMLPAR" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì:$DIFF" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì²M³æ:\n"; 
 	foreach $host(@HOST){
 		chomp($host);
 		$FLAG=grep( /$host$/,@ROW);
@@ -234,7 +234,7 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 		}
 	}
 	print REPORT "\n","#","-"x73,"#","\n\n";		
-	print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                                   ç‹€æ…‹","\n";
+	print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                                   ª¬ºA","\n";
 	print REPORT @ROW;
 	
 	close REPORT;
@@ -280,10 +280,10 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 
 	open (REPORT, ">$REPORT") || die "Can't open the $REPORT:$!";
 
-	print REPORT "LPAR æ‡‰åˆ°:", &count('host.lst'), "å°","\n";		
-	print REPORT "LPAR å¯¦åˆ°:$SUMLPAR" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°:$DIFF" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°æ¸…å–®:\n"; 
+	print REPORT "LPAR À³¨ì:", &count('host.lst'), "¥x","\n";		
+	print REPORT "LPAR ¹ê¨ì:$SUMLPAR" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì:$DIFF" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì²M³æ:\n"; 
 	foreach $host(@HOST){
 		chomp($host);
 		$FLAG=grep( /$host$/,@ROW);
@@ -295,25 +295,25 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 
 	#Menu_no 2
 	if ( $MATCH eq "offset" ) {
-		print REPORT "æ—¥  æœˆ    æ™‚é–“                                        æ ¡æ™‚ä¸»æ©Ÿ           æ™‚é–“å·®","\n";
+		print REPORT "¤é  ¤ë    ®É¶¡                                        ®Õ®É¥D¾÷           ®É¶¡®t","\n";
 	#Menu_no 3
 	}elsif ( $MATCH eq "Finished" ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                                   ç‹€æ…‹","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                                   ª¬ºA","\n";
 	}
 	#Menu_no 4
 	elsif ( $MATCH =~ /base/ ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                æª”æ¡ˆæ™‚é–“                          æª”æ¡ˆ","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                ÀÉ®×®É¶¡                          ÀÉ®×","\n";
 	}
 	#Menu_no 5
 	elsif ( $MATCH eq "Start" ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                æª”æ¡ˆ","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                ÀÉ®×","\n";
 	}
 	#Menu_no 6
 	elsif ( $MATCH eq "attr" ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                                                  æª”æ¡ˆ","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                                                  ÀÉ®×","\n";
 	}
 	elsif ( $MATCH eq "End" ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                         ç‹€æ…‹","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                         ª¬ºA","\n";
 	}
 	else{
 		print "Error:No have other REPORT.";
