@@ -10,13 +10,13 @@ echo "             << FIX/FAST 資訊傳輸系統使用者作業 (ALL AIX LPAR)>> "
 echo ""
 echo "           1. 同步修改密碼 "
 echo ""
-echo "           2. 共用工作區之檔案上傳至各LPAR(MDS/DAP/DAR/LOG) "
+echo "           2. 共用工作區之檔案上傳至各LPAR(MDS/DAP/DAR/LOG/FIX/TS) "
 echo ""
-echo "           3. 於共用工作區執行指令同步於各LPAR(MDS/DAP/DAR/LOG) "
+echo "           3. 於共用工作區執行指令同步於各LPAR(MDS/DAP/DAR/LOG/FIX/TS) "
 echo ""
-echo "           4. 各LPAR(MDS/DAP/DAR/LOG)中檔案下載至共用工作區 "
+echo "           4. 各LPAR(MDS/DAP/DAR/LOG/FIX/TS)中檔案下載至共用工作區 "
 echo ""
-echo "           5. 將LPAR(MDS/DAP/DAR/LOG)目錄下傳至共用工作區 "
+echo "           5. 將LPAR(MDS/DAP/DAR/LOG/FIX/TS)目錄下傳至共用工作區 "
 echo ""
 echo "               (隨時可輸 q 以離開 )"
 echo ""
@@ -116,6 +116,12 @@ STARTB () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -271,6 +277,12 @@ STARTC () {
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
                ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+               ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
                ;;
@@ -379,6 +391,12 @@ STARTD () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -536,6 +554,12 @@ STARTE () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
