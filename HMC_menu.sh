@@ -4,6 +4,7 @@ main () {
 clear ""
 Menu_No=""
 print "	<< FIX/FAST LPAR Active && Shutdown Menu >>"
+print ""
 print "1. Active LPAR "
 print ""
 print "2. Shutdown LPAR"
