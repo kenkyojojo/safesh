@@ -28,12 +28,12 @@ if ($#Menu_no != 0) {
 #---------------------------------------------------------------------
 # Set raw data variable
 #---------------------------------------------------------------------
-#ntp check timing status log 
-#sys check syschk status
+#ntp check ntp status 
+#sys check syschk compare status
 #aut check daily_copy running status
-#atr check fileaudit bas recover status
+#atr check fileaudit bas update status
 #adm check Hardware_chk running status
-#sba check syschk_base bas recover status
+#sba check syschk_base bas update status
 $ntp_CHKLOG="$LOGDIR/ntp_chk.$DATE";
 $sys_CHKLOG="$LOGDIR/sys_chk.$DATE";
 $aut_CHKLOG="$LOGDIR/aut_chk.$DATE";
@@ -45,8 +45,8 @@ $sba_CHKLOG="$LOGDIR/sba_chk.$DATE";
 # Set report file variable
 #---------------------------------------------------------------------
 
-$ntp_REPORT="$REPORTDIR/ntp_report.$DATE";
 $wkl_REPORT="$REPORTDIR/wkl_report.$DATE";
+$ntp_REPORT="$REPORTDIR/ntp_report.$DATE";
 $sys_REPORT="$REPORTDIR/sys_report.$DATE";
 $aut_REPORT="$REPORTDIR/aut_report.$DATE";
 $atr_REPORT="$REPORTDIR/atr_report.$DATE";
@@ -337,7 +337,7 @@ sub main(){
 $Menu_no2=@_[0];
 
 	if ($Menu_no2 == 1 ){
-		&wk_ntp_report ;
+		&wk_ntp_report ; 
 	}elsif ($Menu_no2 == 2){
 		$MATCH="offset";
 		&report($ntp_CHKLOG,$ntp_REPORT,$MATCH) ;
@@ -365,18 +365,25 @@ $Menu_no2=@_[0];
 sub menu(){
 $Menu_no=@_[0];
 
+	#wklpar ntp status report
 	if ($Menu_no == 1){
 		&main(1) ;
+	#All Lpar ntp status report
 	}elsif ($Menu_no == 2){
 		&main(2) ;
+	#Run combind.sh ,check Hardware_chk running status. User:seadm
 	}elsif ($Menu_no == 3){
 		&main(3) ;
+	#check syschk compare status.
 	}elsif ($Menu_no == 4){
 		&main(4) ;
+	#check syschk base update status.
 	}elsif ($Menu_no == 5){
 		&main(5) ;
+	#check fileaudit base update status.
 	}elsif ($Menu_no == 6){
 		&main(6) ;
+	#aut check daily_copy running status
 	}elsif ($Menu_no == 7){
 		&main(7) ;
 	}else{ 

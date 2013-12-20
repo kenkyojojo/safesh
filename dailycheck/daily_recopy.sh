@@ -12,7 +12,7 @@ ACCOUNTDIR=/home/se/safechk/file/account
 LOG=/home/se/safechk/safelog/dailycheck.log
 SELOG=/home/se/safechk/selog
 
-
+echo "#======================daily_recopy.sh Start===================#" >> $LOG
 #-----------------------
 # Copy logfile to Working LPAR
 #-----------------------
@@ -24,5 +24,6 @@ scp -P 2222 $ACCOUNTDIR/result/${hostname}_`date +%Y%m%d_user_attr.rst` $wkserve
 chown -R useradm:security $SELOG
 echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp csv to Working LPAR End' >> $LOG
 
+echo "#======================daily_recopy.sh End=====================#" >> $LOG
 
 exit

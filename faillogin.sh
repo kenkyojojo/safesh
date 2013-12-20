@@ -13,13 +13,14 @@ yt1=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%b %m %d", local
 y_mon=`echo $yt1 | awk '{printf("%s",$1)}'`
 y_day=`echo $yt1 | awk '{printf("%s",$3)}'`
 flag_file="/home/se/safechk/safelog/faillogin.flag"
+flag_cur=`who -a /etc/security/failedlogin| grep -v "UNKNOWN" | wc -l |awk '{print $1}'`
 
 #----------------------------------
 # Test the flag_file exist
 #----------------------------------
 	if [[ ! -f $flag_file ]]; then
 		touch $flag_file
-		echo "0" > $flag_file
+		echo $flag_cur > $flag_file
 		chown useradm:security $flag_file
 		chmod 664 $flag_file
 	fi
@@ -27,8 +28,7 @@ flag_file="/home/se/safechk/safelog/faillogin.flag"
 # Load the flag_file number and compare with the current status
 #----------------------------------
 flag_org=`cat $flag_file`
-flag_cur=`who -a /etc/security/failedlogin| grep -v "UNKNOWN" | wc -l |awk '{print $1}'`
-(( flag_dif=$flag_cur - $flag_org ))
+flag_dif=$(( $flag_cur - $flag_org ))
 
 	if [[ $flag_cur -eq $flag_org ]] ; then
 		echo "" >> $loginfile

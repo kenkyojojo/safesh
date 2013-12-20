@@ -14,6 +14,7 @@ ACCOUNTSH=/home/se/safechk/safesh/dailycheck/account
 FILEDIR=/home/se/safechk/file/fileaudit
 ACCOUNTDIR=/home/se/safechk/file/account
 
+echo "#======================daily_check.sh Start==================#" >> $LOG
 
 #---------------------
 # Daily file check
@@ -99,4 +100,5 @@ STEP3
 STEP4
 STEP5
 
+echo "#======================daily_check.sh End====================#" >> $LOG
 exit

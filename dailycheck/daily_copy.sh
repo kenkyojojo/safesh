@@ -20,6 +20,7 @@ FILECHG=$LOGDIR/${hostname}_`date +%Y%m%d_file_attr.chg`
 LOG=/home/se/safechk/safelog/dailycheck.log
 SELOG=/home/se/safechk/selog
 
+echo "#======================daily_copy.sh Start===================#" >> $LOG
 #fileaudit for Daily_chk
 rm -f /home/se/chk/fileaudit/safelog.fileattr.*
 cp  $LOGDIR/safelog.$hostname.fileattr.$DATE /home/se/chk/fileaudit/safelog.fileattr.$DATE
@@ -130,4 +131,5 @@ STEP1
 STEP2
 STEP3
 
+echo "#======================daily_copy.sh End=====================#" >> $LOG
 exit
