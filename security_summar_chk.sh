@@ -2,7 +2,7 @@
 #---------------------------------------------------------------------
 # Set variable
 #---------------------------------------------------------------------
-SITE=TSEOB1
+SITE=TSEOA1
 HOSTNAME=`hostname`
 DATE=`date +%Y%m%d`
 SHDIR=/home/se/safechk/safesh
@@ -14,6 +14,7 @@ LOG=$LOGDIR/security_summar_chk.log
 WKLPAR="WKLPARB1"
 trailmod=1
 GARVG=$1
+TIME=10
 
 echo "#-------------------------------------------------------------------------#" >> $LOG
 
@@ -214,7 +215,7 @@ fileaudit_scopy (){
 
 	tlog "Step[8] $SHDIR/dailycheck/daily_copy.sh Start" >> $LOG
 		  $SHDIR/dailycheck/daily_copy.sh
-		  tail -2 $LOGDIR/dailycheck.log > $LOGDIR/fileaudit_scopy.log
+		  tail -3 $LOGDIR/dailycheck.log |head -2> $LOGDIR/fileaudit_scopy.log
 		  chk_pointfile aut
 	tlog "Step[8] $SHDIR/dailycheck/daily_copy.sh Finished" >> $LOG
 }
@@ -237,13 +238,18 @@ Hardware_chk (){
 ssh_rcmd () {
 ARGV=$1
 SARGV=$2
-
+COUNT=1
     tlog "Step[1] Start to running remote command " >> $LOG
 		for HOSTLST in `cat $SHCFG/host.lst|grep -v WKL`
 		do
     		tlog "$HOSTLST remote command Start" >> $LOG
 			ssh -f -p 2222 $HOSTLST $ARGV $SARGV > /dev/null 2>&1
     		tlog "$HOSTLST remote command Finished" >> $LOG
+			COUNT=$(( $COUNT +1 ))
+			if [[ $COUNT -eq 10 ]] ; then
+				sleep $TIME
+			COUNT=1
+			fi
 		done
     tlog "Step[1] Running remote command Finished" >> $LOG
 }
@@ -290,7 +296,7 @@ MODEARGV=$1
 HST=`echo $HOSTNAME | cut -c1-3`
 
 	case $MODEARGV in 
-		boot) #Test OK
+		boot) #Run ntp.sh, syschk_diff.sh, daily_check.sh
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh boot
 				#
@@ -306,7 +312,7 @@ HST=`echo $HOSTNAME | cut -c1-3`
 				daily_check > /dev/null 2>&1  &
 			fi
 		;;
-		down) # Test OK
+		down) #Run syschk_base.sh, Update syschk_base status
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh down
 				syschk_base > /dev/null 2>&1 & 
@@ -315,7 +321,7 @@ HST=`echo $HOSTNAME | cut -c1-3`
 				syschk_base > /dev/null 2>&1 &	 
 			fi
 		;;
-		base) #Test OK
+		base) #Update fileauidt base status,and update combind.sh fileaudit stauts
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh base
 				fileaudit_base > /dev/null 2>&1 &	 
@@ -324,7 +330,7 @@ HST=`echo $HOSTNAME | cut -c1-3`
 				fileaudit_base > /dev/null 2>&1 &	 
 			fi
 		;;
-		audit) #Test OK
+		audit) #Run daily_copy.sh
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh audit
 				sleep 10
@@ -335,7 +341,7 @@ HST=`echo $HOSTNAME | cut -c1-3`
 				fileaudit_scopy > /dev/null 2>&1 &	 
 			fi
 		;;	
-		hardware_chk) #Test OK
+		hardware_chk) #Run seadm combind.sh
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh hardware_chk
 				Hardware_chk > /dev/null 2>&1 	 
@@ -345,7 +351,7 @@ HST=`echo $HOSTNAME | cut -c1-3`
 				Hardware_chk > /dev/null 2>&1 	 
 			fi
 		;;
-		ntp) #Test OK
+		ntp) #Run ntp.sh
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh ntp
 				ntp > /dev/null 2>&1 &
@@ -354,7 +360,7 @@ HST=`echo $HOSTNAME | cut -c1-3`
 				ntp > /dev/null 2>&1 &
 			fi
 		;;
-		sys) #Test OK
+		sys) #Run syschk_diff.sh
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh sys
 				syschk_compare > /dev/null 2>&1 & 	 
@@ -364,9 +370,10 @@ HST=`echo $HOSTNAME | cut -c1-3`
 			fi
 		;;
 
-		daily_check) #Test OK
+		daily_check) #Run daily_check.sh 
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh daily_check
+				sleep 5
 				daily_check > /dev/null 2>&1 & 	 
 			else
 				daily_check > /dev/null 2>&1 & 	 

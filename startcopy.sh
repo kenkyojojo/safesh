@@ -4,11 +4,12 @@
 # Set variable
 #----------------------------------
 HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
-LOG=/home/se/safechk/safesh/dailycheck/dailycheck.log
+LOG=/home/se/safechk/safelog/dailycheck.log
 USER=$(whoami)
 HOMEDIR=`lsuser $USER | awk '{print $5}' | cut -c6-`
 timestamp=`date +%Y%m%d`
 
+echo "#======================startcopy.sh   Start==================#" >> $LOG
 #----------------------------------
 # Start to rm file.attr.chk file.attr.chg
 # 
@@ -49,3 +50,5 @@ STEP3(){
 #STEP1 #It change to use  filechg.sh to rm the fileaudit's chk or chg file.
 STEP2
 #STEP3 #No 
+
+echo "#======================startcopy.sh   End====================#" >> $LOG

@@ -41,22 +41,22 @@ TWSEDIR() {
       for dir_type1 in bin bkbin bkcfg bkshell cfg oldbin oldcfg oldshell shell
       do
          mkdir -p $RPATH/$dir_type1
-         chown exadm:exc $DIRPATH/$dir_type1
-         chmod 775 $RPATH/$dir_type1
+         chown -R exadm:exc $RPATH/$dir_type1
+         chmod -R 775 $RPATH/$dir_type1
       done
 
       for dir_type2 in bkfile file 
       do
          mkdir -p $RPATH/$dir_type2
-         chown twse:tse $DIRPATH/$dir_type2
-         chmod 774 $RPATH/$dir_type2
+         chown -R twse:tse $RPATH/$dir_type2
+         chmod -R 774 $RPATH/$dir_type2
       done
 
       for dir_type3 in log bklog
       do
-         mkdir -p $RPATH/$dir_type2
-         chown twse:tse $DIRPATH/$dir_type2
-         chmod 775 $RPATH/$dir_type2
+         mkdir -p $RPATH/$dir_type3
+         chown -R twse:tse $RPATH/$dir_type3
+         chmod -R 775 $RPATH/$dir_type3
       done
 
    else

@@ -123,22 +123,35 @@ tlog() {
 #----------------------------------
 check_base_file(){
 tlog "Running check_base_file start"
+FILEAUDIT_STATUS=$CHKDIR/fileaudit.status
+
+
+	if [ ! -f $FILEAUDIT_STATUS ];then 
+		echo "Failed:The $FILEAUDIT_STATUS file is not exists" 
+		echo "Failed:The $FILEAUDIT_STATUS file is not exists" >> $LOG
+		tlog "Running check_base_file end"
+		exit
+	fi
+
 BASE_FILE=`grep 'exists' $CHKDIR/fileaudit.status|wc -l`
 	cat /dev/null > $CHKDIR/fileaudit.status
 
 	if [ ! -f $BASEFILE ];then 
 		echo "Failed:The $BASEFILE file is not exists" 
+		echo "Failed:The $BASEFILE file is not exists" >> $LOG
 		echo "Failed:The $BASEFILE file is not exists" >> $CHKDIR/fileaudit.status
 	fi
 	if [ ! -f $EXISTBASE ];then 
 		echo "Failed:The $EXISTBASE file is not exists"
+		echo "Failed:The $EXISTBASE file is not exists" >> $LOG
 		echo "Failed:The $EXISTBASE file is not exists" >> $CHKDIR/fileaudit.status 
 	fi
+
+tlog "Running check_base_file end"
 
 	if  [ "$BASE_FILE" -ge 1 ] ;then
 		exit
 	fi
-tlog "Running check_base_file end"
 }
 #----------------------------------
 # Clear temporary files
