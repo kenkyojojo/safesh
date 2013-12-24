@@ -248,7 +248,7 @@ COUNT=1
 			COUNT=$(( $COUNT +1 ))
 			if [[ $COUNT -eq 10 ]] ; then
 				sleep $TIME
-			COUNT=1
+				COUNT=1
 			fi
 		done
     tlog "Step[1] Running remote command Finished" >> $LOG
@@ -333,7 +333,6 @@ HST=`echo $HOSTNAME | cut -c1-3`
 		audit) #Run daily_copy.sh
 			if [[ $HST = "WKL" ]];then
 				ssh_rcmd $SHDIR/security_summar_chk.sh audit
-				sleep 10
 				fileaudit_scopy > /dev/null 2>&1 &
 				chk_status aut > /dev/null 2>&1 &
 				#chk_status aut &
