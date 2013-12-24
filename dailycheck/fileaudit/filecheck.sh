@@ -20,7 +20,7 @@
 #----------------------------------
 hostname=`hostname`
 SHELL=filecheck.sh
-SITE=TSEOT1
+SITE=TSEOA1
 CONFIGDIR=/home/se/safechk/cfg
 FILEDIR=/home/se/safechk/file/fileaudit
 LOGDIR=/home/se/safechk/safelog
