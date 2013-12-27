@@ -1,0 +1,365 @@
+commit 392cecef79506c9c7863ab67586bfba809d0187f
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Dec 24 20:46:34 2013 +0800
+
+    modified:fix security_summar_chk.sh to change sleep time
+
+commit 9ef344ed139ba976a73f9cbdc8b2a675ea0c3f65
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Dec 16 17:04:48 2013 +0800
+
+    modified: syschk_base.sh、syschk_current.sh don't check /TWSE directory
+
+commit 08188e1c1aa13a36ceda882f4d6db035a3d46a68
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Wed Dec 11 16:10:39 2013 +0800
+
+    modified:security_report.pl to fix the date parameter
+
+commit 1128917130bc7e30ebb1ccd0930dc31b58808b2e
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Wed Dec 11 09:51:18 2013 +0800
+
+    modified: faillogin.sh change don't use date to grep status.
+
+commit 354fcc5db6017441fcd15948615d395a2a89167b
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Dec 10 15:29:49 2013 +0800
+
+    modified: security_report.pl to add to the 7 menu's function
+
+commit b80f4fad46274d7dfc8d389cad1c9534672803e4
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Dec 10 10:25:50 2013 +0800
+
+    modified:faillogin.sh to fix the date display double twice
+
+commit 8be55666879092091ecd5d236c62ed457b144c1f
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Oct 31 09:26:43 2013 +0800
+
+    modified:crontab.sh change the crontab , syslog_need.pl to fix bug
+
+commit b2110c06ceb53e1b6d663ed11f2681f2ce5e8087
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Oct 25 17:08:27 2013 +0800
+
+    modified:apdir.sh、sedir.sh、mkalluser.sh
+
+commit 564f7ca66af7a558437478d73455ab95924973f7
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Oct 24 15:35:35 2013 +0800
+
+    modified: deluser_ssh.sh add new function to delete user's home directory
+
+commit 6136c9159d844a6a17b9e395daf5d7b047f59163
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Oct 8 17:12:54 2013 +0800
+
+    modified:security_report.pl only for test
+
+commit a5a421dcea73812ffb8aec78993bf39cd64cf96c
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Sep 30 16:00:19 2013 +0800
+
+    modified:filecheck.sh to fix multiple file name agent
+
+commit 1e5c9305f4a64ea25c47b022a99aa37c43dc8723
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Sep 27 18:00:37 2013 +0800
+
+    modified:security_report.pl 、m.sh.utf8 not finish yet
+
+commit d4be586d28d7f241b71088fd9f69e28f0f9f4385
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Sep 24 11:52:53 2013 +0800
+
+    modified:filecheck.sh delete the last mark
+
+commit 4df25b7a4bccafd0b0e1d8f21d1faff8caa734d0
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Sep 23 16:47:26 2013 +0800
+
+    modified:syschk_diff.sh change the OK status add  cp step
+
+commit a5c1c88246c89e4f0e9f390016af498850d326e3
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sat Sep 21 15:33:02 2013 +0800
+
+     modified:syschk_current.sh、syschk_base.sh change twse awk use
+
+commit 8cd8519ed5f243f1369ffcca11567c88d5097f71
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Sep 17 15:39:30 2013 +0800
+
+    modified:security_summar_chk.sh fix ntp function
+
+commit 08b2dadefe42bad71dce46ba2eb761eaaa4149a2
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Sep 17 11:54:00 2013 +0800
+
+    modified:m.sh、m.sh.utf8 add the 20 function
+
+commit 326d0250a2abfc8f637ca731412039c9ef910f57
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Sep 16 01:34:59 2013 +0800
+
+    new file:m.sh.utf8、security_report.pl
+
+commit af15301af01158b878cd71e3084be8b2b0989533
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sun Sep 15 18:42:32 2013 +0800
+
+    modified:security_summar_chk.sh change the parameter name TOTLECOUNT to TOTLELPAR
+
+commit 8f7e440ddcddac628cada95ee76fb472cc654492
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sun Sep 15 18:21:04 2013 +0800
+
+    modified:security_summar_chk.sh the function audit to add sleep 10 sec
+
+commit 938a99bcfd89c0853a1d9ffa2deb41407e6f3e18
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sat Sep 14 11:58:47 2013 +0800
+
+    modified:security_summar_chk.sh change the usage function's message
+
+commit 256318441e7c8abd16e43432b02c1303af1a6bb5
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sat Sep 14 11:23:50 2013 +0800
+
+    modified:security_summar_chk.sh change the usage function's message
+
+commit f2331292823b1f5e2f4d863d5b0b6688875d36ba
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sat Sep 14 11:17:10 2013 +0800
+
+    modified:security_summar_chk.sh change the usage function's message
+
+commit 61562a21e470f7a34c5c4c2e7fd4916c0698a0e5
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Sep 13 17:37:11 2013 +0800
+
+    modified:dailycheck/daily_copy.sh、dailycheck/daily_recopy.sh、dailycheck/fileaudit/filecheck.sh、ntp.sh、ntp_manual.sh、security_summar_chk.sh
+
+commit 0168690c59707452166684b20c7bae508e143959
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Sep 13 17:04:26 2013 +0800
+
+    modified:security_summar_chk.sh to change add the new function
+
+commit 5e55c4aae7f022caf4643d0b17d483b8cdbdd2c5
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Sep 13 11:46:50 2013 +0800
+
+    modified:filecheck.sh add the display the SITE in the report file
+
+commit 3ef3337a3c8b4c75d6cff681533b22585ad9d0a6
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Sep 13 10:38:02 2013 +0800
+
+    modified:syschk_base.sh , syschk_current.sh cancel check the lssrad command
+
+commit a42d019e93c16cb6cb04250c1b4a37a6479903d5
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Sep 10 01:35:36 2013 +0800
+
+    modified: dailycheck/daily_copy.sh , dailycheck/daily_recopy.sh to change log path
+
+commit 0cdb7862d54b0be5ea7fd9b8ebfa0591ec203cff
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Wed Sep 4 14:44:13 2013 +0800
+
+    modified:security_summar_chk.sh check function add fileaudit check
+
+commit 71b70093df8a72586fbec494560ef4f65d493b57
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sat Aug 31 22:27:53 2013 +0800
+
+    modified:daily_copy.sh,daily_recopy.sh,ntp.sh,ntp_manual.sh,security_summar_chk.sh  change WKLPAR hostname to WKLPARA1
+
+commit 6d858b4938ad638daae572910420557be52f4c85
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Aug 22 21:10:42 2013 +0800
+
+    modified:ntp.sh、ntp_manual.sh 、security_summar_chk.sh change wklpar hostname
+
+commit fd46ab315d11440b53626c093e01d6edad701687
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Aug 20 13:19:18 2013 +0800
+
+    modified:security_summar_chk.sh add fileaudit_base function
+
+commit 7a47edceb79063c3153e3354f168f6fb772a6547
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Aug 16 18:25:11 2013 +0800
+
+    modified: dailycheck/daily_check.sh, security_summar_chk.sh, syschk_diff.sh
+
+commit 0dcfec3cc23c431f6024e869e0843efed2f00b2a
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Wed Aug 14 10:40:28 2013 +0800
+
+    modified:security_summar_chk.sh change site name to TSEOA1
+
+commit 7e31042e21f0b8f18c577773bf27ed4ac4b538cf
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Wed Aug 14 10:38:34 2013 +0800
+
+    modified:filecheck.sh recover deleted:genbas_file_attr.sh.0507
+
+commit 409382bc5ef94e6434a451e749b1fa28ad20bd8b
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Wed Aug 14 09:52:33 2013 +0800
+
+    add security_summar_chk.sh
+
+commit f003ca55adbba9b2fae0e5cb30992a205ff7a5bf
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Aug 13 16:29:43 2013 +0800
+
+    modified:ntp.sh ntp_manual.sh syschk_diff.sh
+
+commit 5028f2b5b087770f3299afa2aa06781f702b917f
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Aug 13 09:45:57 2013 +0800
+
+    modified:crontab.sh monthly_check.sh
+
+commit fe96708db93eae2c3f365e0e4145a7db0811b72e
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Aug 12 19:10:37 2013 +0800
+
+    modified:account/mkalluser.sh change the user account
+
+commit eb16acff319b9de46a2ff765ecd956e797c5d4a9
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Jul 23 18:23:40 2013 +0800
+
+    modified:daily_copy.sh to scp fileattr to chg
+
+commit 92d725d24e3766224d7d24169e7776b2a06bfe24
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Jul 22 21:58:15 2013 +0800
+
+    modified:syschk_diff.sh fix syschk.diff to syschk.diff.一  7月 22 21:58:15 CST 2013
+
+commit 67c1e8fef72ae00f21ca5ca5a1486de1667c08ad
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Jul 22 20:59:04 2013 +0800
+
+    modified:daily_copy.sh change file name to safelog.fileattr.
+
+commit 94c8a49d5e79c0da303b092be6ceffda805e683e
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Jul 22 12:48:23 2013 +0800
+
+    modified:daily_copy.sh change site name.
+
+commit b0a34174204702f7ab33f74fd24c0921d0f4d44b
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Jul 22 11:53:00 2013 +0800
+
+    modified:syschk_current.sh correct backup name
+
+commit 78c33d3bec308bde19be3ee63dd0ed077d440079
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Jul 22 11:49:19 2013 +0800
+
+    modified:syschk_current.sh change backup name for current file
+
+commit c5e58cd1797ff68d1dd3bf5ab69a7db61322b1cb
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sun Jul 21 22:48:50 2013 +0800
+
+    modified:syschk_base.sh, syschk_current.sh to add backup function
+
+commit 6cd4e3d0b46fa114209f4d6c649893d4fbbb2006
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Jul 19 16:05:33 2013 +0800
+
+    modified:daily_copy.sh
+
+commit 648a6274ad27134764463e15c717aa37618d940b
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Jul 19 14:55:19 2013 +0800
+
+    add:createobj.pl
+
+commit d8f3d9b22dd95b7c2cd9edf90e41fc06da9bf1b6
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Jul 15 17:54:08 2013 +0800
+
+    modified:syschk_diff.sh The last to tail the log file
+
+commit 40fc1a07645d9d864e25af1048b446f91c4c440e
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Jul 15 17:46:30 2013 +0800
+
+    modified:syschk_diff.sh add time display to log file
+
+commit bc80652b569cf196ad3e0e72e96c1c536174eb64
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Jul 15 17:37:42 2013 +0800
+
+    modified:syschk_base.sh, syschk_current.sh, syschk_diff.sh
+
+commit b8e5999b0bc21af7c3dd9c282c7566e00f927d39
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Jul 15 12:09:30 2013 +0800
+
+    modified:filecheck.sh genbas_file_attr.sh awk use NF to access the last field
+
+commit 6af1fd22b2b8af8f71f54cc4d42a46944e717af0
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Jul 4 19:46:06 2013 +0800
+
+    modified: dailycheck/daily_copy.sh fix function step3
+
+commit 076365f4965a2c31dffaccb4f9aab7054d05cab2
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sat Jun 29 12:06:37 2013 +0800
+
+    deleted filecheck.sh.0507 filecheck.sh.0517 filecheck.sh.0518
+
+commit d76427e48795f4190ecc67ea0c471b6586b8325e
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Sat Jun 29 12:00:19 2013 +0800
+
+    modified daily_check.sh the error to delete the file audit base rule form regular
+
+commit 5daa9c22e84d8a42c896e85cca99c1ae24607539
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Jun 28 10:43:56 2013 +0800
+
+    modified: syschk_diff.sh change the file dir
+
+commit df9043cd92edb6df374f6f6adeb94085993e55b9
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Jun 21 16:19:24 2013 +0800
+
+    modified: filecheck.sh
+
+commit f1a4b293b4f7e90199d4850c7fc31290e097237a
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Jun 4 12:07:45 2013 +0800
+
+    #4:Test:To modified 2 shell: filecheck.sh  genbas_file_attr.shadd new_function:Recursive list dir, but don't list the file and directory time.
+
+commit 0d225dfc725294376622bf80e7960581cb49c906
+Author: bruce <bruce@X230.(none)>
+Date:   Thu May 30 18:51:21 2013 +0800
+
+    #3:Master:The filecheck.sh script to add echo ther  on each report. To deleted dailycheck/fileaudit/filecheck.wei.sh
+
+commit 7e88e1ef2231b8780d6805c9e0e6b97debbf91b9
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu May 23 17:05:06 2013 +0800
+
+    #2:Master:Safesh modified usrlock_ssh.sh
+
+commit bccd972fb1d5cc4eb4747aa5d11ef3b17482d8f9
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Wed May 22 23:24:47 2013 +0800
+
+    #1:Master:Safesh clone
