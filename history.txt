@@ -1,3 +1,15 @@
+commit af10dda6eee5c72fc5f321b7fefd3189fdfee587
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:47:57 2013 +0800
+
+    modified:version.txt
+
+commit 03ba89c8002a41a0580c456a248c8522b08db6b9
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:46:40 2013 +0800
+
+    new file:history.txt ,version.txt
+
 commit c6a1c623e210b06f7f6d2edf6e7812931e20fc19
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Tue Dec 24 20:44:32 2013 +0800
