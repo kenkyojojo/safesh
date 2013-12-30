@@ -1,3 +1,33 @@
+commit a4ed46deddb0b35183374f56a680cfe9593edd66
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Dec 30 17:01:08 2013 +0800
+
+    modified:active_lpar.Menu.sh、shutdown_lpar.Menu.sh change to Server name
+
+commit 7830f0f314baf1194f07dbcffc9c4aa2bdfa2459
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:42:37 2013 +0800
+
+    modified:   version.txt
+
+commit 053a5e6def84c7e7dafe1c24a7bfcc7c0c17b67d
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:40:52 2013 +0800
+
+    new file:add the new version.txt
+
+commit 65faf4bb9acf442ad8ec8e5e68aecd1f4ed64b22
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:39:26 2013 +0800
+
+    renamed:Readme.txt -> history.txt, new file:version.txt
+
+commit 2d8cbe81bf2ce3518f669da7da5ff74bc3767a9e
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:33:45 2013 +0800
+
+    New file:add the Readme.txt about the change history
+
 commit 20af6a6b4dae1a6233bfa5474da8dae7809fd478
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Tue Dec 24 20:39:39 2013 +0800
