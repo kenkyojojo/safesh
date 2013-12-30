@@ -12,19 +12,19 @@ clear ""
 Menu_No=""
 print "	<< FIX/FAST Shutdown SYSTEM Menu >>"
 print ""
-print "1. Server-9179-MHC-SN06A2F3R"
+print "1. Server-9179-MHD-SN1038DAT"
 print ""
-print "2. Server-9179-MHD-SN06E1ADR"
+print "2. Server-9179-MHD-SN1038D9T"
 print ""
 print "You can type q or Q exit the shell"
 read Menu_No?"Please to choose(1-2):"
 
 case $Menu_No in
 	1)
-		SYSTEM=Server-9179-MHC-SN06A2F3R
+		SYSTEM=Server-9179-MHD-SN1038DAT
 		;;
 	2)
-		SYSTEM=Server-9179-MHD-SN06E1ADR
+		SYSTEM=Server-9179-MHD-SN1038D9T
 		;;
 	q|Q)
 		./HMC_menu.sh;exit 0
