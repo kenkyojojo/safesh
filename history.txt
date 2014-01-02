@@ -1,3 +1,15 @@
+commit e51bd61b85d83bc5a02ac28154ce970d975bbf26
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Jan 2 18:36:35 2014 +0800
+
+    modified:Etherchannel-2.sh、SEA_mapping-3.sh、VFC_mapping-1.sh
+
+commit db66ab35947f5bee01e0cd5ea787dd92090b5618
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Dec 30 17:22:10 2013 +0800
+
+    modified:history.txt、version.txt
+
 commit a4ed46deddb0b35183374f56a680cfe9593edd66
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Mon Dec 30 17:01:08 2013 +0800
