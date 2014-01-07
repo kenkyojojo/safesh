@@ -217,8 +217,8 @@ case $Menu_No in
                 fi
 				;;
 	20)
-				if [ "$USER" == "root" ] || [ "$USER" == "bruce" ]; then
-#if [ "$USER" == "root" ] || [ "$USER" == "useradm" ]; then
+#if [ "$USER" == "root" ] || [ "$USER" == "bruce" ]; then
+				if [ "$USER" == "root" ] || [ "$USER" == "useradm" ]; then
                    STARTT
                 else
                    echo ""
@@ -1907,6 +1907,8 @@ NTPCMD="stopsrc -s xntpd;$SHDIR/ntp_manual.sh;startsrc -s xntpd"
 SECCMD=$SHDIR/security_summar_chk.sh
 timestamp=`date +"%Y%m%d%H%M"`
 CHKFLG=0
+FNUM=1
+LNUM=9
 
 clear
 echo "          << FIX/FAST 開機檢核操作介面 (ALL AIX LPAR)>> "
@@ -1918,20 +1920,22 @@ echo "        2. Client-LPAR校時、系統檢核、系統檔案檢核 "
 echo ""
 echo "        3. Client-LPAR與WKLPAR校時(確任第一選項須先執行) (ntp_manual.sh) "
 echo ""
-echo "        4. 系統檢核(syschk_diff.sh) "
+echo "        4. 系統檢核(syschk_diff.sh)"
 echo ""
-echo "        5. 系統檔案檢核(useradm's daily_check.sh) "
+echo "        5. 系統檔案檢核(useradm's daily_check.sh)"
 echo ""
-echo "        6. 系統檔案檢核異動匯集至WKLPAR (daily_copy.sh) "
+echo "        6. 系統檔案檢核異動匯集至WKLPAR (daily_copy.sh)"
 echo ""
-echo "        7. 系統檔案檢核Base檔覆蓋 "
+echo "        7. 系統檔案檢核Base檔更新"
 echo ""
-echo "        8. 系統資源、設定值檢核(seadm's daily_check) "
+echo "        8. 系統資源、設定值檢核(seadm's hardware_chk)"
+echo ""
+echo "        9. 系統檢核Base更新"
 echo ""
 
 echo "      (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?" 請選擇選項 (1-8) : "
+read Menu_No?" 請選擇選項 ($FNUM-$LNUM) : "
 
 case $Menu_No in
 	   1)
@@ -2002,11 +2006,11 @@ case $Menu_No in
 	   	;;
 
 	   7)
- 	    echo "			開始進行檔案檢核Base檔覆蓋..."
+ 	    echo "			開始進行檔案檢核Base檔更新..."
 		sleep 1
 		echo "			執行指令：$SECCMD base"
 							      $SECCMD base
- 	    echo "			指令完成(請確檔案檢核Base檔覆蓋結果.)"
+ 	    echo "			指令完成(請確檔案檢核Base檔更新結果.)"
 		echo ""
 		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
@@ -2023,13 +2027,24 @@ case $Menu_No in
 		STARTT1
 	   	;;
 
+	   9)
+ 	    echo "			開始進行系統檢核Base檔更新..."
+		sleep 1
+		echo "			執行指令：$SECCMD down"
+							      $SECCMD down
+ 	    echo "			指令完成(請確檔案檢核Base檔更新結果.)"
+		echo ""
+		read ANSWR?"               按Enter鍵繼續 "
+		STARTT1
+	   	;;
+
 	q|Q)
 		STARTT
 		;;
 		
 	*)
         echo ""
-		echo " [Error]  輸入錯誤, 請輸入 (1-8)的選項"
+		echo " [Error]  輸入錯誤, 請輸入 ($FNUM-$LNUM)的選項"
         read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 		;;
@@ -2044,20 +2059,36 @@ SHDIR=/home/se/safechk/safesh
 SECCMD=$SHDIR/security_summar_chk.sh
 timestamp=`date +"%Y%m%d%H%M"`
 CHKFLG=0
+FNUM=1
+LNUM=2
 
 clear
 echo "          << FIX/FAST 關機檢核操作介面 (ALL AIX LPAR)>> "
 echo ""
 echo ""
-echo "        1. 系統系統資源、設定值檢核Base檔產生 "
-
+echo "        1. 系統檢核(syschk_diff.sh) "
+echo ""
+echo "        2. 系統檢核Base檔更新(syschk base update)"
+echo ""
 echo "      (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?" 請選擇選項 (1) : "
+read Menu_No?" 請選擇選項 ($FNUM-$LNUM) : "
 
 case $Menu_No in
+	   
 	   1)
- 	    echo "			開始進行系統檢核Base檔產生... "
+ 	    echo "			開始進行系統檢核..."
+		sleep 1
+		echo "			執行指令：$SECCMD sys"
+							      $SECCMD sys
+ 	    echo "			指令完成(請確認系統檢核結果.)"
+		echo ""
+		read ANSWR?"               按Enter鍵繼續 "
+		STARTT1
+	   	;;
+
+       2)
+ 	    echo "			開始進行系統檢核Base檔更新... "
 		sleep 1
 		echo "			執行指令：$SECCMD down"
 							      $SECCMD down
@@ -2066,13 +2097,14 @@ case $Menu_No in
 		read ANSWR?"               按Enter鍵繼續 "
 		STARTT2
 	   	;;
+
 	q|Q)
 		STARTT
 		;;
 		
 	*)
         echo ""
-		echo " [Error]  輸入錯誤, 請輸入(1)的選項"
+		echo " [Error]  輸入錯誤, 請輸入($FNUM-$LNUM)的選項"
         read ANSWR?"               按Enter鍵繼續 "
 		STARTT2
 		;;
@@ -2084,39 +2116,121 @@ LOGDIR=/home/se/safechk/safelog
 LOG=$LOGDIR/security_summar_chk.log
 SHCFG=/home/se/safechk/cfg
 SHDIR=/home/se/safechk/safesh
-SECCMD=$SHDIR/security_summar_chk.sh
+SECCMD=$SHDIR/security_report.pl
 timestamp=`date +"%Y%m%d%H%M"`
 TOTLECOUNT=`cat $SHCFG/host.lst |awk '{print $1}'|wc -l `
 CHKFLG=0
+FNUM=1
+LNUM=7
 
 clear
 echo "          << FIX/FAST 檢核報表操作介面 (ALL AIX LPAR)>> "
 echo ""
 echo ""
-echo "        1. 系統系統資源、設定值檢核Base檔產生 "
-
+echo "        1. $WKLPAR與校時主機($NTPSRV)校時結果"
+echo ""
+echo "        2. Client LPAR與$WKLPAR校時結果"
+echo ""
+echo "        3. 系統資源、設定值檢核結果(seadm's hardware_chk)"
+echo ""
+echo "        4. 系統檢核Base檔更新結果"
+echo ""
+echo "        5. 系統檢核結果(syschk)"
+echo ""
+echo "        6. 系統檔案檢核Base檔更新結果"
+echo ""
+echo "        7. 系統檔案檢核結果檔匯集至$WKLPAR執行結果"
+echo ""
 echo "      (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?" 請選擇選項 (1) : "
+read Menu_No?" 請選擇選項 ($FNUM-$LNUM) : "
 
 case $Menu_No in
+	   
 	   1)
- 	    echo "			開始進行系統檢核Base檔產生... "
+ 	    echo "			開始進行$WKLPAR與校時主機($NTPSRV)校時結果..."
 		sleep 1
-		echo "			執行指令：$SECCMD down"
-							      $SECCMD down
- 	    echo "			指令完成(請確系統檢核Base結果.)"
+		echo "			執行指令：$SECCMD 1"
+							      $SECCMD 1 
+ 	    echo "			指令完成(請確認結果.)"
 		echo ""
 		read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 	   	;;
-	q|Q)
-		STARTT
+
+	   2)
+ 	    echo "			開始進行Client LPAR與$WKLPAR校時結果..."
+		sleep 1
+		echo "			執行指令：$SECCMD 2"
+							      $SECCMD 2 
+ 	    echo "			指令完成(請確認結果.)"
+		echo ""
+		read ANSWR?"               按Enter鍵繼續 "
+		STARTT3
+	   	;;
+
+	   3)
+ 	    echo "			開始進行系統資源、設定值檢核結果..."
+		sleep 1
+		echo "			執行指令：$SECCMD 3"
+							      $SECCMD 3 
+ 	    echo "			指令完成(請確認結果.)"
+		echo ""
+		read ANSWR?"               按Enter鍵繼續 "
+		STARTT3
+	   	;;
+
+	   4)
+ 	    echo "			開始進行系統檢核Base檔更新結果..."
+		sleep 1
+		echo "			執行指令：$SECCMD 4"
+							      $SECCMD 4 
+ 	    echo "			指令完成(請確認結果.)"
+		echo ""
+		read ANSWR?"               按Enter鍵繼續 "
+		STARTT3
+	   	;;
+
+	   5)
+ 	    echo "			開始進行系統檢核結果..."
+		sleep 1
+		echo "			執行指令：$SECCMD 5"
+							      $SECCMD 5 
+ 	    echo "			指令完成(請確認結果.)"
+		echo ""
+		read ANSWR?"               按Enter鍵繼續 "
+		STARTT3
+	   	;;
+
+	   6)
+ 	    echo "			開始進行系統檔案檢核Base檔更新結果..."
+		sleep 1
+		echo "			執行指令：$SECCMD 6"
+							      $SECCMD 6 
+ 	    echo "			指令完成(請確認結果.)"
+		echo ""
+		read ANSWR?"               按Enter鍵繼續 "
+		STARTT3
+	   	;;
+
+	   7)
+ 	    echo "			開始進行系統檔案檢核結果檔匯集至$WKLPAR執行結果..."
+		sleep 1
+		echo "			執行指令：$SECCMD 7"
+							      $SECCMD 7 
+ 	    echo "			指令完成(請確認結果.)"
+		echo ""
+		read ANSWR?"               按Enter鍵繼續 "
+		STARTT3
+	   	;;
+
+		q|Q)
+			STARTT
 		;;
 		
 	*)
         echo ""
-		echo " [Error]  輸入錯誤, 請輸入(1)的選項"
+		echo " [Error]  輸入錯誤, 請輸入($FNUM-$LNUM)的選項"
         read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 		;;

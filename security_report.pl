@@ -5,7 +5,6 @@
 $SITE="TSEOT1";
 $HOSTNAME=`hostname`;
 $DATE=`date +%Y%m%d`;
-#$DATE=20130916;
 $SHDIR="/home/se/safechk/safesh";
 $SHCFG="/home/se/safechk/cfg";
 $LOGDIR="/home/se/safechk/safelog";
@@ -29,12 +28,12 @@ if ($#Menu_no != 0) {
 #---------------------------------------------------------------------
 # Set raw data variable
 #---------------------------------------------------------------------
-#ntp check timing status log 
-#sys check syschk status
+#ntp check ntp status 
+#sys check syschk compare status
 #aut check daily_copy running status
-#atr check fileaudit bas recover status
+#atr check fileaudit bas update status
 #adm check Hardware_chk running status
-#sba check syschk_base bas recover status
+#sba check syschk_base bas update status
 $ntp_CHKLOG="$LOGDIR/ntp_chk.$DATE";
 $sys_CHKLOG="$LOGDIR/sys_chk.$DATE";
 $aut_CHKLOG="$LOGDIR/aut_chk.$DATE";
@@ -46,8 +45,8 @@ $sba_CHKLOG="$LOGDIR/sba_chk.$DATE";
 # Set report file variable
 #---------------------------------------------------------------------
 
-$ntp_REPORT="$REPORTDIR/ntp_report.$DATE";
 $wkl_REPORT="$REPORTDIR/wkl_report.$DATE";
+$ntp_REPORT="$REPORTDIR/ntp_report.$DATE";
 $sys_REPORT="$REPORTDIR/sys_report.$DATE";
 $aut_REPORT="$REPORTDIR/aut_report.$DATE";
 $atr_REPORT="$REPORTDIR/atr_report.$DATE";
@@ -113,6 +112,7 @@ sub wk_ntp_report(){
 #set the variable.
 #---------------------------------------------------------------------
 $TLOG=&tlog($HOSTNAME) ;
+$NTPSRV=`/usr/sbin/ntpq -p` ;
 
 #---------------------------------------------------------------------
 #	To creative the wklpar ntp report file in selog/log/wkl_report.$YYYYMMDD.
@@ -120,10 +120,13 @@ $TLOG=&tlog($HOSTNAME) ;
 	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
 	open (REPORT, ">$wkl_REPORT") || die "Can't open the ntp.log:$!";
 		@LOG=<LOG>;
-		print REPORT "æ—¥  æœˆ    æ™‚é–“                                        æ ¡æ™‚ä¸»æ©Ÿ           æ™‚é–“å·®","\n";
+		print REPORT "¤é  ¤ë    ®É¶¡                                        ®Õ®É¥D¾÷           ®É¶¡®t","\n";
 		print REPORT "#","-"x73,"#","\n";		
 		print REPORT $TLOG;
-		print REPORT @LOG ;
+		print REPORT @LOG ,"\n";
+		print REPORT "$WKLPAR NTP Service Status","\n";
+		print REPORT "#","-"x73,"#","\n";		
+		print REPORT $NTPSRV;
 	close REPORT;
 	close LOG;
 
@@ -167,10 +170,10 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 
 	open (REPORT, ">$ntp_REPORT") || die "Can't open the ntp.log:$!";
 
-	print REPORT "LPAR æ‡‰åˆ°:", &count('host.lst'), "å°","\n";		
-	print REPORT "LPAR å¯¦åˆ°:$SUMLPAR" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°:$DIFF" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°æ¸…å–®:\n"; 
+	print REPORT "LPAR À³¨ì:", &count('host.lst'), "¥x","\n";		
+	print REPORT "LPAR ¹ê¨ì:$SUMLPAR" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì:$DIFF" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì²M³æ:\n"; 
 	foreach $host(@HOST){
 		chomp($host);
 		$FLAG=grep( /$host$/,@ROW);
@@ -179,7 +182,7 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 		}
 	}
 	print REPORT "\n","#","-"x73,"#","\n\n";		
-	print REPORT "æ—¥  æœˆ    æ™‚é–“                                        æ ¡æ™‚ä¸»æ©Ÿ           æ™‚é–“å·®","\n";
+	print REPORT "¤é  ¤ë    ®É¶¡                                        ®Õ®É¥D¾÷           ®É¶¡®t","\n";
 	print REPORT @ROW;
 	
 	close REPORT;
@@ -223,10 +226,10 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 
 	open (REPORT, ">$adm_REPORT") || die "Can't open the ntp.log:$!";
 
-	print REPORT "LPAR æ‡‰åˆ°:", &count('host.lst'), "å°","\n";		
-	print REPORT "LPAR å¯¦åˆ°:$SUMLPAR" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°:$DIFF" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°æ¸…å–®:\n"; 
+	print REPORT "LPAR À³¨ì:", &count('host.lst'), "¥x","\n";		
+	print REPORT "LPAR ¹ê¨ì:$SUMLPAR" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì:$DIFF" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì²M³æ:\n"; 
 	foreach $host(@HOST){
 		chomp($host);
 		$FLAG=grep( /$host$/,@ROW);
@@ -235,7 +238,7 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 		}
 	}
 	print REPORT "\n","#","-"x73,"#","\n\n";		
-	print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                                   ç‹€æ…‹","\n";
+	print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                                   ª¬ºA","\n";
 	print REPORT @ROW;
 	
 	close REPORT;
@@ -281,10 +284,10 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 
 	open (REPORT, ">$REPORT") || die "Can't open the $REPORT:$!";
 
-	print REPORT "LPAR æ‡‰åˆ°:", &count('host.lst'), "å°","\n";		
-	print REPORT "LPAR å¯¦åˆ°:$SUMLPAR" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°:$DIFF" ,"å°","\n";		
-	print REPORT "LPAR æœªåˆ°æ¸…å–®:\n"; 
+	print REPORT "LPAR À³¨ì:", &count('host.lst'), "¥x","\n";		
+	print REPORT "LPAR ¹ê¨ì:$SUMLPAR" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì:$DIFF" ,"¥x","\n";		
+	print REPORT "LPAR ¥¼¨ì²M³æ:\n"; 
 	foreach $host(@HOST){
 		chomp($host);
 		$FLAG=grep( /$host$/,@ROW);
@@ -296,25 +299,25 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 
 	#Menu_no 2
 	if ( $MATCH eq "offset" ) {
-		print REPORT "æ—¥  æœˆ    æ™‚é–“                                        æ ¡æ™‚ä¸»æ©Ÿ           æ™‚é–“å·®","\n";
+		print REPORT "¤é  ¤ë    ®É¶¡                                        ®Õ®É¥D¾÷           ®É¶¡®t","\n";
 	#Menu_no 3
 	}elsif ( $MATCH eq "Finished" ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                                   ç‹€æ…‹","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                                   ª¬ºA","\n";
 	}
 	#Menu_no 4
 	elsif ( $MATCH =~ /base/ ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                æª”æ¡ˆæ™‚é–“                          æª”æ¡ˆ","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                ÀÉ®×®É¶¡                          ÀÉ®×","\n";
 	}
 	#Menu_no 5
 	elsif ( $MATCH eq "Start" ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                æª”æ¡ˆ","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                ÀÉ®×","\n";
 	}
 	#Menu_no 6
 	elsif ( $MATCH eq "attr" ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                                                  æª”æ¡ˆ","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                                                  ÀÉ®×","\n";
 	}
 	elsif ( $MATCH eq "End" ) {
-		print REPORT " ç¯€é»         æ™‚é–“         ä¸»æ©Ÿ                         ç‹€æ…‹","\n";
+		print REPORT " ¸`ÂI         ®É¶¡         ¥D¾÷                         ª¬ºA","\n";
 	}
 	else{
 		print "Error:No have other REPORT.";
@@ -338,7 +341,7 @@ sub main(){
 $Menu_no2=@_[0];
 
 	if ($Menu_no2 == 1 ){
-		&wk_ntp_report ;
+		&wk_ntp_report ; 
 	}elsif ($Menu_no2 == 2){
 		$MATCH="offset";
 		&report($ntp_CHKLOG,$ntp_REPORT,$MATCH) ;
@@ -366,18 +369,25 @@ $Menu_no2=@_[0];
 sub menu(){
 $Menu_no=@_[0];
 
+	#wklpar ntp status report
 	if ($Menu_no == 1){
 		&main(1) ;
+	#All Lpar ntp status report
 	}elsif ($Menu_no == 2){
 		&main(2) ;
+	#Run combind.sh ,check Hardware_chk running status. User:seadm
 	}elsif ($Menu_no == 3){
 		&main(3) ;
+	#check syschk base update status.
 	}elsif ($Menu_no == 4){
 		&main(4) ;
+	#check syschk compare status.
 	}elsif ($Menu_no == 5){
 		&main(5) ;
+	#check fileaudit base update status.
 	}elsif ($Menu_no == 6){
 		&main(6) ;
+	#aut check daily_copy running status
 	}elsif ($Menu_no == 7){
 		&main(7) ;
 	}else{ 
