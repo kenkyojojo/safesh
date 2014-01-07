@@ -1,3 +1,33 @@
+commit 69b00d4b03fb2033a416c4424410b33257c5858b
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Jan 7 17:13:50 2014 +0800
+
+    modified:security_summar_chk.sh、security_report.pl、m.sh、m.sh.utf8
+
+commit c8ac2bfb23a39d7f55a09686364d20750b3885a7
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:58:42 2013 +0800
+
+    modified:version.txt
+
+commit fbe555eb4970440f6c387ce63f88c72a76d4d058
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:51:32 2013 +0800
+
+     new file:version.txt
+
+commit 6a490bb775ed01506778e7fbc2c4c5f2366deead
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:50:47 2013 +0800
+
+    renamed: Readme.txt -> history.txt
+
+commit 51e26da7b47d96db8218ac30fff4ccec6f907caa
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Fri Dec 27 21:32:19 2013 +0800
+
+    New file:add the Readme.txt about the change history
+
 commit 392cecef79506c9c7863ab67586bfba809d0187f
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Tue Dec 24 20:46:34 2013 +0800
