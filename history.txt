@@ -1,3 +1,15 @@
+commit a00b7d032242b23477b8f8c0d5d206a0f12dd2e1
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Jan 7 22:09:19 2014 +0800
+
+    new file:dir_operator.sh for the twse'3 group's requre
+
+commit c90af6817b57e4f174cc7b2cf362a4b7ecf2e349
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Jan 2 18:39:52 2014 +0800
+
+    modified:history.txt，version.txt
+
 commit e51bd61b85d83bc5a02ac28154ce970d975bbf26
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Thu Jan 2 18:36:35 2014 +0800

@@ -3,9 +3,9 @@
 main () {
 	clear
     echo "start menu"
-    echo "1:æ–°å¢ç›®éŒ„"
-    echo "2:åˆªé™¤ç›®éŒ„" 	
-    read Menu_No?"                                 è«‹é¸æ“‡é¸é …(1-2) : "
+    echo "1:·s¼W¥Ø¿ı"
+    echo "2:§R°£¥Ø¿ı" 	
+    read Menu_No?"                                 ½Ğ¿ï¾Ü¿ï¶µ(1-2) : "
     case $Menu_No in  
         1)
             DIR_INFO MKDIR
@@ -18,8 +18,8 @@ main () {
             ;;
         *)
             echo "" 
-	    echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥ (1-2)çš„é¸é …"
-	    read Answer?"  æŒ‰Enteréµç¹¼çºŒ "
+	    echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J (1-2)ªº¿ï¶µ"
+	    read Answer?"  «öEnterÁäÄ~Äò "
 	    main
             ;;
     esac
@@ -38,15 +38,15 @@ MENU_INPUT () {
 
    if [[ "$HOSTN" == "" ]]; then
        echo ""
-       echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
+       echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
        echo "#==========================================================#"
-       echo "# è¼¸å…¥æ ¼å¼(æ¯å°ä¸»æ©Ÿä»¥ç©ºæ ¼åšç‚ºåˆ†éš”): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# ¿é¤J®æ¦¡(¨C¥x¥D¾÷¥HªÅ®æ°µ¬°¤À¹j): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# ç¾¤çµ„è¼¸å…¥æ ¼å¼: DAP (ä¸€æ¬¡ä¸€å€‹ç¾¤çµ„)                         #"
+       echo "# ¸s²Õ¿é¤J®æ¦¡: DAP (¤@¦¸¤@­Ó¸s²Õ)                         #"
        echo "#                                                          #"
-       echo "# å…¨éƒ¨ä¸»æ©Ÿè«‹è¼¸å…¥: ALL                                      #"
+       echo "# ¥ş³¡¥D¾÷½Ğ¿é¤J: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"è¼¸å…¥æ¬²å‚³é€çš„ä¸»æ©Ÿåç¨± : "
+       read HOSTN?"¿é¤J±ı¶Ç°eªº¥D¾÷¦WºÙ : "
        if [[ "$HOSTN" == "q" ]] || [[ "$HOSTN" == "Q" ]]; then
            main
        fi
@@ -80,9 +80,9 @@ MENU_INPUT () {
 
 			   if [[ -z "$HOSTLIST" ]]; then
            	  		echo ""
-	    			echo "               [Error]  è¼¸å…¥ç‚ºç©ºå€¼ "
+	    			echo "               [Error]  ¿é¤J¬°ªÅ­È "
 	    			echo ""
-	    			read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+	    			read ANSWR?"               «öEnterÁäÄ~Äò "
 	    			main
 			   fi
     fi
@@ -96,9 +96,9 @@ USER_CHECK (){
 
     if [[ "$DIROWNER" == "" ]]; then
         echo ""
-	echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
+	echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
 	echo ""
-	read DIROWNER?" è¼¸å…¥ç›®éŒ„çš„æ“æœ‰è€… : "
+	read DIROWNER?" ¿é¤J¥Ø¿ıªº¾Ö¦³ªÌ : "
 	fi
 
 	if [[ "$DIROWNER" == "q" ]] || [[ "$DIROWNER" == "Q" ]]; then
@@ -108,21 +108,21 @@ USER_CHECK (){
 	USERNAMECHK=`grep "^${DIROWNER}:" /etc/passwd | awk -F: '{print $1}'`
 	if [[ "$USERNAMECHK" != "$DIROWNER" ]]; then
 	    echo ""
-	    echo "               [Error]  è¼¸å…¥ä½¿ç”¨è€…åç¨±ä¸å­˜åœ¨ "
+	    echo "               [Error]  ¿é¤J¨Ï¥ÎªÌ¦WºÙ¤£¦s¦b "
 	    echo ""
-	    read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+	    read ANSWR?"               «öEnterÁäÄ~Äò "
 	    main 
 	fi
 
 	if [[ -z "$USERNAMECHK" ]]; then
 	    echo ""
-	    echo "               [Error]  è¼¸å…¥ä½¿ç”¨è€…åç¨±ç‚ºç©ºå€¼ "
+	    echo "               [Error]  ¿é¤J¨Ï¥ÎªÌ¦WºÙ¬°ªÅ­È "
 	    echo ""
-	    read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+	    read ANSWR?"               «öEnterÁäÄ~Äò "
 	    main 
 	fi
 
-        read DIRGROUP?" è¼¸å…¥ç›®éŒ„çš„æ“æœ‰ç¾¤çµ„ : "
+        read DIRGROUP?" ¿é¤J¥Ø¿ıªº¾Ö¦³¸s²Õ : "
 	if [[ "$DIRGROUP" == "q" ]] || [[ "$DIRGROUP" == "Q" ]]; then
 	    main
 	fi
@@ -131,17 +131,17 @@ USER_CHECK (){
 
 	if [[ "$GROUPCHK" != "$DIRGROUP" ]]; then
 	    echo ""
-	    echo "               [Error]  è¼¸å…¥ç¾¤çµ„ä¸å­˜åœ¨ "
+	    echo "               [Error]  ¿é¤J¸s²Õ¤£¦s¦b "
 	    echo ""
-	    read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+	    read ANSWR?"               «öEnterÁäÄ~Äò "
 	    main 
 	fi
 
 	if [[ -z "$GROUPCHK" ]]; then
   	    echo ""
-	    echo "               [Error]  è¼¸å…¥ç¾¤çµ„ç‚ºç©ºå€¼ "
+	    echo "               [Error]  ¿é¤J¸s²Õ¬°ªÅ­È "
 	    echo ""
-	    read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+	    read ANSWR?"               «öEnterÁäÄ~Äò "
 	    main 
 	fi
 }
@@ -153,7 +153,7 @@ DIRPATH=""
 DIRPERM=""
 MODE=$1
 
-    read DIRPATH?" è¼¸å…¥ç›®éŒ„çš„è·¯å¾‘ä½ç½®(çµ•å°è·¯å¾‘) : "
+    read DIRPATH?" ¿é¤J¥Ø¿ıªº¸ô®|¦ì¸m(µ´¹ï¸ô®|) : "
 
     if [[ "$DIRPATH" == "q" ]] || [[ "$DIRPATH" == "Q" ]]; then
         main
@@ -161,15 +161,15 @@ MODE=$1
 
     if [[ -z "$DIRPATH" ]]; then
         echo ""
-        echo "               [Error]  è¼¸å…¥ç›®éŒ„ç‚ºç©ºå€¼ "
+        echo "               [Error]  ¿é¤J¥Ø¿ı¬°ªÅ­È "
 		echo ""
-		read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+		read ANSWR?"               «öEnterÁäÄ~Äò "
         main
     fi
 
 	if [[ $MODE = MKDIR ]]; then
 
-		read DIRPERM?" è¼¸å…¥ç›®éŒ„çš„æ¬Šé™,è«‹è¼¸å…¥3å€‹(0-7æ•¸å­—),å¦‚755: "
+		read DIRPERM?" ¿é¤J¥Ø¿ıªºÅv­­,½Ğ¿é¤J3­Ó(0-7¼Æ¦r),¦p755: "
 
 		if [[ "$DIRPERM" == "q" ]] || [[ "$DIRPERM" == "Q" ]]; then
 			main
@@ -177,9 +177,9 @@ MODE=$1
 
 		if [[ "$DIRPERM" != [1-7][0-7][0-7] ]]; then
 			echo ""
-			echo "               [Error]  è¼¸å…¥Permissionéæ•¸å­—æ ¼å¼,è«‹è¼¸å…¥3å€‹(0-7ç¯„åœ)çš„æ•¸å­—"
+			echo "               [Error]  ¿é¤JPermission«D¼Æ¦r®æ¦¡,½Ğ¿é¤J3­Ó(0-7½d³ò)ªº¼Æ¦r"
 			echo ""
-			read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+			read ANSWR?"               «öEnterÁäÄ~Äò "
 			main
 		fi
 	fi
@@ -210,7 +210,7 @@ fi
 
     if [[ "$CHKFLG" != "0" ]]; then
         echo ""
-	read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+	read ANSWR?"               «öEnterÁäÄ~Äò "
 	main
     else
 	echo ""
@@ -219,11 +219,11 @@ fi
 	echo "Directory PATH:       $DIRPATH"
 	echo "Directory Permission: $DIRPERM"
 	echo ""
-	echo "#===ä¸»æ©Ÿåˆ—è¡¨===#"
+	echo "#===¥D¾÷¦Cªí===#"
 	echo "$HOSTLIST"
     echo "#==============#"
 		   
-	read ANSWER?"             è«‹ç¢ºèªä¸Šè¿°è³‡è¨Šç„¡èª¤(Y/N): "
+	read ANSWER?"             ½Ğ½T»{¤W­z¸ê°TµL»~(Y/N): "
 	case $ANSWER in
 	    n|N)
 	        main
@@ -237,7 +237,7 @@ fi
 			fi
 
 			for HOST in $HOSTLIST ; do
-	            echo "$HOST åŸ·è¡Œä¸­..."
+	            echo "$HOST °õ¦æ¤¤..."
 
 				echo "SSH_CMD $CMDTYPE"
 				SSH_CMD $CMDTYPE
@@ -257,16 +257,16 @@ fi
 
 	         echo ""
 	         echo "#==========================#"
-	         echo "#  åŸ·è¡ŒæŒ‡ä»¤ä¸»æ©Ÿçµæœæ¸…å–®:   #"
+	         echo "#  °õ¦æ«ü¥O¥D¾÷µ²ªG²M³æ:   #"
 	         echo "#==========================#"
 	         cat /tmp/$USER.$timestamp
 			 rm /tmp/$USER.$timestamp
-	         read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+	         read ANSWR?"               «öEnterÁäÄ~Äò "
      	         main
 	         ;;
 	    *)
-	         echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
-	         read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
+	         echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
+	         read ANSWR?"               «öEnterÁäÄ~Äò "
 	         	main
 	         ;;
         esac
@@ -341,7 +341,7 @@ fi
 # Section 2 --- Verify that the directory were created
 #    Part 1 --- Retrieve those check files
 #-----------------------------------------------------------
-	echo "$HOST çµæœæª¢æŸ¥ä¸­..."
+	echo "$HOST µ²ªGÀË¬d¤¤..."
     scp -P 2222 ${USER}@${HOST}:$HOMEDIR/dirdatafile.${HOST} /tmp/
 	ssh -p 2222 ${USER}@${HOST} "rm -f $HOMEDIR/dirdatafile.${HOST}"
 }
