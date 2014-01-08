@@ -1,3 +1,26 @@
+commit 84ecb5ad4fcad04cec51d0f3465fa10bee0cd4b7
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Jan 9 00:35:09 2014 +0800
+
+    modified the flowing LIST file to sync the TSEOA1.
+    LIST:
+    Etherchannel-2.sh
+    SEA_mapping-3.sh
+    VFC_mapping-1.sh
+    active_lpar.Menu.sh
+    apdir_operator.sh
+    dir_operator.sh
+    ntp.sh
+    ntp_manual.sh
+    security_summar_chk.sh
+    shutdown_lpar.Menu.sh
+
+commit 11df292c7f6949a5e48eb59de2315a7adf219d08
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Dec 30 17:20:23 2013 +0800
+
+    modified:history.txt、version.txt
+
 commit 58b4331f498a25c6becfe7fd61238a385d7a8294
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Mon Dec 30 17:18:19 2013 +0800
