@@ -346,4 +346,19 @@ fi
 	ssh -p 2222 ${USER}@${HOST} "rm -f $HOMEDIR/dirdatafile.${HOST}"
 }
 
-main
+#Start
+
+if [[ $# -eq 0  ]] ; then
+	main
+else
+	dir_cfg=$1
+	while read MODE HOST DIR PERMIT OWNER 
+	do
+		COMMENT=`echo $MODE | grep '^#' |wc -l `
+		if [[ $COMMENT != 0 ]];then
+			continue
+		else
+			DIR_INFO MKDIR
+		fi
+	done < "$dir_cfg"
+fi
