@@ -1,3 +1,21 @@
+commit 35b05fe658ca55ef61e3a4dfd9883328f440f6b9
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Jan 9 00:12:52 2014 +0800
+
+    modified:dir_operator.sh
+
+commit 835329934f7c4dc1a5e06c6270d82d370acc44d9
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Jan 9 00:12:11 2014 +0800
+
+    new file:apdir_operator.sh modified:dir_operator.sh
+
+commit 2d326e68cc41979a04ec7073d976a1f4ad201d5b
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Jan 7 22:13:32 2014 +0800
+
+    modified:dir_operator.sh change utf8 to big5
+
 commit a00b7d032242b23477b8f8c0d5d206a0f12dd2e1
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Tue Jan 7 22:09:19 2014 +0800
