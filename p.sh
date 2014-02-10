@@ -27,17 +27,17 @@ case $Menu_No in
 		STARTA
 		;;
 	2)
-                STARTB
+		STARTB
 		;;
-        3)
-                STARTC
-                ;;
-        4)
-                STARTD
-                ;;
-        5)
-                STARTE
-                ;;
+    3)
+		STARTC
+		;;
+    4)
+		STARTD
+		;;
+    5)
+		STARTE
+		;;
 	q|Q)
 		exit
 		;;
@@ -100,6 +100,8 @@ STARTB () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲傳送的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
+
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -260,6 +262,8 @@ STARTC () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲執行指令的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
+
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -375,6 +379,8 @@ STARTD () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲取檔案的遠端主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
+
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -538,6 +544,9 @@ STARTE () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲取目錄的遠端主機名稱 : "
+
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
+
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi

@@ -15,21 +15,21 @@ fi
 #----------------------------------
 # Section 0 --- Set variable
 #----------------------------------
-HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 LDIRPATH=$1
 LFILE=$2
 RDIRPATH=$3
 MUSER=$(whoami)
 HOMEDIR=`lsuser $MUSER | awk '{print $5}' | cut -c6-`
 DELAY=1
-exec 4>&1
 
 #----------------------------------
 # Section 1 --- Scp file
 #----------------------------------
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
+exec 4>&1
 for HOST in $HOSTLIST ; do
     ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
-    print -p "test -e $RDIRPATH/$LFILE && touch scpdatafile.${HOST}"
+    print -p "test -e $RDIRPATH/$LFILE && touch /tmp/scpdatafile.${HOST}"
     print -p exit
     wait
 done
@@ -38,6 +38,7 @@ done
 # Section 2 --- Verify
 #    Part 1 --- Retrieve those check files
 #----------------------------------
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst|grep -v WKL`
 for HOST in $HOSTLIST ; do
     #sftp ${MUSER}@${HOST} >&4 2>&4 |&
     #print -p lcd /tmp
@@ -46,14 +47,15 @@ for HOST in $HOSTLIST ; do
     #print -p bye
     #wait
     echo "$HOST 結果檢查中..."
-    scp -P 2222 ${MUSER}@${HOST}:$HOMEDIR/scpdatafile.${HOST} /tmp/
-    ssh -p 2222 ${MUSER}@${HOST} "rm -f $HOMEDIR/scpdatafile.${HOST}"
+    scp -P 2222 ${MUSER}@${HOST}:/tmp/scpdatafile.${HOST} /tmp/
+    ssh -p 2222 ${MUSER}@${HOST} "rm -f /tmp/scpdatafile.${HOST}"
 done
 
 #----------------------------------
 # Section 2 --- Verify
 #    Part 2 --- Inspect the retrieved files
 #----------------------------------
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 errors=0
 echo
 echo "#==========================#"

@@ -1,6 +1,8 @@
 #!/bin/ksh
-Logfile=/home/se/safechk/safelog/menu.log
+LOG=/home/se/safechk/safelog/menu.log
+SHDIR=/home/se/safechk/safesh
 USER=$(whoami)
+tlog=$SHDIR/tlog.sh
 hostname=`hostname`
 
 
@@ -176,7 +178,7 @@ case $Menu_No in
                    main
                 fi
 		;;
-        16)
+    16)
                 if [ "$USER" == "root" ] || [ "$USER" == "useradm" ]; then
                    STARTP
                 else
@@ -186,7 +188,7 @@ case $Menu_No in
                    main
                 fi
                 ;;
-        17)
+    17)
                 if [ "$USER" == "root" ] || [ "$USER" == "useradm" ]; then
                    STARTQ
                 else
@@ -196,7 +198,7 @@ case $Menu_No in
                    main
                 fi
                 ;;
-        18)
+    18)
                 if [ "$USER" == "root" ] ; then
                    STARTR
                 else
@@ -274,13 +276,13 @@ STARTA() {
            CHKFLG=1
        fi
 
-       if [[ "$UMASK" != ?(+|-)+([0-9]) ]]; then
+       if [[ "$UMASK" != ?(+|-)+([0-7][0-7][0-7]) ]]; then
            echo ""
            echo "               [Error]  輸入UMASK非數字格式 "
            CHKFLG=1
        fi
 
-       if [[ "$UID" != ?(+|-)+([0-9]) ]]; then
+       if [[ "$UID" != ?(+|-)+([0-7][0-7][0-7]) ]]; then
            echo "               [Error]  輸入UID非數字格式 "
            CHKFLG=1
        else
@@ -792,6 +794,8 @@ STARTI () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲傳送的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
+
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -1077,6 +1081,8 @@ STARTM () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲執行指令的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
+
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -1144,8 +1150,10 @@ STARTM () {
                 main
                 ;;
            y|Y)
+			   $tlog "#============================================================= " $LOG
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST 執行中..."
+                   $tlog "$HOST 執行中..." $LOG
+                   $tlog "ssh -p 2222 $HOST "$COMMAND" " $LOG
                    ssh -p 2222 $HOST "$COMMAND"
                    execStatus=$?
                    if [ $execStatus -eq 0 ]; then
@@ -1192,6 +1200,8 @@ STARTN () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲取檔案的遠端主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
+
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -1355,6 +1365,8 @@ STARTO () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲取目錄的遠端主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
+
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -1631,9 +1643,11 @@ STARTR () {
                 main
                 ;;
            y|Y)
+			   $tlog "#============================================================= " $LOG
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST 執行中..."
-                   ssh -p 2222 $HOST "$ACCOUNT"
+                   $tlog "$HOST 執行中..." $LOG
+                   $tlog "ssh -p 2222 -f $HOST "$ACCOUNT" " $LOG
+                   ssh -p 2222 -f $HOST "$ACCOUNT"
                    execStatus1=$?
                    if [ $execStatus1 -eq 0 ]; then
                       echo "$HOST OK!" >> /tmp/$USER.account.$timestamp
@@ -1641,7 +1655,9 @@ STARTR () {
                       echo "$HOST Fail!" >> /tmp/$USER.account.$timestamp
                    fi
 
-                   ssh -p 2222 $HOST "$SYSCHK"
+                   $tlog "$HOST 執行中..." $LOG
+                   $tlog "ssh -p 2222 -f $HOST "$SYSCHK" " $LOG
+                   ssh -p 2222 -f $HOST "$SYSCHK"
                    execStatus1=$?
                    if [ $execStatus1 -eq 0 ]; then
                       echo "$HOST OK!" >> /tmp/$USER.syschk.$timestamp
@@ -1649,7 +1665,11 @@ STARTR () {
                       echo "$HOST Fail!" >> /tmp/$USER.syschk.$timestamp
                    fi
 
-                   ssh -p 2222 $HOST "$FILEAUDIT"
+				   sleep 5
+
+                   $tlog "$HOST 執行中..." $LOG
+                   $tlog "ssh -p 2222 -f $HOST "$FILEAUDIT" " $LOG
+                   ssh -p 2222 -f $HOST "$FILEAUDIT"
                    execStatus2=$?
                    if [ $execStatus2 -eq 0 ]; then
                       echo "$HOST OK!" >> /tmp/$USER.fileaudit.$timestamp
@@ -1709,6 +1729,8 @@ STARTS () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲傳送的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
+
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi

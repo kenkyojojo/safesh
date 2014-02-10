@@ -12,33 +12,52 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
+
 #----------------------------------
 # Section 0 --- Set variable
 #----------------------------------
-HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 DIR=$1
 USER=$(whoami)
 HOMEDIR=`lsuser $USER | awk '{print $5}' | cut -c6-`
 DELAY=1
-exec 4>&1
+HOSTNAME=$(hostname)
+
+if [[ $USER != "root" ||  $USER != "useradm" ]] ; then
+	echo "The $USER permission deny,Please to check the login User. Ex:root or useradm"
+	exit 1
+fi
 
 #----------------------------------
 # Section 1 --- Delete Directory
 #----------------------------------
-for HOST in $HOSTLIST ; do
-    ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
-    print -p swrole SecPolicy,sa
-    print -p rm -rf $DIR
-    print -p "test -d $DIR || touch rmdirdatafile.${HOST}"
-    print -p exit
-    print -p exit
-    wait
-done
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
+exec 4>&1
+if [[ $USER = "root" ]] ; then
+		for HOST in $HOSTLIST ; do
+			ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
+			print -p rm -rf $DIR
+			print -p "test -d $DIR || touch /tmp/rmdirdatafile.${HOST}"
+			print -p exit
+			print -p exit
+			wait
+		done
+else
+		for HOST in $HOSTLIST ; do
+			ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
+			print -p swrole SecPolicy,sa
+			print -p rm -rf $DIR
+			print -p "test -d $DIR || touch /tmp/rmdirdatafile.${HOST}"
+			print -p exit
+			print -p exit
+			wait
+		done
+fi
 
 #----------------------------------
 # Section 2 --- Verify that the directory were deleted
 #    Part 1 --- Retrieve those check files
 #----------------------------------
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -v WKL`
 for HOST in $HOSTLIST ; do
     #sftp ${USER}@${HOST} >&4 2>&4 |&
     #print -p lcd /tmp
@@ -55,6 +74,7 @@ done
 # Section 2 --- Verify that the directory were deleted
 #    Part 2 --- Inspect the retrieved files
 #----------------------------------
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 errors=0
 echo
 echo "#==========================#"

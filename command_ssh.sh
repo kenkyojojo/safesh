@@ -20,11 +20,11 @@ command=$2
 USER=$(whoami)
 HOMEDIR=`lsuser $USER | awk '{print $5}' | cut -c6-`
 DELAY=1
-exec 4>&1
 
 #----------------------------------
 # Section 1 --- Excute command
 #----------------------------------
+exec 4>&1
 for HOST in $HOSTLIST ; do
     ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
     print -p $command

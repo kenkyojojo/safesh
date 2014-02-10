@@ -1,11 +1,17 @@
 #!/bin/ksh
-
+CFGDIR=/home/se/safechk/cfg
+CFGFILE=$CFGDIR/ap_dir.cfg
 main () {
 	clear
-    echo "start menu"
-    echo "1:新增目錄"
-    echo "2:刪除目錄" 	
-    read Menu_No?"                                 請選擇選項(1-2) : "
+	echo " << FIX/FAST 資訊傳輸系統系管控操作介面 (ALL AIX LPAR)>> "
+	echo ""
+    echo "                  1:新增目錄"
+	echo ""
+    echo "                  2:刪除目錄" 	
+	echo ""
+    echo "                  3:查詢目錄" 	
+	echo ""
+    read Menu_No?"請選擇選項(1-3) : "
     case $Menu_No in  
         1)
             DIR_INFO MKDIR
@@ -13,12 +19,15 @@ main () {
         2)
             DIR_INFO RMDIR
             ;;
+        3)
+            DIR_INFO LSDIR
+			;;
         q|Q)
             exit 
             ;;
         *)
             echo "" 
-	    echo "[Error]  輸入錯誤, 請輸入 (1-2)的選項"
+	    echo "[Error]  輸入錯誤, 請輸入 (1-3)的選項"
 	    read Answer?"  按Enter鍵繼續 "
 	    main
             ;;
@@ -47,30 +56,32 @@ MENU_INPUT () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲傳送的主機名稱 : "
+
+	   HOSTN=`echo $HOSTN|tr '[a-z]' '[A-Z]'`
        if [[ "$HOSTN" == "q" ]] || [[ "$HOSTN" == "Q" ]]; then
            main
        fi
 
        case $HOSTN in
-           dap|DAP)
+           DAP)
                HOSTLIST=`cat $HOSTDIR | grep -i ^DAP`
                ;;
-           dar|DAR)
+           DAR)
                HOSTLIST=`cat $HOSTDIR | grep -i ^DAR`
                ;;
-           mds|MDS)
+           MDS)
                HOSTLIST=`cat $HOSTDIR | grep -i ^MDS`
                ;;
-           log|LOG)
+           LOG)
                HOSTLIST=`cat $HOSTDIR | grep -i ^LOG`
                ;;
-           fix|FIX)
+           FIX)
                HOSTLIST=`cat $HOSTDIR | grep -i ^FIXGW`
                ;;
-           ts|TS)
+           TS)
                HOSTLIST=`cat $HOSTDIR | grep -i ^TS`
                ;;
-           all|ALL)
+           ALL)
                HOSTLIST=`cat $HOSTDIR | grep -i -v $HOSTNAME`
                ;;
            *)
@@ -167,6 +178,7 @@ MODE=$1
         main
     fi
 
+
 	if [[ $MODE = MKDIR ]]; then
 
 		read DIRPERM?" 輸入目錄的權限,請輸入3個(0-7數字),如755: "
@@ -187,6 +199,7 @@ MODE=$1
 
 # Setting the main information.  
 DIR_INFO () {
+#set -x 
 
 MODE=$1
 DIRPATH=""
@@ -208,6 +221,10 @@ if [[ $MODE = RMDIR ]]; then
     DIR_CHECK RMDIR
 fi
 
+# User the DIR_CHECK function, to Set the Directory information.  
+if [[ $MODE = LSDIR ]]; then
+    DIR_CHECK LSDIR
+fi
     if [[ "$CHKFLG" != "0" ]]; then
         echo ""
 	read ANSWR?"               按Enter鍵繼續 "
@@ -230,25 +247,51 @@ fi
 	        ;;
 	    y|Y)
 
+			LPARTYPE=`echo $HOSTN|cut -c1-3`
+
+			if [[ $MODE = RMDIR ]]; then
+				CONFIRM=`awk -v LPARTYPE=$LPARTYPE -v DIRPATH=$DIRPATH '{if ($2==LPARTYPE && $3==DIRPATH) {print $0}}' $CFGFILE`
+				if [[ ! -z  $CONFIRM ]]; then
+				    grep -v ".*${LPARTYPE}.*${DIRPATH}[[:space:]].*" $CFGFILE > ${CFGFILE}.bak  
+					mv ${CFGFILE}.bak $CFGFILE
+				fi
+			fi
+
+			#LINE=$(grep -n "$LPARTYPE[[:space:]]" $CFGFILE | awk -F: '{print $1}'| tail -1)
+			#LINE=$(grep -v '^#' $APCFG|grep $HOST|wc -l)
+
 			if [[ $MODE = MKDIR ]];then 
 				CMDTYPE="$DIROWNER:$DIRGROUP $DIRPATH $DIRPERM $MODE "
 			else 
 				CMDTYPE="$DIRPATH $MODE "
 			fi
 
+#			exit
+
 			for HOST in $HOSTLIST ; do
 	            echo "$HOST 執行中..."
 
-				echo "SSH_CMD $CMDTYPE"
+#				echo "SSH_CMD $CMDTYPE"
 				SSH_CMD $CMDTYPE
 
-			    if [[ -f /tmp/dirdatafile.${HOST} ]] ; then
-       		    	echo $HOST OK! >> /tmp/$USER.$timestamp
-					cat /tmp/dirdatafile.${HOST} >> /tmp/$USER.$timestamp
-		        	rm /tmp/dirdatafile.${HOST}
-    			else
-        			echo $HOST has a problem! >> /tmp/$USER.$timestamp
-    			fi
+				if [[ $MODE = MKDIR ]] || [[ $MODE = LSDIR ]] ;then 
+					if [[ -e /tmp/dirdatafile.${HOST} ]] && [[  -s /tmp/dirdatafile.${HOST} ]] ; then
+						echo $HOST OK! >> /tmp/$USER.$timestamp
+						cat /tmp/dirdatafile.${HOST} >> /tmp/$USER.$timestamp
+						rm /tmp/dirdatafile.${HOST}
+					else
+						echo "$HOST has a problem!,The $DIR is not exist"  >> /tmp/$USER.$timestamp
+					fi
+				else
+					if [[ -e /tmp/dirdatafile.${HOST} ]] && [[  ! -s /tmp/dirdatafile.${HOST} ]] ; then
+						echo "$HOST OK!,The $DIR is remove Success" >> /tmp/$USER.$timestamp
+						cat /tmp/dirdatafile.${HOST} >> /tmp/$USER.$timestamp
+						rm /tmp/dirdatafile.${HOST}
+					else
+						echo "$HOST has a problem!,The $DIR remove Failed"  >> /tmp/$USER.$timestamp
+					fi
+
+				fi
 	        done
 #-----------------------------------------------------------
 # Section 2 --- Verify that the directory were created
@@ -264,7 +307,7 @@ fi
 	         read ANSWR?"               按Enter鍵繼續 "
      	         main
 	         ;;
-	    *)
+	     *)
 	         echo "[Error]  輸入錯誤, 請輸入(Y/N)"
 	         read ANSWR?"               按Enter鍵繼續 "
 	         	main
@@ -323,8 +366,8 @@ if [[ $MODE = "MKDIR" ]]; then
     print -p mkdir -p $DIR
     print -p chown $OWNER $DIR
     print -p chmod $PERMIT $DIR
-    print -p "test -d $DIR && touch dirdatafile.${HOST}"
-	print -p "ls -ld $DIR > dirdatafile.${HOST}"
+    print -p "test -d $DIR && touch /tmp/dirdatafile.${HOST}"
+	print -p "ls -ld $DIR > /tmp/dirdatafile.${HOST}"
     print -p exit
     wait
 fi
@@ -332,7 +375,15 @@ fi
 if [[ $MODE = "RMDIR" ]] ; then
     ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
     print -p rm -rf $DIR
-    print -p "test ! -d $DIR && touch dirdatafile.${HOST}"
+    print -p "test ! -d $DIR && touch /tmp/dirdatafile.${HOST}"
+    print -p exit
+    wait
+fi
+
+if [[ $MODE = "LSDIR" ]]; then
+    ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
+    print -p "test -d $DIR && touch /tmp/dirdatafile.${HOST}"
+	print -p "ls -ld $DIR > /tmp/dirdatafile.${HOST}"
     print -p exit
     wait
 fi
@@ -342,8 +393,8 @@ fi
 #    Part 1 --- Retrieve those check files
 #-----------------------------------------------------------
 	echo "$HOST 結果檢查中..."
-    scp -P 2222 ${USER}@${HOST}:$HOMEDIR/dirdatafile.${HOST} /tmp/
-	ssh -p 2222 ${USER}@${HOST} "rm -f $HOMEDIR/dirdatafile.${HOST}"
+    scp -P 2222 ${USER}@${HOST}:/tmp/dirdatafile.${HOST} /tmp/
+	ssh -p 2222 ${USER}@${HOST} "rm -f /tmp/dirdatafile.${HOST}"
 }
 
 main

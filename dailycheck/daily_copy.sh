@@ -5,7 +5,7 @@
 #----------------------------------
 hostname=`hostname`
 wkserver="WKLPARB1"
-SITE=TSEOA1
+SITE=TSEOB1
 DATE=`date +%Y%m%d`
 DATE2=`date +%Y%m`
 
