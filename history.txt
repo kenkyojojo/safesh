@@ -1,3 +1,35 @@
+commit 9f8acb10d4e2d25a64053ecea87fba4b4c086e95
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Feb 10 15:25:26 2014 +0800
+
+    # On branch TSEOB1
+    #	new file:   sshkey_all_auto.sh
+    #	new file:   tlog.sh
+    #
+    #
+    #	modified:   apdir.sh fix mkdir directory path.
+    #	modified:   apdir_operator.sh fix the bug.
+    #	modified:   dir_operator.sh fix the bug.
+    #	modified:   command_ssh.sh nothing to change.
+    #	modified:   dailycheck/daily_copy.sh delete the some commit.
+    #	modified:   m.sh add the new function about the logger the history.
+    #	modified:   p.sh add the new function about the logger the history.
+    #	modified:   adduser_ssh.sh fix the bug ,change the flag file to /tmp directory.
+    #	modified:   mkdir_ssh.sh fix the bug ,change the flag file to /tmp directory.
+    #	modified:   deluser_ssh.sh fix the bug ,change the flag file to /tmp directory.
+    #	modified:   mkgroup_ssh.sh fix the bug ,change the flag file to /tmp directory.
+    #	modified:   rmdir_ssh.sh fix the bug ,change the flag file to /tmp directory.
+    #	modified:   scpfile_ssh.sh fix the bug ,change the flag file to /tmp directory.
+    #	modified:   usrlock_ssh.sh fix the bug ,change the flag file to /tmp directory.
+    #	modified:   sedir.sh fix mkdir directory path.
+    #	modified:   startcopy.sh delete the some commit.
+
+commit 56d0dbe4c8dc46d0a0e99f64d03fb458b162d14e
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Thu Jan 9 00:57:57 2014 +0800
+
+    modified:history.txt,version.txt
+
 commit 84ecb5ad4fcad04cec51d0f3465fa10bee0cd4b7
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Thu Jan 9 00:35:09 2014 +0800
