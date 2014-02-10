@@ -21,8 +21,8 @@ MUSER=$(whoami)
 HOMEDIR=`lsuser $MUSER | awk '{print $5}' | cut -c6-`
 DELAY=1
 
-if [[ $USER != "root" ||  $USER != "useradm" ]] ; then
-	echo "The $USER permission deny,Please to check the login User. Ex:root or useradm"
+if [[ $MUSER != "root" ||  $MUSER != "useradm" ]] ; then
+	echo "The $MUSER permission deny,Please to check the login User. Ex:root or useradm"
 	exit 1
 fi
 
@@ -31,7 +31,7 @@ fi
 #----------------------------------
 HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 exec 4>&1
-if [[ $USER = "root" ]] ; then
+if [[ $MUSER = "root" ]] ; then
 		for HOST in $HOSTLIST ; do
 			ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
 			#sleep $DELAY
