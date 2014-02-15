@@ -59,7 +59,7 @@ SSH_CMD() {
 DIR_ACT () {
 #set -x 
 
-	$tlog "Step[4] DIR_ACT function Start" 
+	$tlog "Step[4] DIR_ACT function Start" $LOG
 
 	if  [[ $MODE = MKDIR ]]; then
 		if [[ $USER = "root" ]]; then

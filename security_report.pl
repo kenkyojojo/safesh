@@ -25,6 +25,7 @@ if ($#Menu_no != 0) {
 }
 
 
+#{{{raw data variable
 #---------------------------------------------------------------------
 # Set raw data variable
 #---------------------------------------------------------------------
@@ -40,7 +41,9 @@ $aut_CHKLOG="$LOGDIR/aut_chk.$DATE";
 $atr_CHKLOG="$LOGDIR/atr_chk.$DATE";
 $adm_CHKLOG="$LOGDIR/adm_chk.$DATE";
 $sba_CHKLOG="$LOGDIR/sba_chk.$DATE";
+#}}}
 
+#{{{report file variable
 #---------------------------------------------------------------------
 # Set report file variable
 #---------------------------------------------------------------------
@@ -52,20 +55,9 @@ $aut_REPORT="$REPORTDIR/aut_report.$DATE";
 $atr_REPORT="$REPORTDIR/atr_report.$DATE";
 $adm_REPORT="$REPORTDIR/adm_report.$DATE";
 $sba_REPORT="$REPORTDIR/sba_report.$DATE";
+#}}}
 
-#---------------------------------------------------------------------
-# Show running step status
-#---------------------------------------------------------------------
-
-sub count() {
-@ARGV=@_;
-$lines=undef;
-	open (FILE,"${SHCFG}/$ARGV[0]" ) or die "Can't open ${SHCFG}/$ARGV[0]:$!";
-		$lines++ while (<FILE>);
-	close FILE;
-	return ($lines);
-}
-
+#{{{comment lostcount cut
 =cut
 sub lostcount() {
 @ARGV=@_;
@@ -93,47 +85,10 @@ $lostlpar=undef;
 	close ROWFILE;
 
 }
-
 =cut
+#}}}
 
-sub tlog(){
-
-chomp (($msg)=@_);
-    if ( $trailmod == 1){
-	   	chomp ($dt=`date +"%y/%m/%d %H:%M:%S"`);
-#		print "$SITE [${dt}] $msg\n";
-		return "$SITE [${dt}] $msg\n";
-	}
-} 
-
-sub wk_ntp_report(){
-
-#---------------------------------------------------------------------
-#set the variable.
-#---------------------------------------------------------------------
-$TLOG=&tlog($HOSTNAME) ;
-
-#---------------------------------------------------------------------
-#	To creative the wklpar ntp report file in selog/log/wkl_report.$YYYYMMDD.
-#---------------------------------------------------------------------
-	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
-	open (REPORT, ">$wkl_REPORT") || die "Can't open the ntp.log:$!";
-		@LOG=<LOG>;
-		print REPORT "日  月    時間                                        校時主機           時間差","\n";
-		print REPORT "#","-"x73,"#","\n";		
-		print REPORT $TLOG;
-		print REPORT @LOG ;
-	close REPORT;
-	close LOG;
-
-#---------------------------------------------------------------------
-#	To print the wklpar ntp report file in selog/log/wkl_report.$YYYYMMDD.
-#---------------------------------------------------------------------
-	open (REPORT, "<$wkl_REPORT") || die "Can't open the ntp.log:$!";
-		print <REPORT>;
-	close REPORT;
-}
-
+#{{{comment ntp_report cut
 =cut
 sub ntp_report(){
 
@@ -248,7 +203,65 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 	close REPORT;
 }
 =cut
+#}}}
 
+#{{{count
+sub count() {
+@ARGV=@_;
+$lines=undef;
+	open (FILE,"${SHCFG}/$ARGV[0]" ) or die "Can't open ${SHCFG}/$ARGV[0]:$!";
+		$lines++ while (<FILE>);
+	close FILE;
+	return ($lines);
+}
+#}}}
+
+#{{{tlog
+#---------------------------------------------------------------------
+# Show running step status
+#---------------------------------------------------------------------
+sub tlog(){
+
+chomp (($msg)=@_);
+    if ( $trailmod == 1){
+	   	chomp ($dt=`date +"%y/%m/%d %H:%M:%S"`);
+#		print "$SITE [${dt}] $msg\n";
+		return "$SITE [${dt}] $msg\n";
+	}
+} 
+#}}}
+
+#{{{wk_ntp_report
+sub wk_ntp_report(){
+
+#---------------------------------------------------------------------
+#set the variable.
+#---------------------------------------------------------------------
+$TLOG=&tlog($HOSTNAME) ;
+
+#---------------------------------------------------------------------
+#	To creative the wklpar ntp report file in selog/log/wkl_report.$YYYYMMDD.
+#---------------------------------------------------------------------
+	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
+	open (REPORT, ">$wkl_REPORT") || die "Can't open the ntp.log:$!";
+		@LOG=<LOG>;
+		print REPORT "日  月    時間                                        校時主機           時間差","\n";
+		print REPORT "#","-"x73,"#","\n";		
+		print REPORT $TLOG;
+		print REPORT @LOG ;
+	close REPORT;
+	close LOG;
+
+#---------------------------------------------------------------------
+#	To print the wklpar ntp report file in selog/log/wkl_report.$YYYYMMDD.
+#---------------------------------------------------------------------
+	open (REPORT, "<$wkl_REPORT") || die "Can't open the ntp.log:$!";
+		print <REPORT>;
+	close REPORT;
+}
+#}}}
+
+#{{{report
 sub report(){
 
 #---------------------------------------------------------------------
@@ -332,7 +345,9 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 		print <REPORT>;
 	close REPORT;
 }
+#}}}
 
+#{{{main
 sub main(){
 $Menu_no2=@_[0];
 
@@ -361,7 +376,9 @@ $Menu_no2=@_[0];
 		exit ;
 	}
 }
+#}}}
 
+#{{{menu
 sub menu(){
 $Menu_no=@_[0];
 
@@ -391,5 +408,6 @@ $Menu_no=@_[0];
 		exit ;
 	}
 }
+#}}}
 
 &menu("@Menu_no");

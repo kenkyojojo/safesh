@@ -11,7 +11,7 @@ EPATH="/home/exc"
 HPATH="/home"
 HOST=`echo $HOSTNAME | cut -c1-3`
 
-
+mk_download_dir () {
 DOWNPATH="/home/download"
 if [ -d $HPATH ]; then
    mkdir -p $DOWNPATH
@@ -27,7 +27,19 @@ if [ -d $HPATH ]; then
 else
    echo "$PATH not exist! Please check.."
 fi
+}
 
+mk_excwk_dir () {
+if [ -d $EPATH ]; then
+	mkdir -p $EPATH/excwk
+	chown exadm:exc $EPATH/excwk
+else
+   echo "$EPATH not exist! Please check.."
+fi
+}
+
+mk_download_dir
+mk_excwk_dir
 #----------------------------------
 # Create syslog Directory and logfile
 #----------------------------------

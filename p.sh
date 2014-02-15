@@ -1,10 +1,35 @@
 #!/bin/ksh
-Logfile=/home/se/safechk/safelog/menu.log
+LOG=/home/se/safechk/safelog/penu.log
+SHDIR=/home/se/safechk/safesh
 USER=$(whoami)
-hostname=`hostname`
+tlog=$SHDIR/tlog.sh
+hostname=$(hostname)
 
+###############################################################
+#{{{create_log
+create_log () {
 
+	if [[ ! -f $LOG ]]; then 
+		if [[ $USER = "root" ]];then
+			touch $LOG
+			chown useradm:security $LOG
+			chmod 666 $LOG
+		elif [[ $USER = "useradm" ]]; then
+			touch $LOG
+			chmod 666 $LOG
+		else
+			echo "create_log:Please use the useradm or root user to running the script first"
+			exit 1
+		fi
+	fi
+}
+
+#}}}
+###############################################################
+#{{{ main
 main () {
+
+
 clear
 echo "             << FIX/FAST 資訊傳輸系統使用者作業 (ALL AIX LPAR)>> "
 echo ""
@@ -21,6 +46,8 @@ echo ""
 echo "               (隨時可輸 q 以離開 )"
 echo ""
 read Menu_No?"                請選擇選項 (1-5) : "
+
+create_log
 
 case $Menu_No in
 	1)
@@ -50,7 +77,9 @@ case $Menu_No in
 		;;
         esac
 }
+#}}}}
 ###############################################################
+#{{{STARTA
 STARTA () {
    clear
    echo ""
@@ -78,8 +107,9 @@ STARTA () {
         ;;
     esac
 }
-
+#}}}
 ###############################################################
+#{{{STARTB
 STARTB () {
    clear
    echo ""
@@ -242,8 +272,9 @@ STARTB () {
        fi
    fi
 }
-
+#}}}
 ###############################################################
+#{{{STARTC
 STARTC () {
    clear
    echo ""
@@ -331,8 +362,10 @@ STARTC () {
                 main
                 ;;
            y|Y)
+			   $tlog "#============================================================= " $LOG
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST 執行中..."
+                   $tlog "${USER}@${HOST}: 執行中..." $LOG
+                   $tlog "ssh -p 2222 $HOST "$COMMAND" " $LOG
                    ssh -p 2222 $HOST "$COMMAND"
                    execStatus=$?
                    if [ $execStatus -eq 0 ]; then
@@ -359,7 +392,9 @@ STARTC () {
        fi
    fi
 }
+#}}}
 ###############################################################
+#{{{STARTD
 STARTD () {
    clear
    echo ""
@@ -524,7 +559,9 @@ STARTD () {
        fi
    fi
 }
+#}}}
 ###############################################################
+#{{{STARTE
 STARTE () {
    clear
    echo ""
@@ -665,6 +702,6 @@ STARTE () {
        fi
    fi
 }
+#}}}
 ###############################################################
-
 main

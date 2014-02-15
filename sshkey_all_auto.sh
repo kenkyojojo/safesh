@@ -1,18 +1,18 @@
 #! /usr/bin/ksh
 #
 
-if [ $# -lt 1 ]; then
-    echo "Please Input sshkey_all.sh username"
-    echo
-    echo "Example: sshkey_all.sh se01"
-    exit 1
-fi
+#if [ $# -lt 1 ]; then
+#    echo "Please Input sshkey_all.sh username"
+#    echo
+#    echo "Example: sshkey_all.sh se01"
+#    exit 1
+#fi
 
 #----------------------------------
 # Set variable
 #----------------------------------
 WLPAR=`hostname`
-USERLIST=$1
+USERLIST="useradm seadm se01 se02 exadm ex10 ex11 ex14 ex15 twse"
 
 PASSWORD=1234567
 PASSWORD1=1234567

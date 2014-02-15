@@ -3,10 +3,32 @@ LOG=/home/se/safechk/safelog/menu.log
 SHDIR=/home/se/safechk/safesh
 USER=$(whoami)
 tlog=$SHDIR/tlog.sh
-hostname=`hostname`
+hostname=$(hostname)
 
+###############################################################
+#{{{create_log
+create_log () {
 
+	if [[ ! -f $LOG ]]; then 
+		if [[ $USER = "root" ]];then
+			touch $LOG
+			chown useradm:security $LOG
+			chmod 666 $LOG
+		elif [[ $USER = "useradm" ]]; then
+			touch $LOG
+			chmod 666 $LOG
+		else
+			echo "create_log:Please use the useradm or root user to running the script first"
+			exit 1
+		fi
+	fi
+}
+#}}}
+###############################################################
+#{{{main
 main () {
+
+
 clear
 echo "          << FIX/FAST 資訊傳輸系統系管與安控操作介面 (ALL AIX LPAR)>> "
 echo ""
@@ -33,6 +55,8 @@ echo ""
 echo "                                (隨時可輸 q 以離開 )"
 echo ""
 read Menu_No?"                                 請選擇選項 (1-19) : "
+
+create_log
 
 case $Menu_No in
 	1)
@@ -230,7 +254,9 @@ case $Menu_No in
 		;;
         esac
 }
+#}}}
 ###############################################################
+#{{{STARTA
 STARTA() {
    clear
    echo ""
@@ -336,8 +362,9 @@ STARTA() {
        fi
    fi
 }
-
+#}}}
 ###############################################################
+#{{{STARTB
 STARTB () {
    clear
    echo ""
@@ -391,8 +418,9 @@ STARTB () {
        fi
    fi
 }
-
+#}}}
 ###############################################################
+#{{{STARTC
 STARTC () {
    clear
    echo ""
@@ -420,8 +448,9 @@ STARTC () {
         ;;
     esac
 }
-
+#}}}
 ###############################################################
+#{{{STARTD
 STARTD () {
    clear
    echo ""
@@ -487,8 +516,9 @@ STARTD () {
         fi
    fi
 }
-
+#}}}
 ###############################################################
+#{{{STARTE
 STARTE () {
    clear
    echo ""
@@ -587,8 +617,9 @@ STARTE () {
        fi
    fi
 }
-
+#}}}
 ###############################################################
+#{{{STARTF
 STARTF () {
    clear
    echo ""
@@ -643,8 +674,9 @@ STARTF () {
        fi
    fi
 }
-
+#}}}
 ###############################################################
+#{{{STARTG
 STARTG () {
    clear
    echo ""
@@ -717,8 +749,9 @@ STARTG () {
        fi
    fi
 }
-
+#}}}
 ###############################################################
+#{{{STARTH
 STARTH () {
    clear
    echo ""
@@ -772,8 +805,9 @@ STARTH () {
        fi
    fi
 }
-
+#}}}
 ###############################################################
+#{{{STARTI
 STARTI () {
    clear
    echo ""
@@ -936,8 +970,9 @@ STARTI () {
        fi
    fi
 }
-
+#}}}
 ###############################################################
+#{{{STARTJ 
 STARTJ () {
    clear
    echo ""
@@ -1017,8 +1052,9 @@ STARTJ () {
    fi
 
 }
-
+#}}}
 ###############################################################
+#{{{STARTK
 STARTK () {
    clear
    echo ""
@@ -1040,7 +1076,9 @@ STARTK () {
         ;;
     esac
 }
+#}}}
 ###############################################################
+#{{{STARTL
 STARTL () {
    clear
    echo ""
@@ -1062,7 +1100,9 @@ STARTL () {
         ;;
     esac
 }
+#}}}
 ###############################################################
+#{{{STARTM
 STARTM () {
    clear
    echo ""
@@ -1152,7 +1192,7 @@ STARTM () {
            y|Y)
 			   $tlog "#============================================================= " $LOG
                 for HOST in $HOSTLIST ; do
-                   $tlog "$HOST 執行中..." $LOG
+                   $tlog "${USER}@${HOST} 執行中..." $LOG
                    $tlog "ssh -p 2222 $HOST "$COMMAND" " $LOG
                    ssh -p 2222 $HOST "$COMMAND"
                    execStatus=$?
@@ -1180,7 +1220,9 @@ STARTM () {
        fi
    fi
 }
+#}}}
 ###############################################################
+#{{{STARTN
 STARTN () {
    clear
    echo ""
@@ -1345,7 +1387,9 @@ STARTN () {
        fi
    fi
 }
+#}}}
 ###############################################################
+#{{{STARTO
 STARTO () {
    clear
    echo ""
@@ -1485,7 +1529,9 @@ STARTO () {
        fi
    fi
 }
+#}}}
 ###############################################################
+#{{{STARTP
 STARTP () {
    clear
    echo ""
@@ -1536,7 +1582,9 @@ STARTP () {
         fi
    fi
 }
+#}}}
 ###############################################################
+#{{{STARTQ
 STARTQ() {
    clear
    echo ""
@@ -1587,7 +1635,9 @@ STARTQ() {
         fi
    fi
 }
+#}}}
 ###############################################################
+#{{{STARTK
 STARTR () {
    clear
    echo ""
@@ -1645,7 +1695,7 @@ STARTR () {
            y|Y)
 			   $tlog "#============================================================= " $LOG
                 for HOST in $HOSTLIST ; do
-                   $tlog "$HOST 執行中..." $LOG
+                   $tlog "${USER}@${HOST} 執行中..." $LOG
                    $tlog "ssh -p 2222 -f $HOST "$ACCOUNT" " $LOG
                    ssh -p 2222 -f $HOST "$ACCOUNT"
                    execStatus1=$?
@@ -1655,7 +1705,7 @@ STARTR () {
                       echo "$HOST Fail!" >> /tmp/$USER.account.$timestamp
                    fi
 
-                   $tlog "$HOST 執行中..." $LOG
+					#$tlog "${USER}@${HOST} 執行中..." $LOG
                    $tlog "ssh -p 2222 -f $HOST "$SYSCHK" " $LOG
                    ssh -p 2222 -f $HOST "$SYSCHK"
                    execStatus1=$?
@@ -1667,7 +1717,7 @@ STARTR () {
 
 				   sleep 5
 
-                   $tlog "$HOST 執行中..." $LOG
+					#$tlog "${USER}@${HOST} 執行中..." $LOG
                    $tlog "ssh -p 2222 -f $HOST "$FILEAUDIT" " $LOG
                    ssh -p 2222 -f $HOST "$FILEAUDIT"
                    execStatus2=$?
@@ -1707,7 +1757,9 @@ STARTR () {
        fi
    fi
 }
+#}}}
 ###############################################################
+#{{{STARTS
 STARTS () {
    clear
    echo ""
@@ -1884,7 +1936,6 @@ STARTS () {
        fi
    fi
 }
-
+#}}}
 ###############################################################
-
 main
