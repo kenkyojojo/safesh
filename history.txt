@@ -1,3 +1,29 @@
+commit 00c8384d5a6048f71387323aa57e9d80b320d983
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Sun Feb 16 03:35:13 2014 +0800
+
+    # On branch TSEOB1
+    #
+    #	modified:   account/mkuser.sh to fix the bug.
+    #	modified:   apdir_operator.sh to fix the bug.
+    #	modified:   crontab.sh to fix the bug.
+    #	modified:   m.sh to fix the bug.
+    #	modified:   ntp.sh to fix the bug.
+    #	modified:   ntp_manual.sh to fix the bug.
+    #	modified:   p.sh to fix the bug. to fix the bug.
+    #	modified:   security_report.pl to fix the bug.
+    #	modified:   security_summar_chk.sh to fix the bug.
+    #	modified:   sedir.sh to fix the bug.
+    #	modified:   sshkey_all_auto.sh to fix the bug.
+    #	new file:   userlimited.sh the new file the unlimite root and twse.
+    #
+
+commit c3e19ed8227d2b2cf6027258a0cce511d72ae87e
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Mon Feb 10 17:08:57 2014 +0800
+
+    modified:history.txt,version.txt
+
 commit 5553e33942f912b14ca0e08cc9f35c1c88e94c6f
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Mon Feb 10 16:55:28 2014 +0800
