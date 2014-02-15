@@ -1,3 +1,15 @@
+commit 84f949899dc8aeec5321bb933d8a5723ca940b0b
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Sun Feb 16 03:39:18 2014 +0800
+
+    modified:scpfile_ssh.sh to change the tmp file directory
+
+commit 51ddff8f8096a9e8fd2de6e46d45397a0121014b
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Sun Feb 16 03:19:10 2014 +0800
+
+    new file:history.txt,version.txt
+
 commit 3288ea64c2a634cda971bf812898bf203c61c1e5
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Sun Feb 16 03:16:05 2014 +0800
