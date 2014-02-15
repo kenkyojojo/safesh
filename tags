@@ -1,0 +1,201 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+DIR_ACT	apdir_operator.sh	/^DIR_ACT () {$/;"	f
+DIR_CHECK	dir_operator.sh	/^DIR_CHECK () {$/;"	f
+DIR_INFO	dir_operator.sh	/^DIR_INFO () {$/;"	f
+Hardware_chk	security_summar_chk.sh	/^Hardware_chk (){$/;"	f
+MENU_INPUT	dir_operator.sh	/^MENU_INPUT () {$/;"	f
+SCP_CMD	apdir_operator.sh	/^SCP_CMD() {$/;"	f
+SSH_CMD	apdir_operator.sh	/^SSH_CMD() {$/;"	f
+SSH_CMD	dir_operator.sh	/^SSH_CMD() {$/;"	f
+STARTA	m.sh	/^STARTA() {$/;"	f
+STARTA	p.sh	/^STARTA () {$/;"	f
+STARTB	m.sh	/^STARTB () {$/;"	f
+STARTB	p.sh	/^STARTB () {$/;"	f
+STARTC	m.sh	/^STARTC () {$/;"	f
+STARTC	p.sh	/^STARTC () {$/;"	f
+STARTD	m.sh	/^STARTD () {$/;"	f
+STARTD	p.sh	/^STARTD () {$/;"	f
+STARTE	m.sh	/^STARTE () {$/;"	f
+STARTE	p.sh	/^STARTE () {$/;"	f
+STARTF	m.sh	/^STARTF () {$/;"	f
+STARTG	m.sh	/^STARTG () {$/;"	f
+STARTH	m.sh	/^STARTH () {$/;"	f
+STARTI	m.sh	/^STARTI () {$/;"	f
+STARTJ	m.sh	/^STARTJ () {$/;"	f
+STARTK	m.sh	/^STARTK () {$/;"	f
+STARTL	m.sh	/^STARTL () {$/;"	f
+STARTM	m.sh	/^STARTM () {$/;"	f
+STARTN	m.sh	/^STARTN () {$/;"	f
+STARTO	m.sh	/^STARTO () {$/;"	f
+STARTP	m.sh	/^STARTP () {$/;"	f
+STARTQ	m.sh	/^STARTQ() {$/;"	f
+STARTR	m.sh	/^STARTR () {$/;"	f
+STARTS	m.sh	/^STARTS () {$/;"	f
+STEP1	filechg.sh	/^STEP1 () {$/;"	f
+STEP1	startcopy.sh	/^STEP1(){$/;"	f
+STEP2	filechg.sh	/^STEP2 () {$/;"	f
+STEP2	startcopy.sh	/^STEP2(){$/;"	f
+STEP3	filechg.sh	/^STEP3 () {$/;"	f
+STEP3	startcopy.sh	/^STEP3(){$/;"	f
+TWSEDIR	apdir.sh	/^TWSEDIR() {$/;"	f
+To_ssh	active_lpar.Menu.sh	/^To_ssh () {$/;"	f
+To_ssh	shutdown_lpar.Menu.sh	/^To_ssh () {$/;"	f
+USER_CHECK	dir_operator.sh	/^USER_CHECK (){$/;"	f
+adm_report	security_report.pl	/^sub adm_report(){$/;"	s
+build_dir	syslog_need.pl	/^sub build_dir$/;"	s
+build_file	syslog_need.pl	/^sub build_file$/;"	s
+catMonthCsv	log2csv.sh	/^catMonthCsv () {$/;"	f
+chk_pointfile	security_summar_chk.sh	/^chk_pointfile () {$/;"	f
+chk_status	security_summar_chk.sh	/^chk_status (){$/;"	f
+clear_tmp	filechg.sh	/^clear_tmp(){  #clear temperary files$/;"	f
+combind	create_DAP1.sh	/^combind () {$/;"	f
+combind	create_DAP2.sh	/^combind () {$/;"	f
+combind	create_DAR1.sh	/^combind () {$/;"	f
+combind	create_DAR2.sh	/^combind () {$/;"	f
+combind	create_LOG1.sh	/^combind () {$/;"	f
+combind	create_LOG2.sh	/^combind () {$/;"	f
+combind	create_MDS1.sh	/^combind () {$/;"	f
+combind	create_MDS2.sh	/^combind () {$/;"	f
+combind	create_NIM.sh	/^combind () {$/;"	f
+combind	create_WK.sh	/^combind () {$/;"	f
+combind	create_lpar.sh	/^combind () {$/;"	f
+combind	create_vios1.sh	/^combind () {$/;"	f
+combind	create_vios2.sh	/^combind () {$/;"	f
+combind_no_virtual_dev	create_vios1.sh	/^combind_no_virtual_dev () {$/;"	f
+combind_no_virtual_dev	create_vios2.sh	/^combind_no_virtual_dev () {$/;"	f
+config_fc	create_DAP1.sh	/^config_fc() {$/;"	f
+config_fc	create_DAP2.sh	/^config_fc() {$/;"	f
+config_fc	create_DAR1.sh	/^config_fc() {$/;"	f
+config_fc	create_DAR2.sh	/^config_fc() {$/;"	f
+config_fc	create_LOG1.sh	/^config_fc() {$/;"	f
+config_fc	create_LOG2.sh	/^config_fc() {$/;"	f
+config_fc	create_MDS1.sh	/^config_fc() {$/;"	f
+config_fc	create_MDS2.sh	/^config_fc() {$/;"	f
+config_fc	create_NIM.sh	/^config_fc() {$/;"	f
+config_fc	create_WK.sh	/^config_fc() {$/;"	f
+config_fc	create_lpar.sh	/^config_fc() {$/;"	f
+config_lpar_name	create_DAP1.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_DAP2.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_DAR1.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_DAR2.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_LOG1.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_LOG2.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_MDS1.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_MDS2.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_NIM.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_WK.sh	/^config_lpar_name () {$/;"	f
+config_lpar_name	create_lpar.sh	/^config_lpar_name () {$/;"	f
+config_lpar_number	create_DAP1.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_DAP2.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_DAR1.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_DAR2.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_LOG1.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_LOG2.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_MDS1.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_MDS2.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_NIM.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_WK.sh	/^config_lpar_number () {$/;"	f
+config_lpar_number	create_lpar.sh	/^config_lpar_number () {$/;"	f
+config_name	create_vios1.sh	/^config_name () {$/;"	f
+config_name	create_vios2.sh	/^config_name () {$/;"	f
+config_profile	create_DAP1.sh	/^config_profile () {$/;"	f
+config_profile	create_DAP2.sh	/^config_profile () {$/;"	f
+config_profile	create_DAR1.sh	/^config_profile () {$/;"	f
+config_profile	create_DAR2.sh	/^config_profile () {$/;"	f
+config_profile	create_LOG1.sh	/^config_profile () {$/;"	f
+config_profile	create_LOG2.sh	/^config_profile () {$/;"	f
+config_profile	create_MDS1.sh	/^config_profile () {$/;"	f
+config_profile	create_MDS2.sh	/^config_profile () {$/;"	f
+config_profile	create_NIM.sh	/^config_profile () {$/;"	f
+config_profile	create_WK.sh	/^config_profile () {$/;"	f
+config_profile	create_lpar.sh	/^config_profile () {$/;"	f
+config_scsi	create_DAP1.sh	/^config_scsi() {$/;"	f
+config_scsi	create_DAP2.sh	/^config_scsi() {$/;"	f
+config_scsi	create_DAR1.sh	/^config_scsi() {$/;"	f
+config_scsi	create_DAR2.sh	/^config_scsi() {$/;"	f
+config_scsi	create_LOG1.sh	/^config_scsi() {$/;"	f
+config_scsi	create_LOG2.sh	/^config_scsi() {$/;"	f
+config_scsi	create_MDS1.sh	/^config_scsi() {$/;"	f
+config_scsi	create_MDS2.sh	/^config_scsi() {$/;"	f
+config_scsi	create_NIM.sh	/^config_scsi() {$/;"	f
+config_scsi	create_WK.sh	/^config_scsi() {$/;"	f
+config_scsi	create_lpar.sh	/^config_scsi() {$/;"	f
+config_vios_profile	create_vios1.sh	/^config_vios_profile () {$/;"	f
+config_vios_profile	create_vios2.sh	/^config_vios_profile () {$/;"	f
+convFailLog	log2csv.sh	/^convFailLog() {$/;"	f
+convHistory	log2csv.sh	/^convHistory() {$/;"	f
+convLogin	log2csv.sh	/^convLogin() {$/;"	f
+convPwExpire	log2csv.sh	/^convPwExpire() {$/;"	f
+count	security_report.pl	/^sub count() {$/;"	s
+create_log	m.sh	/^create_log () {$/;"	f
+create_log	p.sh	/^create_log () {$/;"	f
+daily_check	security_summar_chk.sh	/^daily_check (){$/;"	f
+disable_limits_twse	userlimited.sh	/^disable_limits_twse(){$/;"	f
+disable_limits_user	userlimited.sh	/^disable_limits_user(){$/;"	f
+event	createobj.pl	/^sub event{$/;"	s
+fileaudit_base	security_summar_chk.sh	/^fileaudit_base (){$/;"	f
+fileaudit_scopy	security_summar_chk.sh	/^fileaudit_scopy (){$/;"	f
+findLastLogin	pwlog.sh	/^findLastLogin() {$/;"	f
+findPwLeftTime	pwlog.sh	/^findPwLeftTime() {$/;"	f
+genChUsersCsv	log2csv.sh	/^genChUsersCsv() {$/;"	f
+genEachCsv	log2csv.sh	/^genEachCsv() {$/;"	f
+genUserList	log2csv.sh	/^genUserList() {$/;"	f
+genUserList	pwlog.sh	/^genUserList() {$/;"	f
+getTime1	log2csv.sh	/^getTime1() {$/;"	f
+getTime2	log2csv.sh	/^getTime2() {$/;"	f
+getUserList2id	log2csv.sh	/^getUserList2id() {$/;"	f
+logHdr	pwlog.sh	/^logHdr() {$/;"	f
+lostcount	security_report.pl	/^sub lostcount() {$/;"	s
+main	HMC_menu.sh	/^main () {$/;"	f
+main	active_lpar.Menu.sh	/^main () {$/;"	f
+main	apdir_operator.sh	/^main() {$/;"	f
+main	createobj.pl	/^sub main {$/;"	s
+main	crontab.sh	/^main () {$/;"	f
+main	dir_operator.sh	/^main () {$/;"	f
+main	log2csv.sh	/^main() {$/;"	f
+main	m.sh	/^main () {$/;"	f
+main	p.sh	/^main () {$/;"	f
+main	pwlog.sh	/^main() {$/;"	f
+main	security_report.pl	/^sub main(){$/;"	s
+main	security_summar_chk.sh	/^main () {$/;"	f
+main	shutdown_lpar.Menu.sh	/^main () {$/;"	f
+main	userlimited.sh	/^main (){$/;"	f
+mappingHost	log2csv.sh	/^mappingHost () {$/;"	f
+menu	security_report.pl	/^sub menu(){$/;"	s
+mergeEachCsv	log2csv.sh	/^mergeEachCsv() {$/;"	f
+mk_download_dir	sedir.sh	/^mk_download_dir () {$/;"	f
+mk_excwk_dir	sedir.sh	/^mk_excwk_dir () {$/;"	f
+normal_lpar	crontab.sh	/^normal_lpar(){$/;"	f
+ntp	security_summar_chk.sh	/^ntp (){$/;"	f
+ntp_report	security_report.pl	/^sub ntp_report(){$/;"	s
+object	createobj.pl	/^sub object{$/;"	s
+profile	create_vios1.sh	/^profile () {$/;"	f
+profile	create_vios2.sh	/^profile () {$/;"	f
+profile_no_vdev	create_vios1.sh	/^profile_no_vdev () {$/;"	f
+profile_no_vdev	create_vios2.sh	/^profile_no_vdev () {$/;"	f
+readFailLog	log2csv.sh	/^readFailLog() {$/;"	f
+readHistory	log2csv.sh	/^readHistory() {$/;"	f
+readLogin	log2csv.sh	/^readLogin() {$/;"	f
+readPwExpire	log2csv.sh	/^readPwExpire() {$/;"	f
+report	security_report.pl	/^sub report(){$/;"	s
+seperater	filechg.sh	/^seperater() {$/;"	f
+sortEachCsv	log2csv.sh	/^sortEachCsv() {$/;"	f
+ssh_rcmd	security_summar_chk.sh	/^ssh_rcmd () {$/;"	f
+syschk_base	security_summar_chk.sh	/^syschk_base (){$/;"	f
+syschk_compare	security_summar_chk.sh	/^syschk_compare () {$/;"	f
+test1	log2csv.sh	/^test1() {$/;"	f
+tlog	apdir_operator.sh	/^tlog() {$/;"	f
+tlog	log2csv.sh	/^tlog() {$/;"	f
+tlog	security_report.pl	/^sub tlog(){$/;"	s
+tlog	security_summar_chk.sh	/^tlog() {$/;"	f
+tlog	tlog.sh	/^tlog() {$/;"	f
+tt2ddhh	pwlog.sh	/^tt2ddhh() {$/;"	f
+usage	security_summar_chk.sh	/^usage () {$/;"	f
+usage	tlog.sh	/^usage() {$/;"	f
+wk_ntp_report	security_report.pl	/^sub wk_ntp_report(){$/;"	s
+wkl_lpar	crontab.sh	/^wkl_lpar(){$/;"	f

@@ -12,7 +12,6 @@ timestamp=`date +%Y%m%d`
 echo "#======================startcopy.sh   Start==================#" >> $LOG
 #----------------------------------
 # Start to rm file.attr.chk file.attr.chg
-# 
 #----------------------------------
 STEP1(){
 for file in chk chg 

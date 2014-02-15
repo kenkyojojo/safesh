@@ -15,7 +15,6 @@ fi
 #----------------------------------
 # Section 0 --- Set variable
 #----------------------------------
-HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 PGROUP=$1
 GROUP=$2
 UMASK=$3
@@ -35,29 +34,52 @@ NEWPASS="1234567"
 MUSER=$(whoami)
 HOMEDIR=`lsuser $MUSER | awk '{print $5}' | cut -c6-`
 DELAY=1
-exec 4>&1
+HOSTNAME=$(hostname)
+
+if [[ $MUSER != "root" ||  $MUSER != "useradm" ]] ; then
+	echo "The $MUSER permission deny,Please to check the login User. Ex:root or useradm"
+	exit 1
+fi
 
 #----------------------------------
 # Section 1 --- Create User
 #----------------------------------
-for HOST in $HOSTLIST ; do
-    ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
-    #sleep $DELAY
-    print -p swrole SecPolicy,sa
-    print -p mkuser pgrp=$PGROUP groups=$GROUP home="/home/$PGROUP/"$UNAME shell='/usr/bin/ksh' umask=$UMASK id=$UID loginretries="$loginretries" pwdwarntime="$pwdwarntime" histsize="$histsize" maxexpired="$maxexpired" maxage="$maxage" minlen="$minlen" $5
-    print -p "echo \"$UNAME:$NEWPASS\"|chpasswd"
-    print -p pwdadm -c $UNAME
-    print -p CHK=\`cut -f \"1\" -d : /etc/passwd \| grep "^$UNAME"\`
-    print -p "test \$CHK == $UNAME && touch addusrdatafile.${HOST}"
-    print -p exit
-    print -p exit
-    wait
-done
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
+exec 4>&1
+if [[ $MUSER = "root" ]] ; then
+		for HOST in $HOSTLIST ; do
+			ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
+			#sleep $DELAY
+			print -p mkuser pgrp=$PGROUP groups=$GROUP home="/home/$PGROUP/"$UNAME shell='/usr/bin/ksh' umask=$UMASK id=$UID loginretries="$loginretries" pwdwarntime="$pwdwarntime" histsize="$histsize" maxexpired="$maxexpired" maxage="$maxage" minlen="$minlen" $5
+			print -p "echo \"$UNAME:$NEWPASS\"|chpasswd"
+			print -p pwdadm -c $UNAME
+			print -p CHK=\`cut -f \"1\" -d : /etc/passwd \| grep "^$UNAME"\`
+			print -p "test \$CHK == $UNAME && touch /tmp/addusrdatafile.${HOST}"
+			print -p exit
+			print -p exit
+			wait
+		done
+else
+		for HOST in $HOSTLIST ; do
+			ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
+			#sleep $DELAY
+			print -p swrole SecPolicy,sa
+			print -p mkuser pgrp=$PGROUP groups=$GROUP home="/home/$PGROUP/"$UNAME shell='/usr/bin/ksh' umask=$UMASK id=$UID loginretries="$loginretries" pwdwarntime="$pwdwarntime" histsize="$histsize" maxexpired="$maxexpired" maxage="$maxage" minlen="$minlen" $5
+			print -p "echo \"$UNAME:$NEWPASS\"|chpasswd"
+			print -p pwdadm -c $UNAME
+			print -p CHK=\`cut -f \"1\" -d : /etc/passwd \| grep "^$UNAME"\`
+			print -p "test \$CHK == $UNAME && touch /tmp/addusrdatafile.${HOST}"
+			print -p exit
+			print -p exit
+			wait
+		done
+fi
 
 #----------------------------------
 # Section 2 --- Verify that the user were created
 #    Part 1 --- Retrieve those check files
 #----------------------------------
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -v WKL`
 for HOST in $HOSTLIST ; do
     #sftp ${MUSER}@${HOST} >&4 2>&4 |&
     #print -p lcd /tmp
@@ -66,14 +88,15 @@ for HOST in $HOSTLIST ; do
     #print -p bye
     #wait
     echo "$HOST 結果檢查中..."
-    scp -P 2222 ${MUSER}@${HOST}:$HOMEDIR/addusrdatafile.${HOST} /tmp/
-    ssh -p 2222 ${MUSER}@${HOST} "rm -f $HOMEDIR/addusrdatafile.${HOST}"
+    scp -P 2222 ${MUSER}@${HOST}:/tmp/addusrdatafile.${HOST} /tmp/
+    ssh -p 2222 ${MUSER}@${HOST} "rm -f /tmp/addusrdatafile.${HOST}"
 done
 
 #----------------------------------
 # Section 2 --- Verify that the user were created
 #    Part 2 --- Inspect the retrieved files
 #----------------------------------
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 errors=0
 echo
 echo "#================================#"

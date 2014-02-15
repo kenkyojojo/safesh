@@ -1,15 +1,17 @@
 #!/bin/ksh
 USER=`whoami`
 HOSTNAME=`hostname`
-CFGDIR=/home/se/sfechk/cfg
+CFGDIR=/home/se/safechk/cfg
 LOGDIR=/home/se/safechk/safelog
 LOG="$LOGDIR/apdir_operator.log"
+SHDIR=/home/se/safechk/safesh
+CFGFILE=$CFGDIR/ap_dir.cfg
+tlog=$SHDIR/tlog.sh
 
 #---------------------------------------------------------------------
 # Show running step status
 #---------------------------------------------------------------------
-trailmod=1
-
+#trailmod=1
 tlog() {
 	msg=$1
     if [ "$trailmod" = "1" ]; then
@@ -21,60 +23,63 @@ tlog() {
 SCP_CMD() {
 #set -x 
 
-	tlog "Step[2] SPC_CMD function  Start" 
+	$tlog "Step[2] SPC_CMD function  Start" $LOG
 
-	#dir_cfg=`echo $1| awk -F "/" '{print $NF}'`
-
-	filename=`basename $1`
-	dirname=`dirname $1`
 
 	for hosts in `cat /home/se/safechk/cfg/host.lst|grep -v $HOSTNAME`
 	do
-		tlog "scp -P 2222 $dirname/$filename $USER@$hosts:$CFGDIR/$filename" 
-		#scp -P 2222 $dirname/$filename $USER@$hosts:$CFGDIR/$filename 
+		$tlog "scp -P 2222 $dirname/$filename $USER@$hosts:$dirname/$filename" $LOG
+		       scp -P 2222 $dirname/$filename $USER@$hosts:$dirname/$filename  > /dev/null 2>&1
 	done
 
-	tlog "Step[2] SPC_CMD function Finished" 
+	$tlog "Step[2] SPC_CMD function Finished" $LOG
 }
 
-# Use the ssh command to execuit to  ALL LPAR .
+# Use the ssh command to execute to  ALL LPAR .
 SSH_CMD() {
 #set -x 
 
-	tlog "Step[3] SSH_CMD function  Start" 
-
-	#dir_cfg=`echo $1| awk -F "/" '{print $NF}'`
+	$tlog "Step[3] SSH_CMD function  Start" $LOG
 
 	filename=`basename $0`
 	dirname=`dirname $0`
+	if [[ $dirname = '.' ]] ; then
+		dirname=`pwd`
+	fi
 
 	for hosts in `cat /home/se/safechk/cfg/host.lst|grep -v $HOSTNAME`
 	do
-		tlog "ssh -p 2222 $dirname/$filename $1" 
-		#scp -P 2222 $dirname/$filename $USER@$hosts:$CFGDIR/$filename 
+		$tlog "ssh -p 2222 -f $USER@$hosts $dirname/$filename $1"  $LOG
+		   	   ssh -p 2222 -f $USER@$hosts $dirname/$filename $1 > /dev/null 2>&1
 	done
 
-	tlog "Step[3] SSH_CMD function  Finished" 
+	$tlog "Step[3] SSH_CMD function  Finished" $LOG
 }
 
 DIR_ACT () {
 #set -x 
 
-	tlog "Step[3] DIR_ACT function Start" 
+	$tlog "Step[4] DIR_ACT function Start" $LOG
 
 	if  [[ $MODE = MKDIR ]]; then
-		tlog "mkdir -p $DIR "  
-		#mkdir -p $DIR  
-		tlog "chown $OWNER  $DIR" 
-		#chown $OWNER  $DIR 
-        tlog "chmod $PERMIT $DIR" 
-		#chmod $PERMIT $DIR
+		if [[ $USER = "root" ]]; then
+			$tlog "mkdir $DIR " $LOG
+				   mkdir $DIR  
+			$tlog "chown $OWNER  $DIR" $LOG
+				   chown $OWNER  $DIR 
+			$tlog "chmod $PERMIT $DIR" $LOG
+				   chmod $PERMIT $DIR
+		else
+			$tlog "mkdir $DIR " $LOG
+				   mkdir $DIR  
+			$tlog "chmod $PERMIT $DIR" $LOG
+				   chmod $PERMIT $DIR
+		fi
 	else 
-		tlog "rm -rf $DIR" 
-		#rm -rf $DIR
+		$tlog "Please setting the correct action type" $LOG
 	fi
 
-	tlog "Step[3] DIR_ACT function Finished" 
+	$tlog "Step[4] DIR_ACT function Finished" $LOG
 }
 
 
@@ -82,30 +87,39 @@ DIR_ACT () {
 main() {
 #set -x 
 
-	echo "#---------------------------------------------------------------------#"  | tee -a $LOG
-	tlog "Step[1] main function Start" 
+	$tlog "#---------------------------------------------------------------------#"  $LOG
+	$tlog "Step[1] main function Start" $LOG
+
 
 	#Check has one parameter
 	if [[ $# != 1 ]];then 
-		tlog "Please input a parameter"
-		tlog "Usage:$0 op_dir.cfg"
+		$tlog "Please input a parameter" $LOG
+		$tlog "Usage:$0 op_dir.cfg" $LOG
 		exit 1
 	fi
 
 	#Check dir config file is exist
 	dir_cfg=$1
 	if [[ ! -f $dir_cfg ]];then
-		tlog "The $dir_cfg file is not exits"
-		tlog "Please the check the $dir_cfg"
+		$tlog "The $dir_cfg file is not exits" $LOG
+		$tlog "Please the check the $dir_cfg" $LOG
 		exit 1
 	fi
 
-	#Use scp dir config to the all lpar.
-	SCP_CMD $dir_cfg
+	filename=`basename $dir_cfg`
+	dirname=`dirname $dir_cfg`
+	if [[ $dirname = '.' ]] ; then
+		dirname=`pwd`
+		dir_cfg=$dirname/$dir_cfg
+	fi
+	#delete windowns ^M
+	cat $dir_cfg | col -b > ${dir_cfg}.bak
+	mv ${dir_cfg}.bak ${dir_cfg}
 
+	#If lpar hostname is WKL then use scp dir config to the all lpar,and ssh command to remote lpar.
 	hostname=`echo $HOSTNAME | cut -c1-3`
-	#Use scp dir config to the all lpar.
 	if [[ $hostname = "WKL" ]]; then
+		SCP_CMD $dir_cfg
 		SSH_CMD $dir_cfg
 	fi
 
@@ -113,7 +127,8 @@ main() {
 	while read MODE HOST DIR PERMIT OWNER 
 	do
 			COMMENT=`echo $MODE | grep '^#' |wc -l | awk '{print $1}'`
-			if [[ $COMMENT != 0 ]];then
+			WHITESP=`echo $MODE | grep '^$' |wc -l | awk '{print $1}'`
+			if [[ $COMMENT != 0 ]] || [[ $WHITESP != 0 ]] ;then
 				continue
 			fi
 
@@ -128,7 +143,7 @@ main() {
 					DIR_ACT
 				fi
 			;;
-			TS)
+			TS[1-2])
 				if [[ $HOST = "TS" ]]; then
 					DIR_ACT
 				fi
@@ -154,13 +169,13 @@ main() {
 				fi
 			;;
 			*)
-				tlog "The LPAR type is not exits"
+				$tlog "The LPAR type is not exits" $LOG
 				exit 1
 			;;
 		esac
 	done < "$dir_cfg"
 
-	tlog "Step[1] main function Finished " 
+	$tlog "Step[1] main function Finished "  $LOG
 }
 
-main $1
+main $CFGFILE

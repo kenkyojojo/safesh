@@ -18,21 +18,24 @@ TIME=10
 
 echo "#-------------------------------------------------------------------------#" >> $LOG
 
+#{{{tlog
+tlog() {
 #---------------------------------------------------------------------
 # Show running step status
 #---------------------------------------------------------------------
-tlog() {
 	msg=$1
     if [ "$trailmod" = "1" ]; then
 	   	dt=`date +"%y/%m/%d %H:%M:%S"`
   		echo "$SITE [${dt}] $msg"
     fi 
 } 
+#}}}
 
+#{{{chk_pointfile
+chk_pointfile () {
 #---------------------------------------------------------------------
 #scp the TYPE_tmp file to wklpar for the check point.
 #---------------------------------------------------------------------
-chk_pointfile () {
 
 HST=`echo $HOSTNAME | cut -c1-3`
 TYPE=$1
@@ -45,11 +48,13 @@ TYPE=$1
 	  	rm -f /tmp/${HOSTNAME}.${TYPE}tmp
 	fi
 }
+#}}}
 
+#{{{syschk_diff.sh
+syschk_compare () {
 #---------------------------------------------------------------------
 #Run syschk_diff.sh
 #---------------------------------------------------------------------
-syschk_compare () {
 SYSLOG=/home/se/safechk/file/syschk
 	tlog "Step[2] $SHDIR/syschk_diff.sh Start" >> $LOG
 		  $SHDIR/syschk_diff.sh
@@ -57,20 +62,24 @@ SYSLOG=/home/se/safechk/file/syschk
 		  chk_pointfile sys
 	tlog "Step[2] $SHDIR/syschk_diff.sh Finished" >> $LOG
 }
+#}}}
 
+#{{{daily_check.sh
+daily_check (){
 #---------------------------------------------------------------------
 #Run daily_check.sh
 #---------------------------------------------------------------------
-daily_check (){
 	tlog "Step[3] $SHDIR/dailycheck/daily_check.sh Start" >> $LOG
 		  $SHDIR/dailycheck/daily_check.sh
 	tlog "Step[3] $SHDIR/dailycheck/daily_check.sh Finished" >> $LOG
 }
+#}}}
 
+#{{{syschk_base.sh
+syschk_base (){
 #---------------------------------------------------------------------
 #Run syschk_base.sh
 #---------------------------------------------------------------------
-syschk_base (){
 BASDIR=/home/se/safechk/file/syschk/base
 	tlog "Step[4] $SHDIR/syschk_base.sh Start" >> $LOG
 		  $SHDIR/syschk_base.sh
@@ -78,11 +87,13 @@ BASDIR=/home/se/safechk/file/syschk/base
 		  chk_pointfile sba
 	tlog "Step[4] $SHDIR/syschk_base.sh Finished" >> $LOG
 }
+#}}}
 
+#{{{ntp
+ntp (){
 #---------------------------------------------------------------------
 #Run ntp 
 #---------------------------------------------------------------------
-ntp (){
 HST=`echo $HOSTNAME | cut -c1-3`
 
 	tlog "Step[5] $SHDIR/ntp_manual.sh Start" >> $LOG
@@ -97,11 +108,13 @@ HST=`echo $HOSTNAME | cut -c1-3`
 		fi
 	tlog "Step[5] $SHDIR/ntp_manual.sh Finished" >> $LOG
 }
+#}}}
 
+#{{{chk_status
+chk_status (){
 #---------------------------------------------------------------------
 #check the action finished status and summarize the report to safelog directoy in the wklpar.
 #---------------------------------------------------------------------
-chk_status (){
 
 #The chk's report file only in wklpar lpar.
 
@@ -171,7 +184,7 @@ esac
 			while [[ $COUNTNUM -lt $TOTLELPAR ]]
 			do
 #echo $CHKTYPE
-#echo $COUNTNUM:$TOTLELPAR
+#rdware_chkecho $COUNTNUM:$TOTLELPAR
 				for HOSTLST in `cd /tmp;ls -1 *.${CHKTYPE}tmp|awk -F '.' '{print $1}'`
 				do
 				echo "#-------------------------------------------------------------------------#" >> $CHKLOG
@@ -190,11 +203,13 @@ esac
 
 	tlog "Step[6] check_status $CHKTYPE Finished" >> $LOG
 }
+#}}}
 
+#{{{fileaudit base
+fileaudit_base (){
 #---------------------------------------------------------------------
 # Fileaudit cp current status to overwrite the base status ,and change the fileaudit.status to OK status.
 #---------------------------------------------------------------------
-fileaudit_base (){
 
 BASEFILE=$FILEDIR/base/${HOSTNAME}_file_attr.bas
 CURRENT=$FILEDIR/check/${HOSTNAME}_`date +%Y%m%d_file_attr.chk`
@@ -207,11 +222,13 @@ CURRENT=$FILEDIR/check/${HOSTNAME}_`date +%Y%m%d_file_attr.chk`
 		  chk_pointfile atr
 	tlog "Step[7] fileaudit current overwrite base Finished" >> $LOG
 }
+#}}}
 
+#{{{fileaudit scopy
+fileaudit_scopy (){
 #---------------------------------------------------------------------
 # scp fileaudit failed report file to wklpar use daily_coyp.sh script.
 #---------------------------------------------------------------------
-fileaudit_scopy (){
 
 	tlog "Step[8] $SHDIR/dailycheck/daily_copy.sh Start" >> $LOG
 		  $SHDIR/dailycheck/daily_copy.sh
@@ -219,11 +236,13 @@ fileaudit_scopy (){
 		  chk_pointfile aut
 	tlog "Step[8] $SHDIR/dailycheck/daily_copy.sh Finished" >> $LOG
 }
+#}}}
 
+#{{{Hardware_chk
+Hardware_chk (){
 #---------------------------------------------------------------------
 # su command to change the seadm user and running his cron job. It's execute the check.sh script in the /home/se/chk/ directory.
 #---------------------------------------------------------------------
-Hardware_chk (){
 
 	tlog "Step[9] Running seadm's Hardware_chk  Start" >> $LOG
 		  su - seadm -c "crontab -l |tail -1|cut -c 14-| ksh"
@@ -231,11 +250,14 @@ Hardware_chk (){
 	tlog "Step[9] Running seadm's Hardware_chk Finished" >> $LOG
 		  tail -2 $LOG > $LOGDIR/seadm_chk.log
 }
+#}}}
 
+#{{{ssh_rcmd
+ssh_rcmd () {
 #---------------------------------------------------------------------
 #Run ssh_rcmd to remte the lpar and execute the script use the ssh and add the -f pararmeter to running in the background .
 #---------------------------------------------------------------------
-ssh_rcmd () {
+
 ARGV=$1
 SARGV=$2
 COUNT=1
@@ -253,11 +275,13 @@ COUNT=1
 		done
     tlog "Step[1] Running remote command Finished" >> $LOG
 }
+#}}}
 
+#{{{usage
+usage () {
 #---------------------------------------------------------------------
 #The usage in the script, you  need to have the parameter,show the parameter use function
 #---------------------------------------------------------------------
-usage () {
 
 	tlog "Please insert boot/down/base/audit/Hardware_chk/ntp/sys/daily_check Parameter."
 	echo ""
@@ -287,11 +311,14 @@ usage () {
 
 	exit 1
 }
+#}}}
 
+#{{{main
+main () {
 #---------------------------------------------------------------------
 #Start Function 
 #---------------------------------------------------------------------
-main () {
+
 MODEARGV=$1
 HST=`echo $HOSTNAME | cut -c1-3`
 
@@ -385,5 +412,6 @@ HST=`echo $HOSTNAME | cut -c1-3`
 
 	esac
 }
+#}}}
 
 main $GARVG

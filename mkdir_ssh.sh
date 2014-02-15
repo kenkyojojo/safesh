@@ -12,37 +12,58 @@ if [ $# -lt 3 ]; then
     exit 1
 fi
 
+
 #----------------------------------
 # Section 0 --- Set variable
 #----------------------------------
-HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 OWNER=$1
 DIR=$2
 PERMIT=$3
 USER=$(whoami)
 HOMEDIR=`lsuser $USER | awk '{print $5}' | cut -c6-`
 DELAY=1
-exec 4>&1
+HOSTNAME=$(hostname)
+
+if [[ $USER != "root" ||  $USER != "useradm" ]] ; then
+	echo "The $USER permission deny,Please to check the login User. Ex:root or useradm"
+	exit 1
+fi
 
 #----------------------------------
 # Section 1 --- Create Directory
 #----------------------------------
-for HOST in $HOSTLIST ; do
-    ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
-    print -p swrole SecPolicy,sa
-    print -p mkdir -p $DIR
-    print -p chown $OWNER $DIR
-    print -p chmod $PERMIT $DIR
-    print -p "test -d $DIR && touch mkdirdatafile.${HOST}"
-    print -p exit
-    print -p exit
-    wait
-done
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
+exec 4>&1
+if [[ $USER = "root" ]] ; then
+		for HOST in $HOSTLIST ; do
+			ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
+			print -p mkdir -p $DIR
+			print -p chown $OWNER $DIR
+			print -p chmod $PERMIT $DIR
+			print -p "test -d $DIR && touch /tmp/mkdirdatafile.${HOST}"
+			print -p exit
+			print -p exit
+			wait
+		done
+else 
+		for HOST in $HOSTLIST ; do
+			ssh -p 2222 -t -t $HOST >&4 2>/dev/null |&
+			print -p swrole SecPolicy,sa
+			print -p mkdir -p $DIR
+			print -p chown $OWNER $DIR
+			print -p chmod $PERMIT $DIR
+			print -p "test -d $DIR && touch /tmp/mkdirdatafile.${HOST}"
+			print -p exit
+			print -p exit
+			wait
+		done
+fi
 
 #----------------------------------
 # Section 2 --- Verify that the directory were created
 #    Part 1 --- Retrieve those check files
 #----------------------------------
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -v WKL`
 for HOST in $HOSTLIST ; do
     #sftp ${USER}@${HOST} >&4 2>&4 |&
     #print -p lcd /tmp
@@ -51,14 +72,15 @@ for HOST in $HOSTLIST ; do
     #print -p bye
     #wait
     echo "$HOST 結果檢查中..."
-    scp -P 2222 ${USER}@${HOST}:$HOMEDIR/mkdirdatafile.${HOST} /tmp/
-    ssh -p 2222 ${USER}@${HOST} "rm -f $HOMEDIR/mkdirdatafile.${HOST}"
+    scp -P 2222 ${USER}@${HOST}:/tmp/mkdirdatafile.${HOST} /tmp/
+    ssh -p 2222 ${USER}@${HOST} "rm -f /tmp/mkdirdatafile.${HOST}"
 done
 
 #----------------------------------
 # Section 2 --- Verify that the directory were created
 #    Part 2 --- Inspect the retrieved files
 #----------------------------------
+HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
 errors=0
 echo
 echo "#==========================#"

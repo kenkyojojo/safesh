@@ -43,27 +43,27 @@ if [ $execStatus -eq 0 ]; then
   echo `date +"%Y%m%d %H:%M:%S"` "user:$5 already exist"
   echo `date +"%Y%m%d %H:%M:%S"` "Change user:$5 attribute"
   if [ $5 == twse ]; then
-     chuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
+     chuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
   else
      if [ $5 == useradm ]; then
-        chuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
+        chuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
      else
-        chuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='7' minlen='7' $5
+        chuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='7' minlen='7' $5
      fi
   fi 
 else
   echo `date +"%Y%m%d %H:%M:%S"` "user:$5 not exist"
   echo `date +"%Y%m%d %H:%M:%S"` "Create new user:$5"
   if [ $5 == twse ]; then
-     mkuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
+     mkuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
         echo "$5:1234567"|chpasswd
   else
      if [ $5 == useradm ]; then
-        mkuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
+        mkuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
         echo "$5:1234567"|chpasswd
         pwdadm -c $5
      else
-        mkuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='7' minlen='7' $5
+        mkuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='7' minlen='7' $5
         echo "$5:1234567"|chpasswd
         pwdadm -c $5
      fi
