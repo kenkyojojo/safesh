@@ -2,7 +2,7 @@
 #---------------------------------------------------------------------
 # Set variable
 #---------------------------------------------------------------------
-SITE=TSEOB1
+SITE=TSEOA1
 HOSTNAME=`hostname`
 DATE=`date +%Y%m%d`
 SHDIR=/home/se/safechk/safesh
@@ -11,7 +11,7 @@ FILEDIR=/home/se/safechk/file/fileaudit
 CHKDIR=/home/se/chk/
 LOGDIR=/home/se/safechk/safelog
 LOG=$LOGDIR/security_summar_chk.log
-WKLPAR="WKLPARB1"
+WKLPAR="WKLPARA1"
 trailmod=1
 GARVG=$1
 TIME=10
