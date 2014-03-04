@@ -1,3 +1,19 @@
+commit b54f2622f072fb6f83f045e8b0021ae77dbeadc8
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Mar 4 19:06:41 2014 +0800
+
+    #	new file:   fileaudit_base.menu.sh
+    #	new file:   sshkey_all_auto.sh
+    #	new file:   tlog.sh
+    #	new file:   userlimited.sh
+    #	modified:   usrlock_ssh.sh fix the bug
+
+commit a9b0b9e23851463817d5b6daac3476bd1c95c5f6
+Author: Bruce <kenkyojojo@gmail.com>
+Date:   Tue Jan 7 17:15:20 2014 +0800
+
+     modified:history.txt、version.txt
+
 commit 69b00d4b03fb2033a416c4424410b33257c5858b
 Author: Bruce <kenkyojojo@gmail.com>
 Date:   Tue Jan 7 17:13:50 2014 +0800
