@@ -391,10 +391,10 @@ $Menu_no=@_[0];
 	#Run combind.sh ,check Hardware_chk running status. User:seadm
 	}elsif ($Menu_no == 3){
 		&main(3) ;
-	#check syschk compare status.
+	#check syschk base update status.
 	}elsif ($Menu_no == 4){
 		&main(4) ;
-	#check syschk base update status.
+	#check syschk compare status.
 	}elsif ($Menu_no == 5){
 		&main(5) ;
 	#check fileaudit base update status.

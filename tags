@@ -4,20 +4,32 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Begin	fileaudit_base.menu.sh	/^Begin () {$/;"	f
 DIR_ACT	apdir_operator.sh	/^DIR_ACT () {$/;"	f
 DIR_CHECK	dir_operator.sh	/^DIR_CHECK () {$/;"	f
 DIR_INFO	dir_operator.sh	/^DIR_INFO () {$/;"	f
 Hardware_chk	security_summar_chk.sh	/^Hardware_chk (){$/;"	f
 MENU_INPUT	dir_operator.sh	/^MENU_INPUT () {$/;"	f
+MENU_INPUT	fileaudit_base.menu.sh	/^MENU_INPUT () {$/;"	f
+MODIFIED_BASE	fileaudit_base.menu.sh	/^MODIFIED_BASE(){$/;"	f
+MODIFIED_REMOVE_BASE	fileaudit_base.menu.sh	/^MODIFIED_REMOVE_BASE(){$/;"	f
 SCP_CMD	apdir_operator.sh	/^SCP_CMD() {$/;"	f
 SSH_CMD	apdir_operator.sh	/^SSH_CMD() {$/;"	f
 SSH_CMD	dir_operator.sh	/^SSH_CMD() {$/;"	f
+SSH_CMD	fileaudit_base.menu.sh	/^SSH_CMD() {$/;"	f
+SSH_CMD_RECOVER	fileaudit_base.menu.sh	/^SSH_CMD_RECOVER() {$/;"	f
+SSH_FILEAUDIT	fileaudit_base.menu.sh	/^SSH_FILEAUDIT() {$/;"	f
+SSH_FILEAUDIT_BASE	fileaudit_base.menu.sh	/^SSH_FILEAUDIT_BASE() {$/;"	f
+STARTA	fileaudit_base.menu.sh	/^STARTA () {$/;"	f
 STARTA	m.sh	/^STARTA() {$/;"	f
 STARTA	p.sh	/^STARTA () {$/;"	f
+STARTB	fileaudit_base.menu.sh	/^STARTB () {$/;"	f
 STARTB	m.sh	/^STARTB () {$/;"	f
 STARTB	p.sh	/^STARTB () {$/;"	f
+STARTC	fileaudit_base.menu.sh	/^STARTC () {$/;"	f
 STARTC	m.sh	/^STARTC () {$/;"	f
 STARTC	p.sh	/^STARTC () {$/;"	f
+STARTD	fileaudit_base.menu.sh	/^STARTD () {$/;"	f
 STARTD	m.sh	/^STARTD () {$/;"	f
 STARTD	p.sh	/^STARTD () {$/;"	f
 STARTE	m.sh	/^STARTE () {$/;"	f
@@ -46,6 +58,7 @@ TWSEDIR	apdir.sh	/^TWSEDIR() {$/;"	f
 To_ssh	active_lpar.Menu.sh	/^To_ssh () {$/;"	f
 To_ssh	shutdown_lpar.Menu.sh	/^To_ssh () {$/;"	f
 USER_CHECK	dir_operator.sh	/^USER_CHECK (){$/;"	f
+USER_CHECK	fileaudit_base.menu.sh	/^USER_CHECK (){$/;"	f
 adm_report	security_report.pl	/^sub adm_report(){$/;"	s
 build_dir	syslog_need.pl	/^sub build_dir$/;"	s
 build_file	syslog_need.pl	/^sub build_file$/;"	s
@@ -157,6 +170,7 @@ main	apdir_operator.sh	/^main() {$/;"	f
 main	createobj.pl	/^sub main {$/;"	s
 main	crontab.sh	/^main () {$/;"	f
 main	dir_operator.sh	/^main () {$/;"	f
+main	fileaudit_base.menu.sh	/^main () {$/;"	f
 main	log2csv.sh	/^main() {$/;"	f
 main	m.sh	/^main () {$/;"	f
 main	p.sh	/^main () {$/;"	f
