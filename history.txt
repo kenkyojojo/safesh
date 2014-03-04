@@ -1,3 +1,23 @@
+commit fe3732e42576165c3786dc535fc6ee089449efc0
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Mar 4 16:05:40 2014 +0800
+
+    #	new file:   fileaudit_base.menu.sh to add the new script about for change fileaudit base.
+    #	modified:   security_report.pl change the commit.
+    #	modified:   tags add function the tags.
+
+commit 67becce81e7717f9ab1abef93192c1e2d07a8c33
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Sun Feb 16 03:43:25 2014 +0800
+
+    new file:tags
+
+commit bb4b219f2afc824e54d394c722e4acd3dda1dbe1
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Sun Feb 16 03:37:01 2014 +0800
+
+    modified:history.txt,version.txt
+
 commit 00c8384d5a6048f71387323aa57e9d80b320d983
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Sun Feb 16 03:35:13 2014 +0800
