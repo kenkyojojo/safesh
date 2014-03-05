@@ -621,8 +621,9 @@ TYPE=$2
 						chkflag=0
 						for FILENCHG in $(cat /tmp/filechg.tmp)
 						do
-						  $tlog "The modified file name:$FILENCHG" $LOG
-					   	   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
+#$tlog "The modified file name:$FILENCHG" $LOG
+						  $tlog "異動檔名:$FILENCHG" $LOG
+					   	   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
 								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
@@ -630,25 +631,27 @@ TYPE=$2
 								chkflag=$(($chkflag + 1))
 						   fi
 
-						   if [[ ! -f ${CURRDIR}/${hostname}${CURR} ]];then
+						   if [[ ! -f ${CURRDIR}/${hosts}${CURR} ]];then
 								$tlog "" $LOG
-								$tlog "[Error] ${CURRDIR}/${hostname}${CURR} file is not exist,Please to check."  $LOG
+								$tlog "[Error] ${CURRDIR}/${hosts}${CURR} file is not exist,Please to check."  $LOG
 								$tlog "" $LOG
 						   fi
 
 						   if [[ $chkflag -eq "0" ]];then
-							   TOLLNUM=$(wc -l ${BASEDIR}/${hostname}${BASE} | awk '{print $1}')
-							   CNGLNUM=$(grep -n "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}| awk -F : '{print $1}' )
+							   TOLLNUM=$(wc -l ${BASEDIR}/${hosts}${BASE} | awk '{print $1}')
+							   CNGLNUM=$(grep -n "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| awk -F : '{print $1}' )
 							   HEDLNUM=$(( $CNGLNUM - 1 ))
 							   TAILNUM=$(( $TOLLNUM - $CNGLNUM ))
-							  #$tlog head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-							   head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
-							  #$tlog grep ${FILENCHG}$ ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-							   grep "[[:space:]]${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
-							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-							   tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp
-							  #$tlog mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
-							   mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+							  #$tlog head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
+							   head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
+							  #$tlog grep ${FILENCHG}$ ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
+							   grep "[[:space:]]${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
+							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
+							   tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp
+							  #$tlog mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
+							   mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+							   modifiedstatus=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+							   $tlog "檔案異動結果：$modifiedstatus" $LOG
 					 	   fi
 						done
 					else
@@ -656,13 +659,15 @@ TYPE=$2
 						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
 						scp -P 2222 /tmp/filechg.tmp ${USER}@${hosts}:/tmp/
 						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &"
+					    modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE})
+					    $tlog "檔案異動結果：$modifiedstatus" $LOG
 					fi
 				done
 			else
 					if [[ ${#HOSTLIST[@]} -eq 1 ]];then
 						if [[ $hostname != $HOSTLIST ]];then
 								$tlog "" $LOG
-								echo "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST"
+								$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 								$tlog "" $LOG
 								read ANSWR?"               按Enter鍵繼續 "
 								main
@@ -671,7 +676,7 @@ TYPE=$2
 					# If hostlist arrary great than 1 and lpar name is not wklpar than show Error.
 					if [[ ${#HOSTLIST[@]} -gt 1 ]];then
 							$tlog "" $LOG
-							echo "[Error] Local lpar name:$hostname is not WKLPAR"
+							$tlog "[Error] Local lpar name:$hostname is not WKLPAR " $LOG
 							$tlog "" $LOG
 							read ANSWR?"               按Enter鍵繼續 "
 							main
@@ -680,17 +685,18 @@ TYPE=$2
 					chkflag=0
 					for FILENCHG in $(cat /tmp/filechg.tmp)
 					do
-					  $tlog "The modified file name:$FILENCHG" $LOG
+#					  $tlog "The modified file name:$FILENCHG" $LOG
+					  $tlog "異動檔名:$FILENCHG" $LOG
 					   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
 					   if [[ $CHKFILEN -lt 1 ]]; then
-							echo "[Error] ${FILENCHG} 輸入為空值 "
+							$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
 							$tlog "" $LOG
 							chkflag=$(($chkflag + 1))
 					   fi
 
 					   if [[ ! -f ${CURRDIR}/${hostname}${CURR} ]];then
 							$tlog "" $LOG
-							echo "[Error] ${CURRDIR}/${hostname}${CURR} file is not exist,Please to check. "
+							$tlog "[Error] ${CURRDIR}/${hostname}${CURR} file is not exist,Please to check. " $LOG
 							$tlog "" $LOG
 							chkflag=$(($chkflag + 1))
 					   fi
@@ -730,20 +736,23 @@ TYPE=$2
 				do
 					if [[ $hosts = $WKLPAR ]];then
 						IFS=";"
+						chkflag=0
 						for FILENCHG in $(cat /tmp/filechg.tmp)
 						do
-					  $tlog "The modified file name:$FILENCHG" $LOG
-					   	   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l )
+#					  $tlog "The modified file name:$FILENCHG" $LOG
+						  $tlog "清除檔名:$FILENCHG" $LOG
+					   	   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
-								echo "[Error] ${FILENCHG} 輸入為空值 "
+								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
 								$tlog "" $LOG
-								read ANSWR?"               按Enter鍵繼續 "
-								main
+								chkflag=$(($chkflag + 1))
 						   fi
 
-				   		   grep -v "[[:space;]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
-						   mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+						   if [[ $chkflag -eq "0" ]];then
+							   grep -v "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
+							   mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
+					       fi
 						done
 					else
 						$tlog "scp -P 2222 /tmp/filechg.tmp ${USER}@${hosts}:/tmp/" $LOG
@@ -756,7 +765,7 @@ TYPE=$2
 					if [[ ${#HOSTLIST[@]} -eq 1 ]];then
 						if [[ $hostname != $HOSTLIST ]];then
 								$tlog "" $LOG
-								echo "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST"
+								$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 								$tlog "" $LOG
 								read ANSWR?"               按Enter鍵繼續 "
 								main
@@ -765,25 +774,28 @@ TYPE=$2
 					# If hostlist arrary great than 1 and lpar name is not wklpar than show Error.
 					if [[ ${#HOSTLIST[@]} -gt 1 ]];then
 							$tlog "" $LOG
-							echo "[Error] Local lpar name:$hostname is not WKLPAR"
+							$tlog "[Error] Local lpar name:$hostname is not WKLPAR" $LOG
 							$tlog "" $LOG
 							read ANSWR?"               按Enter鍵繼續 "
 							main
 					fi
 					IFS=";"
+					chkflag=0
 					for FILENCHG in $(cat /tmp/filechg.tmp)
 					do
-					  $tlog "The modified file name:$FILENCHG" $LOG
-					   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l )
+#					  $tlog "The modified file name:$FILENCHG" $LOG
+					   $tlog "清除檔名:$FILENCHG" $LOG
+					   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
 					   if [[ $CHKFILEN -lt 1 ]]; then
-							echo "[Error] ${FILENCHG} 輸入為空值 "
-							echo ""
-							read ANSWR?"               按Enter鍵繼續 "
-							main
+							$tog "" $LOG
+							$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
+							$tog "" $LOG
 					   fi
 
-					   grep -v "${FILENCHG}$" ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
-					   mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+					   if [[ $chkflag -eq "0" ]];then
+						   grep -v "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
+						   mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+					   fi
 					 done
 			fi
 
