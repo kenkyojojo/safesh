@@ -1,10 +1,28 @@
 #!/bin/ksh
-Logfile=/home/se/safechk/safelog/menu.log
+LOG=/home/se/safechk/safelog/menu.log
 SHDIR=/home/se/safechk/safesh
 USER=$(whoami)
 hostname=`hostname`
-
-
+tlog=$SHDIR/tlog.sh
+###############################################################
+#{{{create_log
+create_log () {
+	if [[ ! -f $LOG ]]; then 
+		   if [[ $USER = "root" ]];then
+				   touch $LOG
+				   chown useradm:security $LOG
+				   chmod 666 $LOG
+		   elif [[ $USER = "useradm" ]]; then
+				   touch $LOG
+				   chmod 666 $LOG
+		   else
+				   echo "create_log:Please use the useradm or root user to running the script first"
+				   exit 1
+		   fi
+	fi
+}
+#}}}
+###############################################################
 main () {
 clear
 echo "          << FIX/FAST 資訊傳輸系統系管與安控操作介面 (ALL AIX LPAR)>> "
@@ -33,7 +51,8 @@ echo "       21. 檔案檢核BASE"
 echo ""
 echo "                                (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?"                                 請選擇選項 (1-20) : "
+read Menu_No?"                                 請選擇選項 (1-21) : "
+create_log
 
 case $Menu_No in
 	1)
@@ -292,13 +311,13 @@ STARTA() {
            CHKFLG=1
        fi
 
-       if [[ "$UMASK" != ?(+|-)+([0-9]) ]]; then
+	   if [[ "$UMASK" != ?(+|-)+([0-7][0-7][0-7]) ]]; then
            echo ""
            echo "               [Error]  輸入UMASK非數字格式 "
            CHKFLG=1
        fi
 
-       if [[ "$UID" != ?(+|-)+([0-9]) ]]; then
+	   if [[ "$UID" != ?(+|-)+([0-7][0-7][0-7]) ]]; then
            echo "               [Error]  輸入UID非數字格式 "
            CHKFLG=1
        else
@@ -810,6 +829,7 @@ STARTI () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲傳送的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -826,6 +846,12 @@ STARTI () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -1089,6 +1115,7 @@ STARTM () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲執行指令的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -1105,6 +1132,12 @@ STARTM () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
@@ -1151,7 +1184,8 @@ STARTM () {
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST 執行中..."
+                   $tlog "$HOST 執行中..." $LOG
+                   $tlog "ssh -p 2222 $HOST $COMMAND" $LOG
                    ssh -p 2222 $HOST "$COMMAND"
                    execStatus=$?
                    if [ $execStatus -eq 0 ]; then
@@ -1198,6 +1232,7 @@ STARTN () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲取檔案的遠端主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -1215,9 +1250,14 @@ STARTN () {
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
                ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+               ;;
            ALL)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname
-`
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
                ;;
            *)
                HOSTLIST=$HOSTN
@@ -1373,9 +1413,14 @@ STARTO () {
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
                ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+               ;;
            ALL)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname
-`
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
                ;;
            *)
                HOSTLIST=$HOSTN
@@ -1628,7 +1673,8 @@ STARTR () {
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST 執行中..."
+                   $tlog "$HOST 執行中..." $LOG
+                   $tlog "ssh -p 2222 $HOST $ACCOUNT" $LOG
                    ssh -p 2222 $HOST "$ACCOUNT"
                    execStatus1=$?
                    if [ $execStatus1 -eq 0 ]; then
@@ -1637,6 +1683,7 @@ STARTR () {
                       echo "$HOST Fail!" >> /tmp/$USER.account.$timestamp
                    fi
 
+                   $tlog "ssh -p 2222 $HOST $SYSCHK" $LOG
                    ssh -p 2222 $HOST "$SYSCHK"
                    execStatus1=$?
                    if [ $execStatus1 -eq 0 ]; then
@@ -1645,6 +1692,7 @@ STARTR () {
                       echo "$HOST Fail!" >> /tmp/$USER.syschk.$timestamp
                    fi
 
+                   $tlog "ssh -p 2222 $HOST $FILEAUDIT" $LOG
                    ssh -p 2222 $HOST "$FILEAUDIT"
                    execStatus2=$?
                    if [ $execStatus2 -eq 0 ]; then
@@ -1705,6 +1753,7 @@ STARTS () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲傳送的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -1721,6 +1770,12 @@ STARTS () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
