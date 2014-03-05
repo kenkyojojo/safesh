@@ -22,19 +22,19 @@ main () {
 	FNUM=1
 	LNUM=4
 	clear
-	echo " << FIX/FAST 資訊傳輸系統系管控操作介面-[檔案檢核] (ALL AIX LPAR)>> "
+	echo " << FIX/FAST ��T�ǿ�t�Ψt�ޱ��ާ@����-[�ɮ��ˮ�] (ALL AIX LPAR)>> "
 	echo ""
-    echo "                  1:檔案檢核BASE檔更新 "
+    echo "                  1:�ɮ��ˮ�BASE�ɧ�s "
 	echo ""
-    echo "                  2:檔案檢核BASE檔還原 "
+    echo "                  2:�ɮ��ˮ�BASE���٭� "
 	echo ""
-    echo "                  3:檔案檢核BASE檔變更 "
+    echo "                  3:�ɮ��ˮ�BASE���ܧ� "
 	echo ""
-    echo "                  4:手動執行檔案檢核 "
+    echo "                  4:��ʰ����ɮ��ˮ� "
 	echo ""
-    echo "                  (隨時可輸 q 以離開 ) "
+    echo "                  (�H�ɥi�� q �H���} ) "
 	echo ""
-    read Menu_No?"請選擇選項(${FNUM}-${LNUM}) : "
+    read Menu_No?"�п�ܿﶵ(${FNUM}-${LNUM}) : "
 
     case $Menu_No in  
         1)
@@ -50,12 +50,12 @@ main () {
 			STARTD
 			;;
         q|Q)
-            exit 
+			$SHDIR/m.sh
             ;;
         *)
             echo "" 
-			echo "[Error]  輸入錯誤, 請輸入 (${FNUM}-${LNUM})的選項"
-			read Answer?"  按Enter鍵繼續 "
+			echo "[Error]  ��J���~, �п�J (${FNUM}-${LNUM})���ﶵ"
+			read Answer?"  ��Enter���~�� "
 			main
             ;;
 	esac
@@ -72,15 +72,15 @@ USER_CHECK
 	clear
 	FNUM=1
 	LNUM=2
-	echo " << FIX/FAST 資訊傳輸系統系管控操作介面-[檔案檢核更新] (ALL AIX LPAR)>> "
+	echo " << FIX/FAST ��T�ǿ�t�Ψt�ޱ��ާ@����-[�ɮ��ˮ֧�s] (ALL AIX LPAR)>> "
 	echo ""
-    echo "                  1:檔案檢核BASE檔更新(有時間屬性_attr)"
+    echo "                  1:�ɮ��ˮ�BASE�ɧ�s(���ɶ��ݩ�_attr)"
 	echo ""
-    echo "                  2:檔案檢核BASE檔更新(無時間屬性_exist)"
+    echo "                  2:�ɮ��ˮ�BASE�ɧ�s(�L�ɶ��ݩ�_exist)"
 	echo ""
-    echo "                  (隨時可輸 q 以離開 ) "
+    echo "                  (�H�ɥi�� q �H���} ) "
 	echo ""
-    read Menu_No?"請選擇選項(${FNUM}-${LNUM}) : "
+    read Menu_No?"�п�ܿﶵ(${FNUM}-${LNUM}) : "
     case $Menu_No in  
         1)
 			BASE="_file_attr.bas"
@@ -97,8 +97,8 @@ USER_CHECK
             ;;
         *)
             echo "" 
-			echo "[Error]  輸入錯誤, 請輸入 (${FNUM}-${LNUM})的選項"
-			read Answer?"  按Enter鍵繼續 "
+			echo "[Error]  ��J���~, �п�J (${FNUM}-${LNUM})���ﶵ"
+			read Answer?"  ��Enter���~�� "
 			STARTA
             ;;
     esac
@@ -116,15 +116,15 @@ USER_CHECK
 	clear
 	FNUM=1
 	LNUM=2
-	echo " << FIX/FAST 資訊傳輸系統系管控操作介面-[檔案檢核還原] (ALL AIX LPAR)>> "
+	echo " << FIX/FAST ��T�ǿ�t�Ψt�ޱ��ާ@����-[�ɮ��ˮ��٭�] (ALL AIX LPAR)>> "
 	echo ""
-	echo "                  1:檔案檢核BASE檔還原(有時間屬性_attr)"
+	echo "                  1:�ɮ��ˮ�BASE���٭�(���ɶ��ݩ�_attr)"
 	echo ""
-    echo "                  2:檔案檢核BASE檔還原(無時間屬性_exist)"
+    echo "                  2:�ɮ��ˮ�BASE���٭�(�L�ɶ��ݩ�_exist)"
 	echo ""
-    echo "                  (隨時可輸 q 以離開 ) "
+    echo "                  (�H�ɥi�� q �H���} ) "
 	echo ""
-    read Menu_No?"請選擇選項(${FNUM}-${LNUM}) : "
+    read Menu_No?"�п�ܿﶵ(${FNUM}-${LNUM}) : "
     case $Menu_No in  
         1)
 			BASE="_file_attr.bas"
@@ -141,9 +141,9 @@ USER_CHECK
             ;;
         *)
             echo "" 
-	    echo "[Error]  輸入錯誤, 請輸入 (${FNUM}-${LNUM})的選項"
-	    read Answer?"  按Enter鍵繼續 "
-		STARTB
+			echo "[Error]  ��J���~, �п�J (${FNUM}-${LNUM})���ﶵ"
+			read Answer?"  ��Enter���~�� "
+			STARTB
             ;;
     esac
 
@@ -160,19 +160,19 @@ USER_CHECK
 	clear
 	FNUM=1
 	LNUM=4
-	echo " << FIX/FAST 資訊傳輸系統系管控操作介面-[檔案檢核修改] (ALL AIX LPAR)>> "
+	echo " << FIX/FAST ��T�ǿ�t�Ψt�ޱ��ާ@����-[�ɮ��ˮ֭ק�] (ALL AIX LPAR)>> "
 	echo ""
-    echo "                  1:檔案檢核BASE檔內容變更(有時間屬性_attr)" 	
+    echo "                  1:�ɮ��ˮ�BASE�ɤ��e�ܧ�(���ɶ��ݩ�_attr)" 	
 	echo ""
-    echo "                  2:檔案檢核BASE檔內容變更(無時間屬性_exist)" 	
+    echo "                  2:�ɮ��ˮ�BASE�ɤ��e�ܧ�(�L�ɶ��ݩ�_exist)" 	
 	echo ""
-    echo "                  3:檔案檢核BASE檔內容刪除(有時間屬性_attr)" 	
+    echo "                  3:�ɮ��ˮ�BASE�ɤ��e�R��(���ɶ��ݩ�_attr)" 	
 	echo ""
-    echo "                  4:檔案檢核BASE檔內容刪除(無時間屬性_exist)" 	
+    echo "                  4:�ɮ��ˮ�BASE�ɤ��e�R��(�L�ɶ��ݩ�_exist)" 	
 	echo ""
-    echo "                  (隨時可輸 q 以離開 ) "
+    echo "                  (�H�ɥi�� q �H���} ) "
 	echo ""
-    read Menu_No?"請選擇選項(${FNUM}-${LNUM}) : "
+    read Menu_No?"�п�ܿﶵ(${FNUM}-${LNUM}) : "
     case $Menu_No in  
         1)
 			BASE="_file_attr.bas"
@@ -199,8 +199,8 @@ USER_CHECK
             ;;
         *)
             echo "" 
-			echo "[Error]  輸入錯誤, 請輸入 (${FNUM}-${LNUM})的選項"
-			read Answer?"  按Enter鍵繼續 "
+			echo "[Error]  ��J���~, �п�J (${FNUM}-${LNUM})���ﶵ"
+			read Answer?"  ��Enter���~�� "
 			STARTC
             ;;
     esac
@@ -217,16 +217,18 @@ USER_CHECK
 
 	clear
 	FNUM=1
-	LNUM=2
-	echo " << FIX/FAST 資訊傳輸系統系管控操作介面-[檔案檢核執行] (ALL AIX LPAR)>> "
+	LNUM=3
+	echo " << FIX/FAST ��T�ǿ�t�Ψt�ޱ��ާ@����-[�ɮ��ˮְ���] (ALL AIX LPAR)>> "
 	echo ""
-    echo "                  1:產生檔案檢核BASE檔 "
+    echo "                  1:�����ɮ��ˮ�BASE�� "
 	echo ""
-    echo "                  2:執行檔案檢核 "
+    echo "                  2:�����ɮ��ˮ� "
 	echo ""
-    echo "                  (隨時可輸 q 以離開 ) "
+    echo "                  3:�T�{�ɮ��ˮֵ��G "
 	echo ""
-    read Menu_No?"請選擇選項(${FNUM}-${LNUM}) : "
+    echo "                  (�H�ɥi�� q �H���} ) "
+	echo ""
+    read Menu_No?"�п�ܿﶵ(${FNUM}-${LNUM}) : "
     case $Menu_No in  
         1)
           	MENU_INPUT SSH_FILEAUDIT_BASE
@@ -234,13 +236,16 @@ USER_CHECK
         2)
             MENU_INPUT SSH_FILEAUDIT
 			;;
+        3)
+            MENU_INPUT SSH_FILEAUDIT_CAT
+			;;
         q|Q)
             main
             ;;
         *)
             echo ""
-	    echo "[Error]  輸入錯誤, 請輸入 (${FNUM}-${LNUM})的選項"
-	    read Answer?"  按Enter鍵繼續 "
+	    echo "[Error]  ��J���~, �п�J (${FNUM}-${LNUM})���ﶵ"
+	    read Answer?"  ��Enter���~�� "
 	    STARTD
             ;;
     esac
@@ -255,7 +260,7 @@ SSH_CMD() {
 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "Base 檔更新開始....." $LOG
+	$tlog "Base �ɧ�s�}�l....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
@@ -272,7 +277,7 @@ SSH_CMD() {
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "" $LOG
-						$tlog "[Error] 主機名稱：[$hosts] $FILECHK file is not exist,Please to check. " $LOG
+						$tlog "[Error] �D���W�١G[$hosts] $FILECHK file is not exist,Please to check. " $LOG
 						$tlog "" $LOG
 						chkflag=$(($chkflag + 1))
 					fi
@@ -282,8 +287,8 @@ SSH_CMD() {
 				if [[ $chkflag -eq "0" ]];then
 					cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 
 					result=$(ls -l ${BASEDIR}/${hosts}${BASE})
-					$tlog "主機名稱： [$hosts] " $LOG
-					$tlog "檔案屬性：$result" $LOG
+					$tlog "�D���W�١G [$hosts] " $LOG
+					$tlog "�ɮ��ݩʡG$result" $LOG
 				fi
 			else # If lpar equal the lparlist.
 				# Check the fileaudit base and current files 
@@ -303,8 +308,8 @@ SSH_CMD() {
 #				$tlog "ssh -p 2222 ${USER}@${hosts} cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE}" $LOG
 				ssh -p 2222 ${USER}@${hosts} "cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1"
 				result=$(ssh -p 2222 ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
-				$tlog "主機名稱： [$hosts] " $LOG
-				$tlog "檔案屬性：$result" $LOG
+				$tlog "�D���W�١G [$hosts] " $LOG
+				$tlog "�ɮ��ݩʡG$result" $LOG
 			fi
 		done
 	else # If lpar is not wklpar.
@@ -316,7 +321,7 @@ SSH_CMD() {
 							$tlog "" $LOG
 							$tloag "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 							$tlog "" $LOG
-							read ANSWR?"               按Enter鍵繼續 "
+							read ANSWR?"               ��Enter���~�� "
 							main
 					fi
 				fi
@@ -325,7 +330,7 @@ SSH_CMD() {
 						$tlog "" $LOG
 						$tlog "[Error] Local lpar name:$hostname is not WKLPAR" $LOG
 						$tlog "" $LOG
-						read ANSWR?"               按Enter鍵繼續 "
+						read ANSWR?"               ��Enter���~�� "
 						main
 				fi
 			done
@@ -338,7 +343,7 @@ SSH_CMD() {
 				excstatus=$?
 				if [[ $excstatus -gt 0 ]];then
 					$tlog "" $LOG
-					$tlog "[Error] 主機名稱：[$hostname] $FILECHK file is not exist,Please to check. " $LOG
+					$tlog "[Error] �D���W�١G[$hostname] $FILECHK file is not exist,Please to check. " $LOG
 					$tlog "" $LOG
 					chkflag=$(($chkflag + 1))
 				fi
@@ -348,11 +353,11 @@ SSH_CMD() {
 			if [[ $chkflag -eq "0" ]];then
 				cp ${CURRDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE} > /dev/null 2>&1 
 				result=$(ls -l ${BASEDIR}/${hostname}${BASE})
-				$tlog "主機名稱： [$hostname] " $LOG
-				$tlog "檔案屬性：$result" $LOG
+				$tlog "�D���W�١G [$hostname] " $LOG
+				$tlog "�ɮ��ݩʡG$result" $LOG
 			fi
 	fi
-	$tlog "Base 檔更新結束....." $LOG
+	$tlog "Base �ɧ�s����....." $LOG
 }
 #}}}
 
@@ -362,7 +367,7 @@ SSH_CMD_RECOVER() {
 # set -x 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "Base檔還原開始....." $LOG
+	$tlog "Base���٭�}�l....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then
@@ -379,7 +384,7 @@ SSH_CMD_RECOVER() {
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "" $LOG
-						$tlog "[Error] 主機名稱：[$hosts] $FILECHK file is not exist,Please to check. " $LOG
+						$tlog "[Error] �D���W�١G[$hosts] $FILECHK file is not exist,Please to check. " $LOG
 						$tlog "" $LOG
 						chkflag=$(($chkflag + 1))
 					fi
@@ -388,8 +393,8 @@ SSH_CMD_RECOVER() {
 				if [[ $chkflag -eq "0" ]];then
 					cp -p ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 
 					result=$(ls -l ${BASEDIR}/${hostname}${BASE})
-					$tlog "主機名稱： [$hosts] " $LOG
-					$tlog "檔案屬性：$result" $LOG
+					$tlog "�D���W�١G [$hosts] " $LOG
+					$tlog "�ɮ��ݩʡG$result" $LOG
 				fi
 			else
 				# Check the fileaudit base and current files 
@@ -401,7 +406,7 @@ SSH_CMD_RECOVER() {
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "" $LOG
-						$tlog "[Error] 主機名稱：[$hosts] $FILECHK file is not exist,Please to check. " $LOG
+						$tlog "[Error] �D���W�١G[$hosts] $FILECHK file is not exist,Please to check. " $LOG
 						$tlog "" $LOG
 						chkflag=$(($chkflag + 1))
 					fi
@@ -412,8 +417,8 @@ SSH_CMD_RECOVER() {
 				if [[ $chkflag -eq "0" ]];then
 				       ssh -p 2222 ${USER}@${hosts} "cp -p ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 "
 					   result=$(ssh -p 2222 ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
-					   $tlog "主機名稱： [$hosts] " $LOG
-					   $tlog "檔案屬性：$result" $LOG
+					   $tlog "�D���W�١G [$hosts] " $LOG
+					   $tlog "�ɮ��ݩʡG$result" $LOG
 				fi
 			fi
 		done
@@ -426,7 +431,7 @@ SSH_CMD_RECOVER() {
 							$tlog "" $LOG
 							$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 							$tlog "" $LOG
-							read ANSWR?"               按Enter鍵繼續 "
+							read ANSWR?"               ��Enter���~�� "
 							main
 					fi
 				fi
@@ -435,7 +440,7 @@ SSH_CMD_RECOVER() {
 						$tlog "" $LOG
 						echo "[Error] Local lpar name:$hostname is not WKLPAR"
 						$tlog "" $LOG
-						read ANSWR?"               按Enter鍵繼續 "
+						read ANSWR?"               ��Enter���~�� "
 						main
 				fi
 			done
@@ -448,7 +453,7 @@ SSH_CMD_RECOVER() {
 				excstatus=$?
 				if [[ $excstatus -gt 0 ]];then
 					$tlog "" $LOG
-					echo "[Error] 主機名稱：[$hostname] $FILECHK file is not exist,Please to check. "
+					echo "[Error] �D���W�١G[$hostname] $FILECHK file is not exist,Please to check. "
 					$tlog "" $LOG
 					chkflag=$(($chkflag + 1))
 				fi
@@ -459,11 +464,11 @@ SSH_CMD_RECOVER() {
 			if [[ $chkflag -eq "0" ]];then
 				cp -p ${BASEDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE} > /dev/null 2>&1 
 				result=$(ls -l ${BASEDIR}/${hostname}${BASE})
-				$tlog "主機名稱： [$hostname] " $LOG
-				$tlog "檔案屬性：$result" $LOG
+				$tlog "�D���W�١G [$hostname] " $LOG
+				$tlog "�ɮ��ݩʡG$result" $LOG
 			fi
 	fi
-	$tlog "Base 檔還原結束....." $LOG
+	$tlog "Base ���٭쵲��....." $LOG
 }
 #}}}
 
@@ -474,7 +479,7 @@ SSH_FILEAUDIT() {
 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "檔案檢核開始執行....." $LOG
+	$tlog "�ɮ��ˮֶ}�l����....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
@@ -486,18 +491,18 @@ SSH_FILEAUDIT() {
 					${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "主機名稱： [$hosts]  OK" $LOG
+						$tlog "�D���W�١G [$hosts]  OK" $LOG
 					else
-						$tlog "主機名稱： [$hosts]  FAILED" $LOG
+						$tlog "�D���W�١G [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
 					$tlog "ssh -f -p 2222 ${USER}@${hosts} ${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 " $LOG
 					ssh -f -p 2222 ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "主機名稱： [$hosts]  OK" $LOG
+						$tlog "�D���W�١G [$hosts]  OK" $LOG
 					else
-						$tlog "主機名稱： [$hosts]  FAILED" $LOG
+						$tlog "�D���W�١G [$hosts]  FAILED" $LOG
 					fi
 			fi
 		done
@@ -510,7 +515,7 @@ SSH_FILEAUDIT() {
 							$tlog "" $LOG
 							echo "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST"
 							$tlog "" $LOG
-							read ANSWR?"               按Enter鍵繼續 "
+							read ANSWR?"               ��Enter���~�� "
 							main
 					fi
 				fi
@@ -519,7 +524,7 @@ SSH_FILEAUDIT() {
 						$tlog "" $LOG
 						echo "[Error] Local lpar name:$hostname is not WKLPAR"
 						$tlog "" $LOG
-						read ANSWR?"               按Enter鍵繼續 "
+						read ANSWR?"               ��Enter���~�� "
 						main
 				fi
 			done
@@ -527,12 +532,12 @@ SSH_FILEAUDIT() {
 					${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "主機名稱： [$hostname]  OK" $LOG
+						$tlog "�D���W�١G [$hostname]  OK" $LOG
 					else
-						$tlog "主機名稱： [$hostname]  FAILED" $LOG
+						$tlog "�D���W�١G [$hostname]  FAILED" $LOG
 					fi
 	fi
-	$tlog "檔案檢核執行完成....." $LOG
+	$tlog "�ɮ��ˮְ��槹��....." $LOG
 }
 #}}}
 
@@ -543,7 +548,7 @@ SSH_FILEAUDIT_BASE() {
 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "檔案檢核Base檔開始....." $LOG
+	$tlog "�ɮ��ˮ�Base�ɶ}�l....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
@@ -555,18 +560,18 @@ SSH_FILEAUDIT_BASE() {
 					${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "主機名稱： [$hosts]  OK" $LOG
+						$tlog "�D���W�١G [$hosts]  OK" $LOG
 					else
-						$tlog "主機名稱： [$hosts]  FAILED" $LOG
+						$tlog "�D���W�١G [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
 #$tlog "	ssh -f -p 2222 ${USER}@${hosts} ${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1 " $LOG
 					ssh -f -p 2222 ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1 "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "主機名稱： [$hosts]  OK" $LOG
+						$tlog "�D���W�١G [$hosts]  OK" $LOG
 					else
-						$tlog "主機名稱： [$hosts]  FAILED" $LOG
+						$tlog "�D���W�١G [$hosts]  FAILED" $LOG
 					fi
 			fi
 		done
@@ -579,7 +584,7 @@ SSH_FILEAUDIT_BASE() {
 							$tlog "" $LOG
 							echo "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST"
 							$tlog "" $LOG
-							read ANSWR?"               按Enter鍵繼續 "
+							read ANSWR?"               ��Enter���~�� "
 							main
 					fi
 				fi
@@ -588,7 +593,7 @@ SSH_FILEAUDIT_BASE() {
 						$tlog "" $LOG
 						echo "[Error] Local lpar name:$hostname is not WKLPAR"
 						$tlog "" $LOG
-						read ANSWR?"               按Enter鍵繼續 "
+						read ANSWR?"               ��Enter���~�� "
 						main
 				fi
 			done
@@ -596,12 +601,80 @@ SSH_FILEAUDIT_BASE() {
 					${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "主機名稱： [$hostname]  OK" $LOG
+						$tlog "�D���W�١G [$hostname]  OK" $LOG
 					else
-						$tlog "主機名稱： [$hostname]  FAILED" $LOG
+						$tlog "�D���W�١G [$hostname]  FAILED" $LOG
 					fi
 	fi
-	$tlog "檔案檢核Base檔完成....." $LOG
+	$tlog "�ɮ��ˮ�Base�ɧ���....." $LOG
+}
+#}}}
+
+#{{{SSH command execute cat fileaudit compare status
+SSH_FILEAUDIT_CAT() {
+# Use the ssh run fileaudit compare program.
+# set -x 
+
+
+	$tlog "#===============================================================#" $LOG
+	$tlog "�T�{�ɮ��ˮְ��浲�G....." $LOG
+
+
+	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
+		for hosts in $(cat /tmp/lparlst.tmp)
+		do
+			if [[ $WKLPAR = $hosts ]];then # If hosts equal wklpar.
+
+					$tlog "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG
+					cat $LOGDIR/safelog.${hostname}.fileattr.`date +%Y%m%d`
+			 		excstatus=$?
+					if [[ $excstatus -eq 0 ]];then
+						$tlog "�D���W�١G [$hosts]  OK" $LOG
+					else
+						$tlog "�D���W�١G [$hosts]  FAILED" $LOG
+					fi
+			else # If lpar equal the lparlist.
+					$tlog "ssh -p 2222 ${USER}@${hosts} cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG
+					ssh -p 2222 ${USER}@${hosts} "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` "
+			 		excstatus=$?
+					if [[ $excstatus -eq 0 ]];then
+						$tlog "�D���W�١G [$hosts]  OK" $LOG
+					else
+						$tlog "�D���W�١G [$hosts]  FAILED" $LOG
+					fi
+			fi
+		done
+	else # If lpar is not wklpar.
+			for HOSTLISTA in $(cat /tmp/lparlst.tmp|wc -w)
+			do
+# 		  	If hostlist arrary equal 1 but localhost name is not the same input lpar name than show Error.
+				if [[ $HOSTLISTA -eq 1 ]];then
+					if [[ $hostname != $HOSTLIST ]];then
+							$tlog "" $LOG
+							echo "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST"
+							$tlog "" $LOG
+							read ANSWR?"               ��Enter���~�� "
+							main
+					fi
+				fi
+# 			If hostlist arrary great than 1 and lpar name is not wklpar than show Error.
+				if [[ $HOSTLISTA -gt 1 ]];then
+						$tlog "" $LOG
+						echo "[Error] Local lpar name:$hostname is not WKLPAR"
+						$tlog "" $LOG
+						read ANSWR?"               ��Enter���~�� "
+						main
+				fi
+			done
+					$tlog "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG
+					cat $LOGDIR/safelog.${hostname}.fileattr.`date +%Y%m%d`
+			 		excstatus=$?
+					if [[ $excstatus -eq 0 ]];then
+						$tlog "�D���W�١G [$hostname]  OK" $LOG
+					else
+						$tlog "�D���W�١G [$hostname]  FAILED" $LOG
+					fi
+	fi
 }
 #}}}
 
@@ -621,12 +694,18 @@ TYPE=$2
 						chkflag=0
 						for FILENCHG in $(cat /tmp/filechg.tmp)
 						do
-#$tlog "The modified file name:$FILENCHG" $LOG
-						  $tlog "異動檔名:$FILENCHG" $LOG
-					   	   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
+						   $tlog "�����ɦW: $FILENCHG " $LOG
+						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
+						   if [[ $FILECHK -eq 1 ]];then
+								GREP="[[:digit:]][[:space:]]"
+						   else
+								GREP="[[:space:]]"
+						   fi
+
+						   CHKFILEN=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
-								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
+								$tlog "[Error] ${FILENCHG} ��J���ŭ� " $LOG
 								$tlog "" $LOG
 								chkflag=$(($chkflag + 1))
 						   fi
@@ -639,28 +718,41 @@ TYPE=$2
 
 						   if [[ $chkflag -eq "0" ]];then
 							   TOLLNUM=$(wc -l ${BASEDIR}/${hosts}${BASE} | awk '{print $1}')
-							   CNGLNUM=$(grep -n "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| awk -F : '{print $1}' )
+#CNGLNUM=$(grep -n "[:digit:][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| awk -F : '{print $1}' )
+							   CNGLNUM=$( grep -n "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} | awk -F : '{print $1}' )
 							   HEDLNUM=$(( $CNGLNUM - 1 ))
 							   TAILNUM=$(( $TOLLNUM - $CNGLNUM ))
 							  #$tlog head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-							   head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
+							   head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
 							  #$tlog grep ${FILENCHG}$ ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-							   grep "[[:space:]]${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
+#grep "[0-9][[:space:]]${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}.tmp
+							   grep "${GREP}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}.tmp
 							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-							   tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp
+							   tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hosts}${BASE}.tmp
 							  #$tlog mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
-							   mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
-							   modifiedstatus=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-							   $tlog "檔案異動結果：$modifiedstatus" $LOG
+							   mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
+							   modifiedstatus=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+							   $tlog "�ɮײ��ʵ��G�G$modifiedstatus" $LOG
 					 	   fi
 						done
 					else
 						$tlog "scp -P 2222 /tmp/filechg.tmp ${USER}@${hosts}:/tmp/" $LOG
 						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
-						scp -P 2222 /tmp/filechg.tmp ${USER}@${hosts}:/tmp/
-						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &"
-					    modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE})
-					    $tlog "檔案異動結果：$modifiedstatus" $LOG
+						scp -P 2222 /tmp/filechg.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
+						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
+						IFS=";"
+						for FILENCHG in $(cat /tmp/filechg.tmp)
+						do
+						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
+						   if [[ $FILECHK -eq 1 ]];then
+								GREP="[[:digit:]][[:space:]]"
+						   else
+								GREP="[[:space:]]"
+						   fi
+						   #modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "[0-9][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+					       modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+					       $tlog "�ɮײ��ʵ��G�G$modifiedstatus" $LOG
+						done
 					fi
 				done
 			else
@@ -669,7 +761,7 @@ TYPE=$2
 								$tlog "" $LOG
 								$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 								$tlog "" $LOG
-								read ANSWR?"               按Enter鍵繼續 "
+								read ANSWR?"               ��Enter���~�� "
 								main
 						fi
 					fi
@@ -678,44 +770,49 @@ TYPE=$2
 							$tlog "" $LOG
 							$tlog "[Error] Local lpar name:$hostname is not WKLPAR " $LOG
 							$tlog "" $LOG
-							read ANSWR?"               按Enter鍵繼續 "
+							read ANSWR?"               ��Enter���~�� "
 							main
 					fi
 					IFS=";"
 					chkflag=0
 					for FILENCHG in $(cat /tmp/filechg.tmp)
 					do
-#					  $tlog "The modified file name:$FILENCHG" $LOG
-					  $tlog "異動檔名:$FILENCHG" $LOG
-					   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
-					   if [[ $CHKFILEN -lt 1 ]]; then
-							$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
-							$tlog "" $LOG
-							chkflag=$(($chkflag + 1))
-					   fi
+						  $tlog "�����ɦW: $FILENCHG " $LOG
+						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
+						   if [[ $FILECHK -eq 1 ]];then
+								GREP="[[:digit:]][[:space:]]"
+						   else
+								GREP="[[:space:]]"
+						   fi
 
-					   if [[ ! -f ${CURRDIR}/${hostname}${CURR} ]];then
-							$tlog "" $LOG
-							$tlog "[Error] ${CURRDIR}/${hostname}${CURR} file is not exist,Please to check. " $LOG
-							$tlog "" $LOG
-							chkflag=$(($chkflag + 1))
-					   fi
+						   CHKFILEN=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
+						   if [[ $CHKFILEN -lt 1 ]]; then
+								$tlog "[Error] ${FILENCHG} ��J���ŭ� " $LOG
+								$tlog "" $LOG
+								chkflag=$(($chkflag + 1))
+						   fi
 
-						if [[ $chkflag -eq "0" ]];then
-						   TOLLNUM=$(wc -l ${BASEDIR}/${hostname}${BASE} | awk '{print $1}')
-						   CNGLNUM=$(grep -n "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}| awk -F : '{print $1}' )
-						   HEDLNUM=$(( $CNGLNUM - 1 ))
-						   TAILNUM=$(( $TOLLNUM - $CNGLNUM ))
-						  #$tlog head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-						   head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
-						  #$tlog grep ${FILENCHG}$ ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-						   grep "[[:space:]]${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
-						  #$tlog tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-						   tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp
-						  #$tlog mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
-						   mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
-						fi
+						   if [[ ! -f ${CURRDIR}/${hostname}${CURR} ]];then
+								$tlog "" $LOG
+								$tlog "[Error] ${CURRDIR}/${hostname}${CURR} file is not exist,Please to check. " $LOG
+								$tlog "" $LOG
+								chkflag=$(($chkflag + 1))
+						   fi
 
+						   if [[ $chkflag -eq "0" ]];then
+							   TOLLNUM=$(wc -l ${BASEDIR}/${hostname}${BASE} | awk '{print $1}')
+							   CNGLNUM=$( grep -n "${GREP}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}| awk -F : '{print $1}' )
+							   HEDLNUM=$(( $CNGLNUM - 1 ))
+							   TAILNUM=$(( $TOLLNUM - $CNGLNUM ))
+							  #$tlog head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
+							   head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
+							  #$tlog grep ${FILENCHG}$ ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
+							   grep "${GREP}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
+							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
+							   tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp
+							  #$tlog mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
+							   mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+						   fi
 					 done
 			fi
 
@@ -739,19 +836,26 @@ TYPE=$2
 						chkflag=0
 						for FILENCHG in $(cat /tmp/filechg.tmp)
 						do
-#					  $tlog "The modified file name:$FILENCHG" $LOG
-						  $tlog "清除檔名:$FILENCHG" $LOG
-					   	   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
+						  $tlog "�M���ɦW: $FILENCHG " $LOG
+
+						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
+						   if [[ $FILECHK -eq 1 ]];then
+								GREP="[[:digit:]][[:space:]]"
+						   else
+								GREP="[[:space:]]"
+						   fi
+
+						   CHKFILEN=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
-								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
+								$tlog "[Error] ${FILENCHG} ��J���ŭ� " $LOG
 								$tlog "" $LOG
 								chkflag=$(($chkflag + 1))
 						   fi
 
 						   if [[ $chkflag -eq "0" ]];then
-							   grep -v "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
-							   mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
+							    grep -v "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
+							    mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
 					       fi
 						done
 					else
@@ -767,7 +871,7 @@ TYPE=$2
 								$tlog "" $LOG
 								$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 								$tlog "" $LOG
-								read ANSWR?"               按Enter鍵繼續 "
+								read ANSWR?"               ��Enter���~�� "
 								main
 						fi
 					fi
@@ -776,26 +880,34 @@ TYPE=$2
 							$tlog "" $LOG
 							$tlog "[Error] Local lpar name:$hostname is not WKLPAR" $LOG
 							$tlog "" $LOG
-							read ANSWR?"               按Enter鍵繼續 "
+							read ANSWR?"               ��Enter���~�� "
 							main
 					fi
 					IFS=";"
 					chkflag=0
 					for FILENCHG in $(cat /tmp/filechg.tmp)
 					do
-#					  $tlog "The modified file name:$FILENCHG" $LOG
-					   $tlog "清除檔名:$FILENCHG" $LOG
-					   CHKFILEN=$(grep "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
-					   if [[ $CHKFILEN -lt 1 ]]; then
-							$tog "" $LOG
-							$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
-							$tog "" $LOG
-					   fi
+						   $tlog "�M���ɦW: $FILENCHG " $LOG
 
-					   if [[ $chkflag -eq "0" ]];then
-						   grep -v "[[:space:]]${FILENCHG}$" ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
-						   mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
-					   fi
+						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
+						   if [[ $FILECHK -eq 1 ]];then
+								GREP="[[:digit:]][[:space:]]"
+						   else
+								GREP="[[:space:]]"
+						   fi
+
+						   CHKFILEN=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
+						   if [[ $CHKFILEN -lt 1 ]]; then
+								$tog "" $LOG
+								$tlog "[Error] ${FILENCHG} ��J���ŭ� " $LOG
+								$tog "" $LOG
+								chkflag=$(($chkflag + 1))
+						   fi
+
+						   if [[ $chkflag -eq "0" ]];then
+							    grep -v "${GREP}${FILENCHG}" ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
+							    mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+						   fi
 					 done
 			fi
 
@@ -819,16 +931,16 @@ MENU_INPUT () {
 
    if [[ "$HOSTN" == "" ]]; then
        echo ""
-       echo "                  (隨時可輸 q 以離開 ) "
+       echo "                  (�H�ɥi�� q �H���} ) "
        echo "#==========================================================#"
-       echo "# 輸入格式(每台主機以空格做為分隔): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# ��J�榡(�C�x�D���H�Ů氵�����j): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# 群組輸入格式: DAP (一次一個群組)                         #"
+       echo "# �s�տ�J�榡: DAP (�@���@�Ӹs��)                         #"
        echo "#                                                          #"
-       echo "# 全部主機請輸入: ALL                                      #"
+       echo "# �����D���п�J: ALL                                      #"
        echo "#==========================================================#"
-#read  -A HOSTN?"輸入欲變更Base的主機名稱 : "
-       read  HOSTN?"輸入欲變更Base的主機名稱 : "
+#read  -A HOSTN?"��J���ܧ�Base���D���W�� : "
+       read  HOSTN?"��J���ܧ�Base���D���W�� : "
 
 	   if [[ "$HOSTN" == "q" ]] || [[ "$HOSTN" == "Q" ]]; then
 		   main
@@ -836,19 +948,19 @@ MENU_INPUT () {
 
 	   if [[ -z "$HOSTN" ]]; then
 			echo ""
-			echo "               [Error] 請輸輸入欲變更的主機名稱"
+			echo "               [Error] �п��J���ܧ󪺥D���W��"
 			echo ""
-			read ANSWR?"               按Enter鍵繼續 "
+			read ANSWR?"               ��Enter���~�� "
 			main
 	   fi
 
 	   # check input more then 2 characters 
-	   # [:alpha:]代表英文大小寫字元，亦即A-Z, a-z
-	   # [:alnum:]代表英文大小寫字元及數字，亦即 0-9, A-Z, a-z
+	   # [:alpha:]�N���^��j�p�g�r���A��YA-Z, a-z
+	   # [:alnum:]�N���^��j�p�g�r���μƦr�A��Y 0-9, A-Z, a-z
 	   if [[ $HOSTN != [[:alpha:]][[:alnum:]]* ]]; then
-				echo "               [Error] ${HOSTN} 輸入為空值"
+				echo "               [Error] ${HOSTN} ��J���ŭ�"
 				echo ""
-				read ANSWR?"               按Enter鍵繼續 "
+				read ANSWR?"               ��Enter���~�� "
 				main
 	   fi	
 
@@ -885,9 +997,9 @@ MENU_INPUT () {
 
 		    if [[ -z "$HOSTLIST" ]]; then
 				echo ""
-				echo "               [Error] ${HOSTN} 輸入為空值 "
+				echo "               [Error] ${HOSTN} ��J���ŭ� "
 				echo ""
-				read ANSWR?"               按Enter鍵繼續 "
+				read ANSWR?"               ��Enter���~�� "
 				main
 		    fi
 
@@ -895,22 +1007,22 @@ MENU_INPUT () {
 	   done
 
 		if [[ $MODE = "CNG_DETAL" || $MODE = "CNG_REMOVE" ]];then
-			echo "                  (隨時可輸 q 以離開 ) "
+			echo "                  (�H�ɥi�� q �H���} ) "
 			echo "#============================================================#"
-			echo "# 輸入欲變更的目錄或檔案(每個徑或檔案以;做為分隔)如下:       #"
+			echo "# ��J���ܧ󪺥ؿ����ɮ�(�C�Ӯ|���ɮץH;�������j)�p�U:       #"
 			echo "# /etc/passwd;/etc/group;/etc/profile;/etc/environment;/tmp  #"
 			echo "#============================================================#"
-#read -A FILEN?"輸入欲變更的目錄或檔案: "
-			read FILEN?"輸入欲變更的目錄或檔案: "
+#read -A FILEN?"��J���ܧ󪺥ؿ����ɮ�: "
+			read FILEN?"��J���ܧ󪺥ؿ����ɮ�: "
 
 			if [[ "$FILEN" == "q" ]] || [[ "$FILEN" == "Q" ]]; then
 			   main
 			fi
 			if [[ -z "$FILEN" ]]; then
 				echo ""
-				echo "               [Error] 請輸輸入欲變更的目錄或檔案"
+				echo "               [Error] �п��J���ܧ󪺥ؿ����ɮ�"
 				echo ""
-				read ANSWR?"               按Enter鍵繼續 "
+				read ANSWR?"               ��Enter���~�� "
 				main
 		    fi
 			echo ${FILEN[@]} > /tmp/filechg.tmp
@@ -918,7 +1030,7 @@ MENU_INPUT () {
 
 		if [[ $MODE = "CNG_REMOVE" ]];then
 				echo ""
-				read ANSWER?"     請確認是否執行(Y/N): "
+				read ANSWER?"     �нT�{�O�_����(Y/N): "
 				case $ANSWER in
 					n|N)                                          
 				 		main
@@ -927,14 +1039,14 @@ MENU_INPUT () {
 						MODIFIED_REMOVE_BASE $MODE $TYPE
 				 		;;
 					*)                                          
-						echo "		[Error]  輸入錯誤, 請輸入(Y/N)"
-				        read ANSWR?"               按Enter鍵繼續 "
+						echo "		[Error]  ��J���~, �п�J(Y/N)"
+				        read ANSWR?"               ��Enter���~�� "
 				 		main
 				 		;;
 				esac
 		elif [[ $MODE = "CNG_DETAL" ]];then
 				echo ""
-				read ANSWER?"     請確認是否執行(Y/N): "
+				read ANSWER?"     �нT�{�O�_����(Y/N): "
 				case $ANSWER in
 					n|N)                                          
 				 		main
@@ -943,14 +1055,14 @@ MENU_INPUT () {
 						MODIFIED_BASE $MODE $TYPE
 				 		;;
 					*)                                          
-						echo "		[Error]  輸入錯誤, 請輸入(Y/N)"
-				        read ANSWR?"               按Enter鍵繼續 "
+						echo "		[Error]  ��J���~, �п�J(Y/N)"
+				        read ANSWR?"               ��Enter���~�� "
 				 		main
 				 		;;
 				esac
 		else
 				echo ""
-				read ANSWER?"     請確認是否執行(Y/N): "
+				read ANSWER?"     �нT�{�O�_����(Y/N): "
 				case $ANSWER in
 					n|N)                                          
 				 		main
@@ -959,14 +1071,14 @@ MENU_INPUT () {
 						$MODE
 						;;
 					*)                                          
-						echo "		[Error]  輸入錯誤, 請輸入(Y/N)"
-				        read ANSWR?"               按Enter鍵繼續 "
+						echo "		[Error]  ��J���~, �п�J(Y/N)"
+				        read ANSWR?"               ��Enter���~�� "
 				 		main
 				 		;;
 				esac
 		fi
 
-		read ANSWR?"               按Enter鍵繼續 "
+		read ANSWR?"               ��Enter���~�� "
 		main
     fi
 }
@@ -986,9 +1098,9 @@ USER_CHECK (){
 	done
 
 	if [[ userflag -eq 0 ]];then 
-		echo "               [Error]  使用者權限不符合"
+		echo "               [Error]  �ϥΪ��v�����ŦX"
 		echo ""
-		read ANSWR?"               按Enter鍵繼續 "
+		read ANSWR?"               ��Enter���~�� "
 		main 
 	fi
 }

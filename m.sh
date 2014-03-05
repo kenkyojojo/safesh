@@ -1,5 +1,6 @@
 #!/bin/ksh
 Logfile=/home/se/safechk/safelog/menu.log
+SHDIR=/home/se/safechk/safesh
 USER=$(whoami)
 hostname=`hostname`
 
@@ -27,6 +28,8 @@ echo ""
 echo "        9. 同步檔案                              19. 同步目錄"
 echo ""
 echo "       10. 每日值班檢核報表檔案重傳              20. 開關機檢核"
+echo ""
+echo "       21. 檔案檢核BASE"
 echo ""
 echo "                                (隨時可輸 q 以離開 )"
 echo ""
@@ -226,6 +229,9 @@ case $Menu_No in
                    read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
+				;;
+	21)
+				$SHDIR/fileaudit_base.menu.sh
 				;;
 
 	q|Q)
