@@ -1,3 +1,21 @@
+commit b26b36e65fe68e5f0f0fb8dbe9c8d322458083d3
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Mar 6 16:04:16 2014 +0800
+
+    modified:fileaudit_base.menu.sh, m.sh,security_summar_chk.sh
+
+commit 95d83ac2b01bbf2af34b3a31521161abbfb496d5
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Mar 6 14:24:53 2014 +0800
+
+    modified:fileaudit_base.menu.sh
+
+commit dba7e7256e3a8adec886bf2a92d3c387436a63af
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Mar 6 09:28:53 2014 +0800
+
+    history.txt,version.txt
+
 commit 2c33b2f28dcf36a1af6321ba7aa5ae23b62c9672
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Mar 6 01:05:04 2014 +0800

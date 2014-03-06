@@ -1186,7 +1186,7 @@ STARTM () {
            y|Y)
                 for HOST in $HOSTLIST ; do
                    $tlog "$HOST 執行中..." $LOG
-                   $tlog "ssh -p 2222 $HOST $COMMAND" $LOG
+                   $tlog "$USER:ssh -p 2222 $HOST $COMMAND" $LOG > /dev/null 2>&1
                    ssh -p 2222 $HOST "$COMMAND"
                    execStatus=$?
                    if [ $execStatus -eq 0 ]; then
@@ -1675,7 +1675,7 @@ STARTR () {
            y|Y)
                 for HOST in $HOSTLIST ; do
                    $tlog "$HOST 執行中..." $LOG
-                   $tlog "ssh -p 2222 $HOST $ACCOUNT" $LOG
+                   $tlog "$USER:ssh -p 2222 $HOST $ACCOUNT" $LOG > /dev/null 2>&1
                    ssh -p 2222 $HOST "$ACCOUNT"
                    execStatus1=$?
                    if [ $execStatus1 -eq 0 ]; then
@@ -1684,7 +1684,7 @@ STARTR () {
                       echo "$HOST Fail!" >> /tmp/$USER.account.$timestamp
                    fi
 
-                   $tlog "ssh -p 2222 $HOST $SYSCHK" $LOG
+                   $tlog "ssh -p 2222 $HOST $SYSCHK" $LOG > /dev/null 2>&1
                    ssh -p 2222 $HOST "$SYSCHK"
                    execStatus1=$?
                    if [ $execStatus1 -eq 0 ]; then
@@ -1693,7 +1693,7 @@ STARTR () {
                       echo "$HOST Fail!" >> /tmp/$USER.syschk.$timestamp
                    fi
 
-                   $tlog "ssh -p 2222 $HOST $FILEAUDIT" $LOG
+                   $tlog "ssh -p 2222 $HOST $FILEAUDIT" $LOG > /dev/null 2>&1
                    ssh -p 2222 $HOST "$FILEAUDIT"
                    execStatus2=$?
                    if [ $execStatus2 -eq 0 ]; then
@@ -2004,8 +2004,10 @@ case $Menu_No in
  	    echo "			開始進行WKLPAR校時..."
 		sleep 1
 		echo "			執行指令：$NTPCMD"
-						stopsrc -s xntpd > /dev null 
+						stopsrc -s xntpd > /dev/null 
+						sleep 1
 						$SHDIR/ntp_manual.sh
+						sleep 1
 						startsrc -s xntpd > /dev/null 
  	    echo "			WKLPAR校時完成(請確認校時結果)"
 		echo ""
@@ -2178,6 +2180,7 @@ LOGDIR=/home/se/safechk/safelog
 LOG=$LOGDIR/security_summar_chk.log
 SHCFG=/home/se/safechk/cfg
 SHDIR=/home/se/safechk/safesh
+NTPSRV=$(sed -n '1p' /home/se/safechk/cfg/ntp.lst)
 SECCMD=$SHDIR/security_report.pl
 timestamp=`date +"%Y%m%d%H%M"`
 TOTLECOUNT=`cat $SHCFG/host.lst |awk '{print $1}'|wc -l `
@@ -2189,9 +2192,9 @@ clear
 echo "          << FIX/FAST 檢核報表操作介面 (ALL AIX LPAR)>> "
 echo ""
 echo ""
-echo "        1. $WKLPAR與校時主機($NTPSRV)校時結果"
+echo "        1. WKLPAR與校時主機($NTPSRV)校時結果"
 echo ""
-echo "        2. Client LPAR與$WKLPAR校時結果"
+echo "        2. Client LPAR與WKLPAR校時結果"
 echo ""
 echo "        3. 系統資源、設定值檢核結果(seadm's hardware_chk)"
 echo ""

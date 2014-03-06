@@ -368,7 +368,7 @@ SSH_CMD_RECOVER() {
 # set -x 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "Base檔還原開始....." $LOG
+	$tlog "Base 檔還原開始....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then
@@ -488,7 +488,7 @@ SSH_FILEAUDIT() {
 		do
 			if [[ $WKLPAR = $hosts ]];then # If hosts equal wklpar.
 
-					$tlog "${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  &" $LOG
+					$tlog "${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  &" $LOG > /dev/null
 					${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
@@ -497,7 +497,7 @@ SSH_FILEAUDIT() {
 						$tlog "主機名稱： [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
-					$tlog "ssh -f -p 2222 ${USER}@${hosts} ${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 " $LOG
+					$tlog "ssh -f -p 2222 ${USER}@${hosts} ${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 " $LOG > /dev/null
 					ssh -f -p 2222 ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
@@ -529,7 +529,7 @@ SSH_FILEAUDIT() {
 						main
 				fi
 			done
-					$tlog " ${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  & " $LOG
+					$tlog " ${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  & " $LOG > /dev/null
 					${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
@@ -626,7 +626,7 @@ SSH_FILEAUDIT_CAT() {
 		do
 			if [[ $WKLPAR = $hosts ]];then # If hosts equal wklpar.
 
-					$tlog "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG
+					$tlog "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG > /dev/null
 					cat $LOGDIR/safelog.${hostname}.fileattr.`date +%Y%m%d`
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
@@ -635,7 +635,7 @@ SSH_FILEAUDIT_CAT() {
 						$tlog "主機名稱： [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
-					$tlog "ssh -p 2222 ${USER}@${hosts} cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG
+					$tlog "ssh -p 2222 ${USER}@${hosts} cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG > /dev/null
 					ssh -p 2222 ${USER}@${hosts} "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
@@ -667,7 +667,7 @@ SSH_FILEAUDIT_CAT() {
 						main
 				fi
 			done
-					$tlog "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG
+					$tlog "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG > /dev/null
 					cat $LOGDIR/safelog.${hostname}.fileattr.`date +%Y%m%d`
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
