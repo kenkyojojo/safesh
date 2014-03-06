@@ -697,12 +697,12 @@ TYPE=$2
 						   $tlog "異動檔名: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
-								GREP="[[:digit:]][[:space:]]"
+								GREPMODE="[[:digit:]][[:space:]]"
 						   else
-								GREP="[[:space:]]"
+								GREPMODE="[[:space:]]"
 						   fi
 
-						   CHKFILEN=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
+						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
 								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
@@ -719,19 +719,19 @@ TYPE=$2
 						   if [[ $chkflag -eq "0" ]];then
 							   TOLLNUM=$(wc -l ${BASEDIR}/${hosts}${BASE} | awk '{print $1}')
 #CNGLNUM=$(grep -n "[:digit:][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| awk -F : '{print $1}' )
-							   CNGLNUM=$( grep -n "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} | awk -F : '{print $1}' )
+							   CNGLNUM=$( grep -n "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} | awk -F : '{print $1}' )
 							   HEDLNUM=$(( $CNGLNUM - 1 ))
 							   TAILNUM=$(( $TOLLNUM - $CNGLNUM ))
 							  #$tlog head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
 							  #$tlog grep ${FILENCHG}$ ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 #grep "[0-9][[:space:]]${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}.tmp
-							   grep "${GREP}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}.tmp
+							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}.tmp
 							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hosts}${BASE}.tmp
 							  #$tlog mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
 							   mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
-							   modifiedstatus=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+							   modifiedstatus=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
 							   $tlog "檔案異動結果：$modifiedstatus" $LOG
 					 	   fi
 						done
@@ -745,12 +745,12 @@ TYPE=$2
 						do
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
-								GREP="[[:digit:]][[:space:]]"
+								GREPMODE="[[:digit:]][[:space:]]"
 						   else
-								GREP="[[:space:]]"
+								GREPMODE="[[:space:]]"
 						   fi
 						   #modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "[0-9][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-					       modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+					       modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
 					       $tlog "檔案異動結果：$modifiedstatus" $LOG
 						done
 					fi
@@ -780,12 +780,12 @@ TYPE=$2
 						  $tlog "異動檔名: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
-								GREP="[[:digit:]][[:space:]]"
+								GREPMODE="[[:digit:]][[:space:]]"
 						   else
-								GREP="[[:space:]]"
+								GREPMODE="[[:space:]]"
 						   fi
 
-						   CHKFILEN=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
+						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
 								$tlog "" $LOG
@@ -801,13 +801,13 @@ TYPE=$2
 
 						   if [[ $chkflag -eq "0" ]];then
 							   TOLLNUM=$(wc -l ${BASEDIR}/${hostname}${BASE} | awk '{print $1}')
-							   CNGLNUM=$( grep -n "${GREP}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}| awk -F : '{print $1}' )
+							   CNGLNUM=$( grep -n "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}| awk -F : '{print $1}' )
 							   HEDLNUM=$(( $CNGLNUM - 1 ))
 							   TAILNUM=$(( $TOLLNUM - $CNGLNUM ))
 							  #$tlog head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
 							  #$tlog grep ${FILENCHG}$ ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-							   grep "${GREP}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
+							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
 							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp
 							  #$tlog mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
@@ -840,12 +840,12 @@ TYPE=$2
 
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
-								GREP="[[:digit:]][[:space:]]"
+								GREPMODE="[[:digit:]][[:space:]]"
 						   else
-								GREP="[[:space:]]"
+								GREPMODE="[[:space:]]"
 						   fi
 
-						   CHKFILEN=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| wc -l |awk '{print $1}')
+						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
 								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
@@ -854,7 +854,7 @@ TYPE=$2
 						   fi
 
 						   if [[ $chkflag -eq "0" ]];then
-							    grep -v "${GREP}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
+							    grep -v "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
 							    mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
 					       fi
 						done
@@ -891,12 +891,12 @@ TYPE=$2
 
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
-								GREP="[[:digit:]][[:space:]]"
+								GREPMODE="[[:digit:]][[:space:]]"
 						   else
-								GREP="[[:space:]]"
+								GREPMODE="[[:space:]]"
 						   fi
 
-						   CHKFILEN=$( grep "${GREP}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
+						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tog "" $LOG
 								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
@@ -905,7 +905,7 @@ TYPE=$2
 						   fi
 
 						   if [[ $chkflag -eq "0" ]];then
-							    grep -v "${GREP}${FILENCHG}" ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
+							    grep -v "${GREPMODE}${FILENCHG}" ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
 							    mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
 						   fi
 					 done
