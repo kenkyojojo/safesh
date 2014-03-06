@@ -1,3 +1,27 @@
+commit 2c33b2f28dcf36a1af6321ba7aa5ae23b62c9672
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Mar 6 01:05:04 2014 +0800
+
+    modified:m.sh,m.sh.utf8
+
+commit 3e84ca47c2b69c448472c634f74bc74532dce890
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Mar 6 00:33:40 2014 +0800
+
+    modified:fileaudit_base.menu.sh, m.sh, m.sh.utf8
+
+commit bdfba9119d1ec4185448ccfc041f6ba382518f36
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Wed Mar 5 14:53:32 2014 +0800
+
+    modified: fileaudit_base.menu.sh fix the bug
+
+commit 70d1fbf1565b1c6857dd41e97b01cf300549e08a
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Mar 4 19:09:01 2014 +0800
+
+    modified:history.txt, version.txt
+
 commit b54f2622f072fb6f83f045e8b0021ae77dbeadc8
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Tue Mar 4 19:06:41 2014 +0800
