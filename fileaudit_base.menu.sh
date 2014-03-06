@@ -51,6 +51,7 @@ main () {
 			;;
         q|Q)
 			$SHDIR/m.sh
+			exit
             ;;
         *)
             echo "" 

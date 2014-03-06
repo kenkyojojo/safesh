@@ -251,15 +251,16 @@ case $Menu_No in
 				;;
 	21)
 				$SHDIR/fileaudit_base.menu.sh
+				exit
 				;;
 
 	q|Q)
-		exit
-		;;
+				exit
+				;;
 		
 	*)
                 echo ""
-		echo "        [Error]  輸入錯誤, 請輸入 (1-20)的選項"
+		echo "        [Error]  輸入錯誤, 請輸入 (1-21)的選項"
                 read ANSWR?"               按Enter鍵繼續 "
                 main
 		;;
