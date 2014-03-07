@@ -542,7 +542,7 @@ SSH_FILEAUDIT() {
 }
 #}}}
 
-#{{{SSH command execute fileaudit base program
+#{{{SSH command execute fileaudit genebase program
 SSH_FILEAUDIT_BASE() {
 # Use the ssh run fileaudit base program.
 # set -x 
@@ -557,7 +557,6 @@ SSH_FILEAUDIT_BASE() {
 		do
 			if [[ $WKLPAR = $hosts ]];then # If hosts equal wklpar.
 
-#$tlog "	${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1  &" $LOG
 					${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
@@ -566,7 +565,6 @@ SSH_FILEAUDIT_BASE() {
 						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
-#$tlog "	ssh -f -p 2222 ${USER}@${hosts} ${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1 " $LOG
 					ssh -f -p 2222 ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1 "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
@@ -598,7 +596,6 @@ SSH_FILEAUDIT_BASE() {
 						main
 				fi
 			done
-#$tlog "${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1  &" $LOG
 					${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
