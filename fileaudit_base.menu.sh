@@ -2,19 +2,45 @@
 hostname=`hostname`
 DATEM=`date +%Y%m`
 DATE1AGO=`perl -MPOSIX -le 'print strftime "%Y%m%d", localtime(time()-86400);'`
-SHDIR=/home/se/safechk/safesh
 USER=$(whoami)
-LOGDIR=/home/se/safechk/safelog
-LOG=${LOGDIR}/fileaudit_base.menu.sh.log
+SHDIR=/home/se/safechk/safesh
 tlog=${SHDIR}/tlog.sh
-FILEDIR=/home/se/safechk/file/fileaudit
-BASEDIR=${FILEDIR}/base
-CURRDIR=${FILEDIR}/check
 WKLPAR=WKLPART1
 MODE=$1
 TYPE=$2
 OLDIFS=$IFS
+if [[ $USER = "exadm" ]];then
+	LOGDIR=/home/exc/excwk/apdir/log
+	LOG=${LOGDIR}/fileaudit_base.menu.sh.log
+	FILEDIR=/home/exc/excwk/apdir/file/fileaudit
+else
+	LOGDIR=/home/se/safechk/safelog
+	LOG=${LOGDIR}/fileaudit_base.menu.sh.log
+	FILEDIR=/home/se/safechk/file/fileaudit
+fi
+BASEDIR=${FILEDIR}/base
+CURRDIR=${FILEDIR}/check
+
+set -A MUSER root bruce
 #===============================================================#
+
+#{{{create_log
+create_log () {
+   if [[ ! -f $LOG ]]; then 
+		   if [[ $USER = "root" ]];then
+				   touch $LOG
+				   chown useradm:security $LOG
+				   chmod 666 $LOG
+		   elif [[ $USER = "useradm" ]]; then
+				   touch $LOG
+				   chmod 666 $LOG
+		   else
+				   echo "create_log:Please use the useradm or root user to running the script first"
+				   exit 1
+		   fi
+   fi
+}
+#}}}
 
 #{{{main menu
 main () {
@@ -50,7 +76,7 @@ main () {
 			STARTD
 			;;
         q|Q)
-			$SHDIR/m.sh
+			$SHDIR/p.sh
 			exit
             ;;
         *)
@@ -67,7 +93,6 @@ main () {
 STARTA () {
 
 # check user permission
-set -A MUSER root seadm bruce
 USER_CHECK 
 
 	clear
@@ -111,7 +136,6 @@ USER_CHECK
 STARTB () {
 
 # check user permission
-set -A MUSER root seadm bruce
 USER_CHECK 
 
 	clear
@@ -155,7 +179,6 @@ USER_CHECK
 STARTC () {
 
 # check user permission
-set -A MUSER root seadm bruce
 USER_CHECK 
 
 	clear
@@ -213,7 +236,6 @@ USER_CHECK
 STARTD () {
 
 # check user permission
-set -A MUSER root bruce
 USER_CHECK 
 
 	clear
@@ -265,7 +287,7 @@ SSH_CMD() {
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
-		for hosts in $(cat /tmp/lparlst.tmp)
+		for hosts in $(cat /tmp/lparlst${USER}.tmp)
 		do
 			if [[ $WKLPAR = $hosts ]];then # If hosts equal wklpar.
 
@@ -314,7 +336,7 @@ SSH_CMD() {
 			fi
 		done
 	else # If lpar is not wklpar.
-			for HOSTLISTA in $(cat /tmp/lparlst.tmp|wc -w)
+			for HOSTLISTA in $(cat /tmp/lparlst${USER}.tmp|wc -w)
 			do
 # 		  	If hostlist arrary equal 1 but localhost name is not the same input lpar name than show Error.
 				if [[ $HOSTLISTA -eq 1 ]];then
@@ -372,7 +394,7 @@ SSH_CMD_RECOVER() {
 
 
 	if [[ $hostname = $WKLPAR ]];then
-		for hosts in $(cat /tmp/lparlst.tmp)
+		for hosts in $(cat /tmp/lparlst${USER}.tmp)
 		do
 			if [[ $WKLPAR = $hosts ]];then
 
@@ -424,7 +446,7 @@ SSH_CMD_RECOVER() {
 			fi
 		done
 	else
-			for HOSTLISTA in $(cat /tmp/lparlst.tmp|wc -w)
+			for HOSTLISTA in $(cat /tmp/lparlst${USER}.tmp|wc -w)
 			do
 # 		  	If hostlist arrary equal 1 but localhost name is not the same input lpar name than show Error.
 				if [[ $HOSTLISTA -eq 1 ]];then
@@ -484,7 +506,7 @@ SSH_FILEAUDIT() {
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
-		for hosts in $(cat /tmp/lparlst.tmp)
+		for hosts in $(cat /tmp/lparlst${USER}.tmp)
 		do
 			if [[ $WKLPAR = $hosts ]];then # If hosts equal wklpar.
 
@@ -508,7 +530,7 @@ SSH_FILEAUDIT() {
 			fi
 		done
 	else # If lpar is not wklpar.
-			for HOSTLISTA in $(cat /tmp/lparlst.tmp|wc -w)
+			for HOSTLISTA in $(cat /tmp/lparlst${USER}.tmp|wc -w)
 			do
 # 		  	If hostlist arrary equal 1 but localhost name is not the same input lpar name than show Error.
 				if [[ $HOSTLISTA -eq 1 ]];then
@@ -553,7 +575,7 @@ SSH_FILEAUDIT_BASE() {
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
-		for hosts in $(cat /tmp/lparlst.tmp)
+		for hosts in $(cat /tmp/lparlst${USER}.tmp)
 		do
 			if [[ $WKLPAR = $hosts ]];then # If hosts equal wklpar.
 
@@ -575,7 +597,7 @@ SSH_FILEAUDIT_BASE() {
 			fi
 		done
 	else # If lpar is not wklpar.
-			for HOSTLISTA in $(cat /tmp/lparlst.tmp|wc -w)
+			for HOSTLISTA in $(cat /tmp/lparlst${USER}.tmp|wc -w)
 			do
 # 		  	If hostlist arrary equal 1 but localhost name is not the same input lpar name than show Error.
 				if [[ $HOSTLISTA -eq 1 ]];then
@@ -619,7 +641,7 @@ SSH_FILEAUDIT_CAT() {
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
-		for hosts in $(cat /tmp/lparlst.tmp)
+		for hosts in $(cat /tmp/lparlst${USER}.tmp)
 		do
 			if [[ $WKLPAR = $hosts ]];then # If hosts equal wklpar.
 
@@ -643,7 +665,7 @@ SSH_FILEAUDIT_CAT() {
 			fi
 		done
 	else # If lpar is not wklpar.
-			for HOSTLISTA in $(cat /tmp/lparlst.tmp|wc -w)
+			for HOSTLISTA in $(cat /tmp/lparlst${USER}.tmp|wc -w)
 			do
 # 		  	If hostlist arrary equal 1 but localhost name is not the same input lpar name than show Error.
 				if [[ $HOSTLISTA -eq 1 ]];then
@@ -685,12 +707,12 @@ TYPE=$2
 			$tlog "#=======================START to modified the fileaudit base status=================================#" $LOG
 
 			if [[ $hostname = $WKLPAR ]];then
-				for hosts in $(cat /tmp/lparlst.tmp)
+				for hosts in $(cat /tmp/lparlst${USER}.tmp)
 				do
 					if [[ $hosts = $WKLPAR ]];then
 						IFS=";"
 						chkflag=0
-						for FILENCHG in $(cat /tmp/filechg.tmp)
+						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
 						   $tlog "異動檔名: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
@@ -734,12 +756,12 @@ TYPE=$2
 					 	   fi
 						done
 					else
-						$tlog "scp -P 2222 /tmp/filechg.tmp ${USER}@${hosts}:/tmp/" $LOG
+						$tlog "scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
 						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
-						scp -P 2222 /tmp/filechg.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
+						scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
 						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
 						IFS=";"
-						for FILENCHG in $(cat /tmp/filechg.tmp)
+						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
@@ -773,7 +795,7 @@ TYPE=$2
 					fi
 					IFS=";"
 					chkflag=0
-					for FILENCHG in $(cat /tmp/filechg.tmp)
+					for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 					do
 						  $tlog "異動檔名: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
@@ -827,12 +849,12 @@ TYPE=$2
 			$tlog "#=======================START to modified remove the fileaudit base status=================================#" $LOG
 
 			if [[ $hostname = $WKLPAR ]];then
-				for hosts in $(cat /tmp/lparlst.tmp)
+				for hosts in $(cat /tmp/lparlst${USER}.tmp)
 				do
 					if [[ $hosts = $WKLPAR ]];then
 						IFS=";"
 						chkflag=0
-						for FILENCHG in $(cat /tmp/filechg.tmp)
+						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
 						  $tlog "清除檔名: $FILENCHG " $LOG
 
@@ -857,9 +879,9 @@ TYPE=$2
 					       fi
 						done
 					else
-						$tlog "scp -P 2222 /tmp/filechg.tmp ${USER}@${hosts}:/tmp/" $LOG
+						$tlog "scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
 						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
-						scp -P 2222 /tmp/filechg.tmp ${USER}@${hosts}:/tmp/
+						scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/
 						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &"
 					fi
 				done
@@ -883,7 +905,7 @@ TYPE=$2
 					fi
 					IFS=";"
 					chkflag=0
-					for FILENCHG in $(cat /tmp/filechg.tmp)
+					for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 					do
 						   $tlog "清除檔名: $FILENCHG " $LOG
 
@@ -962,7 +984,7 @@ MENU_INPUT () {
 				main
 	   fi	
 
-	   rm -f /tmp/lparlst.tmp	
+	   rm -f /tmp/lparlst${USER}.tmp	
 	   for HOSTN in ${HOSTN[@]}
 	   do
 		   HOSTN=`echo $HOSTN|tr '[a-z]' '[A-Z]'`
@@ -1001,7 +1023,7 @@ MENU_INPUT () {
 				main
 		    fi
 
-			echo ${HOSTLIST[@]} >> /tmp/lparlst.tmp
+			echo ${HOSTLIST[@]} >> /tmp/lparlst${USER}.tmp
 	   done
 
 		if [[ $MODE = "CNG_DETAL" || $MODE = "CNG_REMOVE" ]];then
@@ -1023,7 +1045,7 @@ MENU_INPUT () {
 				read ANSWR?"               按Enter鍵繼續 "
 				main
 		    fi
-			echo ${FILEN[@]} > /tmp/filechg.tmp
+			echo ${FILEN[@]} > /tmp/filechg${USER}.tmp
 	   	fi
 
 		if [[ $MODE = "CNG_REMOVE" ]];then
@@ -1123,5 +1145,7 @@ Begin () {
 	fi
 }
 #}}}
+
+create_log
 
 Begin

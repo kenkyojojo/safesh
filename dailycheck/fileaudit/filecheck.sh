@@ -20,6 +20,7 @@
 #----------------------------------
 hostname=`hostname`
 SHELL=filecheck.sh
+SHDIR=/home/se/safechk/safesh
 SITE=TSEOT1
 CONFIGDIR=/home/se/safechk/cfg
 FILEDIR=/home/se/safechk/file/fileaudit
@@ -242,12 +243,14 @@ if [ -f $EXISTBASE ]; then
    cat /dev/null > $CURRENT_EXIST
    for DIRNAME in $EXIST
    do
-       ls -ld  $DIRNAME  2> /dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}'  >> $CURRENT_EXIST 
+#ls -ld  $DIRNAME  2> /dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}'  >> $CURRENT_EXIST 
+       ${SHDIR}/sels  $DIRNAME  2> /dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}'  >> $CURRENT_EXIST 
    done
 
    for DIRNAME in $DIRNOTIME #Recursive list dir, but don't list the file and directory time.
    do
-      find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
+#find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
+      ${SHDIR}/sefind $DIRNAME | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
    done
 
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $CURRENT_EXIST > $TMP_EXISTCUR
@@ -355,9 +358,8 @@ echo "#============================================================#"
    cat /dev/null > $RESULT #flush the check_status_file
    for DIRNAME in $DIR #import all dir_list from commandline prompt
    do
-      #find $DIRNAME -ls | eval $ALLEXCLUDE | sort -k2 -t "/" >> $CURRENT
-	   find $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
-#      find $DIRNAME -ls | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
+#	   find $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
+	   ${SHDIR}/sefind $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
    done
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT > $TMP_CUR
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $BASEFILE > $TMP_BASE

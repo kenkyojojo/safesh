@@ -1,9 +1,28 @@
 #!/bin/ksh
-Logfile=/home/se/safechk/safelog/menu.log
+LOG=/home/se/safechk/safelog/penu.log
 USER=$(whoami)
-hostname=`hostname`
+hostname=$(hostname)
+SHDIR=/home/se/safechk/safesh
 
+#{{{create_log
+create_log () {
+   if [[ ! -f $LOG ]]; then 
+		   if [[ $USER = "root" ]];then
+				   touch $LOG
+				   chown useradm:security $LOG
+				   chmod 666 $LOG
+		   elif [[ $USER = "useradm" ]]; then
+				   touch $LOG
+				   chmod 666 $LOG
+		   else
+				   echo "create_log:Please use the useradm or root user to running the script first"
+				   exit 1
+		   fi
+   fi
+}
+#}}}
 
+#{{{main
 main () {
 clear
 echo "             << FIX/FAST 資訊傳輸系統使用者作業 (ALL AIX LPAR)>> "
@@ -18,39 +37,49 @@ echo "           4. 各LPAR(MDS/DAP/DAR/LOG)中檔案下載至共用工作區 "
 echo ""
 echo "           5. 將LPAR(MDS/DAP/DAR/LOG)目錄下傳至共用工作區 "
 echo ""
+echo "           6. 檔案檢核BASE"
+echo ""
 echo "               (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?"                請選擇選項 (1-5) : "
+read Menu_No?"                請選擇選項 (1-6) : "
+
+create_log	
 
 case $Menu_No in
 	1)
 		STARTA
 		;;
 	2)
-                STARTB
+        STARTB
 		;;
-        3)
-                STARTC
-                ;;
-        4)
-                STARTD
-                ;;
-        5)
-                STARTE
-                ;;
+    3)
+		STARTC
+		;;
+	4)
+		STARTD
+		;;
+	5)
+		STARTE
+		;;
+	6)
+		$SHDIR/fileaudit_base.penu.sh
+		exit
+		;;
 	q|Q)
 		exit
 		;;
 		
 	*)
                 echo ""
-		echo "        [Error]  輸入錯誤, 請輸入 (1-5)的選項"
+		echo "        [Error]  輸入錯誤, 請輸入 (1-6)的選項"
                 read ANSWR?"               按Enter鍵繼續 "
                 main
 		;;
         esac
 }
-###############################################################
+#}}}
+
+#{{{STARTA
 STARTA () {
    clear
    echo ""
@@ -78,8 +107,9 @@ STARTA () {
         ;;
     esac
 }
+#}}}
 
-###############################################################
+#{{{STARTB
 STARTB () {
    clear
    echo ""
@@ -100,6 +130,7 @@ STARTB () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲傳送的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -116,6 +147,12 @@ STARTB () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -234,8 +271,9 @@ STARTB () {
        fi
    fi
 }
+#}}}
 
-###############################################################
+#{{{STARTC
 STARTC () {
    clear
    echo ""
@@ -254,6 +292,7 @@ STARTC () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲執行指令的主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -270,6 +309,12 @@ STARTC () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
@@ -343,7 +388,9 @@ STARTC () {
        fi
    fi
 }
-###############################################################
+#}}}
+
+#{{{STARTD
 STARTD () {
    clear
    echo ""
@@ -363,6 +410,7 @@ STARTD () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲取檔案的遠端主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -379,6 +427,12 @@ STARTD () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -500,7 +554,9 @@ STARTD () {
        fi
    fi
 }
-###############################################################
+#}}}
+
+#{{{STARTE
 STARTE () {
    clear
    echo ""
@@ -520,6 +576,7 @@ STARTE () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
        read HOSTN?"輸入欲取目錄的遠端主機名稱 : "
+	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -536,6 +593,12 @@ STARTE () {
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               ;;
+           FIX)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               ;;
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -632,6 +695,6 @@ STARTE () {
        fi
    fi
 }
-###############################################################
+#}}}
 
 main
