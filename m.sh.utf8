@@ -26,33 +26,33 @@ create_log () {
 #{{{main
 main () {
 clear
-echo "          << FIX/FAST ��T�ǿ�t�Ψt�޻P�w���ާ@���� (ALL AIX LPAR)>> "
+echo "          << FIX/FAST 資訊傳輸系統系管與安控操作介面 (ALL AIX LPAR)>> "
 echo ""
-echo "        1. �s�W�ϥΪ̱b��                        11. ����Telnet �A��"
+echo "        1. 新增使用者帳號                        11. 關閉Telnet 服務"
 echo ""
-echo "        2. �R���ϥΪ̱b��                        12. �}��Telnet �A��"
+echo "        2. 刪除使用者帳號                        12. 開啟Telnet 服務"
 echo ""
-echo "        3. �P�B���K�X                          13. ���滷�ݫ��O"
+echo "        3. 同步更改密碼                          13. 執行遠端指令"
 echo ""
-echo "        4. �Ѱ��b����w���A                      14. ���o�����ɮ�"
+echo "        4. 解除帳戶鎖定狀態                      14. 取得遠端檔案"
 echo ""
-echo "        5. �s�إؿ�                              15. ���o���ݥؿ�"
+echo "        5. 新建目錄                              15. 取得遠端目錄"
 echo ""
-echo "        6. �R���ؿ�                              16. Faillogin����reset"
+echo "        6. 刪除目錄                              16. Faillogin次數reset"
 echo ""
-echo "        7. �s�W�s��                              17. ����SSH Key"
+echo "        7. 新增群組                              17. 產生SSH Key"
 echo ""
-echo "        8. �R���s��                              18. ���ͦw���ˮ�Base��"
+echo "        8. 刪除群組                              18. 產生安控檢核Base檔"
 echo ""
-echo "        9. �P�B�ɮ�                              19. �P�B�ؿ�"
+echo "        9. 同步檔案                              19. 同步目錄"
 echo ""
-echo "       10. �C��ȯZ�ˮֳ����ɮ׭���              20. �}�����ˮ�"
+echo "       10. 每日值班檢核報表檔案重傳              20. 開關機檢核"
 echo ""
-echo "       21. �ɮ��ˮ�BASE"
+echo "       21. 檔案檢核BASE"
 echo ""
-echo "                                (�H�ɥi�� q �H���} )"
+echo "                                (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?"                                 �п�ܿﶵ (1-21) : "
+read Menu_No?"                                 請選擇選項 (1-21) : "
 create_log
 
 case $Menu_No in
@@ -61,8 +61,8 @@ case $Menu_No in
                    STARTA
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -71,8 +71,8 @@ case $Menu_No in
                    STARTB
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -84,8 +84,8 @@ case $Menu_No in
                    STARTD
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -94,8 +94,8 @@ case $Menu_No in
                    STARTE
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -104,8 +104,8 @@ case $Menu_No in
                    STARTF
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -114,8 +114,8 @@ case $Menu_No in
                    STARTG
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -124,8 +124,8 @@ case $Menu_No in
                    STARTH
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -134,8 +134,8 @@ case $Menu_No in
                    STARTI
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -144,8 +144,8 @@ case $Menu_No in
                    STARTJ
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -154,8 +154,8 @@ case $Menu_No in
                    STARTK
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -164,8 +164,8 @@ case $Menu_No in
                    STARTL
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -174,8 +174,8 @@ case $Menu_No in
                    STARTM
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -184,8 +184,8 @@ case $Menu_No in
                    STARTN
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -194,8 +194,8 @@ case $Menu_No in
                    STARTO
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 		;;
@@ -204,8 +204,8 @@ case $Menu_No in
                    STARTP
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
                 ;;
@@ -214,8 +214,8 @@ case $Menu_No in
                    STARTQ
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
                 ;;
@@ -224,8 +224,8 @@ case $Menu_No in
                    STARTR
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
                 ;;
@@ -234,8 +234,8 @@ case $Menu_No in
                    STARTS
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 				;;
@@ -245,8 +245,8 @@ case $Menu_No in
                    STARTT
                 else
                    echo ""
-                   echo "      $USER �L�v���ϥΦ��\��, �Ь��t�κ޲z��"
-                   read ANSWR?"                 ��Enter���~�� "
+                   echo "      $USER 無權限使用此功能, 請洽系統管理員"
+                   read ANSWR?"                 按Enter鍵繼續 "
                    main
                 fi
 				;;
@@ -261,8 +261,8 @@ case $Menu_No in
 		
 	*)
                 echo ""
-		echo "        [Error]  ��J���~, �п�J (1-21)���ﶵ"
-                read ANSWR?"               ��Enter���~�� "
+		echo "        [Error]  輸入錯誤, 請輸入 (1-21)的選項"
+                read ANSWR?"               按Enter鍵繼續 "
                 main
 		;;
         esac
@@ -280,74 +280,74 @@ STARTA() {
    CHKFLG=0
    if [ "$GROUP" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
 
-       read GROUP?" ��J�s�զW��( ���� ) : "
+       read GROUP?" 輸入群組名稱( 必須 ) : "
        if [ "$GROUP" == "q" ] || [ "$GROUP" == "Q" ]; then
            main
        fi
 
-       read UMASK?" ��Jumask( ���� ) : "
+       read UMASK?" 輸入umask( 必須 ) : "
        if [ "$UMASK" == "q" ] || [ "$UMASK" == "Q" ]; then
            main
        fi
 
-       read UID?" ��Juser id( ���� ) : "
+       read UID?" 輸入user id( 必須 ) : "
        if [ "$UID" == "q" ] || [ "$UID" == "Q" ]; then
            main
        fi
 
-       read USERNAME?" ��Juser name( ���� ) : "
+       read USERNAME?" 輸入user name( 必須 ) : "
        if [ "$USERNAME" == "q" ] || [ "$USERNAME" == "Q" ]; then
            main
        fi
 
        if [ -z "$GROUP" ]; then
            echo ""
-           echo "               [Error]  ��J�s�զW�٬��ŭ� "
+           echo "               [Error]  輸入群組名稱為空值 "
            CHKFLG=1
        fi
        GROUPCHK=`grep "^${GROUP}:" /etc/group | awk -F: '{print $1}'`
        if [ "$GROUPCHK" != "$GROUP" ]; then
            echo ""
-           echo "               [Error]  ��J�s�դ��s�b "
+           echo "               [Error]  輸入群組不存在 "
            CHKFLG=1
        fi
 
 	   if [[ "$UMASK" != ?(+|-)+([0-7][0-7][0-7]) ]]; then
            echo ""
-           echo "               [Error]  ��JUMASK�D�Ʀr�榡 "
+           echo "               [Error]  輸入UMASK非數字格式 "
            CHKFLG=1
        fi
 
 	   if [[ "$UID" != ?(+|-)+([0-7][0-7][0-7]) ]]; then
-           echo "               [Error]  ��JUID�D�Ʀr�榡 "
+           echo "               [Error]  輸入UID非數字格式 "
            CHKFLG=1
        else
            UIDCHK=`cat /etc/passwd | awk -F: '{print $3}' | grep "${UID}"`
            if [ "$UIDCHK" == "$UID" ]; then
                echo ""
-               echo "               [Error]  ��JUID�w�s�b "
+               echo "               [Error]  輸入UID已存在 "
                CHKFLG=1
            fi
        fi
 
        if [ -z "$USERNAME" ]; then
            echo ""
-           echo "               [Error]  ��J�ϥΪ̦W�٬��ŭ� "
+           echo "               [Error]  輸入使用者名稱為空值 "
            CHKFLG=1
        fi
        USERNAMECHK=`grep "^${USERNAME}:" /etc/passwd | awk -F: '{print $1}'`
        if [ "$USERNAMECHK" == "$USERNAME" ]; then
            echo ""
-           echo "               [Error]  ��Jusername�w�s�b "
+           echo "               [Error]  輸入username已存在 "
            CHKFLG=1
        fi
        
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
@@ -356,19 +356,19 @@ STARTA() {
            echo "User ID:            $UID"
            echo "User Name:          $USERNAME"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�L�~(Y/N): "
+           read ANSWER?"             請確認上述資訊無誤(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 /home/se/safechk/safesh/adduser_ssh.sh $GROUP $GROUP $UMASK $UID $USERNAME
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTA
                 ;;
            esac
@@ -385,46 +385,46 @@ STARTB () {
    CHKFLG=0
    if [ "$USERNAME" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
-       read USERNAME?" ��JUser name( ���� ) : "
+       read USERNAME?" 輸入User name( 必須 ) : "
        if [ "$USERNAME" == "q" ] || [ "$USERNAME" == "Q" ]; then
            main
        fi
 
        if [ -z "$USERNAME" ]; then
            echo ""
-           echo "               [Error]  ��J���ŭ� "
+           echo "               [Error]  輸入為空值 "
            CHKFLG=1
        fi
 
        USERCHK=`grep "^${USERNAME}:" /etc/passwd | awk -F: '{print $1}'`
        if [ "$USERCHK" != "$USERNAME" ]; then
            echo ""
-           echo "               [Error]  ��J�ϥΪ̦W�٤��s�b "
+           echo "               [Error]  輸入使用者名稱不存在 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
-           echo "���R����User: $USERNAME"
-           read ANSWER?"             �нT�{�W�z��T�L�~(Y/N): "
+           echo "欲刪除的User: $USERNAME"
+           read ANSWER?"             請確認上述資訊無誤(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 /home/se/safechk/safesh/deluser_ssh.sh $USERNAME
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTB
                 ;;
            esac
@@ -438,25 +438,25 @@ STARTC () {
    clear
    echo ""
    echo "#============================================#"
-   echo "#  ���\��|�P�B�ܧ�Ҧ�LPAR�D�����ϥΪ̱K�X  #"
+   echo "#  此功能會同步變更所有LPAR主機的使用者密碼  #"
    echo "#============================================#"
    echo ""
-   echo "���ܧ� ${USER} ���K�X?"
+   echo "欲變更 ${USER} 的密碼?"
    echo ""
-   read ANSWER?"            �нT�{�n�ܧ�User �L�~(Y/N): "
+   read ANSWER?"            請確認要變更的User 無誤(Y/N): "
    case $ANSWER in
    n|N)
         main
         ;;
    y|Y)
         /home/se/safechk/safesh/pwchg_all.sh
-        read ANSWR?"               ��Enter���~�� "
+        read ANSWR?"               按Enter鍵繼續 "
         main
         ;;
    *)
         echo ""
-        echo "[Error]  ��J���~, �п�J(Y/N)"
-        read ANSWR?"               ��Enter���~�� "
+        echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+        read ANSWR?"               按Enter鍵繼續 "
         main
         ;;
     esac
@@ -471,58 +471,58 @@ STARTD () {
    CHKFLG=0
    if [ "$USERNAME" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
-       read USERNAME?" ��J�ݸ��ꪺUser name( ���� ) : "
+       read USERNAME?" 輸入需解鎖的User name( 必須 ) : "
        if [ "$USERNAME" == "q" ] || [ "$USERNAME" == "Q" ]; then
            main
        fi
 
-       read USERPASS?" ��J�ݸ��ꪺUser �w�]Password( ���� ) : "
+       read USERPASS?" 輸入需解鎖的User 預設Password( 必須 ) : "
        if [ "$USERPASS" == "q" ] || [ "$USERPASS" == "Q" ]; then
            main
        fi
 
        if [ -z "$USERNAME" ]; then
            echo ""
-           echo "               [Error]  ��J���ŭ� "
+           echo "               [Error]  輸入為空值 "
            CHKFLG=1
        fi
        USERCHK=`grep "^${USERNAME}:" /etc/passwd | awk -F: '{print $1}'`
        if [ "$USERCHK" != "$USERNAME" ]; then
            echo ""
-           echo "               [Error]  ��J�ϥΪ̦W�٤��s�b "
+           echo "               [Error]  輸入使用者名稱不存在 "
            CHKFLG=1
        fi
 
        if [ -z "$USERPASS" ]; then
            echo ""
-           echo "               [Error]  �K�X��J���ŭ� "
+           echo "               [Error]  密碼輸入為空值 "
            CHKFLG=1
        fi
 
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
-           echo "�����ꪺUser Name: $USERNAME"
-           echo "�����ꪺUser Password: $USERPASS"
-           read ANSWER?"             �нT�{�W�z��T�L�~(Y/N): "
+           echo "欲解鎖的User Name: $USERNAME"
+           echo "欲解鎖的User Password: $USERPASS"
+           read ANSWER?"             請確認上述資訊無誤(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 /home/se/safechk/safesh/usrlock_ssh.sh $USERNAME $USERPASS
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTD
                 ;;
            esac
@@ -542,24 +542,24 @@ STARTE () {
    CHKFLG=0
    if [ "$DIROWNER" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
-       read DIROWNER?" ��J�ؿ����֦��� : "
+       read DIROWNER?" 輸入目錄的擁有者 : "
        if [ "$DIROWNER" == "q" ] || [ "$DIROWNER" == "Q" ]; then
            main
        fi
 
-       read DIRGROUP?" ��J�ؿ����֦��s�� : "
+       read DIRGROUP?" 輸入目錄的擁有群組 : "
        if [ "$DIRGROUP" == "q" ] || [ "$DIRGROUP" == "Q" ]; then
            main
        fi
 
-       read DIRPATH?" ��J�ؿ������|��m(������|) : "
+       read DIRPATH?" 輸入目錄的路徑位置(絕對路徑) : "
        if [ "$DIRPATH" == "q" ] || [ "$DIRPATH" == "Q" ]; then
            main
        fi
 
-       read DIRPERM?" ��J�ؿ����v�� (�Ʀr) : "
+       read DIRPERM?" 輸入目錄的權限 (數字) : "
        if [ "$DIRPERM" == "q" ] || [ "$DIRPERM" == "Q" ]; then
            main
        fi
@@ -567,42 +567,42 @@ STARTE () {
        USERNAMECHK=`grep "^${DIROWNER}:" /etc/passwd | awk -F: '{print $1}'`
        if [ "$USERNAMECHK" != "$DIROWNER" ]; then
            echo ""
-           echo "               [Error]  ��J�ϥΪ̦W�٤��s�b "
+           echo "               [Error]  輸入使用者名稱不存在 "
            CHKFLG=1
        fi
        if [ -z "$USERNAMECHK" ]; then
            echo ""
-           echo "               [Error]  ��J�ϥΪ̦W�٬��ŭ� "
+           echo "               [Error]  輸入使用者名稱為空值 "
            CHKFLG=1
        fi
 
        GROUPCHK=`grep "^${DIRGROUP}:" /etc/group | awk -F: '{print $1}'`
        if [ "$GROUPCHK" != "$DIRGROUP" ]; then
            echo ""
-           echo "               [Error]  ��J�s�դ��s�b "
+           echo "               [Error]  輸入群組不存在 "
            CHKFLG=1
        fi
        if [ -z "$GROUPCHK" ]; then
            echo ""
-           echo "               [Error]  ��J�s�լ��ŭ� "
+           echo "               [Error]  輸入群組為空值 "
            CHKFLG=1
        fi
 
        if [ -z "$DIRPATH" ]; then
            echo ""
-           echo "               [Error]  ��J�ؿ����ŭ� "
+           echo "               [Error]  輸入目錄為空值 "
            CHKFLG=1
        fi
 
        if [[ "$DIRPERM" != ?(+|-)+([0-9]) ]]; then
            echo ""
-           echo "               [Error]  ��JPermission�D�Ʀr�榡 "
+           echo "               [Error]  輸入Permission非數字格式 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
@@ -611,19 +611,19 @@ STARTE () {
            echo "Directory PATH:       $DIRPATH"
            echo "Directory Permission: $DIRPERM"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�L�~(Y/N): "
+           read ANSWER?"             請確認上述資訊無誤(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 /home/se/safechk/safesh/mkdir_ssh.sh $DIROWNER:$DIRGROUP $DIRPATH $DIRPERM
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTE
                 ;;
            esac
@@ -640,47 +640,47 @@ STARTF () {
    CHKFLG=0
    if [ "$DIRPATH" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
-       read DIRPATH?" ��J�ؿ������|��m(������|) : "
+       read DIRPATH?" 輸入目錄的路徑位置(絕對路徑) : "
        if [ "$DIRPATH" == "q" ] || [ "$DIRPATH" == "Q" ]; then
            main
        fi
 
        if [ ! -d $DIRPATH ]; then
            echo ""
-           echo "               [Error]  ��J���ؿ����s�b "
+           echo "               [Error]  輸入的目錄不存在 "
            CHKFLG=1
        fi
        if [ -z "$DIRPATH" ]; then
            echo ""
-           echo "               [Error]  ��J���ŭ� "
+           echo "               [Error]  輸入為空值 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
            echo "Directory PATH: $DIRPATH"
            echo ""
-           echo "                       [Warning] ���ʧ@�L�k�_��, �Яd�N!!!"
+           echo "                       [Warning] 此動作無法復原, 請留意!!!"
            echo ""
-           read ANSWER?"             �нT�{�W�z�ؿ��O�_�n�R��, �����ؿ��P�ɮ׬ҷ|�R��(Y/N): "
+           read ANSWER?"             請確認上述目錄是否要刪除, 執行後目錄與檔案皆會刪除(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 /home/se/safechk/safesh/rmdir_ssh.sh $DIRPATH
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTF
                 ;;
            esac
@@ -698,64 +698,64 @@ STARTG () {
    CHKFLG=0
    if [ "$GROUP" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
-       read GROUP?" ��J�n�s�W���s�զW��: "
+       read GROUP?" 輸入要新增的群組名稱: "
        if [ "$GROUP" == "q" ] || [ "$GROUP" == "Q" ]; then
            main
        fi
 
-       read GID?" ��J�n�s�W���s��GID: "
+       read GID?" 輸入要新增的群組GID: "
        if [ "$GID" == "q" ] || [ "$GID" == "Q" ]; then
            main
        fi
 
        if [ -z "$GROUP" ]; then
            echo ""
-           echo "               [Error]  ��J�s�զW�٬��ŭ� "
+           echo "               [Error]  輸入群組名稱為空值 "
            CHKFLG=1
        fi
        GROUPCHK=`grep "^${GROUP}:" /etc/group | awk -F: '{print $1}'`
        if [ "$GROUPCHK" == "$GROUP" ]; then
            echo ""
-           echo "               [Error]  ��J�s�դw�s�b "
+           echo "               [Error]  輸入群組已存在 "
            CHKFLG=1
        fi
 
        if [[ "$GID" != ?(+|-)+([0-9]) ]]; then
-           echo "               [Error]  ��JGID�D�Ʀr�榡 "
+           echo "               [Error]  輸入GID非數字格式 "
            CHKFLG=1
        else
            GIDCHK=`cut -f "3" -d : /etc/group | grep "^$GID"`
            if [ "$GIDCHK" == "$GID" ]; then
                echo ""
-               echo "               [Error]  ��JGID�w�s�b "
+               echo "               [Error]  輸入GID已存在 "
                CHKFLG=1
            fi
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
            echo "Group Name: $GROUP"
            echo "Group ID: $GID"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�L�~(Y/N): "
+           read ANSWER?"             請確認上述資訊無誤(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 /home/se/safechk/safesh/mkgroup_ssh.sh $GID $GROUP
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTG
                 ;;
            esac
@@ -772,46 +772,46 @@ STARTH () {
    CHKFLG=0
    if [ "$GROUP" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
-       read GROUP?" ��J�n�R�����s�զW��: "
+       read GROUP?" 輸入要刪除的群組名稱: "
        if [ "$GROUP" == "q" ] || [ "$GROUP" == "Q" ]; then
            main
        fi
 
        if [ -z "$GROUP" ]; then
            echo ""
-           echo "               [Error]  ��J�s�զW�٬��ŭ� "
+           echo "               [Error]  輸入群組名稱為空值 "
            CHKFLG=1
        fi
        GROUPCHK=`grep "^${GROUP}:" /etc/group | awk -F: '{print $1}'`
        if [ "$GROUPCHK" != "$GROUP" ]; then
            echo ""
-           echo "               [Error]  ��J�s�դ��s�b "
+           echo "               [Error]  輸入群組不存在 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
            echo "Group Name: $GROUP"
            echo ""
-           read ANSWER?"             �нT�{�W�z�n�R�����s�զW�ٵL�~(Y/N): "
+           read ANSWER?"             請確認上述要刪除的群組名稱無誤(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 /home/se/safechk/safesh/rmgroup_ssh.sh $GROUP
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTH
                 ;;
            esac
@@ -832,15 +832,15 @@ STARTI () {
    CHKFLG=0
    if [ "$HOSTN" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo "#==========================================================#"
-       echo "# ��J�榡(�C�x�D���H�Ů氵�����j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# 輸入格式(每台主機以空格做為分隔): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# �s�տ�J�榡: DAP (�@���@�Ӹs��)                         #"
+       echo "# 群組輸入格式: DAP (一次一個群組)                         #"
        echo "#                                                          #"
-       echo "# �����D���п�J: ALL                                      #"
+       echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"��J���ǰe���D���W�� : "
+       read HOSTN?"輸入欲傳送的主機名稱 : "
 	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
@@ -875,65 +875,65 @@ STARTI () {
 
        if [ -z "$HOSTLIST" ]; then
           echo ""
-          echo "               [Error]  ��J���ŭ� "
+          echo "               [Error]  輸入為空值 "
           echo ""
-          read ANSWR?"               ��Enter���~�� "
+          read ANSWR?"               按Enter鍵繼續 "
           main
        fi
 
-       read DIRPATH?"��J�ɮשҦb���ؿ����|��m(������|) : "
+       read DIRPATH?"輸入檔案所在的目錄路徑位置(絕對路徑) : "
        if [ "$DIRPATH" == "q" ] || [ "$DIRPATH" == "Q" ]; then
            main
        fi
 
        if [ ! -d $DIRPATH ]; then
            echo ""
-           echo "               [Error]  ��J���ؿ����s�b "
+           echo "               [Error]  輸入的目錄不存在 "
            CHKFLG=1
        fi
        if [ -z "$DIRPATH" ]; then
            echo ""
-           echo "               [Error]  ��J���ŭ� "
+           echo "               [Error]  輸入為空值 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo "Directory PATH: $DIRPATH"
            echo ""
            ls -ltr $DIRPATH
-           read FILENAME?"             �п�J�ݭn�P�B���L�xLPAR�ɮצW��: "
+           read FILENAME?"             請輸入需要同步到其他台LPAR檔案名稱: "
            if [ -d $DIRPATH/$FILENAME ]; then
               echo ""
-              echo "               [Error]  ��J���ɦW���ؿ� "
-              read ANSWR?"               ��Enter���~�� "
+              echo "               [Error]  輸入的檔名為目錄 "
+              read ANSWR?"               按Enter鍵繼續 "
               main
            fi
            if [ ! -f $DIRPATH/$FILENAME ]; then
               echo ""
-              echo "               [Error]  ��J���ɦW���s�b "
-              read ANSWR?"               ��Enter���~�� "
+              echo "               [Error]  輸入的檔名不存在 "
+              read ANSWR?"               按Enter鍵繼續 "
               main
            fi
 
            echo ""
-           echo "#===�D���C��===#"
+           echo "#===主機列表===#"
            echo "$HOSTLIST"
            echo "#==============#"
-           echo "�P�B�ɮ�: $DIRPATH/$FILENAME"
+           echo "同步檔案: $DIRPATH/$FILENAME"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�O�_���T(Y/N): "
+           read ANSWER?"             請確認上述資訊是否正確(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
-                read RDIRPATH?"             �п�J�ɮ׭n�ǰe�컷�ݥD�����ؿ�(������|): "
+                read RDIRPATH?"             請輸入檔案要傳送到遠端主機的目錄(絕對路徑): "
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST �ɮ׶ǰe��..."
+                   echo "$HOST 檔案傳送中..."
                    scp -P 2222 $DIRPATH/$FILENAME $HOST:$RDIRPATH/
                 done
 
@@ -949,7 +949,7 @@ STARTI () {
 
                 ## Retrieve check files ##
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST ���G�ˬd��..."
+                   echo "$HOST 結果檢查中..."
                    scp -P 2222 ${MUSER}@${HOST}:$HOMEDIR/scpdatafile.${HOST} /tmp/
                    ssh -p 2222 ${MUSER}@${HOST} "rm -f $HOMEDIR/scpdatafile.${HOST}"
                 done
@@ -957,7 +957,7 @@ STARTI () {
                 errors=0
                 echo
                 echo "#==========================#"
-                echo "#  �P�B�ɮץD�����G�M��:   #"
+                echo "#  同步檔案主機結果清單:   #"
                 echo "#==========================#"
                 for HOST in $HOSTLIST ; do
                    if [[ -f /tmp/scpdatafile.${HOST} ]] ; then
@@ -970,12 +970,12 @@ STARTI () {
                 done
                 ((errors)) && exit 1
 
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTI
                 ;;
            esac
@@ -998,19 +998,19 @@ STARTJ () {
    CHKFLG=0
    if [ "$HOSTLIST" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
-       echo "��J�榡(�C�x�D���H�Ů氵�����j): DAP1-1 DAR1-1 LOG1 MDS1"
-       read HOSTLIST?" ��J�����Ǫ��D���W�� (����J�w�]������) : "
+       echo "輸入格式(每台主機以空格做為分隔): DAP1-1 DAR1-1 LOG1 MDS1"
+       read HOSTLIST?" 輸入欲重傳的主機名稱 (未輸入預設為全部) : "
        if [ "$HOSTLIST" == "q" ] || [ "$HOSTLIST" == "Q" ]; then
            main
        fi
 
        if [ -z "$HOSTLIST" ]; then
            echo ""
-           echo "               ��J���ŭ�, �w�]�|�N�J�������D��LPAR"
+           echo "               輸入為空值, 預設會代入全部的主機LPAR"
            echo ""
-           read ANSWER?"               �нT�{�O�_�~��(Y/N): "
+           read ANSWER?"               請確認是否繼續(Y/N): "
            case $ANSWER in
            n|N)
                 main
@@ -1019,8 +1019,8 @@ STARTJ () {
                 HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTJ
                 ;;
            esac
@@ -1028,35 +1028,35 @@ STARTJ () {
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
-           echo "#===�D���C��===#"
+           echo "#===主機列表===#"
            echo "$HOSTLIST"
            echo "#==============#"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�O�_���T(Y/N): "
+           read ANSWER?"             請確認上述資訊是否正確(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST �ǿ餤..."
+                   echo "$HOST 傳輸中..."
                    scp -P 2222 ${USER}@${HOST}:$SEDIR/$DATE2.$HOST.*.txt $CSVDIR
                    scp -P 2222 ${USER}@${HOST}:$SEDIR/$DATE2.$HOST.*.csv $LOGDIR
                    scp -P 2222 ${USER}@${HOST}:$SEDIR/dailycheck/account/result/${HOST}_`date +%Y%m%d_user_attr.rst` $ITMDIR
                    scp -P 2222 ${USER}@${HOST}:$SEDIR/dailycheck/file_audit/result/${HOST}_`date +%Y%m%d_file_attr.rst` $ITMDIR
-                   echo "$HOST �ǿ鵲��..."
+                   echo "$HOST 傳輸結束..."
                    echo ""
                 done
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTJ
                 ;;
            esac
@@ -1070,20 +1070,20 @@ STARTJ () {
 STARTK () {
    clear
    echo ""
-   read ANSWER?"             �нT�{�n�O�_�n����telnet Service(Y/N): "
+   read ANSWER?"             請確認要是否要關閉telnet Service(Y/N): "
    case $ANSWER in
    n|N)
         main
         ;;
    y|Y)
         /home/se/safechk/safesh/stoptelnet.sh
-        read ANSWR?"               ��Enter���~�� "
+        read ANSWR?"               按Enter鍵繼續 "
         main
         ;;
    *)
         echo ""
-        echo "[Error]  ��J���~, �п�J(Y/N)"
-        read ANSWR?"               ��Enter���~�� "
+        echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+        read ANSWR?"               按Enter鍵繼續 "
         main
         ;;
     esac
@@ -1094,20 +1094,20 @@ STARTK () {
 STARTL () {
    clear
    echo ""
-   read ANSWER?"             �нT�{�n�O�_�n�}��telnet Service(Y/N): "
+   read ANSWER?"             請確認要是否要開啟telnet Service(Y/N): "
    case $ANSWER in
    n|N)
         main
         ;;
    y|Y)
         /home/se/safechk/safesh/starttelnet.sh
-        read ANSWR?"               ��Enter���~�� "
+        read ANSWR?"               按Enter鍵繼續 "
         main
         ;;
    *)
         echo ""
-        echo "[Error]  ��J���~, �п�J(Y/N)"
-        read ANSWR?"               ��Enter���~�� "
+        echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+        read ANSWR?"               按Enter鍵繼續 "
         main
         ;;
     esac
@@ -1124,15 +1124,15 @@ STARTM () {
    CHKFLG=0
    if [ "$HOSTN" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo "#==========================================================#"
-       echo "# ��J�榡(�C�x�D���H�Ů氵�����j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# 輸入格式(每台主機以空格做為分隔): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# �s�տ�J�榡: DAP (�@���@�Ӹs��)                         #"
+       echo "# 群組輸入格式: DAP (一次一個群組)                         #"
        echo "#                                                          #"
-       echo "# �����D���п�J: ALL                                      #"
+       echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"��J��������O���D���W�� : "
+       read HOSTN?"輸入欲執行指令的主機名稱 : "
 	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
@@ -1167,42 +1167,42 @@ STARTM () {
 
        if [ -z "$HOSTLIST" ]; then
            echo ""
-           echo "               [Error]  ��J���ŭ� "
+           echo "               [Error]  輸入為空值 "
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        fi
 
        echo ""
-       read COMMAND?"               �п�J�n���檺���O: "
+       read COMMAND?"               請輸入要執行的指令: "
        if [ "$COMMAND" == "q" ] || [ "$COMMAND" == "Q" ]; then
            main
        fi
        if [ -z "$COMMAND" ]; then
            echo ""
-           echo "               [Error]  ���O��J���ŭ� "
+           echo "               [Error]  指令輸入為空值 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
-           echo "#===�D���C��===#"
+           echo "#===主機列表===#"
            echo "$HOSTLIST"
            echo "#==============#"
-           echo "������O: $COMMAND"
+           echo "執行指令: $COMMAND"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�O�_���T(Y/N): "
+           read ANSWER?"             請確認上述資訊是否正確(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   $tlog "$HOST ���椤..." $LOG
+                   $tlog "$HOST 執行中..." $LOG
                    $tlog "$USER:ssh -p 2222 $HOST $COMMAND" $LOG > /dev/null 2>&1
                    ssh -p 2222 $HOST "$COMMAND"
                    execStatus=$?
@@ -1214,16 +1214,16 @@ STARTM () {
                 done
                 echo ""
                 echo "#==========================#"
-                echo "#  ������O�D�����G�M��:   #"
+                echo "#  執行指令主機結果清單:   #"
                 echo "#==========================#"
                 cat /tmp/$USER.$timestamp
                 rm /tmp/$USER.$timestamp
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTM
                 ;;
            esac
@@ -1243,15 +1243,15 @@ STARTN () {
    CHKFLG=0
    if [ "$HOSTN" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo "#==========================================================#"
-       echo "# ��J�榡(�C�x�D���H�Ů氵�����j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# 輸入格式(每台主機以空格做為分隔): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# �s�տ�J�榡: DAP (�@���@�Ӹs��)                         #"
+       echo "# 群組輸入格式: DAP (一次一個群組)                         #"
        echo "#                                                          #"
-       echo "# �����D���п�J: ALL                                      #"
+       echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"��J�����ɮת����ݥD���W�� : "
+       read HOSTN?"輸入欲取檔案的遠端主機名稱 : "
 	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
@@ -1286,30 +1286,30 @@ STARTN () {
 
        if [ -z "$HOSTLIST" ]; then
            echo ""
-           echo "               [Error]  ��J���ŭ� "
+           echo "               [Error]  輸入為空值 "
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        fi
 
        echo ""
-       read DIRPATH?"��J�ɮשҦb���ؿ������|��m(������|) : "
+       read DIRPATH?"輸入檔案所在的目錄的路徑位置(絕對路徑) : "
        if [ "$DIRPATH" == "q" ] || [ "$DIRPATH" == "Q" ]; then
            main
        fi
 
 
        echo ""
-       read FILENAME?"�п�J�n�ƥ��U�Ǫ��ɮ�(�ɦW): "
+       read FILENAME?"請輸入要備份下傳的檔案(檔名): "
        if [ "$FILENAME" == "q" ] || [ "$FILENAME" == "Q" ]; then
            main
        fi
 
        echo ""
-       echo "                    [Warning]�Y����LPAR�ۦP�ɦW�U���ܥ��a�|�л\ "
-       echo "                    �� Y �Y�ɦW�ۦP�|�\�� "
-       echo "                    �� N �|���ɦW��[�W�D���P�Ǹ��קK�\�� "
-       read ANSWER?"                    �нT�{�O�_�л\(Y/N): "
+       echo "                    [Warning]若遠端LPAR相同檔名下載至本地會覆蓋 "
+       echo "                    選 Y 若檔名相同會蓋檔 "
+       echo "                    選 N 會於檔名後加上主機與序號避免蓋檔 "
+       read ANSWER?"                    請確認是否覆蓋(Y/N): "
        case $ANSWER in
        n|N)
             CHECK=2
@@ -1318,43 +1318,43 @@ STARTN () {
             CHECK=1
             ;;
        *)
-            echo "[Error]  ��J���~, �п�J(Y/N)"
-            read ANSWR?"               ��Enter���~�� "
+            echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+            read ANSWR?"               按Enter鍵繼續 "
             STARTN
             ;;
        esac
 
        if [ -z "$DIRPATH" ]; then
            echo ""
-           echo "               [Error] �ؿ���J���ŭ� "
+           echo "               [Error] 目錄輸入為空值 "
            CHKFLG=1
        fi
 
        if [ -z "$FILENAME" ]; then
            echo ""
-           echo "               [Error]  �ɦW��J���ŭ� "
+           echo "               [Error]  檔名輸入為空值 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
-           echo "#===�D���C��===#"
+           echo "#===主機列表===#"
            echo "$HOSTLIST"
            echo "#==============#"
-           echo "�����ɮ�: $DIRPATH/$FILENAME"
+           echo "遠端檔案: $DIRPATH/$FILENAME"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�O�_���T(Y/N): "
+           read ANSWER?"             請確認上述資訊是否正確(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST ���椤..."
+                   echo "$HOST 執行中..."
                    # overwrite
                    if [ "$CHECK" == "1" ]; then
                      scp -P 2222 $HOST:$DIRPATH/$FILENAME $BACKUPDIR/
@@ -1379,17 +1379,17 @@ STARTN () {
                 done
                 echo ""
                 echo "#=======================================#"
-                echo "#  ���o�ɮץD�����G�M��:                #"
-                echo "#  �ɮצs���m /home/download/file:    #"
+                echo "#  取得檔案主機結果清單:                #"
+                echo "#  檔案存放位置 /home/download/file:    #"
                 echo "#=======================================#"
                 cat /tmp/$USER.$FILENAME.$timestamp
                 rm /tmp/$USER.$FILENAME.$timestamp
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTN
                 ;;
            esac
@@ -1409,15 +1409,15 @@ STARTO () {
    CHKFLG=0
    if [ "$HOSTN" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo "#==========================================================#"
-       echo "# ��J�榡(�C�x�D���H�Ů氵�����j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# 輸入格式(每台主機以空格做為分隔): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# �s�տ�J�榡: DAP (�@���@�Ӹs��)                         #"
+       echo "# 群組輸入格式: DAP (一次一個群組)                         #"
        echo "#                                                          #"
-       echo "# �����D���п�J: ALL                                      #"
+       echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"��J�����ؿ������ݥD���W�� : "
+       read HOSTN?"輸入欲取目錄的遠端主機名稱 : "
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
        fi
@@ -1451,85 +1451,85 @@ STARTO () {
 
        if [ -z "$HOSTLIST" ]; then
            echo ""
-           echo "               [Error]  ��J���ŭ� "
+           echo "               [Error]  輸入為空值 "
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        fi
 
        echo ""
-       read DIRPATH?"��J�ؿ������|��m(������|) : "
+       read DIRPATH?"輸入目錄的路徑位置(絕對路徑) : "
        if [ "$DIRPATH" == "q" ] || [ "$DIRPATH" == "Q" ]; then
            main
        fi
 
        echo ""
-       read FILENAME?"�п�J���a�s�ɦW��(�ɦW): "
+       read FILENAME?"請輸入本地存檔名稱(檔名): "
        if [ "$FILENAME" == "q" ] || [ "$FILENAME" == "Q" ]; then
            main
        fi
 
        if [ -z "$DIRPATH" ]; then
            echo ""
-           echo "               [Error] �ؿ���J���ŭ� "
+           echo "               [Error] 目錄輸入為空值 "
            CHKFLG=1
        fi
 
        if [ -z "$FILENAME" ]; then
            echo ""
-           echo "               [Error]  �ɦW��J���ŭ� "
+           echo "               [Error]  檔名輸入為空值 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
-           echo "#===�D���C��===#"
+           echo "#===主機列表===#"
            echo "$HOSTLIST"
            echo "#==============#"
-           echo "���ݥؿ�: $DIRPATH"
+           echo "遠端目錄: $DIRPATH"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�O�_���T(Y/N): "
+           read ANSWER?"             請確認上述資訊是否正確(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST ���]��..."
+                   echo "$HOST 打包中..."
                    ssh -p 2222 $HOST "cd $DIRPATH; tar cf - ./* | gzip > /tmp/$FILENAME.$HOST.$timestamp.tar.gz"
                    execStatus1=$?
                    if [ $execStatus1 -eq 0 ]; then
-                      echo "$HOST ���] OK!" >> /tmp/$USER.$FILENAME.$timestamp
+                      echo "$HOST 打包 OK!" >> /tmp/$USER.$FILENAME.$timestamp
                    else
-                      echo "$HOST ���] Fail!" >> /tmp/$USER.$FILENAME.$timestamp
+                      echo "$HOST 打包 Fail!" >> /tmp/$USER.$FILENAME.$timestamp
                    fi
-                   echo "$HOST �U����..."
+                   echo "$HOST 下載中..."
                    scp -P 2222 $HOST:/tmp/$FILENAME.$HOST.$timestamp.tar.gz $BACKUPDIR/
                    execStatus2=$?
                    if [ $execStatus2 -eq 0 ]; then
-                      echo "$HOST �U�� OK!" >> /tmp/$USER.$FILENAME.$timestamp
+                      echo "$HOST 下載 OK!" >> /tmp/$USER.$FILENAME.$timestamp
                    else
-                      echo "$HOST �U�� Fail!" >> /tmp/$USER.$FILENAME.$timestamp
+                      echo "$HOST 下載 Fail!" >> /tmp/$USER.$FILENAME.$timestamp
                    fi
                    ssh -p 2222 $HOST "cd /tmp; rm -f $FILENAME.$HOST.$timestamp.tar.gz"
                 done
                 echo ""
                 echo "#========================================#"
-                echo "#  ���o�ؿ� �D�����G�M��:                #"
-                echo "#  �ɮצs���m  /home/download/dir:     #"
+                echo "#  取得目錄 主機結果清單:                #"
+                echo "#  檔案存放位置  /home/download/dir:     #"
                 echo "#========================================#"
                 cat /tmp/$USER.$FILENAME.$timestamp
                 rm /tmp/$USER.$FILENAME.$timestamp
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTO
                 ;;
            esac
@@ -1547,28 +1547,28 @@ STARTP () {
    CHKFLG=0
    if [ "$USERLIST" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
 
-       read USERLIST?" ��J�n���ꪺ�b���W��( ���� ) : "
+       read USERLIST?" 輸入要解鎖的帳號名稱( 必須 ) : "
        if [ "$USERLIST" == "q" ] || [ "$USERLIST" == "Q" ]; then
            main
        fi
 
        if [ -z "$USERLIST" ]; then
            echo ""
-           echo "               [Error]  ��J�ϥΪ̦W�٬��ŭ� "
+           echo "               [Error]  輸入使用者名稱為空值 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
-           echo "�����ꪺUser Name: $USERLIST"
-           read ANSWER?"             �нT�{�W�z��T�L�~(Y/N): "
+           echo "欲解鎖的User Name: $USERLIST"
+           read ANSWER?"             請確認上述資訊無誤(Y/N): "
            case $ANSWER in
            n|N)
                main
@@ -1577,12 +1577,12 @@ STARTP () {
                for USERNAME in $USERLIST ; do
                   /home/se/safechk/safesh/usrlock_all.sh $USERNAME
                done
-               read ANSWR?"               ��Enter���~�� "
+               read ANSWR?"               按Enter鍵繼續 "
                main
                ;;
            *)
-               echo "[Error]  ��J���~, �п�J(Y/N)"
-               read ANSWR?"               ��Enter���~�� "
+               echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+               read ANSWR?"               按Enter鍵繼續 "
                STARTP
                ;;
            esac
@@ -1600,28 +1600,28 @@ STARTQ() {
    CHKFLG=0
    if [ "$USERLIST" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
 
-       read USERLIST?" ��J�ϥΪ̱b���W��( ���� ) : "
+       read USERLIST?" 輸入使用者帳號名稱( 必須 ) : "
        if [ "$USERLIST" == "q" ] || [ "$USERLIST" == "Q" ]; then
            main
        fi
 
        if [ -z "$USERLIST" ]; then
            echo ""
-           echo "               [Error]  ��J�ϥΪ̦W�٬��ŭ� "
+           echo "               [Error]  輸入使用者名稱為空值 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
-           echo "������SSH Key���ϥΪ̱b��: $USERLIST"
-           read ANSWER?"             �нT�{�W�z��T�L�~(Y/N): "
+           echo "欲產生SSH Key的使用者帳號: $USERLIST"
+           read ANSWER?"             請確認上述資訊無誤(Y/N): "
            case $ANSWER in
            n|N)
                main
@@ -1630,12 +1630,12 @@ STARTQ() {
                for USERNAME in $USERLIST ; do
                   /home/se/safechk/safesh/sshkey_all.sh $USERNAME
                done
-               read ANSWR?"               ��Enter���~�� "
+               read ANSWR?"               按Enter鍵繼續 "
                main
                ;;
            *)
-               echo "[Error]  ��J���~, �п�J(Y/N)"
-               read ANSWR?"               ��Enter���~�� "
+               echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+               read ANSWR?"               按Enter鍵繼續 "
                STARTQ
                ;;
            esac
@@ -1656,19 +1656,19 @@ STARTR () {
    CHKFLG=0
    if [ "$HOSTLIST" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo ""
-       echo "��J�榡(�C�x�D���H�Ů氵�����j): DAP1-1 DAR1-1 LOG1 MDS1"
-       read HOSTLIST?"��J�����Ǫ��D���W�� (����J�w�]������) : "
+       echo "輸入格式(每台主機以空格做為分隔): DAP1-1 DAR1-1 LOG1 MDS1"
+       read HOSTLIST?"輸入欲重傳的主機名稱 (未輸入預設為全部) : "
        if [ "$HOSTLIST" == "q" ] || [ "$HOSTLIST" == "Q" ]; then
            main
        fi
 
        if [ -z "$HOSTLIST" ]; then
            echo ""
-           echo "               ��J���ŭ�, �w�]�|�N�J�������D��LPAR"
+           echo "               輸入為空值, 預設會代入全部的主機LPAR"
            echo ""
-           read ANSWER?"               �нT�{�O�_�~��(Y/N): "
+           read ANSWER?"               請確認是否繼續(Y/N): "
            case $ANSWER in
            n|N)
                 main
@@ -1677,8 +1677,8 @@ STARTR () {
                 HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTR
                 ;;
            esac
@@ -1686,22 +1686,22 @@ STARTR () {
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo ""
-           echo "#===�D���C��===#"
+           echo "#===主機列表===#"
            echo "$HOSTLIST"
            echo "#==============#"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�O�_���T(Y/N): "
+           read ANSWER?"             請確認上述資訊是否正確(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   $tlog "$HOST ���椤..." $LOG
+                   $tlog "$HOST 執行中..." $LOG
                    $tlog "$USER:ssh -p 2222 $HOST $ACCOUNT" $LOG > /dev/null 2>&1
                    ssh -p 2222 $HOST "$ACCOUNT"
                    execStatus1=$?
@@ -1731,28 +1731,28 @@ STARTR () {
                 done
                 echo ""
                 echo "#====================================#"
-                echo "#  ���ͱb��Base�ɥD�����G�M��:       #"
+                echo "#  產生帳號Base檔主機結果清單:       #"
                 echo "#====================================#"
                 cat /tmp/$USER.account.$timestamp
                 echo ""
                 echo "#====================================#"
-                echo "#  ���ͨt���ˮ�Base�ɥD�����G�M��:   #"
+                echo "#  產生系統檢核Base檔主機結果清單:   #"
                 echo "#====================================#"
                 cat /tmp/$USER.syschk.$timestamp
                 echo ""
                 echo "#====================================#"
-                echo "#  �����ɮײ���Base�ɥD�����G�M��:   #"
+                echo "#  產生檔案異動Base檔主機結果清單:   #"
                 echo "#====================================#"
                 cat /tmp/$USER.fileaudit.$timestamp
                 rm /tmp/$USER.syschk.$timestamp
                 rm /tmp/$USER.account.$timestamp
                 rm /tmp/$USER.fileaudit.$timestamp
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTR
                 ;;
            esac
@@ -1774,15 +1774,15 @@ STARTS () {
    CHKFLG=0
    if [ "$HOSTN" == "" ]; then
        echo ""
-       echo "                  (�H�ɥi�� q �H���} ) "
+       echo "                  (隨時可輸 q 以離開 ) "
        echo "#==========================================================#"
-       echo "# ��J�榡(�C�x�D���H�Ů氵�����j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# 輸入格式(每台主機以空格做為分隔): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# �s�տ�J�榡: DAP (�@���@�Ӹs��)                         #"
+       echo "# 群組輸入格式: DAP (一次一個群組)                         #"
        echo "#                                                          #"
-       echo "# �����D���п�J: ALL                                      #"
+       echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"��J���ǰe���D���W�� : "
+       read HOSTN?"輸入欲傳送的主機名稱 : "
 	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
@@ -1817,64 +1817,64 @@ STARTS () {
 
        if [ -z "$HOSTLIST" ]; then
           echo ""
-          echo "               [Error]  ��J���ŭ� "
+          echo "               [Error]  輸入為空值 "
           echo ""
-          read ANSWR?"               ��Enter���~�� "
+          read ANSWR?"               按Enter鍵繼續 "
           main
        fi
 
-       read DIRPATH?"��J�ؿ��Ҧb���ؿ����|��m(������|) : "
+       read DIRPATH?"輸入目錄所在的目錄路徑位置(絕對路徑) : "
        if [ "$DIRPATH" == "q" ] || [ "$DIRPATH" == "Q" ]; then
            main
        fi
 
        if [ ! -d $DIRPATH ]; then
            echo ""
-           echo "               [Error]  ��J���ؿ����s�b "
+           echo "               [Error]  輸入的目錄不存在 "
            CHKFLG=1
        fi
        if [ -z "$DIRPATH" ]; then
            echo ""
-           echo "               [Error]  ��J���ŭ� "
+           echo "               [Error]  輸入為空值 "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               ��Enter���~�� "
+           read ANSWR?"               按Enter鍵繼續 "
            main
        else
            echo "Directory PATH: $DIRPATH"
            echo ""
            ls -ltr $DIRPATH
-           read FILENAME?"             �п�J�ݭn�P�B���L�xLPAR�ؿ��W��: "
+           read FILENAME?"             請輸入需要同步到其他台LPAR目錄名稱: "
            if [ -f $DIRPATH/$FILENAME ]; then
               echo ""
-              echo "               [Error]  ��J���ɦW���ɮ� "
-              read ANSWR?"               ��Enter���~�� "
+              echo "               [Error]  輸入的檔名為檔案 "
+              read ANSWR?"               按Enter鍵繼續 "
               main
            fi
            if [ ! -d $DIRPATH/$FILENAME ]; then
               echo ""
-              echo "               [Error]  ��J���ؿ����s�b "
-              read ANSWR?"               ��Enter���~�� "
+              echo "               [Error]  輸入的目錄不存在 "
+              read ANSWR?"               按Enter鍵繼續 "
               main
            fi
 
            echo ""
-           echo "#===�D���C��===#"
+           echo "#===主機列表===#"
            echo "$HOSTLIST"
            echo "#==============#"
-           echo "�P�B�ؿ�: $DIRPATH/$FILENAME"
+           echo "同步目錄: $DIRPATH/$FILENAME"
            echo ""
-           read ANSWER?"             �нT�{�W�z��T�O�_���T(Y/N): "
+           read ANSWER?"             請確認上述資訊是否正確(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
-                        read RDIRPATH?"           �п�J�ɮ׭n�ǰe�컷�ݥD�����ؿ�(������|): "
-			read ANSWER?"             �нT�{�W�z��T�O�_���T(Y/N): "
+                        read RDIRPATH?"           請輸入檔案要傳送到遠端主機的目錄(絕對路徑): "
+			read ANSWER?"             請確認上述資訊是否正確(Y/N): "
            		case $ANSWER in
            		n|N)
                 	STARTS
@@ -1882,9 +1882,9 @@ STARTS () {
            		y|Y)
                 	cd $DIRPATH ;tar cvf - $FILENAME | gzip > $DIRPATH/$FILENAME.tar.gz
                         for HOST in $HOSTLIST ; do
-                           echo "$HOST �ɮ׳ƥ���..."
+                           echo "$HOST 檔案備份中..."
                            ssh -p 2222 $HOST "mv $DIRPATH/$FILENAME $RDIRPATH/$FILENAME.$timestamp > /dev/null 2>&1"
-                           echo "$HOST �ɮ׶ǰe��..."
+                           echo "$HOST 檔案傳送中..."
                            scp -P 2222 $DIRPATH/$FILENAME.tar.gz $HOST:$RDIRPATH/
                            ssh -p 2222 $HOST "cd $DIRPATH ;gzip -cd $FILENAME.tar.gz | tar xvf -"
                            ssh -p 2222 $HOST "rm  $DIRPATH/$FILENAME.tar.gz"
@@ -1904,7 +1904,7 @@ STARTS () {
 
                 ## Retrieve check files ##
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST ���G�ˬd��..."
+                   echo "$HOST 結果檢查中..."
                    scp -P 2222 ${MUSER}@${HOST}:$HOMEDIR/scpdatafile.${HOST} /tmp/
                    ssh -p 2222 ${MUSER}@${HOST} "rm -f $HOMEDIR/scpdatafile.${HOST}"
                 done
@@ -1912,7 +1912,7 @@ STARTS () {
                 errors=0
                 echo
                 echo "#==========================#"
-                echo "#  �P�B�ɮץD�����G�M��:   #"
+                echo "#  同步檔案主機結果清單:   #"
                 echo "#==========================#"
                 for HOST in $HOSTLIST ; do
                    if [[ -f /tmp/scpdatafile.${HOST} ]] ; then
@@ -1925,12 +1925,12 @@ STARTS () {
                 done
                 ((errors)) && exit 1
 
-                read ANSWR?"               ��Enter���~�� "
+                read ANSWR?"               按Enter鍵繼續 "
                 main
                 ;;
            *)
-                echo "[Error]  ��J���~, �п�J(Y/N)"
-                read ANSWR?"               ��Enter���~�� "
+                echo "[Error]  輸入錯誤, 請輸入(Y/N)"
+                read ANSWR?"               按Enter鍵繼續 "
                 STARTS
                 ;;
            esac
@@ -1951,18 +1951,18 @@ timestamp=`date +"%Y%m%d%H%M"`
 CHKFLG=0
 
 clear
-echo "          << FIX/FAST ��T�ǿ�t�Ψt�޻P�w���ާ@���� (ALL AIX LPAR)>> "
+echo "          << FIX/FAST 資訊傳輸系統系管與安控操作介面 (ALL AIX LPAR)>> "
 echo ""
-echo "        1. �}���ˮ�"
+echo "        1. 開機檢核"
 echo ""
-echo "        2. �����ˮ�"
+echo "        2. 關機檢核"
 echo ""
-echo "        3. �ˮֳ���"
+echo "        3. 檢核報表"
 echo ""
 
-echo "      (�H�ɥi�� q �H���} )"
+echo "      (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?" �п�ܿﶵ (1-3) : "
+read Menu_No?" 請選擇選項 (1-3) : "
 
 case $Menu_No in
 	   1)
@@ -1983,8 +1983,8 @@ case $Menu_No in
 		
 	*)
         echo ""
-		echo " [Error]  ��J���~, �п�J (1-3)���ﶵ"
-        read ANSWR?"               ��Enter���~�� "
+		echo " [Error]  輸入錯誤, 請輸入 (1-3)的選項"
+        read ANSWR?"               按Enter鍵繼續 "
         main
 		;;
 esac
@@ -2005,132 +2005,132 @@ FNUM=1
 LNUM=9
 
 clear
-echo "          << FIX/FAST �}���ˮ־ާ@���� (ALL AIX LPAR)>> "
+echo "          << FIX/FAST 開機檢核操作介面 (ALL AIX LPAR)>> "
 echo ""
 echo ""
-echo "        1. WKLPAR�P�ծɥD��($NTPSRV)�ծ�(ntp_manual.sh) "
+echo "        1. WKLPAR與校時主機($NTPSRV)校時(ntp_manual.sh) "
 echo ""
-echo "        2. Client-LPAR�ծɡB�t���ˮ֡B�t���ɮ��ˮ� "
+echo "        2. Client-LPAR校時、系統檢核、系統檔案檢核 "
 echo ""
-echo "        3. Client-LPAR�PWKLPAR�ծ�(�T���Ĥ@�ﶵ��������) (ntp_manual.sh) "
+echo "        3. Client-LPAR與WKLPAR校時(確任第一選項須先執行) (ntp_manual.sh) "
 echo ""
-echo "        4. �t���ˮ�(syschk_diff.sh)"
+echo "        4. 系統檢核(syschk_diff.sh)"
 echo ""
-echo "        5. �t���ɮ��ˮ�(useradm's daily_check.sh)"
+echo "        5. 系統檔案檢核(useradm's daily_check.sh)"
 echo ""
-echo "        6. �t���ɮ��ˮֲ��ʶ׶���WKLPAR (daily_copy.sh)"
+echo "        6. 系統檔案檢核異動匯集至WKLPAR (daily_copy.sh)"
 echo ""
-echo "        7. �t���ɮ��ˮ�Base�ɧ�s"
+echo "        7. 系統檔案檢核Base檔更新"
 echo ""
-echo "        8. �t�θ귽�B�]�w���ˮ�(seadm's hardware_chk)"
+echo "        8. 系統資源、設定值檢核(seadm's hardware_chk)"
 echo ""
-echo "        9. �t���ˮ�Base��s"
+echo "        9. 系統檢核Base更新"
 echo ""
 
-echo "      (�H�ɥi�� q �H���} )"
+echo "      (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?" �п�ܿﶵ ($FNUM-$LNUM) : "
+read Menu_No?" 請選擇選項 ($FNUM-$LNUM) : "
 
 case $Menu_No in
 	   1)
- 	    echo "			�}�l�i��WKLPAR�ծ�..."
+ 	    echo "			開始進行WKLPAR校時..."
 		sleep 1
-		echo "			������O�G$NTPCMD"
+		echo "			執行指令：$NTPCMD"
 						stopsrc -s xntpd > /dev/null 
 						sleep 1
 						$SHDIR/ntp_manual.sh
 						sleep 1
 						startsrc -s xntpd > /dev/null 
- 	    echo "			WKLPAR�ծɧ���(�нT�{�ծɵ��G)"
+ 	    echo "			WKLPAR校時完成(請確認校時結果)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
 	   2)
- 	    echo "			�}�l�i��Client-LPAR�ծɡB�t���ˮ֡B�t���ɮ��ˮ�..."
+ 	    echo "			開始進行Client-LPAR校時、系統檢核、系統檔案檢核..."
 		sleep 1
-		echo "			������O�G$SECCMD boot"
+		echo "			執行指令：$SECCMD boot"
 							      $SECCMD boot
- 	    echo "			���O����(�нT�{Client-LPAR�ծɡB�t���ˮ֡B�t���ɮ��ˮֵ��G.)"
-		read ANSWR?"               ��Enter���~�� "
+ 	    echo "			指令完成(請確認Client-LPAR校時、系統檢核、系統檔案檢核結果.)"
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
 	   3)
- 	    echo "			�}�l�i��Client-LPAR�ծ�..."
+ 	    echo "			開始進行Client-LPAR校時..."
 		sleep 1
-		echo "			������O�G$SECCMD ntp"
+		echo "			執行指令：$SECCMD ntp"
 							      $SECCMD ntp
- 	    echo "			���O����(�нT�{Client-LPAR�ծɵ��G.)"
+ 	    echo "			指令完成(請確認Client-LPAR校時結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
 	   4)
- 	    echo "			�}�l�i��t���ˮ�..."
+ 	    echo "			開始進行系統檢核..."
 		sleep 1
-		echo "			������O�G$SECCMD sys"
+		echo "			執行指令：$SECCMD sys"
 							      $SECCMD sys
- 	    echo "			���O����(�нT�{�t���ˮֵ��G.)"
+ 	    echo "			指令完成(請確認系統檢核結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
 	   5)
- 	    echo "			�}�l�i��t���ɮ��ˮ�..."
+ 	    echo "			開始進行系統檔案檢核..."
 		sleep 1
-		echo "			������O�G$SECCMD daily_check "
+		echo "			執行指令：$SECCMD daily_check "
 							      $SECCMD daily_check
- 	    echo "			���O����"
+ 	    echo "			指令完成"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
 	   6)
- 	    echo "			�}�l�i��t���ɮ��ˮֲ��ʶצ�WKLPAR..."
+ 	    echo "			開始進行系統檔案檢核異動匯至WKLPAR..."
 		sleep 1
-		echo "			������O�G$SECCMD audit"
+		echo "			執行指令：$SECCMD audit"
 							      $SECCMD audit
- 	    echo "			���O����(�нT�{�t���ɮ��ˮֵ��G.)"
+ 	    echo "			指令完成(請確認系統檔案檢核結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
 	   7)
- 	    echo "			�}�l�i���ɮ��ˮ�Base�ɧ�s..."
+ 	    echo "			開始進行檔案檢核Base檔更新..."
 		sleep 1
-		echo "			������O�G$SECCMD base"
+		echo "			執行指令：$SECCMD base"
 							      $SECCMD base
- 	    echo "			���O����(�нT�ɮ��ˮ�Base�ɧ�s���G.)"
+ 	    echo "			指令完成(請確檔案檢核Base檔更新結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
 	   8)
- 	    echo "			�}�l�i��t�θ귽�B�]�w���ˮ�..."
+ 	    echo "			開始進行系統資源、設定值檢核..."
 		sleep 1
-		echo "			������O�G$SECCMD hardware_chk"
+		echo "			執行指令：$SECCMD hardware_chk"
 							      $SECCMD hardware_chk
- 	    echo "			���O����(�нT�t�θ귽�B�]�w���ˮֵ��G.)"
+ 	    echo "			指令完成(請確系統資源、設定值檢核結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
 	   9)
- 	    echo "			�}�l�i��t���ˮ�Base�ɧ�s..."
+ 	    echo "			開始進行系統檢核Base檔更新..."
 		sleep 1
-		echo "			������O�G$SECCMD down"
+		echo "			執行指令：$SECCMD down"
 							      $SECCMD down
- 	    echo "			���O����(�нT�ɮ��ˮ�Base�ɧ�s���G.)"
+ 	    echo "			指令完成(請確檔案檢核Base檔更新結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
@@ -2140,8 +2140,8 @@ case $Menu_No in
 		
 	*)
         echo ""
-		echo " [Error]  ��J���~, �п�J ($FNUM-$LNUM)���ﶵ"
-        read ANSWR?"               ��Enter���~�� "
+		echo " [Error]  輸入錯誤, 請輸入 ($FNUM-$LNUM)的選項"
+        read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 		;;
 esac
@@ -2160,38 +2160,38 @@ FNUM=1
 LNUM=2
 
 clear
-echo "          << FIX/FAST �����ˮ־ާ@���� (ALL AIX LPAR)>> "
+echo "          << FIX/FAST 關機檢核操作介面 (ALL AIX LPAR)>> "
 echo ""
 echo ""
-echo "        1. �t���ˮ�(syschk_diff.sh) "
+echo "        1. 系統檢核(syschk_diff.sh) "
 echo ""
-echo "        2. �t���ˮ�Base�ɧ�s(syschk base update)"
+echo "        2. 系統檢核Base檔更新(syschk base update)"
 echo ""
-echo "      (�H�ɥi�� q �H���} )"
+echo "      (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?" �п�ܿﶵ ($FNUM-$LNUM) : "
+read Menu_No?" 請選擇選項 ($FNUM-$LNUM) : "
 
 case $Menu_No in
 	   
 	   1)
- 	    echo "			�}�l�i��t���ˮ�..."
+ 	    echo "			開始進行系統檢核..."
 		sleep 1
-		echo "			������O�G$SECCMD sys"
+		echo "			執行指令：$SECCMD sys"
 							      $SECCMD sys
- 	    echo "			���O����(�нT�{�t���ˮֵ��G.)"
+ 	    echo "			指令完成(請確認系統檢核結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT1
 	   	;;
 
        2)
- 	    echo "			�}�l�i��t���ˮ�Base�ɧ�s... "
+ 	    echo "			開始進行系統檢核Base檔更新... "
 		sleep 1
-		echo "			������O�G$SECCMD down"
+		echo "			執行指令：$SECCMD down"
 							      $SECCMD down
- 	    echo "			���O����(�нT�t���ˮ�Base���G.)"
+ 	    echo "			指令完成(請確系統檢核Base結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT2
 	   	;;
 
@@ -2201,8 +2201,8 @@ case $Menu_No in
 		
 	*)
         echo ""
-		echo " [Error]  ��J���~, �п�J($FNUM-$LNUM)���ﶵ"
-        read ANSWR?"               ��Enter���~�� "
+		echo " [Error]  輸入錯誤, 請輸入($FNUM-$LNUM)的選項"
+        read ANSWR?"               按Enter鍵繼續 "
 		STARTT2
 		;;
 esac
@@ -2224,103 +2224,103 @@ FNUM=1
 LNUM=7
 
 clear
-echo "          << FIX/FAST �ˮֳ����ާ@���� (ALL AIX LPAR)>> "
+echo "          << FIX/FAST 檢核報表操作介面 (ALL AIX LPAR)>> "
 echo ""
 echo ""
-echo "        1. WKLPAR�P�ծɥD��($NTPSRV)�ծɵ��G"
+echo "        1. WKLPAR與校時主機($NTPSRV)校時結果"
 echo ""
-echo "        2. Client LPAR�PWKLPAR�ծɵ��G"
+echo "        2. Client LPAR與WKLPAR校時結果"
 echo ""
-echo "        3. �t�θ귽�B�]�w���ˮֵ��G(seadm's hardware_chk)"
+echo "        3. 系統資源、設定值檢核結果(seadm's hardware_chk)"
 echo ""
-echo "        4. �t���ˮ�Base�ɧ�s���G"
+echo "        4. 系統檢核Base檔更新結果"
 echo ""
-echo "        5. �t���ˮֵ��G(syschk)"
+echo "        5. 系統檢核結果(syschk)"
 echo ""
-echo "        6. �t���ɮ��ˮ�Base�ɧ�s���G"
+echo "        6. 系統檔案檢核Base檔更新結果"
 echo ""
-echo "        7. �t���ɮ��ˮֵ��G�ɶ׶���$WKLPAR���浲�G"
+echo "        7. 系統檔案檢核結果檔匯集至$WKLPAR執行結果"
 echo ""
-echo "      (�H�ɥi�� q �H���} )"
+echo "      (隨時可輸 q 以離開 )"
 echo ""
-read Menu_No?" �п�ܿﶵ ($FNUM-$LNUM) : "
+read Menu_No?" 請選擇選項 ($FNUM-$LNUM) : "
 
 case $Menu_No in
 	   
 	   1)
- 	    echo "			�}�l�i��$WKLPAR�P�ծɥD��($NTPSRV)�ծɵ��G..."
+ 	    echo "			開始進行$WKLPAR與校時主機($NTPSRV)校時結果..."
 		sleep 1
-		echo "			������O�G$SECCMD 1"
+		echo "			執行指令：$SECCMD 1"
 							      $SECCMD 1 
- 	    echo "			���O����(�нT�{���G.)"
+ 	    echo "			指令完成(請確認結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 	   	;;
 
 	   2)
- 	    echo "			�}�l�i��Client LPAR�P$WKLPAR�ծɵ��G..."
+ 	    echo "			開始進行Client LPAR與$WKLPAR校時結果..."
 		sleep 1
-		echo "			������O�G$SECCMD 2"
+		echo "			執行指令：$SECCMD 2"
 							      $SECCMD 2 
- 	    echo "			���O����(�нT�{���G.)"
+ 	    echo "			指令完成(請確認結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 	   	;;
 
 	   3)
- 	    echo "			�}�l�i��t�θ귽�B�]�w���ˮֵ��G..."
+ 	    echo "			開始進行系統資源、設定值檢核結果..."
 		sleep 1
-		echo "			������O�G$SECCMD 3"
+		echo "			執行指令：$SECCMD 3"
 							      $SECCMD 3 
- 	    echo "			���O����(�нT�{���G.)"
+ 	    echo "			指令完成(請確認結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 	   	;;
 
 	   4)
- 	    echo "			�}�l�i��t���ˮ�Base�ɧ�s���G..."
+ 	    echo "			開始進行系統檢核Base檔更新結果..."
 		sleep 1
-		echo "			������O�G$SECCMD 4"
+		echo "			執行指令：$SECCMD 4"
 							      $SECCMD 4 
- 	    echo "			���O����(�нT�{���G.)"
+ 	    echo "			指令完成(請確認結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 	   	;;
 
 	   5)
- 	    echo "			�}�l�i��t���ˮֵ��G..."
+ 	    echo "			開始進行系統檢核結果..."
 		sleep 1
-		echo "			������O�G$SECCMD 5"
+		echo "			執行指令：$SECCMD 5"
 							      $SECCMD 5 
- 	    echo "			���O����(�нT�{���G.)"
+ 	    echo "			指令完成(請確認結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 	   	;;
 
 	   6)
- 	    echo "			�}�l�i��t���ɮ��ˮ�Base�ɧ�s���G..."
+ 	    echo "			開始進行系統檔案檢核Base檔更新結果..."
 		sleep 1
-		echo "			������O�G$SECCMD 6"
+		echo "			執行指令：$SECCMD 6"
 							      $SECCMD 6 
- 	    echo "			���O����(�нT�{���G.)"
+ 	    echo "			指令完成(請確認結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 	   	;;
 
 	   7)
- 	    echo "			�}�l�i��t���ɮ��ˮֵ��G�ɶ׶���$WKLPAR���浲�G..."
+ 	    echo "			開始進行系統檔案檢核結果檔匯集至$WKLPAR執行結果..."
 		sleep 1
-		echo "			������O�G$SECCMD 7"
+		echo "			執行指令：$SECCMD 7"
 							      $SECCMD 7 
- 	    echo "			���O����(�нT�{���G.)"
+ 	    echo "			指令完成(請確認結果.)"
 		echo ""
-		read ANSWR?"               ��Enter���~�� "
+		read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 	   	;;
 
@@ -2330,8 +2330,8 @@ case $Menu_No in
 		
 	*)
         echo ""
-		echo " [Error]  ��J���~, �п�J($FNUM-$LNUM)���ﶵ"
-        read ANSWR?"               ��Enter���~�� "
+		echo " [Error]  輸入錯誤, 請輸入($FNUM-$LNUM)的選項"
+        read ANSWR?"               按Enter鍵繼續 "
 		STARTT3
 		;;
 esac

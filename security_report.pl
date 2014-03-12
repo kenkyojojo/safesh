@@ -2,7 +2,7 @@
 #---------------------------------------------------------------------
 # Set variable
 #---------------------------------------------------------------------
-$SITE="TSEOA1";
+$SITE="TSEOB1";
 $HOSTNAME=`hostname`;
 $DATE=`date +%Y%m%d`;
 $SHDIR="/home/se/safechk/safesh";
@@ -10,7 +10,7 @@ $SHCFG="/home/se/safechk/cfg";
 $LOGDIR="/home/se/safechk/safelog";
 $REPORTDIR="/home/se/safechk/selog/log";
 $LOG="$LOGDIR/security_report.log";
-$WKLPAR="WKLPARA1";
+$WKLPAR="WKLPARB1";
 $trailmod=1;
 $FIRST=1;
 $END=7;

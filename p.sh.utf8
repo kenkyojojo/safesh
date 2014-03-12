@@ -25,23 +25,23 @@ create_log () {
 #{{{main
 main () {
 clear
-echo "             << FIX/FAST ¸ê°T¶Ç¿é¨t²Î¨Ï¥ÎªÌ§@·~ (ALL AIX LPAR)>> "
+echo "             << FIX/FAST è³‡è¨Šå‚³è¼¸ç³»çµ±ä½¿ç”¨è€…ä½œæ¥­ (ALL AIX LPAR)>> "
 echo ""
-echo "           1. ¦P¨B­×§ï±K½X "
+echo "           1. åŒæ­¥ä¿®æ”¹å¯†ç¢¼ "
 echo ""
-echo "           2. ¦@¥Î¤u§@°Ï¤§ÀÉ®×¤W¶Ç¦Ü¦ULPAR(MDS/DAP/DAR/LOG) "
+echo "           2. å…±ç”¨å·¥ä½œå€ä¹‹æª”æ¡ˆä¸Šå‚³è‡³å„LPAR(MDS/DAP/DAR/LOG) "
 echo ""
-echo "           3. ©ó¦@¥Î¤u§@°Ï°õ¦æ«ü¥O¦P¨B©ó¦ULPAR(MDS/DAP/DAR/LOG) "
+echo "           3. æ–¼å…±ç”¨å·¥ä½œå€åŸ·è¡ŒæŒ‡ä»¤åŒæ­¥æ–¼å„LPAR(MDS/DAP/DAR/LOG) "
 echo ""
-echo "           4. ¦ULPAR(MDS/DAP/DAR/LOG)¤¤ÀÉ®×¤U¸ü¦Ü¦@¥Î¤u§@°Ï "
+echo "           4. å„LPAR(MDS/DAP/DAR/LOG)ä¸­æª”æ¡ˆä¸‹è¼‰è‡³å…±ç”¨å·¥ä½œå€ "
 echo ""
-echo "           5. ±NLPAR(MDS/DAP/DAR/LOG)¥Ø¿ı¤U¶Ç¦Ü¦@¥Î¤u§@°Ï "
+echo "           5. å°‡LPAR(MDS/DAP/DAR/LOG)ç›®éŒ„ä¸‹å‚³è‡³å…±ç”¨å·¥ä½œå€ "
 echo ""
-echo "           6. ÀÉ®×ÀË®ÖBASE"
+echo "           6. æª”æ¡ˆæª¢æ ¸BASE"
 echo ""
-echo "               (ÀH®É¥i¿é q ¥HÂ÷¶} )"
+echo "               (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ )"
 echo ""
-read Menu_No?"                ½Ğ¿ï¾Ü¿ï¶µ (1-6) : "
+read Menu_No?"                è«‹é¸æ“‡é¸é … (1-6) : "
 
 create_log	
 
@@ -71,8 +71,8 @@ case $Menu_No in
 		
 	*)
                 echo ""
-		echo "        [Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J (1-6)ªº¿ï¶µ"
-                read ANSWR?"               «öEnterÁäÄ~Äò "
+		echo "        [Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥ (1-6)çš„é¸é …"
+                read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
                 main
 		;;
         esac
@@ -84,25 +84,25 @@ STARTA () {
    clear
    echo ""
    echo "#============================================#"
-   echo "#  ¦¹¥\¯à·|¦P¨BÅÜ§ó©Ò¦³LPAR¥D¾÷ªº¨Ï¥ÎªÌ±K½X  #"
+   echo "#  æ­¤åŠŸèƒ½æœƒåŒæ­¥è®Šæ›´æ‰€æœ‰LPARä¸»æ©Ÿçš„ä½¿ç”¨è€…å¯†ç¢¼  #"
    echo "#============================================#"
    echo ""
-   echo "±ıÅÜ§ó ${USER} ªº±K½X?"
+   echo "æ¬²è®Šæ›´ ${USER} çš„å¯†ç¢¼?"
    echo ""
-   read ANSWER?"               ½Ğ½T»{­nÅÜ§óªºUser µL»~(Y/N): "
+   read ANSWER?"               è«‹ç¢ºèªè¦è®Šæ›´çš„User ç„¡èª¤(Y/N): "
    case $ANSWER in
    n|N)
         main
         ;;
    y|Y)
         /home/se/safechk/safesh/pwchg_all.sh
-        read ANSWR?"               «öEnterÁäÄ~Äò "
+        read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
         main
         ;;
    *)
         echo ""
-        echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-        read ANSWR?"               «öEnterÁäÄ~Äò "
+        echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+        read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
         main
         ;;
     esac
@@ -121,15 +121,15 @@ STARTB () {
    CHKFLG=0
    if [ "$HOSTN" == "" ]; then
        echo ""
-       echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+       echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
        echo "#==========================================================#"
-       echo "# ¿é¤J®æ¦¡(¨C¥x¥D¾÷¥HªÅ®æ°µ¬°¤À¹j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# è¼¸å…¥æ ¼å¼(æ¯å°ä¸»æ©Ÿä»¥ç©ºæ ¼åšç‚ºåˆ†éš”): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# ¸s²Õ¿é¤J®æ¦¡: DAP (¤@¦¸¤@­Ó¸s²Õ)                         #"
+       echo "# ç¾¤çµ„è¼¸å…¥æ ¼å¼: DAP (ä¸€æ¬¡ä¸€å€‹ç¾¤çµ„)                         #"
        echo "#                                                          #"
-       echo "# ¥ş³¡¥D¾÷½Ğ¿é¤J: ALL                                      #"
+       echo "# å…¨éƒ¨ä¸»æ©Ÿè«‹è¼¸å…¥: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"¿é¤J±ı¶Ç°eªº¥D¾÷¦WºÙ : "
+       read HOSTN?"è¼¸å…¥æ¬²å‚³é€çš„ä¸»æ©Ÿåç¨± : "
 	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
@@ -164,65 +164,65 @@ STARTB () {
 
        if [ -z "$HOSTLIST" ]; then
           echo ""
-          echo "               [Error]  ¿é¤J¬°ªÅ­È "
+          echo "               [Error]  è¼¸å…¥ç‚ºç©ºå€¼ "
           echo ""
-          read ANSWR?"               «öEnterÁäÄ~Äò "
+          read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
           main
        fi
 
-       read DIRPATH?"¿é¤JÀÉ®×©Ò¦bªº¥Ø¿ı¸ô®|¦ì¸m(µ´¹ï¸ô®|) : "
+       read DIRPATH?"è¼¸å…¥æª”æ¡ˆæ‰€åœ¨çš„ç›®éŒ„è·¯å¾‘ä½ç½®(çµ•å°è·¯å¾‘) : "
        if [ "$DIRPATH" == "q" ] || [ "$DIRPATH" == "Q" ]; then
            main
        fi
 
        if [ ! -d $DIRPATH ]; then
            echo ""
-           echo "               [Error]  ¿é¤Jªº¥Ø¿ı¤£¦s¦b "
+           echo "               [Error]  è¼¸å…¥çš„ç›®éŒ„ä¸å­˜åœ¨ "
            CHKFLG=1
        fi
        if [ -z "$DIRPATH" ]; then
            echo ""
-           echo "               [Error]  ¿é¤J¬°ªÅ­È "
+           echo "               [Error]  è¼¸å…¥ç‚ºç©ºå€¼ "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               «öEnterÁäÄ~Äò "
+           read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
            main
        else
            echo "Directory PATH: $DIRPATH"
            echo ""
            ls -ltr $DIRPATH
-           read FILENAME?"             ½Ğ¿é¤J»İ­n¦P¨B¨ì¨ä¥L¥xLPARÀÉ®×¦WºÙ: "
+           read FILENAME?"             è«‹è¼¸å…¥éœ€è¦åŒæ­¥åˆ°å…¶ä»–å°LPARæª”æ¡ˆåç¨±: "
            if [ -d $DIRPATH/$FILENAME ]; then
               echo ""
-              echo "               [Error]  ¿é¤JªºÀÉ¦W¬°¥Ø¿ı "
-              read ANSWR?"               «öEnterÁäÄ~Äò "
+              echo "               [Error]  è¼¸å…¥çš„æª”åç‚ºç›®éŒ„ "
+              read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
               main
            fi
            if [ ! -f $DIRPATH/$FILENAME ]; then
               echo ""
-              echo "               [Error]  ¿é¤JªºÀÉ¦W¤£¦s¦b "
-              read ANSWR?"               «öEnterÁäÄ~Äò "
+              echo "               [Error]  è¼¸å…¥çš„æª”åä¸å­˜åœ¨ "
+              read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
               main
            fi
 
            echo ""
-           echo "#===¥D¾÷¦Cªí===#"
+           echo "#===ä¸»æ©Ÿåˆ—è¡¨===#"
            echo "$HOSTLIST"
            echo "#==============#"
-           echo "¦P¨BÀÉ®×: $DIRPATH/$FILENAME"
+           echo "åŒæ­¥æª”æ¡ˆ: $DIRPATH/$FILENAME"
            echo ""
-           read ANSWER?"             ½Ğ½T»{¤W­z¸ê°T¬O§_¥¿½T(Y/N): "
+           read ANSWER?"             è«‹ç¢ºèªä¸Šè¿°è³‡è¨Šæ˜¯å¦æ­£ç¢º(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
-                read RDIRPATH?"             ½Ğ¿é¤JÀÉ®×­n¶Ç°e¨ì»·ºİ¥D¾÷ªº¥Ø¿ı(µ´¹ï¸ô®|): "
+                read RDIRPATH?"             è«‹è¼¸å…¥æª”æ¡ˆè¦å‚³é€åˆ°é ç«¯ä¸»æ©Ÿçš„ç›®éŒ„(çµ•å°è·¯å¾‘): "
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST ÀÉ®×¶Ç°e¤¤..."
+                   echo "$HOST æª”æ¡ˆå‚³é€ä¸­..."
                    scp -P 2222 $DIRPATH/$FILENAME $HOST:$RDIRPATH/
                 done
 
@@ -238,7 +238,7 @@ STARTB () {
 
                 ## Retrieve check files ##
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST µ²ªGÀË¬d¤¤..."
+                   echo "$HOST çµæœæª¢æŸ¥ä¸­..."
                    scp -P 2222 ${MUSER}@${HOST}:$HOMEDIR/scpdatafile.${HOST} /tmp/
                    ssh -p 2222 ${MUSER}@${HOST} "rm -f $HOMEDIR/scpdatafile.${HOST}"
                 done
@@ -246,7 +246,7 @@ STARTB () {
                 errors=0
                 echo
                 echo "#==========================#"
-                echo "#  ¦P¨BÀÉ®×¥D¾÷µ²ªG²M³æ:   #"
+                echo "#  åŒæ­¥æª”æ¡ˆä¸»æ©Ÿçµæœæ¸…å–®:   #"
                 echo "#==========================#"
                 for HOST in $HOSTLIST ; do
                    if [[ -f /tmp/scpdatafile.${HOST} ]] ; then
@@ -259,12 +259,12 @@ STARTB () {
                 done
                 ((errors)) && exit 1
 
-                read ANSWR?"               «öEnterÁäÄ~Äò "
+                read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
                 main
                 ;;
            *)
-                echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-                read ANSWR?"               «öEnterÁäÄ~Äò "
+                echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+                read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
                 STARTB
                 ;;
            esac
@@ -283,15 +283,15 @@ STARTC () {
    CHKFLG=0
    if [ "$HOSTN" == "" ]; then
        echo ""
-       echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+       echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
        echo "#==========================================================#"
-       echo "# ¿é¤J®æ¦¡(¨C¥x¥D¾÷¥HªÅ®æ°µ¬°¤À¹j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# è¼¸å…¥æ ¼å¼(æ¯å°ä¸»æ©Ÿä»¥ç©ºæ ¼åšç‚ºåˆ†éš”): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# ¸s²Õ¿é¤J®æ¦¡: DAP (¤@¦¸¤@­Ó¸s²Õ)                         #"
+       echo "# ç¾¤çµ„è¼¸å…¥æ ¼å¼: DAP (ä¸€æ¬¡ä¸€å€‹ç¾¤çµ„)                         #"
        echo "#                                                          #"
-       echo "# ¥ş³¡¥D¾÷½Ğ¿é¤J: ALL                                      #"
+       echo "# å…¨éƒ¨ä¸»æ©Ÿè«‹è¼¸å…¥: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"¿é¤J±ı°õ¦æ«ü¥Oªº¥D¾÷¦WºÙ : "
+       read HOSTN?"è¼¸å…¥æ¬²åŸ·è¡ŒæŒ‡ä»¤çš„ä¸»æ©Ÿåç¨± : "
 	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
@@ -326,42 +326,42 @@ STARTC () {
 
        if [ -z "$HOSTLIST" ]; then
            echo ""
-           echo "               [Error]  ¿é¤J¬°ªÅ­È "
+           echo "               [Error]  è¼¸å…¥ç‚ºç©ºå€¼ "
            echo ""
-           read ANSWR?"               «öEnterÁäÄ~Äò "
+           read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
            main
        fi
 
        echo ""
-       read COMMAND?"               ½Ğ¿é¤J­n°õ¦æªº«ü¥O: "
+       read COMMAND?"               è«‹è¼¸å…¥è¦åŸ·è¡Œçš„æŒ‡ä»¤: "
        if [ "$COMMAND" == "q" ] || [ "$COMMAND" == "Q" ]; then
            main
        fi
        if [ -z "$COMMAND" ]; then
            echo ""
-           echo "               [Error]  «ü¥O¿é¤J¬°ªÅ­È "
+           echo "               [Error]  æŒ‡ä»¤è¼¸å…¥ç‚ºç©ºå€¼ "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               «öEnterÁäÄ~Äò "
+           read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
            main
        else
            echo ""
-           echo "#===¥D¾÷¦Cªí===#"
+           echo "#===ä¸»æ©Ÿåˆ—è¡¨===#"
            echo "$HOSTLIST"
            echo "#==============#"
-           echo "°õ¦æ«ü¥O: $COMMAND"
+           echo "åŸ·è¡ŒæŒ‡ä»¤: $COMMAND"
            echo ""
-           read ANSWER?"             ½Ğ½T»{¤W­z¸ê°T¬O§_¥¿½T(Y/N): "
+           read ANSWER?"             è«‹ç¢ºèªä¸Šè¿°è³‡è¨Šæ˜¯å¦æ­£ç¢º(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST °õ¦æ¤¤..."
+                   echo "$HOST åŸ·è¡Œä¸­..."
                    ssh -p 2222 $HOST "$COMMAND"
                    execStatus=$?
                    if [ $execStatus -eq 0 ]; then
@@ -372,16 +372,16 @@ STARTC () {
                 done
                 echo ""
                 echo "#==========================#"
-                echo "#  °õ¦æ«ü¥O¥D¾÷µ²ªG²M³æ:   #"
+                echo "#  åŸ·è¡ŒæŒ‡ä»¤ä¸»æ©Ÿçµæœæ¸…å–®:   #"
                 echo "#==========================#"
                 cat /tmp/$USER.$timestamp
                 rm /tmp/$USER.$timestamp
-                read ANSWR?"               «öEnterÁäÄ~Äò "
+                read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
                 main
                 ;;
            *)
-                echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-                read ANSWR?"               «öEnterÁäÄ~Äò "
+                echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+                read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
                 STARTC
                 ;;
            esac
@@ -401,15 +401,15 @@ STARTD () {
    CHKFLG=0
    if [ "$HOSTN" == "" ]; then
        echo ""
-       echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+       echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
        echo "#==========================================================#"
-       echo "# ¿é¤J®æ¦¡(¨C¥x¥D¾÷¥HªÅ®æ°µ¬°¤À¹j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# è¼¸å…¥æ ¼å¼(æ¯å°ä¸»æ©Ÿä»¥ç©ºæ ¼åšç‚ºåˆ†éš”): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# ¸s²Õ¿é¤J®æ¦¡: DAP (¤@¦¸¤@­Ó¸s²Õ)                         #"
+       echo "# ç¾¤çµ„è¼¸å…¥æ ¼å¼: DAP (ä¸€æ¬¡ä¸€å€‹ç¾¤çµ„)                         #"
        echo "#                                                          #"
-       echo "# ¥ş³¡¥D¾÷½Ğ¿é¤J: ALL                                      #"
+       echo "# å…¨éƒ¨ä¸»æ©Ÿè«‹è¼¸å…¥: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"¿é¤J±ı¨úÀÉ®×ªº»·ºİ¥D¾÷¦WºÙ : "
+       read HOSTN?"è¼¸å…¥æ¬²å–æª”æ¡ˆçš„é ç«¯ä¸»æ©Ÿåç¨± : "
 	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
@@ -444,30 +444,30 @@ STARTD () {
 
        if [ -z "$HOSTLIST" ]; then
            echo ""
-           echo "               [Error]  ¿é¤J¬°ªÅ­È "
+           echo "               [Error]  è¼¸å…¥ç‚ºç©ºå€¼ "
            echo ""
-           read ANSWR?"               «öEnterÁäÄ~Äò "
+           read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
            main
        fi
 
        echo ""
-       read DIRPATH?"¿é¤JÀÉ®×©Ò¦bªº¥Ø¿ıªº¸ô®|¦ì¸m(µ´¹ï¸ô®|) : "
+       read DIRPATH?"è¼¸å…¥æª”æ¡ˆæ‰€åœ¨çš„ç›®éŒ„çš„è·¯å¾‘ä½ç½®(çµ•å°è·¯å¾‘) : "
        if [ "$DIRPATH" == "q" ] || [ "$DIRPATH" == "Q" ]; then
            main
        fi
 
 
        echo ""
-       read FILENAME?"½Ğ¿é¤J­n³Æ¥÷¤U¶ÇªºÀÉ®×(ÀÉ¦W): "
+       read FILENAME?"è«‹è¼¸å…¥è¦å‚™ä»½ä¸‹å‚³çš„æª”æ¡ˆ(æª”å): "
        if [ "$FILENAME" == "q" ] || [ "$FILENAME" == "Q" ]; then
            main
        fi
 
        echo ""
-       echo "                    [Warning]­Y»·ºİLPAR¬Û¦PÀÉ¦W¤U¸ü¦Ü¥»¦a·|ÂĞ»\ "
-       echo "                    ¿ï Y ­YÀÉ¦W¬Û¦P·|»\ÀÉ "
-       echo "                    ¿ï N ·|©óÀÉ¦W«á¥[¤W¥D¾÷»P§Ç¸¹Á×§K»\ÀÉ "
-       read ANSWER?"                    ½Ğ½T»{¬O§_ÂĞ»\(Y/N): "
+       echo "                    [Warning]è‹¥é ç«¯LPARç›¸åŒæª”åä¸‹è¼‰è‡³æœ¬åœ°æœƒè¦†è“‹ "
+       echo "                    é¸ Y è‹¥æª”åç›¸åŒæœƒè“‹æª” "
+       echo "                    é¸ N æœƒæ–¼æª”åå¾ŒåŠ ä¸Šä¸»æ©Ÿèˆ‡åºè™Ÿé¿å…è“‹æª” "
+       read ANSWER?"                    è«‹ç¢ºèªæ˜¯å¦è¦†è“‹(Y/N): "
        case $ANSWER in
        n|N)
             CHECK=2
@@ -476,43 +476,43 @@ STARTD () {
             CHECK=1
             ;;
        *)
-            echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-            read ANSWR?"               «öEnterÁäÄ~Äò "
+            echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+            read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
             STARTD
             ;;
        esac
 
        if [ -z "$DIRPATH" ]; then
            echo ""
-           echo "               [Error] ¥Ø¿ı¿é¤J¬°ªÅ­È "
+           echo "               [Error] ç›®éŒ„è¼¸å…¥ç‚ºç©ºå€¼ "
            CHKFLG=1
        fi
 
        if [ -z "$FILENAME" ]; then
            echo ""
-           echo "               [Error]  ÀÉ¦W¿é¤J¬°ªÅ­È "
+           echo "               [Error]  æª”åè¼¸å…¥ç‚ºç©ºå€¼ "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               «öEnterÁäÄ~Äò "
+           read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
            main
        else
            echo ""
-           echo "#===¥D¾÷¦Cªí===#"
+           echo "#===ä¸»æ©Ÿåˆ—è¡¨===#"
            echo "$HOSTLIST"
            echo "#==============#"
-           echo "»·ºİÀÉ®×: $DIRPATH/$FILENAME"
+           echo "é ç«¯æª”æ¡ˆ: $DIRPATH/$FILENAME"
            echo ""
-           read ANSWER?"             ½Ğ½T»{¤W­z¸ê°T¬O§_¥¿½T(Y/N): "
+           read ANSWER?"             è«‹ç¢ºèªä¸Šè¿°è³‡è¨Šæ˜¯å¦æ­£ç¢º(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST °õ¦æ¤¤..."
+                   echo "$HOST åŸ·è¡Œä¸­..."
                    # overwrite
                    if [ "$CHECK" == "1" ]; then
                      scp -P 2222 $HOST:$DIRPATH/$FILENAME $BACKUPDIR/
@@ -537,17 +537,17 @@ STARTD () {
                 done
                 echo ""
                 echo "#=======================================#"
-                echo "#  ¨ú±oÀÉ®×¥D¾÷µ²ªG²M³æ:                #"
-                echo "#  ÀÉ®×¦s©ñ¦ì¸m /home/download/file:    #"
+                echo "#  å–å¾—æª”æ¡ˆä¸»æ©Ÿçµæœæ¸…å–®:                #"
+                echo "#  æª”æ¡ˆå­˜æ”¾ä½ç½® /home/download/file:    #"
                 echo "#=======================================#"
                 cat /tmp/$USER.$FILENAME.$timestamp
                 rm /tmp/$USER.$FILENAME.$timestamp
-                read ANSWR?"               «öEnterÁäÄ~Äò "
+                read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
                 main
                 ;;
            *)
-                echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-                read ANSWR?"               «öEnterÁäÄ~Äò "
+                echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+                read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
                 STARTD
                 ;;
            esac
@@ -567,15 +567,15 @@ STARTE () {
    CHKFLG=0
    if [ "$HOSTN" == "" ]; then
        echo ""
-       echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+       echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
        echo "#==========================================================#"
-       echo "# ¿é¤J®æ¦¡(¨C¥x¥D¾÷¥HªÅ®æ°µ¬°¤À¹j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# è¼¸å…¥æ ¼å¼(æ¯å°ä¸»æ©Ÿä»¥ç©ºæ ¼åšç‚ºåˆ†éš”): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# ¸s²Õ¿é¤J®æ¦¡: DAP (¤@¦¸¤@­Ó¸s²Õ)                         #"
+       echo "# ç¾¤çµ„è¼¸å…¥æ ¼å¼: DAP (ä¸€æ¬¡ä¸€å€‹ç¾¤çµ„)                         #"
        echo "#                                                          #"
-       echo "# ¥ş³¡¥D¾÷½Ğ¿é¤J: ALL                                      #"
+       echo "# å…¨éƒ¨ä¸»æ©Ÿè«‹è¼¸å…¥: ALL                                      #"
        echo "#==========================================================#"
-       read HOSTN?"¿é¤J±ı¨ú¥Ø¿ıªº»·ºİ¥D¾÷¦WºÙ : "
+       read HOSTN?"è¼¸å…¥æ¬²å–ç›®éŒ„çš„é ç«¯ä¸»æ©Ÿåç¨± : "
 	   HOSTN=$(echo $HOSTN|tr '[a-z]' '[A-Z]')
        if [ "$HOSTN" == "q" ] || [ "$HOSTN" == "Q" ]; then
            main
@@ -610,85 +610,85 @@ STARTE () {
 
        if [ -z "$HOSTLIST" ]; then
            echo ""
-           echo "               [Error]  ¿é¤J¬°ªÅ­È "
+           echo "               [Error]  è¼¸å…¥ç‚ºç©ºå€¼ "
            echo ""
-           read ANSWR?"               «öEnterÁäÄ~Äò "
+           read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
            main
        fi
 
        echo ""
-       read DIRPATH?"¿é¤J¥Ø¿ıªº¸ô®|¦ì¸m(µ´¹ï¸ô®|) : "
+       read DIRPATH?"è¼¸å…¥ç›®éŒ„çš„è·¯å¾‘ä½ç½®(çµ•å°è·¯å¾‘) : "
        if [ "$DIRPATH" == "q" ] || [ "$DIRPATH" == "Q" ]; then
            main
        fi
 
        echo ""
-       read FILENAME?"½Ğ¿é¤J¥»¦a¦sÀÉ¦WºÙ(ÀÉ¦W): "
+       read FILENAME?"è«‹è¼¸å…¥æœ¬åœ°å­˜æª”åç¨±(æª”å): "
        if [ "$FILENAME" == "q" ] || [ "$FILENAME" == "Q" ]; then
            main
        fi
 
        if [ -z "$DIRPATH" ]; then
            echo ""
-           echo "               [Error] ¥Ø¿ı¿é¤J¬°ªÅ­È "
+           echo "               [Error] ç›®éŒ„è¼¸å…¥ç‚ºç©ºå€¼ "
            CHKFLG=1
        fi
 
        if [ -z "$FILENAME" ]; then
            echo ""
-           echo "               [Error]  ÀÉ¦W¿é¤J¬°ªÅ­È "
+           echo "               [Error]  æª”åè¼¸å…¥ç‚ºç©ºå€¼ "
            CHKFLG=1
        fi
 
        if [ "$CHKFLG" != "0" ]; then
            echo ""
-           read ANSWR?"               «öEnterÁäÄ~Äò "
+           read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
            main
        else
            echo ""
-           echo "#===¥D¾÷¦Cªí===#"
+           echo "#===ä¸»æ©Ÿåˆ—è¡¨===#"
            echo "$HOSTLIST"
            echo "#==============#"
-           echo "»·ºİ¥Ø¿ı: $DIRPATH"
+           echo "é ç«¯ç›®éŒ„: $DIRPATH"
            echo ""
-           read ANSWER?"             ½Ğ½T»{¤W­z¸ê°T¬O§_¥¿½T(Y/N): "
+           read ANSWER?"             è«‹ç¢ºèªä¸Šè¿°è³‡è¨Šæ˜¯å¦æ­£ç¢º(Y/N): "
            case $ANSWER in
            n|N)
                 main
                 ;;
            y|Y)
                 for HOST in $HOSTLIST ; do
-                   echo "$HOST ¥´¥]¤¤..."
+                   echo "$HOST æ‰“åŒ…ä¸­..."
                    ssh -p 2222 $HOST "cd $DIRPATH; tar cf - ./* | gzip > /tmp/$FILENAME.$HOST.$timestamp.tar.gz"
                    execStatus1=$?
                    if [ $execStatus1 -eq 0 ]; then
-                      echo "$HOST ¥´¥] OK!" >> /tmp/$USER.$FILENAME.$timestamp
+                      echo "$HOST æ‰“åŒ… OK!" >> /tmp/$USER.$FILENAME.$timestamp
                    else
-                      echo "$HOST ¥´¥] Fail!" >> /tmp/$USER.$FILENAME.$timestamp
+                      echo "$HOST æ‰“åŒ… Fail!" >> /tmp/$USER.$FILENAME.$timestamp
                    fi
-                   echo "$HOST ¤U¸ü¤¤..."
+                   echo "$HOST ä¸‹è¼‰ä¸­..."
                    scp -P 2222 $HOST:/tmp/$FILENAME.$HOST.$timestamp.tar.gz $BACKUPDIR/
                    execStatus2=$?
                    if [ $execStatus2 -eq 0 ]; then
-                      echo "$HOST ¤U¸ü OK!" >> /tmp/$USER.$FILENAME.$timestamp
+                      echo "$HOST ä¸‹è¼‰ OK!" >> /tmp/$USER.$FILENAME.$timestamp
                    else
-                      echo "$HOST ¤U¸ü Fail!" >> /tmp/$USER.$FILENAME.$timestamp
+                      echo "$HOST ä¸‹è¼‰ Fail!" >> /tmp/$USER.$FILENAME.$timestamp
                    fi
                    ssh -p 2222 $HOST "cd /tmp; rm -f $FILENAME.$HOST.$timestamp.tar.gz"
                 done
                 echo ""
                 echo "#========================================#"
-                echo "#  ¨ú±o¥Ø¿ı ¥D¾÷µ²ªG²M³æ:                #"
-                echo "#  ÀÉ®×¦s©ñ¦ì¸m  /home/download/dir:     #"
+                echo "#  å–å¾—ç›®éŒ„ ä¸»æ©Ÿçµæœæ¸…å–®:                #"
+                echo "#  æª”æ¡ˆå­˜æ”¾ä½ç½®  /home/download/dir:     #"
                 echo "#========================================#"
                 cat /tmp/$USER.$FILENAME.$timestamp
                 rm /tmp/$USER.$FILENAME.$timestamp
-                read ANSWR?"               «öEnterÁäÄ~Äò "
+                read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
                 main
                 ;;
            *)
-                echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-                read ANSWR?"               «öEnterÁäÄ~Äò "
+                echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+                read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
                 STARTE
                 ;;
            esac
