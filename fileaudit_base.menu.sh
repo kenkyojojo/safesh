@@ -9,19 +9,13 @@ WKLPAR=WKLPART1
 MODE=$1
 TYPE=$2
 OLDIFS=$IFS
-if [[ $USER = "exadm" ]];then
-	LOGDIR=/home/exc/excwk/apdir/log
-	LOG=${LOGDIR}/fileaudit_base.menu.sh.log
-	FILEDIR=/home/exc/excwk/apdir/file/fileaudit
-else
-	LOGDIR=/home/se/safechk/safelog
-	LOG=${LOGDIR}/fileaudit_base.menu.sh.log
-	FILEDIR=/home/se/safechk/file/fileaudit
-fi
+LOGDIR=/home/se/safechk/safelog
+LOG=${LOGDIR}/fileaudit_base.menu.sh.log
+FILEDIR=/home/se/safechk/file/fileaudit
 BASEDIR=${FILEDIR}/base
 CURRDIR=${FILEDIR}/check
 
-set -A MUSER root bruce
+set -A MUSER root useradm bruce
 #===============================================================#
 
 #{{{create_log
@@ -44,6 +38,8 @@ create_log () {
 
 #{{{main menu
 main () {
+
+	create_log
 
 	FNUM=1
 	LNUM=4
@@ -1146,6 +1142,5 @@ Begin () {
 }
 #}}}
 
-create_log
 
 Begin

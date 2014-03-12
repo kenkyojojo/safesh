@@ -3,25 +3,26 @@ hostname=`hostname`
 DATEM=`date +%Y%m`
 DATE1AGO=`perl -MPOSIX -le 'print strftime "%Y%m%d", localtime(time()-86400);'`
 USER=$(whoami)
-SHDIR=/home/se/safechk/safesh
 tlog=${SHDIR}/tlog.sh
 WKLPAR=WKLPART1
 MODE=$1
 TYPE=$2
 OLDIFS=$IFS
+SHDIR=/home/se/safechk/safesh
+LOGDIR=/home/se/safechk/safelog
+FILEDIR=/home/se/safechk/file/fileaudit
+
 if [[ $USER = "exadm" ]];then
-	LOGDIR=/home/exc/excwk/apdir/log
-	LOG=${LOGDIR}/fileaudit_base.menu.sh.log
+	SHDIR=/home/se/exc/excwk/apdir/shell
 	FILEDIR=/home/exc/excwk/apdir/file/fileaudit
-else
-	LOGDIR=/home/se/safechk/safelog
-	LOG=${LOGDIR}/fileaudit_base.menu.sh.log
-	FILEDIR=/home/se/safechk/file/fileaudit
+	LOGDIR=/home/exc/excwk/apdir/log
 fi
+
+LOG=${LOGDIR}/fileaudit_base.penu.sh.log
 BASEDIR=${FILEDIR}/base
 CURRDIR=${FILEDIR}/check
 
-set -A MUSER seadm exadm bruce
+set -A MUSER root seadm exadm bruce
 #===============================================================#
 
 #{{{create_log
@@ -29,13 +30,16 @@ create_log () {
    if [[ ! -f $LOG ]]; then 
 		   if [[ $USER = "root" ]];then
 				   touch $LOG
-				   chown useradm:security $LOG
+				   chown seadm:se $LOG
 				   chmod 666 $LOG
-		   elif [[ $USER = "useradm" ]]; then
+		   elif [[ $USER = "seadm" ]]; then
+				   touch $LOG
+				   chmod 666 $LOG
+		   elif [[ $USER = "exadm" ]]; then
 				   touch $LOG
 				   chmod 666 $LOG
 		   else
-				   echo "create_log:Please use the useradm or root user to running the script first"
+				   echo "create_log:Please use the exadm or root user to running the script first"
 				   exit 1
 		   fi
    fi
@@ -44,6 +48,8 @@ create_log () {
 
 #{{{main menu
 main () {
+
+	create_log
 
 	FNUM=1
 	LNUM=4
@@ -62,6 +68,7 @@ main () {
 	echo ""
     read Menu_No?"請選擇選項(${FNUM}-${LNUM}) : "
 
+
     case $Menu_No in  
         1)
 			STARTA
@@ -76,7 +83,7 @@ main () {
 			STARTD
 			;;
         q|Q)
-			$SHDIR/p.sh
+			/home/se/safechk/safesh/p.sh
 			exit
             ;;
         *)
@@ -1146,6 +1153,5 @@ Begin () {
 }
 #}}}
 
-create_log
 
 Begin
