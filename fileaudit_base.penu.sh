@@ -3,7 +3,6 @@ hostname=`hostname`
 DATEM=`date +%Y%m`
 DATE1AGO=`perl -MPOSIX -le 'print strftime "%Y%m%d", localtime(time()-86400);'`
 USER=$(whoami)
-tlog=${SHDIR}/tlog.sh
 WKLPAR=WKLPART1
 MODE=$1
 TYPE=$2
@@ -13,11 +12,11 @@ LOGDIR=/home/se/safechk/safelog
 FILEDIR=/home/se/safechk/file/fileaudit
 
 if [[ $USER = "exadm" ]];then
-	SHDIR=/home/se/exc/excwk/apdir/shell
+	SHDIR=/home/exc/excwk/apdir/shell
 	FILEDIR=/home/exc/excwk/apdir/file/fileaudit
 	LOGDIR=/home/exc/excwk/apdir/log
 fi
-
+tlog=${SHDIR}/tlog.sh
 LOG=${LOGDIR}/fileaudit_base.penu.sh.log
 BASEDIR=${FILEDIR}/base
 CURRDIR=${FILEDIR}/check
