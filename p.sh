@@ -347,7 +347,7 @@ STARTC () {
 			rmchk=`echo $COMMAND | awk '{print $1}' `
 			if [[ $rmchk = "rm" || $rmchk = "rmdir" ]];then
 			   echo ""
-			   echo "           [Info] 	輸入指令為${rmchk}，請注意刪除內容是否存於ap_dir_cfg檔案裡，如是請記得修改"
+			   echo "           [Info] 	輸入指令為${rmchk},確認刪除內容是否存於ap_dir_cfg檔案裡，如是請記得修改"
 			fi
 	   fi
 
