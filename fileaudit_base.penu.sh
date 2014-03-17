@@ -13,7 +13,7 @@ FILEDIR=/home/se/safechk/file/fileaudit
 
 if [[ $USER = "exadm" ]];then
 	SHDIR=/home/exc/excwk/apdir/shell
-	FILEDIR=/home/exc/excwk/apdir/file/fileaudit
+	FILEDIR=/home/exc/excwk/apdir/fileaudit
 	LOGDIR=/home/exc/excwk/apdir/log
 fi
 tlog=${SHDIR}/tlog.sh
