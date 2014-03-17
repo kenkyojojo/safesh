@@ -343,6 +343,14 @@ STARTC () {
            CHKFLG=1
        fi
 
+	   if [[ $USER = "twse" || $USER = "exadm" ]];then
+			rmchk=`echo $COMMAND | awk '{print $1}' `
+			if [[ $rmchk = "rm" || $rmchk = "rmdir" ]];then
+			   echo ""
+			   echo "           [Info] 	輸入指令為${rmchk}，請注意刪除內容是否存於ap_dir_cfg檔案裡，如是請記得修改"
+			fi
+	   fi
+
        if [ "$CHKFLG" != "0" ]; then
            echo ""
            read ANSWR?"               按Enter鍵繼續 "
