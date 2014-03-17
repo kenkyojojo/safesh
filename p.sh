@@ -343,11 +343,11 @@ STARTC () {
            CHKFLG=1
        fi
 
-	   if [[ $USER = "twse" || $USER = "exadm" ]];then
+	   if [[ $USER = "twse" || $USER = "bruce" ]];then
 			rmchk=`echo $COMMAND | awk '{print $1}' `
 			if [[ $rmchk = "rm" || $rmchk = "rmdir" ]];then
-			   echo ""
-			   echo "           [Info] 	輸入指令為${rmchk},確認刪除內容是否存於ap_dir_cfg檔案裡，如是請記得修改"
+           	   echo ""
+			   echo "[Inform] 輸入指令為${rmchk},確認刪除內容是否存於ap_dir_cfg檔案裡，如是請記得修改"
 			fi
 	   fi
 
