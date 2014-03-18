@@ -21,7 +21,7 @@ MUSER=$(whoami)
 HOMEDIR=`lsuser $MUSER | awk '{print $5}' | cut -c6-`
 DELAY=1
 
-if [[ $MUSER != "root" ||  $MUSER != "useradm" ]] ; then
+if [[ $MUSER != "root" &&  $MUSER != "useradm" ]] ; then
 	echo "The $MUSER permission deny,Please to check the login User. Ex:root or useradm"
 	exit 1
 fi
