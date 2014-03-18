@@ -763,9 +763,9 @@ TYPE=$2
 						done
 					else
 						$tlog "scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
-						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
+						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
 						scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
-						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
+						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
 						IFS=";"
 						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
@@ -886,9 +886,9 @@ TYPE=$2
 						done
 					else
 						$tlog "scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
-						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
+						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
 						scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/
-						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &"
+						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &"
 					fi
 				done
 			else
