@@ -444,7 +444,7 @@ SSH_CMD_RECOVER() {
 #				$tlog "ssh -p 2222 ${USER}@${hosts} cp ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE}" $LOG
 #				$tlog "ssh -p 2222 ${USER}@${hosts} ls -l ${BASEDIR}/${hosts}${BASE}" $LOG
 				if [[ $chkflag -eq "0" ]];then
-				       ssh -p 2222 ${USER}@${hosts} "cp -p ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 "
+				       ssh -p 2222 ${USER}@${hosts} "cp -p ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 "
 					   result=$(ssh -p 2222 ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
 					   $tlog "主機名稱： [$hosts] " $LOG
 					   $tlog "檔案屬性：$result" $LOG
