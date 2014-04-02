@@ -72,7 +72,7 @@ main () {
 			STARTD
 			;;
         q|Q)
-			$SHDIR/p.sh
+			$SHDIR/m.sh
 			exit
             ;;
         *)
