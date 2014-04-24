@@ -1113,7 +1113,7 @@ USER_CHECK (){
 		fi
 	done
 
-	if [[ userflag -eq 0 ]];then 
+	if [[ $userflag -eq 0 ]];then 
 		echo "               [Error]  使用者權限不符合"
 		echo ""
 		read ANSWR?"               按Enter鍵繼續 "
