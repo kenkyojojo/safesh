@@ -1,3 +1,99 @@
+commit d4642b591bd032e9375263a910682268c0d45a0d
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri May 23 14:40:43 2014 +0800
+
+    new file:source/sefind.c, source/sels.c
+
+commit e10947eb050ca44e07019259823685d6f6ca1045
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri May 23 11:14:41 2014 +0800
+
+    modified:filecheck.sh , genbas_file_attr.sh
+
+commit a2075a267cb4e3d196d7c7fc7e13470ad92fc82b
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri May 23 09:46:29 2014 +0800
+
+    modified:filecheck.sh, genbas_file_attr.sh
+
+commit 6cc4da6cb0de7e7cd9c5498bc7dc7f9ca668de7b
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Apr 24 14:00:45 2014 +0800
+
+    modified:fileaudit_base.menu.sh、fileaudit_base.penu.sh fix the bug
+
+commit eb7ee77dc61cc95575575716f3530b5dd24b716b
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Wed Apr 2 16:42:09 2014 +0800
+
+    modified:fileaudit_base.menu.sh fix the site name
+
+commit 2a2278ea4bc4a169c8d920562f9d54bdd033df80
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Wed Apr 2 16:40:34 2014 +0800
+
+    modified:fix the fileaudit_base.menu.sh script to m.sh
+
+commit c93792b6cde9e3f4ab4c716c9284490c550ed720
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri Mar 28 18:12:42 2014 +0800
+
+    modified:fileaudit_base.penu.sh fix to wklparb1
+
+commit 234130d649a25b3306ceab2941999461cbc7cdda
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri Mar 28 18:05:18 2014 +0800
+
+    modified:fileaudit_base.penu.sh fix the recover type
+
+commit 0ca111a815cbb5046d09d19812c92ff14f10e214
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Mar 18 11:22:55 2014 +0800
+
+    modified:fileaudit_base.penu.sh, usrlock_ssh.sh
+
+commit 1d114e89e96aa60134d570e93ad34e7489c1775e
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Mar 17 18:00:35 2014 +0800
+
+    modified:fileaudit_base.penu.sh
+
+commit d9be332a96743f132c3360fbc11c20c2460f5c38
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Mar 17 16:43:00 2014 +0800
+
+    modified: p.sh.utf8, p.sh
+
+commit 940eae68970dc7668d1315943750954f85b392a3
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Mar 17 16:33:30 2014 +0800
+
+    modified: p.sh p.sh.utf8
+
+commit 404c28f06030c12e13d149afd57e4840333d4573
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Mar 17 15:57:35 2014 +0800
+
+    modified:fileaudit_base.menu.sh, fileaudit_base.penu.sh
+
+commit 5539268a2cfd8f985d623de2e2ce9ac10402d14e
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Mar 17 15:10:09 2014 +0800
+
+    modified:p.sh, p.sh.utf8 add the new check for rm status
+
+commit 060e231f5861ad2ac42ecfecea915646ecb21db7
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Wed Mar 12 10:43:31 2014 +0800
+
+    modified:m.sh, p.sh, security_report.pl, security_summar_chk.sh;new file:m.sh.utf8,p.sh.utf8
+
+commit 05d8aaced3061e1652780be432a298f65df7324c
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Mar 4 16:10:35 2014 +0800
+
+    modified:history.txt ,version.txt
+
 commit fe3732e42576165c3786dc535fc6ee089449efc0
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Tue Mar 4 16:05:40 2014 +0800
