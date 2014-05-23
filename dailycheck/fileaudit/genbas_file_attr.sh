@@ -74,7 +74,7 @@ BACKUP_EXISTBASE=$FILEDIR/base/${hostname}_previous_file_exist.bas
 creat_base(){
 for DIRNAME in $DIR #import all dir_list from prompt
 do
-   #${SHDIR}/sefind $DIRNAME 2>/dev/null | eval $ALLEXCLUDE | sort -k2  >> $BASEFILE #generate CURRENT status to compare with BASEFILE
+   #${SHDIR}/sefind $DIRNAME -ls 2>/dev/null | eval $ALLEXCLUDE | sort -k2  >> $BASEFILE #generate CURRENT status to compare with BASEFILE
    find $DIRNAME -ls 2>/dev/null | eval $ALLEXCLUDE | sort -k2  >> $BASEFILE #generate CURRENT status to compare with BASEFILE
 done
 }
@@ -83,14 +83,14 @@ done
 creat_existbase(){
 for DIRNAME in $EXIST #import all dir_list from prompt
 do
-	#${SHDIR}/sels  $DIRNAME  2>/dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}' >> $EXISTBASE
+	#${SHDIR}/sels -ld $DIRNAME  2>/dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}' >> $EXISTBASE
     ls  -ld $DIRNAME  2>/dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}' >> $EXISTBASE
 done
 
 for DIRNAME in $DIRNOTIME #Recursive list dir, but don't list the file and directory time. 
 do
-	#${SHDIR}/sefind $DIRNAME 2>/dev/null | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $EXISTBASE
-    find $DIRNAME  -ls 2>/dev/null | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $EXISTBASE
+	#${SHDIR}/sefind $DIRNAME -ls 2>/dev/null | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $EXISTBASE
+    find $DIRNAME -ls 2>/dev/null | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $EXISTBASE
 done
 }
 
