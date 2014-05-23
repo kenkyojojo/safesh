@@ -65,6 +65,13 @@ case $HOSTN in
 		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.wkl;sed -n '3p' $CONFIGDIR/dir.conf.wkl;sed -n '4p' $CONFIGDIR/dir.conf.wkl`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.wkl | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
+#	X23)
+#		DIR=`head -1 $CONFIGDIR/dir.conf.x230`
+#		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.x230`
+#		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.x230`
+#		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.x230;sed -n '3p' $CONFIGDIR/dir.conf.x230;sed -n '4p' $CONFIGDIR/dir.conf.x230`
+#		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.x230 | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
+#		;;
 	*)
 		DIR=`head -1 $CONFIGDIR/dir.conf`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf`
@@ -109,6 +116,8 @@ LIST_EXISTDEL=$FILEDIR/file_exist_del
 LIST_EXISTCHANGE=$FILEDIR/file_exist_change
 
 echo "#============================================================#" >> $LOG
+
+#{{{tlog
 #-----------------------
 # Show running step status
 #-----------------------
@@ -119,6 +128,9 @@ tlog() {
 		echo "DATE: [${dt}] $msg" >> $LOG
 	fi
 }
+#}}}
+
+#{{{check_base_file
 #----------------------------------
 # To check the  base files exists
 #----------------------------------
@@ -141,6 +153,9 @@ BASE_FILE=`grep 'exists' $CHKDIR/fileaudit.status|wc -l`
 	fi
 tlog "Running check_base_file end"
 }
+#}}}
+
+#{{{clear_tmp
 #----------------------------------
 # Clear temporary files
 #----------------------------------
@@ -182,6 +197,9 @@ tlog "Running clear_tmp start"
    fi
 tlog "Running clear_tmp end"
 }
+#}}}
+
+#{{{seperater
 #----------------------------------
 # If item were different then show the '^' symbol below it
 #----------------------------------
@@ -194,7 +212,9 @@ do
 done
 print -n " "
 }
+#}}}
 
+#{{{daily_check_status
 #----------------------------------
 # check_status 
 # 1.echo "OK" or "failed" to $CHKDIR/fileaudit.status for the /home/se/chk/'s dailycheck.
@@ -223,11 +243,14 @@ fi
  
 tlog "Running daily_check_status end"
 }
+#}}}
 
+#{{{check_exist
 #----------------------------------
 # Check File or Directory exist
 #----------------------------------
 check_exist(){
+#set -x 
 
 tlog "Running check_exist start"
 echo 
@@ -237,71 +260,75 @@ echo "# The Hostname:$hostname"
 echo "# File or Directory exist check:"
 echo "# Total `awk 'END {print NR}' $EXISTBASE` files in the checking list"
 echo "# Date: `date +%Y/%m/%d\ %H:%M`"
+echo "#============================================================#"
 cat /dev/null > $RESULT_EXIST #flush the check_status_file
 
 if [ -f $EXISTBASE ]; then
    cat /dev/null > $CURRENT_EXIST
    for DIRNAME in $EXIST
    do
-#ls -ld  $DIRNAME  2> /dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}'  >> $CURRENT_EXIST 
-       ${SHDIR}/sels  $DIRNAME  2> /dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}'  >> $CURRENT_EXIST 
+		ls -ld  $DIRNAME  2>/dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}'  >> $CURRENT_EXIST 
+		#${SHDIR}/sels  $DIRNAME  2>/dev/null | eval $EXCLUDE |awk '{print $3,$4,$1,$9}'  >> $CURRENT_EXIST 
    done
 
    for DIRNAME in $DIRNOTIME #Recursive list dir, but don't list the file and directory time.
    do
-#find $DIRNAME -ls | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
-      ${SHDIR}/sefind $DIRNAME | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
+		find $DIRNAME -ls 2>/dev/null | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
+		#${SHDIR}/sefind $DIRNAME 2>/dev/null | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
    done
 
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $CURRENT_EXIST > $TMP_EXISTCUR
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $EXISTBASE > $TMP_EXISTBASE
- #diff $CURRENT_EXIST $EXISTBASE | sed -e "/ \/etc$/d" > $TMP_EXISTCHANGE
+   #diff $CURRENT_EXIST $EXISTBASE | sed -e "/ \/etc$/d" > $TMP_EXISTCHANGE
    diff $CURRENT_EXIST $EXISTBASE  > $TMP_EXISTCHANGE
 
    if [ -s $TMP_EXISTCHANGE ]; then
-      echo "#============================================================#"
-      echo Something are different comparing with the basefile:
-      awk '{print $5}' $TMP_EXISTCHANGE | sort | uniq -d | grep -v '^$' > $LIST_EXISTCHANGE
-      if [ -s $LIST_EXISTCHANGE ]; then
-          echo "EXISTCHANGE Failed" > $RESULT_EXIST
-          cat $LIST_EXISTCHANGE > $FILECHG_EXIST
-          echo "There are `awk 'END {print NR}' $LIST_EXISTCHANGE` files had been MODIFIED"
+		  echo "#============================================================#"
+		  echo Something are different comparing with the basefile:
+		  awk '{print $5}' $TMP_EXISTCHANGE | sort | uniq -d | grep -v '^$' > $LIST_EXISTCHANGE
+		  if [ -s $LIST_EXISTCHANGE ]; then
+			  echo "EXISTCHANGE Failed" > $RESULT_EXIST
+			  cat $LIST_EXISTCHANGE > $FILECHG_EXIST
+			  echo "There are `awk 'END {print NR}' $LIST_EXISTCHANGE` files had been MODIFIED"
 
-          for LINE in `cat $LIST_EXISTCHANGE`
-          do
-             set -A LINE1 `grep " ${LINE}$" $EXISTBASE`
-             execStatus1=$?
-             if [ $execStatus1 -eq 0 ]; then
-                echo "Base   :" ${LINE1[@]}
-             fi
+			  for LINE in `cat $LIST_EXISTCHANGE`
+			  do
+				 set -A LINE1 `grep " ${LINE}$" $EXISTBASE`
+				 execStatus1=$?
+				 if [ $execStatus1 -eq 0 ]; then
+					echo "Base   :" ${LINE1[@]}
+				 fi
 
-             set -A LINE2 `grep " ${LINE}$" $CURRENT_EXIST`
-             execStatus2=$?
-             if [ $execStatus2 -eq 0 ]; then
-                echo "Current:" ${LINE2[@]}
-                print -n "         "
+				 set -A LINE2 `grep " ${LINE}$" $CURRENT_EXIST`
+				 execStatus2=$?
+				 if [ $execStatus2 -eq 0 ]; then
+					echo "Current:" ${LINE2[@]}
+					print -n "         "
+					 let i=0
+					 while [ $i -lt ${#LINE2[@]} ] ; do
+							COUNT=${#LINE2[$i]} #count item length
+							if [[ ${LINE1[$i]} = ${LINE2[$i]} ]]; then #compare LINE1 and LINE2
+								seperater $COUNT ' ' #first para "count length", second para "insert char"
+							else
+								seperater $COUNT '^' #if item were different than show the '^' symbol below it
+							fi
+							let i+=1
+					 done
+                	echo ""
+				 fi
+			  done
+			  echo ---------------------------------------
+		  else
+			  echo No files been modified!
+			  echo ---------------------------------------
+		  fi
+	 else
+		  echo No files been modified!
+		  echo ---------------------------------------
+   fi
 
-             let i=0
-             while [ $i -lt ${#LINE2[@]} ] ; do
-                    COUNT=${#LINE2[$i]} #count item length
-                    if [[ ${LINE1[$i]} = ${LINE2[$i]} ]]; then #compare LINE1 and LINE2
-                        seperater $COUNT ' ' #first para "count length", second para "insert char"
-                    else
-                        seperater $COUNT '^' #if item were different than show the '^' symbol below it
-                    fi
-                    let i+=1
-             done
-             echo
-             fi
-          done
-          echo ---------------------------------------
-      else
-          echo No files been modified!
-          echo ---------------------------------------
-      fi
       sort $TMP_EXISTCUR -o $TMP_EXISTCUR
       sort $TMP_EXISTBASE -o $TMP_EXISTBASE
-
       comm -23 $TMP_EXISTCUR $TMP_EXISTBASE |grep -v '^$' > $LIST_EXISTADD #compare current and base, delete the empty line then output the added file
       if [ -s $LIST_EXISTADD ]; then #if file not empty
           echo "EXISTCHANGE ADD Failed" >> $RESULT_EXIST
@@ -324,19 +351,21 @@ if [ -f $EXISTBASE ]; then
           echo No files been deleted!
           echo ---------------------------------------
       fi
-   else
-      echo "EXISTCHANGE OK" >> $RESULT_EXIST
-#	  cat $RESULT_EXIST
-      echo "#============================================================#"
-      echo Congratulations!!
-      echo Auditing check status SUCCESS, no files been touched.
-   fi
+
+      if [ ! -s $TMP_EXISTCHANGE ] && [ ! -s $LIST_EXISTADD ] && [ ! -s $LIST_EXISTDEL ] ; then #if file not empty
+		  echo "EXISTCHANGE OK" >> $RESULT_EXIST
+		  echo Congratulations!!
+		  echo Auditing check status SUCCESS, no files been touched.
+      fi
+
 else
    echo Basefile not exist, please execute the script '"genbas_file_attr.sh"' to create !
 fi
 tlog "Running check_exist end"
 }
+#}}}
 
+#{{{check_modified
 #----------------------------------
 # Check files had been MODIFIED
 #----------------------------------
@@ -350,7 +379,7 @@ echo
 echo "#============================================================#"
 echo "# The SITE:$SITE"
 echo "# The Hostname:$hostname"
-echo "# Reading Basefile to compare directory changes ..."
+echo "# File or Directory attribute check:"
 echo "# Total `awk 'END {print NR}' $BASEFILE` files in the checking list"
 echo "# Date: `date +%Y/%m/%d\ %H:%M`"
 echo "#============================================================#"
@@ -358,8 +387,8 @@ echo "#============================================================#"
    cat /dev/null > $RESULT #flush the check_status_file
    for DIRNAME in $DIR #import all dir_list from commandline prompt
    do
-#	   find $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
-	   ${SHDIR}/sefind $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
+	   find $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
+#	   ${SHDIR}/sefind $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
    done
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT > $TMP_CUR
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $BASEFILE > $TMP_BASE
@@ -367,6 +396,7 @@ echo "#============================================================#"
 #  diff $CURRENT $BASEFILE  > $TMP_CHANGE   #creat origin difference file
    awk '$4 !~ /^l/' $TMP_CHANGE > $TMP_CHANGETWO #if the file is link file, then it take off.
    mv $TMP_CHANGETWO $TMP_CHANGE
+#   cat $TMP_CHANGE
 ################################################################################################################
 # If the Current status and Base status only the modified time different,then don't to appent the $TMP_CHANGE.
 #Sample:
@@ -444,19 +474,18 @@ echo "#============================================================#"
              execStatus2=$?
              if [ $execStatus2 -eq 0 ]; then
                 echo "Current:" ${LINE2[@]}
-                print -n "         "
-
-             let i=0
-             while [ $i -lt ${#LINE2[@]} ] ; do
-                    COUNT=${#LINE2[$i]} #count item length
-                    if [[ ${LINE1[$i]} = ${LINE2[$i]} ]]; then #compare LINE1 and LINE2
-                        seperater $COUNT ' ' #first para "count length", second para "insert char"
-                    else
-                        seperater $COUNT '^' #if item were different than show the '^' symbol below it
-                    fi
-	            let i+=1
-	     done
-             echo
+				print -n "         "
+				 let i=0
+				 while [ $i -lt ${#LINE2[@]} ] ; do
+						COUNT=${#LINE2[$i]} #count item length
+						if [[ ${LINE1[$i]} = ${LINE2[$i]} ]]; then #compare LINE1 and LINE2
+							seperater $COUNT ' ' #first para "count length", second para "insert char"
+						else
+							seperater $COUNT '^' #if item were different than show the '^' symbol below it
+						fi
+					let i+=1
+				 done
+				 echo ""
              fi
           done
           echo ---------------------------------------
@@ -464,10 +493,14 @@ echo "#============================================================#"
           echo No files been modified!
           echo ---------------------------------------
       fi
+  else	
+	  echo No files been modified!
+	  echo ---------------------------------------
+  fi
 
       sort $TMP_CUR -o $TMP_CUR
       sort $TMP_BASE -o $TMP_BASE
-
+#      echo "comm -23 $TMP_CUR $TMP_BASE |grep -v '^$' > $LIST_ADD" #compare current and base, delete the empty line then output the added file
       comm -23 $TMP_CUR $TMP_BASE |grep -v '^$' > $LIST_ADD #compare current and base, delete the empty line then output the added file
       if [ -s $LIST_ADD ]; then #if file not empty
           echo "MODIFIED ADD Failed" >> $RESULT 
@@ -491,22 +524,20 @@ echo "#============================================================#"
           echo No files been deleted!
           echo ---------------------------------------
       fi
-#      check_status
-   else
-      echo "MODIFIED OK" >> $RESULT #return the final result to file
-#echo "#============================================================#"
-      echo Congratulations!!
-      echo Auditing check status SUCCESS, no files been touched.
-      #clear_tmp  #Clear tmp files, mark "#" before this function to remain temp files for debug
-      #exit 0
-   fi
-   #clear_tmp #Clear tmp files, mark "#" before this function to remain temp files for debug
+
+      if [ ! -s $TMP_CHANGE ] && [ ! -s $LIST_ADD ] && [ ! -s $LIST_DEL ] ; then #if file not empty
+		  echo "MODIFIED OK" >> $RESULT #return the final result to file
+		  echo Congratulations!!
+		  echo Auditing check status SUCCESS, no files been touched.
+	  fi
 else
    echo Basefile not exist, please execute the script '"genbas_file_attr.sh"' to create !
    exit 1
 fi
 tlog "Running check_modified end"
 }
+#}}}
+
 check_base_file
 check_exist
 check_modified
