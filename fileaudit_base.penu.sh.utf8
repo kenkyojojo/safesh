@@ -720,20 +720,12 @@ TYPE=$2
 						chkflag=0
 						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
-						   $tlog "異動檔名: $FILENCHG " $LOG
+						   $tlog "新增檔名: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
 								GREPMODE="[[:digit:]][[:space:]]"
 						   else
 								GREPMODE="[[:space:]]"
-						   fi
-
-						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
-						   if [[ $CHKFILEN -lt 1 ]]; then
-								$tlog "" $LOG
-								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
-								$tlog "" $LOG
-								chkflag=$(($chkflag + 1))
 						   fi
 
 						   if [[ ! -f ${CURRDIR}/${hosts}${CURR} ]];then
@@ -742,10 +734,18 @@ TYPE=$2
 								$tlog "" $LOG
 						   fi
 
+						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR}|wc -l |awk '{print $1}')
+						   if [[ $CHKFILEN -lt 1 ]]; then
+								$tlog "" $LOG
+								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
+								$tlog "" $LOG
+								chkflag=$(($chkflag + 1))
+						   fi
+
 						   if [[ $chkflag -eq "0" ]];then
-							   TOLLNUM=$(wc -l ${BASEDIR}/${hosts}${BASE} | awk '{print $1}')
+							   TOLLNUM=$(wc -l ${CURRDIR}/${hosts}${CURR} | awk '{print $1}')
 #CNGLNUM=$(grep -n "[:digit:][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| awk -F : '{print $1}' )
-							   CNGLNUM=$( grep -n "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} | awk -F : '{print $1}' )
+							   CNGLNUM=$( grep -n "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} | awk -F : '{print $1}' )
 							   HEDLNUM=$(( $CNGLNUM - 1 ))
 							   TAILNUM=$(( $TOLLNUM - $CNGLNUM ))
 							  #$tlog head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
@@ -758,7 +758,7 @@ TYPE=$2
 							  #$tlog mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
 							   mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
 							   modifiedstatus=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-							   $tlog "檔案異動結果：$modifiedstatus" $LOG
+							   $tlog "檔案新增結果：$modifiedstatus" $LOG
 					 	   fi
 						done
 					else
@@ -777,7 +777,7 @@ TYPE=$2
 						   fi
 						   #modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "[0-9][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
 					       modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-					       $tlog "檔案異動結果：$modifiedstatus" $LOG
+					       $tlog "檔案新增結果：$modifiedstatus" $LOG
 						done
 					fi
 				done
@@ -803,7 +803,7 @@ TYPE=$2
 					chkflag=0
 					for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 					do
-						  $tlog "異動檔名: $FILENCHG " $LOG
+						  $tlog "新增檔名: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
 								GREPMODE="[[:digit:]][[:space:]]"
@@ -841,8 +841,7 @@ TYPE=$2
 						   fi
 					 done
 			fi
-
-			$tlog "#=======================End  to modified the fileaudit base status=================================#" $LOG
+			$tlog "#=======================End  to modified the add new line in base =================================#" $LOG
 }
 #}}}
 

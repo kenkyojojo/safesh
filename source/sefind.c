@@ -22,19 +22,33 @@ int main( int argc, char* argv[])
         printf("your uid id is %d\n", (int) getuid());
         exit(EXIT_FAILURE); 
     }
-    
+	int i;
+	char cmdargv[MAXCHAR];
+	strcpy(cmdargv, argv[1]);
+	if (argc>2)
+	{
+		for(i=2;i<argc;i++)
+		{
+
+			strcat(cmdargv, " ");
+			strcat(cmdargv, argv[i]);
+		}
+	}
+ 
+
+	
     fflush(stdout);
     if (strncmp(argv[1], "null", 4)!=0 && strncmp(argv[1], "NULL", 4)!=0)
     {
-    	sprintf(cmd,"find %s",argv[1]); 
+        sprintf(cmd,"find %s\n",cmdargv); 
     	cmd_status=run_sys_call(cmd);
-    	//if (cmd_status!=0)
-    	//{
+    	if (cmd_status!=0)
+    	{
 	//	printf("ERROR:CMD %s\n", cmd);
-        //	exit(EXIT_FAILURE); 
-    	//}
+        // 	exit(EXIT_FAILURE); 
+    	}
     }
-    return cmd_status;
+    return 0;
 }
 
 int run_sys_call(char *buffer)
