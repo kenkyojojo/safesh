@@ -1,3 +1,9 @@
+commit 308721ea058150ee375c89ebda45da513b6642d9
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 11:13:03 2014 +0800
+
+    history.txt , version.txt
+
 commit e003409a5ae883f192cd7a29e9f2a034d03e9fa0
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Jun 5 11:11:22 2014 +0800
