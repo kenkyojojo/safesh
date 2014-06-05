@@ -1,3 +1,21 @@
+commit 4e3daf760d6ec4a3efe7119570203e6e947b0c42
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 11:07:52 2014 +0800
+
+    modified:mkalluser.sh add ex05 user , del se01 user
+
+commit fdb2a73ecb3cc91cb97a15e01bb7f8623b544d12
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Jun 3 16:07:26 2014 +0800
+
+    new file:syschk_base_vios.sh , syschk_base_vios.sh_utf8
+
+commit 89456c1b813d9adc58cde2a147a6d52e131e81c8
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri May 23 14:50:37 2014 +0800
+
+    history.txt , version.txt
+
 commit d4642b591bd032e9375263a910682268c0d45a0d
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Fri May 23 14:40:43 2014 +0800
