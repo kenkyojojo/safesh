@@ -1,3 +1,15 @@
+commit 20efe24dc7db4db9b5070e45902d5eca3c89f863
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 11:44:11 2014 +0800
+
+    modified:syslog_need.pl add the new ssh record
+
+commit 547543d778c9e13dbb39f71dc6e0326d777b1b80
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 11:09:35 2014 +0800
+
+    history.txt, version.txt
+
 commit 4e3daf760d6ec4a3efe7119570203e6e947b0c42
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Jun 5 11:07:52 2014 +0800
