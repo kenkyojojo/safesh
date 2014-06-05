@@ -3,7 +3,7 @@ LOGDIR=/home/padmin/file/syschk/base
 LOGFILE=$LOGDIR/syschk.`hostname`.base
 BKLOGFILE=$LOGDIR/syschk.`hostname`.base.`date +%Y%m%d`
 IOS=/usr/ios/cli/ioscli
-set -A ent_dev ent41 ent42 ent43 ent44 ent45 ent46 ent47 ent48 ent49 ent50 ent51 ent52 ent53
+set -A ent_dev ent44 ent45 ent46 ent47 ent48 ent49 ent50 ent51 ent52 ent55
 #######################################################
 
 #{{{hostname_info
@@ -20,7 +20,7 @@ echo "" >> $LOGFILE
 oslevel_info() {
 echo "" >> $LOGFILE
 echo "#================= 作業系統版本 ================#" >> $LOGFILE
-ioslevel >> $LOGFILE
+$IOS ioslevel >> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 }
@@ -60,7 +60,8 @@ echo "" >> $LOGFILE
 network_info (){
 echo "" >> $LOGFILE
 echo "#================= 網路裝置 ====================#" >> $LOGFILE
-lscfg  | grep ^ent >> $LOGFILE
+lscfg  | grep ent >> $LOGFILE
+echo "Total Ent card Num: `lsdev | grep ent |wc -l|awk '{print $1}'`" >> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 }
@@ -70,7 +71,8 @@ echo "" >> $LOGFILE
 fcs_info () {
 echo "" >> $LOGFILE
 echo "#================= 光纖裝置 ====================#" >> $LOGFILE
-lscfg  | grep ^fcs >> $LOGFILE
+lsdev  | grep fcs >> $LOGFILE
+echo "Total Fcs card Num: `lsdev | grep fcs |wc -l|awk '{print $1}'`" >> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 }
@@ -81,7 +83,7 @@ disk_info () {
 echo "" >> $LOGFILE
 echo "#================= 磁碟路徑 ====================#" >> $LOGFILE
 lspath >> $LOGFILE
-echo "Total Disk path: `lspath|wc -l|awk '{print $1}'`" >> $logfile 
+echo "Total Disk path: `lspath|wc -l|awk '{print $1}'`" >> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 }
@@ -91,7 +93,7 @@ echo "" >> $LOGFILE
 network_address_info () {
 echo "" >> $LOGFILE
 echo "#================= 網路位址 ====================#" >> $LOGFILE
-ifconfig -a | grep "inet " | grep -v "127.0.0.1" | awk '{print $2}' >> $LOGFILE
+ifconfig -a | grep "inet" | grep -v "127.0.0.1"|grep -v "::" | awk '{print $2}' >> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 }
@@ -145,7 +147,7 @@ echo "" >> $LOGFILE
 itm_info() {
 echo "" >> $LOGFILE
 echo "#================= ITM agent狀態 ===============#" >> $LOGFILE
-/opt/IBM/ITM/bin/cinfo -r | grep "^`hostname`" | awk '{print $1, $2, $4, $7}' >> $LOGFILE
+/opt/IBM/ITM/bin/cinfo -r | grep "`hostname`" | awk '{print $1, $2, $4, $7}' >> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 }
@@ -223,7 +225,7 @@ echo "" >> $LOGFILE
 vfc_mapping_info() {
 echo "" >> $LOGFILE
 echo "#================ 光纖對映關係=================#" >> $LOGFILE
-$IOS lsmapp -all -npiv >> $LOGFILE
+$IOS lsmap -all -npiv >> $LOGFILE
 echo "#===== 確認上述資訊是否正確? Yes( ) NO( ) ======#" >> $LOGFILE
 echo "" >> $LOGFILE
 }
@@ -234,11 +236,7 @@ sea_network_mapping_info() {
 echo "" >> $LOGFILE
 echo "#================ 網路對映關係=================#" >> $LOGFILE
 
-for dev in  `lscfg | grep ^ent | awk '{print $1}'`
-do
-	$IOS lsmap -vadapter $dev -fmt ":" >> $LOGFILE
-	$IOS lsmap -vadapter $dev -net  >> $LOGFILE
-done
+#	$IOS lsmap -vadapter $dev -net  >> $LOGFILE
 
 for dev in  ${ent_dev[@]}
 do
@@ -253,7 +251,7 @@ echo "" >> $LOGFILE
 #{{{main
 main () {
 
-	if [[ -d $LOGDIR  ]] ;then
+	if [[ ! -d $LOGDIR  ]] ;then
 		mkdir -p $LOGDIR
 	fi
 
@@ -308,20 +306,20 @@ main () {
 	itm_info
 
 	#:13 check user limite information
-	echo "#=13=#" >> $LOGFILE
-	user_limit_info
+	#echo "#=13=#" >> $LOGFILE
+	#user_limit_info
 
 	#:14 check user information
-	echo "#=14=#" >> $LOGFILE
-	user_info
+	#echo "#=14=#" >> $LOGFILE
+	#user_info
 
 	#:15 check Fibre Channel mapping information
 	echo "#=15=#" >> $LOGFILE
 	vfc_mapping_info
 
 	#:16 check sea network mapping information
-	echo "#=16=#" >> $LOGFILE
-	sea_network_mapping_info
+	#echo "#=16=#" >> $LOGFILE
+	#sea_network_mapping_info
 
 	# Backup base file
 	cp $LOGFILE $BKLOGFILE 
