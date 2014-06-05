@@ -1,3 +1,27 @@
+commit 1035726643c4e8624270c8c185b8be3054ab719a
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 11:14:16 2014 +0800
+
+    modified:mkalluser.sh add ex05 user , del se01 user
+
+commit a2ab53e47e636031ef4bd93a3b0fdc804771007a
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Jun 3 10:06:26 2014 +0800
+
+    new file:diag_system_base_lv2.sh, diag_system_cpu_lv2.sh, diag_system_lvm_lv2.sh, diag_system_mem_lv2.sh, diag_system_menu_lv1.sh, diag_system_net_lv2.sh, diag_system_prc_lv2.sh, function_lib.sh
+
+commit fce013c3a5c66a127be6f7a59fd181f2525b58e3
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon May 26 10:17:05 2014 +0800
+
+    modified:fileaudit_base.penu.sh.utf8, sefind,sels,source/sefind.c,source/sels.c
+
+commit 91c3575697c3ea8c77cfadb4753fbdfbd59a1dcb
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri May 23 14:45:47 2014 +0800
+
+    history.txt, version.txt
+
 commit fc35285d0042d988fa43a8bac48909bfa403e620
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Fri May 23 14:39:47 2014 +0800
