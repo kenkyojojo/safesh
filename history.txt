@@ -1,3 +1,15 @@
+commit e003409a5ae883f192cd7a29e9f2a034d03e9fa0
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 11:11:22 2014 +0800
+
+    modified:mkalluser.sh add ex05 user , del se01 user
+
+commit 63ac0eda8e6a9f3ed9ec7e9814ea7af31c20ee45
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri May 23 14:53:15 2014 +0800
+
+    history.txt, version.txt
+
 commit 78946d0a0bdec7f70f64f3a5e5015a129d44939f
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Fri May 23 14:41:12 2014 +0800
