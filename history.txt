@@ -1,3 +1,33 @@
+commit 207b372af36573fe1e2a1beaf72a586cf936926a
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Jul 15 11:55:54 2014 +0800
+
+    modified:apdir_operator.sh add scp apdir_operator.sh to all lapr
+
+commit df5c544f23d21fea95106a2bbdd2f088ca742f88
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 16:00:12 2014 +0800
+
+    modified: active_lpar.Menu.sh, shutdown_lpar.Menu.sh
+
+commit 7d701f2deaf05cd902aec8da8c3de022d1b964e7
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 15:37:04 2014 +0800
+
+    modified: syschk_base_vios.sh, syschk_base_vios.sh_utf8
+
+commit e531f5c2c67c92829e8d69f229a69bda267f4412
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 15:36:13 2014 +0800
+
+    modified:syschk_base_vios.sh, syschk_base_vios.sh_utf8
+
+commit 2524f0d963331d36aabe657d3aeda10456a728ed
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Jun 5 11:45:08 2014 +0800
+
+    history.txt, version.txt
+
 commit 20efe24dc7db4db9b5070e45902d5eca3c89f863
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Jun 5 11:44:11 2014 +0800
