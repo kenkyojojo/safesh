@@ -6,6 +6,8 @@ LOGDIR=/home/se/safechk/safelog
 LOG="$LOGDIR/apdir_operator.log"
 SHDIR=/home/se/safechk/safesh
 CFGFILE=$CFGDIR/ap_dir.cfg
+#CFGFILE=$CFGDIR/twse_apuser.cfg
+#CFGFILE=$CFGDIR/exadm_apuser.cfg
 tlog=$SHDIR/tlog.sh
 
 #---------------------------------------------------------------------
@@ -30,6 +32,8 @@ SCP_CMD() {
 	do
 		$tlog "scp -P 2222 $dirname/$filename $USER@$hosts:$dirname/$filename" $LOG
 		       scp -P 2222 $dirname/$filename $USER@$hosts:$dirname/$filename  > /dev/null 2>&1
+		$tlog "scp -P 2222 $SHDIR/apdir_operator.sh $USER@$hosts:$SHDIR/apdir_operator.sh" $LOG
+		       scp -P 2222 $SHDIR/apdir_operator.sh $USER@$hosts:$SHDIR/apdir_operator.sh > /dev/null 2>&1
 	done
 
 	$tlog "Step[2] SPC_CMD function Finished" $LOG
