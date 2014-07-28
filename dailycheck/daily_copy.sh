@@ -47,13 +47,13 @@ STEP1() {
 		scp -P 2222 $LOGDIR/$DATE2.$hostname.*.csv $wkserver:$SELOG/csv/ 2>/dev/null
 		scp -P 2222 $ACCOUNTDIR/result/${hostname}_`date +%Y%m%d_user_attr.rst` $wkserver:$SELOG/itm/ 2>/dev/null
 		scp -P 2222 $FILEDIR/result/${hostname}_`date +%Y%m%d_file_attr.rst` $wkserver:$SELOG/itm/ 2>/dev/null
-		scp -P 2222 /var/log/syslog/$hostname.syslog.${DATE}.tar.gz $wkserver:$SELOG/log/ 2>/dev/null
+#		scp -P 2222 /var/log/syslog/$hostname.syslog.${DATE}.tar.gz $wkserver:$SELOG/log/ 2>/dev/null
 	else
 		cp  $LOGDIR/$DATE2.$hostname.*.txt $SELOG/log/ 2>/dev/null
 		cp  $LOGDIR/$DATE2.$hostname.*.csv $SELOG/csv/ 2>/dev/null
 		cp  $ACCOUNTDIR/result/${hostname}_`date +%Y%m%d_user_attr.rst` $SELOG/itm/ 2>/dev/null
 		cp  $FILEDIR/result/${hostname}_`date +%Y%m%d_file_attr.rst` $SELOG/itm/ 2>/dev/null
-		cp  /var/log/syslog/$hostname.syslog.${DATE}.tar.gz $SELOG/log/ 2>/dev/null
+#		cp  /var/log/syslog/$hostname.syslog.${DATE}.tar.gz $SELOG/log/ 2>/dev/null
 		chown -R useradm:security $SELOG
 	fi
     echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'scp csv to Working LPAR End' >> $LOG
