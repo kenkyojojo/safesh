@@ -1,3 +1,27 @@
+commit fe40704555546f8eefc81efbc04f56c58ee4b20d
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Wed Jul 30 11:05:20 2014 +0800
+
+    new file:passwd_emerg.sh
+
+commit 47b63f879df0cd98c63b684e87ff9da9a7e5bb50
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Jul 28 18:39:58 2014 +0800
+
+    modified: daily_copy.sh
+
+commit 129b645f9d30fe2fbaa01d3b1aff475d7200c069
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Jul 28 17:36:05 2014 +0800
+
+    modified:daily_copy.sh
+
+commit 2c917dd9dd2bc242c05978ac3984cde62dffafa5
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Jul 15 11:57:06 2014 +0800
+
+    history.txt version.txt
+
 commit 207b372af36573fe1e2a1beaf72a586cf936926a
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Tue Jul 15 11:55:54 2014 +0800
