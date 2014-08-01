@@ -41,25 +41,23 @@ user_check (){
 #{{{reset_user_passwd
 reset_user_passwd (){
 
-USRLIST=$(cat /home/se/safechk/safesh/account/mkalluser.sh | grep mkuser | awk '{print $NF}' )
+USRLIST=$(cat /home/se/safechk/safesh/account/mkalluser.sh | grep mkuser | awk '{print $NF}')
 
 	for USERNAME in $USRLIST
 	do
 		USERCHK=`grep "^${USERNAME}:" /etc/passwd | awk -F: '{print $1}'`
-
 		if [[ "$USERCHK" != "$USERNAME" ]];then
 			$tlog "[ERR] $USERNAME not exists" $LOG
 		else
 			echo "$USERNAME:$RESTPASS" | chpasswd -c 
 			rc=$?
-			if [[ $rc -eq "0" ]] ;then
+			if [[ $rc -eq "0" ]];then
 				$tlog "[INFO] $USERNAME reset default passwd success" $LOG
 			else
 				$tlog "[ERR] $USERNAME reset default passwd failed" $LOG
 			fi
 		fi
 	done
-
 }
 #}}}
 
@@ -86,4 +84,25 @@ main () {
 }
 #}}}
 
-main
+#{{{begin
+begin () {
+	clear
+	echo "使用者密碼變更緊急程序"
+	echo "將所有使用者密碼變更為預設密碼"
+	read ANSWER?"請確認是否執行(Y/N): "
+		case $ANSWER in                               
+		n|N)                                          
+			exit
+			;;                                       
+		y|Y)
+			main
+			;;
+		*)                                            
+			echo "[ERR]  輸入錯誤, 請輸入(Y/N)"    
+			exit 1
+		   ;;                                 
+		esac
+}
+#}}}
+
+begin
