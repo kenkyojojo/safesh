@@ -1,3 +1,21 @@
+commit 6fea8f1278d5f5e07f01ddb3cc9c08a89eef5b6c
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Aug 11 11:10:49 2014 +0800
+
+    modified:adduser_ssh.sh change the logic
+
+commit bf375ef56c1c10e22a2ed7db35e4a39831f83591
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri Aug 1 12:18:51 2014 +0800
+
+    modified:passwd_emerg.sh
+
+commit 4763be28053d01a26e16afd2b2745dcf45ba9c81
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Wed Jul 30 11:07:11 2014 +0800
+
+    modified:history.txt version.txt
+
 commit fe40704555546f8eefc81efbc04f56c58ee4b20d
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Wed Jul 30 11:05:20 2014 +0800
