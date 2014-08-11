@@ -210,7 +210,7 @@ convPwExpire() {
 
 	# last login time.
 	lastlogin1=""
-	ans=`who /var/adm/wtmp | awk '\$1~/^'${name1}'/{dat=\$0}END{print dat}`
+	ans=`who /var/adm/wtmp | awk '\$1~/^'${name1}'/{dat=\$0}END{print dat}'`
 	if [ -n "$ans" ]; then
 		tt1=`echo $ans | awk '{print $3,$4,$5}'`
 		lastlogin1=`getTime1 $tt1`
@@ -773,7 +773,7 @@ catMonthCsv () {
 }
 
 main() {
-        mappingHost
+    mappingHost
 	genUserList
 
 	# # test1
@@ -784,7 +784,7 @@ main() {
 
 	#mergeEachCsv
 
-        catMonthCsv
+    catMonthCsv
 
 	# final
 	#tlog " > cat $outfile1 >> $outfile2"
