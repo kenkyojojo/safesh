@@ -1,3 +1,33 @@
+commit 7eddffb8aa837cbc278f61cd178504ddb59260bc
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Aug 14 15:56:01 2014 +0800
+
+    modified add the flag mv -f on fileaudit_base.menu.sh fileaudit_base.penu.sh
+
+commit 814f5fe3dfd7e4f39d3e4e6bac5bc50cc60347d9
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Aug 14 15:35:00 2014 +0800
+
+    modified:fileaudit_base.menu.sh,fileaudit_base.penu.sh
+
+commit f88d2df2b93e822b1ca3afa141cf8e2c6980eb6f
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Aug 11 11:45:29 2014 +0800
+
+    modified:log2csv.sh
+
+commit dc8e42c4af35673cd825eb85f1caa47befb36c3d
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Aug 11 11:29:44 2014 +0800
+
+    modified: adduser_ssh.sh deluser_ssh.sh
+
+commit 1829d3e5f0b6b5679af65953963837056e785a2f
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Aug 11 11:11:01 2014 +0800
+
+    history.txt
+
 commit 6fea8f1278d5f5e07f01ddb3cc9c08a89eef5b6c
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Mon Aug 11 11:10:49 2014 +0800
