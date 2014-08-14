@@ -745,8 +745,8 @@ TYPE=$2
 							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}.tmp
 							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hosts}${BASE}.tmp
-							  #$tlog mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
-							   mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
+							  #$tlog mv -f ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
+							   mv -f ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
 							   modifiedstatus=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
 							   $tlog "檔案異動結果：$modifiedstatus" $LOG
 					 	   fi
@@ -826,8 +826,8 @@ TYPE=$2
 							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
 							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp
-							  #$tlog mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
-							   mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+							  #$tlog mv -f ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
+							   mv -f ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
 						   fi
 					 done
 			fi
@@ -871,7 +871,7 @@ TYPE=$2
 
 						   if [[ $chkflag -eq "0" ]];then
 							    grep -v "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
-							    mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
+							    mv -f ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
 					       fi
 						done
 					else
@@ -922,7 +922,7 @@ TYPE=$2
 
 						   if [[ $chkflag -eq "0" ]];then
 							    grep -v "${GREPMODE}${FILENCHG}" ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
-							    mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+							    mv -f ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
 						   fi
 					 done
 			fi
