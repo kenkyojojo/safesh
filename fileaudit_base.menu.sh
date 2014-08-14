@@ -15,7 +15,7 @@ FILEDIR=/home/se/safechk/file/fileaudit
 BASEDIR=${FILEDIR}/base
 CURRDIR=${FILEDIR}/check
 
-set -A MUSER root useradm bruce
+set -A MUSER root useradm
 #===============================================================#
 
 #{{{create_log
@@ -1136,6 +1136,16 @@ Begin () {
 				BASE="_file_exist.bas"
 				CURR="_`date +%Y%m%d_file_exist.chk`"
 				MODIFIED_BASE $MODE $TYPE
+			fi
+		elif [[ $MODE = "CNG_REMOVE" ]];then
+			if [[ $TYPE = "ATTR" ]];then
+				BASE="_file_attr.bas"
+				CURR="_`date +%Y%m%d_file_attr.chk`"
+				MODIFIED_REMOVE_BASE $MODE $TYPE
+			else
+				BASE="_file_exist.bas"
+				CURR="_`date +%Y%m%d_file_exist.chk`"
+				MODIFIED_REMOVE_BASE $MODE $TYPE
 			fi
 		fi
 	fi
