@@ -1,3 +1,15 @@
+commit 5bc2eec47e490f3731b93681703cea5b31008a29
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri Aug 22 10:22:53 2014 +0800
+
+    modified:daily_copy.sh
+
+commit 99710f4dd06eafa84008ff472733990b3afe4dcd
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Aug 14 15:56:12 2014 +0800
+
+    history.txt
+
 commit 7eddffb8aa837cbc278f61cd178504ddb59260bc
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Aug 14 15:56:01 2014 +0800
