@@ -116,9 +116,13 @@ STEP3() {
 		CHKFILEERR=`ls -l $SELOG/log/safelog.*.fileattr.$DATE | wc -l 2>/dev/null`
 		if [ $CHKFILEERR -gt 0 ];then
 			cd $SELOG/log/
-			tar -cf - safelog.*.fileattr.$DATE  | gzip  > ${SITE}.fileattr.${DATE}.err.tar.gz 2>/dev/null
+			cat safelog.*.fileattr.$DATE > fileattr.summary.$DATE 2>/dev/null
+			tar -cf - fileattr.summary.$DATE  | gzip  > ${SITE}.fileattr.${DATE}.err.tar.gz 2>/dev/null
+#			tar -cf - safelog.*.fileattr.$DATE  | gzip  > ${SITE}.fileattr.${DATE}.err.tar.gz 2>/dev/null
 			chown useradm:security $SELOG/log/${SITE}.fileattr.${DATE}.err.tar.gz
+#			rm -f $SELOG/log/safelog.*.fileattr.$DATE 2>/dev/null
 			rm -f $SELOG/log/safelog.*.fileattr.$DATE 2>/dev/null
+			rm -f $SELOG/log/fileattr.summary.$DATE 2>/dev/null
 		fi
 
 			find $SELOG/log/ -type f -mtime +3 -name "${SITE}.fileattr.*.err.tar.gz" -exec rm {} \;
