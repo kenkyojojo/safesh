@@ -75,17 +75,14 @@ else
   echo `date +"%Y%m%d %H:%M:%S"` "Create new user:$5"
   if [ $5 == twse ] || [ $5 == otc ] ; then
      mkuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
-        echo "$5:1234567"|chpasswd
-        pwdadm -c $5
+        echo "$5:1234567"|chpasswd -c
   else
      if [ $5 == useradm ]; then
         mkuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
-        echo "$5:1234567"|chpasswd
-        pwdadm -c $5
+        echo "$5:1234567"|chpasswd -c
      else
         mkuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='7' minlen='7' $5
-        echo "$5:1234567"|chpasswd
-        pwdadm -c $5
+        echo "$5:1234567"|chpasswd -c
      fi
   fi
 fi
