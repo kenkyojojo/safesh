@@ -24,6 +24,14 @@ else
   mkgroup -a id=600 exc 
 fi
 
+lsgroup -a ALL | grep "^otcexc$"
+if [ $? -eq 0 ]; then
+  echo `date +"%Y%m%d %H:%M:%S"` Groupname = otcexc aleady exist
+else
+  echo `date +"%Y%m%d %H:%M:%S"` Groupname = otcexc not exist, create new group
+  mkgroup -a id=700 otcexc
+fi
+
 lsgroup -a ALL | grep "^tse$"
 if [ $? -eq 0 ]; then
   echo `date +"%Y%m%d %H:%M:%S"` Groupname = tse aleady exist
@@ -31,6 +39,17 @@ else
   echo `date +"%Y%m%d %H:%M:%S"` Groupname = tse not exist, create new group
   mkgroup -a id=800 tse
 fi
+
+lsgroup -a ALL | grep "^otc$"
+if [ $? -eq 0 ]; then
+  echo `date +"%Y%m%d %H:%M:%S"` Groupname = otc aleady exist
+else
+  echo `date +"%Y%m%d %H:%M:%S"` Groupname = otc not exist, create new group
+  mkgroup -a id=900 otc
+fi
+
+
+
 echo "---------------------------------------"
 
 
@@ -42,28 +61,29 @@ if [ $execStatus -eq 0 ]; then
   echo
   echo `date +"%Y%m%d %H:%M:%S"` "user:$5 already exist"
   echo `date +"%Y%m%d %H:%M:%S"` "Change user:$5 attribute"
-  if [ $5 == twse ]; then
-     chuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
+  if [ $5 == twse ] || [ $5 == otc ] ; then
+     chuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
   else
      if [ $5 == useradm ]; then
-        chuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
+        chuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
      else
-        chuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='7' minlen='7' $5
+        chuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='7' minlen='7' $5
      fi
   fi 
 else
   echo `date +"%Y%m%d %H:%M:%S"` "user:$5 not exist"
   echo `date +"%Y%m%d %H:%M:%S"` "Create new user:$5"
-  if [ $5 == twse ]; then
-     mkuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
+  if [ $5 == twse ] || [ $5 == otc ] ; then
+     mkuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
         echo "$5:1234567"|chpasswd
+        pwdadm -c $5
   else
      if [ $5 == useradm ]; then
-        mkuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
+        mkuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='12' minlen='7' $5
         echo "$5:1234567"|chpasswd
         pwdadm -c $5
      else
-        mkuser pgrp=$1 groups=$2 home="/home/$1/$5" shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='7' minlen='7' $5
+        mkuser pgrp=$1 groups=$2 home="/home/$1/"$5 shell='/usr/bin/ksh' umask=$3 id=$4 loginretries='10' pwdwarntime='7' histsize='6' maxexpired='1' maxage='7' minlen='7' $5
         echo "$5:1234567"|chpasswd
         pwdadm -c $5
      fi
