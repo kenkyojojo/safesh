@@ -956,7 +956,7 @@ MENU_INPUT () {
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
 #read  -A HOSTN?"輸入欲變更Base的主機名稱 : "
-       read  HOSTN?"輸入欲變更Base的主機名稱 : "
+       read  HOSTN?"輸入欲執行的主機名稱 : "
 
 	   if [[ "$HOSTN" == "q" ]] || [[ "$HOSTN" == "Q" ]]; then
 		   main
@@ -964,7 +964,7 @@ MENU_INPUT () {
 
 	   if [[ -z "$HOSTN" ]]; then
 			echo ""
-			echo "               [Error] 請輸輸入欲變更的主機名稱"
+			echo "               [Error] 請重新輸入主機名"
 			echo ""
 			read ANSWR?"               按Enter鍵繼續 "
 			main
@@ -1000,8 +1000,8 @@ MENU_INPUT () {
 			   FIX)
 				   set -A HOSTLIST $(cat $HOSTDIR | grep -i ^FIX)
 				   ;;
-			   TS)
-				   set -A HOSTLIST $(cat $HOSTDIR | grep -i ^TS)
+			   OTC)
+				   set -A HOSTLIST $(cat $HOSTDIR | grep -i ^OTC)
 				   ;;
 			   ALL)
 				   set -A HOSTLIST $(cat $HOSTDIR)

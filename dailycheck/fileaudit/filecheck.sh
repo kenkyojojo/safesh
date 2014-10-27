@@ -65,13 +65,20 @@ case $HOSTN in
 		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.wkl;sed -n '3p' $CONFIGDIR/dir.conf.wkl;sed -n '4p' $CONFIGDIR/dir.conf.wkl`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.wkl | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
-#	X23)
-#		DIR=`head -1 $CONFIGDIR/dir.conf.x230`
-#		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.x230`
-#		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.x230`
-#		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.x230;sed -n '3p' $CONFIGDIR/dir.conf.x230;sed -n '4p' $CONFIGDIR/dir.conf.x230`
-#		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.x230 | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
-#		;;
+	OTC)
+		DIR=`head -1 $CONFIGDIR/dir.conf.otc`
+		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.otc`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.otc`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.otc;sed -n '3p' $CONFIGDIR/dir.conf.otc;sed -n '4p' $CONFIGDIR/dir.conf.otc`
+		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.otc | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
+		;;
+	FIX)
+		DIR=`head -1 $CONFIGDIR/dir.conf.fix`
+		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.fix`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.fix`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.fix;sed -n '3p' $CONFIGDIR/dir.conf.fix;sed -n '4p' $CONFIGDIR/dir.conf.fix`
+		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.fix | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
+		;;
 	*)
 		DIR=`head -1 $CONFIGDIR/dir.conf`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf`
@@ -88,6 +95,8 @@ EXCLUDE_EXIST=`echo $EXIST | sed -e 's#\/#\\\/#g' -e 's/ /\$\/d\" -e \"\//g' -e 
 BASEFILE=$FILEDIR/base/${hostname}_file_attr.bas
 EXISTBASE=$FILEDIR/base/${hostname}_file_exist.bas
 CURRENT=$FILEDIR/check/${hostname}_`date +%Y%m%d_file_attr.chk`
+#CURRENT_MODI=$FILEDIR/check/${hostname}_`date +%Y%m%d_modified_file_attr.chk`
+CURRENT_MODI=$FILEDIR/${hostname}_`date +%Y%m%d_modified_file_attr.chk`
 CURRENT_EXIST=$FILEDIR/check/${hostname}_`date +%Y%m%d_file_exist.chk`
 RESULT=$FILEDIR/result/${hostname}_`date +%Y%m%d_file_attr.rst`
 RESULT_EXIST=$FILEDIR/result/${hostname}_`date +%Y%m%d_file_exist.rst`
@@ -100,9 +109,11 @@ debugmod="1"		# for debug! (1=on , 0=off)
 # Temp file for compare and debug
 #----------------------------------
 TMP_CUR=$FILEDIR/tmp_current
+TMP_CUR_MODI=$FILEDIR/tmp_current_modi
 TMP_BASE=$FILEDIR/tmp_base
 TMP_CHANGE=$FILEDIR/tmp_change
 TMP_CHANGETWO=$FILEDIR/tmp_changetwo
+TMP_CHANGETRE=$FILEDIR/tmp_changetre
 TMP_DEBUG=$FILEDIR/DEBUG
 LIST_ADD=$FILEDIR/file_add
 LIST_DEL=$FILEDIR/file_del
@@ -163,10 +174,12 @@ clear_tmp(){
 tlog "Running clear_tmp start"
    rm $TMP_BASE
    rm $TMP_CUR
-   rm $TMP_CHANGE
+   rm $TMP_CUR_MODI
+#   rm $TMP_CHANGE
    rm $TMP_EXISTBASE
    rm $TMP_EXISTCUR
    rm $TMP_EXISTCHANGE
+
 
    if [ -f $TMP_DEBUG ]; then
       rm $TMP_DEBUG
@@ -195,6 +208,10 @@ tlog "Running clear_tmp start"
    if [ -f $LIST_EXISTCHANGE ]; then
       rm $LIST_EXISTCHANGE
    fi
+
+   if [ -f $CURRENT_MODI ]; then
+	  rm -f $CURRENT_MODI
+   fi
 tlog "Running clear_tmp end"
 }
 #}}}
@@ -219,6 +236,7 @@ print -n " "
 # check_status 
 # 1.echo "OK" or "failed" to $CHKDIR/fileaudit.status for the /home/se/chk/'s dailycheck.
 # 2.if the fileaudit.status no file has modified, then cp the current attr.bas over write the original attr.bas .
+# 3.為seadm日檢核所產生確認檔
 #----------------------------------
 daily_check_status(){
 RESULT=`grep 'Failed' $RESULT|wc -l`
@@ -248,6 +266,7 @@ tlog "Running daily_check_status end"
 #{{{check_exist
 #----------------------------------
 # Check File or Directory exist
+# 不檢查檔案時間屬性
 #----------------------------------
 check_exist(){
 #set -x 
@@ -257,8 +276,10 @@ echo
 echo "#============================================================#"
 echo "# The SITE:$SITE"
 echo "# The Hostname:$hostname"
-echo "# File or Directory exist check:"
-echo "# Total `awk 'END {print NR}' $EXISTBASE` files in the checking list"
+#echo "# File or Directory exist check"
+echo "# 檢查檔案及目錄(無時間屬性)"
+#echo "# Total `awk 'END {print NR}' $EXISTBASE` files in the checking list"
+echo "# 共檢查 `awk 'END {print NR}' $EXISTBASE` 檔案"
 echo "# Date: `date +%Y/%m/%d\ %H:%M`"
 echo "#============================================================#"
 cat /dev/null > $RESULT_EXIST #flush the check_status_file
@@ -282,14 +303,18 @@ if [ -f $EXISTBASE ]; then
    #diff $CURRENT_EXIST $EXISTBASE | sed -e "/ \/etc$/d" > $TMP_EXISTCHANGE
    diff $CURRENT_EXIST $EXISTBASE  > $TMP_EXISTCHANGE
 
+####################################################################################
+# 檢查是否有檔案異動
+####################################################################################
    if [ -s $TMP_EXISTCHANGE ]; then
 		  echo "#============================================================#"
-		  echo Something are different comparing with the basefile:
+#echo Something are different comparing with the basefile:
 		  awk '{print $5}' $TMP_EXISTCHANGE | sort | uniq -d | grep -v '^$' > $LIST_EXISTCHANGE
 		  if [ -s $LIST_EXISTCHANGE ]; then
 			  echo "EXISTCHANGE Failed" > $RESULT_EXIST
 			  cat $LIST_EXISTCHANGE > $FILECHG_EXIST
-			  echo "There are `awk 'END {print NR}' $LIST_EXISTCHANGE` files had been MODIFIED"
+#echo "There are `awk 'END {print NR}' $LIST_EXISTCHANGE` files had been MODIFIED"
+			  echo "共有 `awk 'END {print NR}' $LIST_EXISTCHANGE` 檔案異動"
 
 			  for LINE in `cat $LIST_EXISTCHANGE`
 			  do
@@ -319,43 +344,64 @@ if [ -f $EXISTBASE ]; then
 			  done
 			  echo ---------------------------------------
 		  else
-			  echo No files been modified!
+          	  echo 無異動檔案
+#	  echo No files been modified!
 			  echo ---------------------------------------
 		  fi
 	 else
-		  echo No files been modified!
+          echo 無異動檔案
+		  #echo No files been modified!
 		  echo ---------------------------------------
    fi
-
+####################################################################################
+# 檢查是否有新增檔案
+####################################################################################
       sort $TMP_EXISTCUR -o $TMP_EXISTCUR
       sort $TMP_EXISTBASE -o $TMP_EXISTBASE
       comm -23 $TMP_EXISTCUR $TMP_EXISTBASE |grep -v '^$' > $LIST_EXISTADD #compare current and base, delete the empty line then output the added file
       if [ -s $LIST_EXISTADD ]; then #if file not empty
           echo "EXISTCHANGE ADD Failed" >> $RESULT_EXIST
-          echo "There are `awk 'END {print NR}' $LIST_EXISTADD` files had been ADDED"
-          awk 'NR==FNR{arr[$1];next}$4 in arr' $LIST_EXISTADD $CURRENT_EXIST #print the added file(s) with Current attributes
-          cat $LIST_EXISTADD
+		  #echo "There are `awk 'END {print NR}' $LIST_EXISTADD` files had been ADDED"
+          echo "共有 `awk 'END {print NR}' $LIST_EXISTADD` 檔案新增"
+#          awk 'NR==FNR{arr[$1];next}$4 in arr' $LIST_EXISTADD $CURRENT_EXIST #print the added file(s) with Current attributes
+
+		  for ADD in `cat $LIST_EXISTADD`
+		  do
+			  grep "${ADD}$" $CURRENT_EXIST
+		  done
+#cat $LIST_EXISTADD
           echo ---------------------------------------
       else
-          echo No files been added!
+          echo 無新增檔案
+	      #echo No files been added!
           echo ---------------------------------------
       fi
-
+####################################################################################
+# 檢查是否有被檔案刪除
+####################################################################################
       comm -13 $TMP_EXISTCUR $TMP_EXISTBASE |grep -v '^$' > $LIST_EXISTDEL
       if [ -s $LIST_EXISTDEL ]; then
       echo "EXISTCHANGE DEL Failed" >> $RESULT_EXIST
-          echo "There are `awk 'END {print NR}' $LIST_EXISTDEL` files had been DELETED"
-          awk 'NR==FNR{arr[$1];next}$4 in arr' $LIST_EXISTDEL $EXISTBASE #print the deleted file(s) with Base attributes
-	  echo ---------------------------------------
+		  #echo "There are `awk 'END {print NR}' $LIST_EXISTDEL` files had been DELETED"
+          echo "共有 `awk 'END {print NR}' $LIST_EXISTDEL` 檔案刪除"
+#          awk 'NR==FNR{arr[$1];next}$4 in arr' $LIST_EXISTDEL $EXISTBASE #print the deleted file(s) with Base attributes
+
+		  for DEL in `cat $LIST_EXISTDEL`
+		  do
+			  grep "${DEL}$" $EXISTBASE
+		  done
+#          cat $LIST_EXISTDEL
+	  	  echo ---------------------------------------
       else
-          echo No files been deleted!
+          echo 無檔案刪除
+		  #echo No files been deleted!
           echo ---------------------------------------
       fi
 
       if [ ! -s $TMP_EXISTCHANGE ] && [ ! -s $LIST_EXISTADD ] && [ ! -s $LIST_EXISTDEL ] ; then #if file not empty
 		  echo "EXISTCHANGE OK" >> $RESULT_EXIST
-		  echo Congratulations!!
-		  echo Auditing check status SUCCESS, no files been touched.
+# 		  echo Congratulations!!
+#		  echo Auditing check status SUCCESS, no files been touched.
       fi
 
 else
@@ -368,6 +414,7 @@ tlog "Running check_exist end"
 #{{{check_modified
 #----------------------------------
 # Check files had been MODIFIED
+# 檢查檔案時間屬性
 #----------------------------------
 check_modified(){
 #set -x 
@@ -379,100 +426,89 @@ echo
 echo "#============================================================#"
 echo "# The SITE:$SITE"
 echo "# The Hostname:$hostname"
-echo "# File or Directory attribute check:"
-echo "# Total `awk 'END {print NR}' $BASEFILE` files in the checking list"
+#echo "# File or Directory attribute check"
+echo "# 檢查檔案及目錄(含時間屬性)"
+#echo "# Total `awk 'END {print NR}' $BASEFILE` files in the checking list"
+echo "# 共檢查 `awk 'END {print NR}' $BASEFILE` 檔案"
 echo "# Date: `date +%Y/%m/%d\ %H:%M`"
 echo "#============================================================#"
    cat /dev/null > $CURRENT #flush the file to make sure it's fresh
+   cat /dev/null > $CURRENT_MODI #flush the file to make sure it's fresh
    cat /dev/null > $RESULT #flush the check_status_file
    for DIRNAME in $DIR #import all dir_list from commandline prompt
    do
 	   find $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
+	   find $DIRNAME -mtime -14 -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT_MODI
 #	   ${SHDIR}/sefind $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
+#	   ${SHDIR}/sefind $DIRNAME -mtime -14 -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT_MODI
    done
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT > $TMP_CUR
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $BASEFILE > $TMP_BASE
-   diff $CURRENT $BASEFILE | sed -e "/ \/etc$/d" > $TMP_CHANGE   #creat origin difference file
-#  diff $CURRENT $BASEFILE  > $TMP_CHANGE   #creat origin difference file
-   awk '$4 !~ /^l/' $TMP_CHANGE > $TMP_CHANGETWO #if the file is link file, then it take off.
-   mv $TMP_CHANGETWO $TMP_CHANGE
-#   cat $TMP_CHANGE
-################################################################################################################
-# If the Current status and Base status only the modified time different,then don't to appent the $TMP_CHANGE.
-#Sample:
-#   Base   : 11    8 drwxr-xr-x 36 root      system        8192 May 17 13:30 /etc
-#   Current: 11    8 drwxr-xr-x 36 root      system        8192 May 17 2012  /etc
-#                                                                      ^^^^^
-################################################################################################################
-   if [ -s $TMP_CHANGE ]; then
+   awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT_MODI > $TMP_CUR_MODI
+	##diff $CURRENT $BASEFILE  > $TMP_CHANGE   #creat origin difference file
+	#awk '$4 !~ /^l/' $TMP_CHANGE > $TMP_CHANGETWO #if the file is link file, then it take off.
+	#diff $CURRENT $BASEFILE | sed -e "/ \/etc$/d" > $TMP_CHANGE   #creat origin difference file
 
-      awk '{print $12}' $TMP_CHANGE | sort | uniq -d | grep -v '^$' > $LIST_CHANGE
-	  cat /dev/null > $TMP_CHANGE
-      if [ -s $LIST_CHANGE ]; then
-
-          for LINE in `cat $LIST_CHANGE`
-          do
-#set -A LINE1 `grep " ${LINE}$" $BASEFILE`
-#set -A LINE2 `grep " ${LINE}$" $CURRENT`
-			set -A LINE1 `grep " ${LINE}$" $BASEFILE | awk '$3 !~ /^l/'`
-			set -A LINE2 `grep " ${LINE}$" $CURRENT | awk '$3 !~ /^l/'`
-			 LINECURRENT=$(grep " ${LINE}$" $CURRENT|awk '$3 !~/^l/')
-			 column=`echo $LINECURRENT | awk '{print NF}'`
-
-             let count=0
-			 let i=0
-
-             while [ $i -lt ${#LINE2[@]} ] ; do
-                    if [[ ${LINE1[$i]} = ${LINE2[$i]} ]]; then #compare LINE1 and LINE2
-            			count=$count
-                    else
-            			let count+=1
-                    fi
-				let i+=1
-	         done
-
-			 LINUCOLUMN9=$(echo $LINECURRENT|awk '{print $9}')
-			 LINUCOLUMN10=$(echo $LINECURRENT|awk '{print $10}')
-		    if [[ $count -gt 0 ]];then
-			 	if [[ $count -eq 1 ]];then
-					 case $column in
-							11) if [[ $LINUCOLUMN10 = [0-9][0-9]:[0-9][0-9] ]];then echo $LINE >> $TMP_CHANGE;fi
-							 ;;
-							10) if [[ $LINUCOLUMN9  = [0-9][0-9]:[0-9][0-9] ]];then echo $LINE >> $TMP_CHANGE;fi
-							 ;;
-							 *) if [[ $LINUCOLUMN10 = [0-9][0-9]:[0-9][0-9] ]];then echo $LINE >> $TMP_CHANGE;fi 
-							 ;;
-		  			 esac
-				 else
-		  	    	echo $LINE	>> $TMP_CHANGE
-			    fi
-		    fi
-           done
-		fi
+ 	#如無diff無異動時，直接離開該function
+   diff  $CURRENT $BASEFILE > /dev/null	#creat origin difference file
+   rc=$?
+   if [[ $rc = "0" ]];then
+	   echo 無異動檔案
+	   echo ---------------------------------------
+	   echo 無新增檔案
+	   echo ---------------------------------------
+	   echo 無檔案刪除
+	   echo ---------------------------------------
+	   return 0
    fi
+
+   cat $TMP_CUR_MODI | sed -e "/\/etc$/d" > $TMP_CHANGE   #creat origin difference file, /etc 不檢查其時間異動
+   touch $TMP_CHANGETRE
+   for FILE_LST in `cat $TMP_CHANGE`
+   do
+	   FILE_A=`grep " ${FILE_LST}$" $BASEFILE`
+	   FILE_B=`grep " ${FILE_LST}$" $CURRENT`
+
+	   if [[ -z $FILE_A ]];then
+			continue
+	   fi
+
+	   if [[ $FILE_A != $FILE_B ]];then
+			echo "$FILE_LST" >> $TMP_CHANGETRE
+	   fi
+   done
+   mv $TMP_CHANGETRE $TMP_CHANGETWO
+   mv $TMP_CHANGETWO $TMP_CHANGE
+
+####################################################################################
+# 檢查是否有檔案異動
 ####################################################################################
    if [ -s $TMP_CHANGE ]; then
-      echo Something are different comparing with the basefile:
+#      echo "Something are different comparing with the basefile:"
 #      awk '{print $12}' $TMP_CHANGE | sort | uniq -d | grep -v '^$' > $LIST_CHANGE
 	   awk '{print $1}' $TMP_CHANGE  > $LIST_CHANGE
       if [ -s $LIST_CHANGE ]; then
-      echo "MODIFIED Failed" > $RESULT #write faild log to result
+	      echo "MODIFIED Failed" > $RESULT #write faild log to result
           cat $LIST_CHANGE > $FILECHG 
-          echo "There are `awk 'END {print NR}' $LIST_CHANGE` files had been MODIFIED"
+		  #echo "There are `awk 'END {print NR}' $LIST_CHANGE` files had been MODIFIED"
+          echo "共有 `awk 'END {print NR}' $LIST_CHANGE` 檔案異動"
 
           for LINE in `cat $LIST_CHANGE`
           do
 			#set -A LINE1 `grep " ${LINE}$" $BASEFILE`
-			 set -A LINE1 `grep " ${LINE}$" $BASEFILE | awk '$3 !~ /^l/'`
+			 grep -q " ${LINE}$" $BASEFILE 
              execStatus1=$?
              if [ $execStatus1 -eq 0 ]; then
+			 	set -A LINE1 `grep " ${LINE}$" $BASEFILE | awk '$3 !~ /^l/'`
                 echo "Base   :" ${LINE1[@]}
+		  	 else
+				 continue
              fi
-
 			#set -A LINE2 `grep " ${LINE}$" $CURRENT`
-			 set -A LINE2 `grep " ${LINE}$" $CURRENT | awk '$3 !~ /^l/'`
+			 grep -q " ${LINE}$" $CURRENT_MODI
              execStatus2=$?
              if [ $execStatus2 -eq 0 ]; then
+			 set -A LINE2 `grep " ${LINE}$" $CURRENT | awk '$3 !~ /^l/'`
                 echo "Current:" ${LINE2[@]}
 				print -n "         "
 				 let i=0
@@ -490,45 +526,66 @@ echo "#============================================================#"
           done
           echo ---------------------------------------
       else
-          echo No files been modified!
+		  #echo No files been modified!
+          echo 無異動檔案
           echo ---------------------------------------
       fi
   else	
-	  echo No files been modified!
+      echo 無異動檔案
 	  echo ---------------------------------------
   fi
-
+####################################################################################
+# 檢查是否有新增檔案
+####################################################################################
       sort $TMP_CUR -o $TMP_CUR
       sort $TMP_BASE -o $TMP_BASE
 #      echo "comm -23 $TMP_CUR $TMP_BASE |grep -v '^$' > $LIST_ADD" #compare current and base, delete the empty line then output the added file
       comm -23 $TMP_CUR $TMP_BASE |grep -v '^$' > $LIST_ADD #compare current and base, delete the empty line then output the added file
       if [ -s $LIST_ADD ]; then #if file not empty
           echo "MODIFIED ADD Failed" >> $RESULT 
-          echo "There are `awk 'END {print NR}' $LIST_ADD` files had been ADDED"
-          awk 'NR==FNR{arr[$1];next}$10 in arr' $LIST_ADD $CURRENT #print the added file(s) with Current attributes
-          cat $LIST_ADD
+#echo "There are `awk 'END {print NR}' $LIST_ADD` files had been ADDED"
+          echo "共有 `awk 'END {print NR}' $LIST_ADD` 檔案新增"
           echo ---------------------------------------
+#          awk 'NR==FNR{arr[$1];next}$10 in arr' $LIST_ADD $CURRENT #print the added file(s) with Current attributes
+		  for ADD in `cat $LIST_ADD`
+		  do
+			  grep "${ADD}$" $CURRENT
+		  done
+#              cat $LIST_ADD 
+		  echo ---------------------------------------
       else
-          echo No files been added!
+		  #echo No files been added!
+          echo 無新增檔案
           echo ---------------------------------------
       fi
 
+####################################################################################
+# 檢查是否有被檔案刪除
+####################################################################################
       comm -13 $TMP_CUR $TMP_BASE |grep -v '^$' > $LIST_DEL #compare current and base, delete the empty line then output the deleted file
       if [ -s $LIST_DEL ]; then #if file not empty
           echo "MODIFIED DEL Failed" >> $RESULT 
-          echo "There are `awk 'END {print NR}' $LIST_DEL` files had been DELETED"
-          awk 'NR==FNR{arr[$1];next}$10 in arr' $LIST_DEL $BASEFILE #print the deleted file(s) with Base attributes
-          cat $LIST_DEL
+#echo "There are `awk 'END {print NR}' $LIST_DEL` files had been DELETED"
+          echo "共有 `awk 'END {print NR}' $LIST_DEL` 檔案刪除"
+          echo ---------------------------------------
+#awk 'NR==FNR{arr[$1];next}$10 in arr' $LIST_DEL $BASEFILE #print the deleted file(s) with Base attributes
+
+		  for DEL in `cat $LIST_DEL`
+		  do
+			  grep "${DEL}$" $BASEFILE
+		  done
+#          cat $LIST_DEL
 	  echo ---------------------------------------
       else
-          echo No files been deleted!
+		  #echo No files been deleted!
+          echo 無檔案刪除
           echo ---------------------------------------
       fi
 
       if [ ! -s $TMP_CHANGE ] && [ ! -s $LIST_ADD ] && [ ! -s $LIST_DEL ] ; then #if file not empty
 		  echo "MODIFIED OK" >> $RESULT #return the final result to file
-		  echo Congratulations!!
-		  echo Auditing check status SUCCESS, no files been touched.
+#		  echo Congratulations!!
+#		  echo Auditing check status SUCCESS, no files been touched.
 	  fi
 else
    echo Basefile not exist, please execute the script '"genbas_file_attr.sh"' to create !

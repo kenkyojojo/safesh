@@ -151,8 +151,8 @@ STARTB () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           TS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+           OTC)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -313,8 +313,8 @@ STARTC () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           TS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+           OTC)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
@@ -343,7 +343,7 @@ STARTC () {
            CHKFLG=1
        fi
 
-	   if [[ $USER = "twse" || $USER = "bruce" ]];then
+	   if [[ $USER = "twse" ]];then
 			rmchk=`echo $COMMAND | awk '{print $1}' `
 			if [[ $rmchk = "rm" || $rmchk = "rmdir" ]];then
            	   echo ""
@@ -439,8 +439,8 @@ STARTD () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           TS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+           OTC)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -605,8 +605,8 @@ STARTE () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           TS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+           OTC)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`

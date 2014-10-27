@@ -43,6 +43,20 @@ case $HOSTN in
 		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.wkl;sed -n '3p' $CONFIGDIR/dir.conf.wkl;sed -n '4p' $CONFIGDIR/dir.conf.wkl`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.wkl | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
+	FIX)
+		DIR=`head -1 $CONFIGDIR/dir.conf.fix`
+		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.fix`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.fix`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.fix;sed -n '3p' $CONFIGDIR/dir.conf.fix;sed -n '4p' $CONFIGDIR/dir.conf.fix`
+		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.fix | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
+		;;
+	OTC)
+		DIR=`head -1 $CONFIGDIR/dir.conf.otc`
+		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.otc`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.otc`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.otc;sed -n '3p' $CONFIGDIR/dir.conf.otc;sed -n '4p' $CONFIGDIR/dir.conf.otc`
+		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.otc | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
+		;;
 #	X23)
 #		DIR=`head -1 $CONFIGDIR/dir.conf.x230`
 #		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.x230`

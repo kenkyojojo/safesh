@@ -78,8 +78,8 @@ MENU_INPUT () {
            FIX)
                HOSTLIST=`cat $HOSTDIR | grep -i ^FIXGW`
                ;;
-           TS)
-               HOSTLIST=`cat $HOSTDIR | grep -i ^TS`
+           OTC)
+               HOSTLIST=`cat $HOSTDIR | grep -i ^OTC`
                ;;
            ALL)
                HOSTLIST=`cat $HOSTDIR | grep -i -v $HOSTNAME`

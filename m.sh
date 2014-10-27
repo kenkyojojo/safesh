@@ -1154,8 +1154,8 @@ STARTM () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           TS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+           OTC)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
@@ -1273,8 +1273,8 @@ STARTN () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           TS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+           OTC)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -1438,8 +1438,8 @@ STARTO () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           TS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
+           OTC)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`

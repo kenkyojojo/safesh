@@ -48,13 +48,15 @@ if [ "$PASSWORD" == "$PASSWORD1" ]; then
       GROUP=`lsuser $USER | awk '{print $3}' | cut -c6-`
       SSHDIR="$HOMEDIR/.ssh"
       cd $SSHDIR
+	  rm known_hosts
       cat /dev/null > authorized_keys
-      #cat id_rsa.pub >> authorized_keys
       cat id_rsa.pub.*.${USER} >> authorized_keys
       chmod 600 authorized_keys
       chown ${USER}:${GROUP} authorized_keys
       rm id_rsa.pub.*.${USER}
    done
+      cd $SSHDIR
+	  cat authorized_keys | sort -u -o authorized_keys
 
    #----------------------------------
    # sync authorized_key file

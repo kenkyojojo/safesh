@@ -8,6 +8,7 @@ wkserver="WKLPARB1"
 SITE=TSEOB1
 DATE=`date +%Y%m%d`
 DATE2=`date +%Y%m`
+TIMEH=`date +%H`
 
 debugmod="1"		# for debug! (1=on , 0=off)
 LOGDIR=/home/se/safechk/safelog
@@ -20,9 +21,6 @@ FILECHG=$LOGDIR/${hostname}_`date +%Y%m%d_file_attr.chg`
 LOG=/home/se/safechk/safelog/dailycheck.log
 SELOG=/home/se/safechk/selog
 
-#fileaudit for Daily_chk
-rm -f /home/se/chk/fileaudit/safelog.fileattr.*
-cp  ${LOGDIR}/safelog.${hostname}.fileattr.${DATE} /home/se/chk/fileaudit/safelog.fileattr.${DATE}
 
 #-----------------------
 # Show running step status
@@ -35,6 +33,7 @@ tlog() {
 	fi
 }
 
+#/*{{{*/setp1
 #-----------------------
 # Copy logfile to Working LPAR
 #-----------------------
@@ -57,7 +56,9 @@ STEP1() {
 	fi
     echo "Date: `date +%Y/%m/%d\ %H:%M:%S` scp csv to $wkserver LPAR End" >> $LOG
 }
+#/*}}}*/
 
+#/*{{{*/setp2
 #-----------------------
 # Clear logfile
 #-----------------------
@@ -87,12 +88,19 @@ STEP2() {
     fi
     echo "Date: `date +%Y/%m/%d\ %H:%M:%S` Clean log LPAR End" >> $LOG
 }
+#/*}}}*/
 
+#/*{{{*/setp3
 #-----------------------
 # Scp fileaudit detail file to WKLPAR if fileaudit check status is Failed.
 #-----------------------
 STEP3() {
 	tlog "Running STEP3 ....."    
+
+	#fileaudit for Daily_chk
+	rm -f /home/se/chk/fileaudit/safelog.fileattr.*
+	cp  ${LOGDIR}/safelog.${hostname}.fileattr.${DATE} /home/se/chk/fileaudit/safelog.fileattr.${DATE}
+
     echo "Date: `date +%Y/%m/%d\ %H:%M:%S` scp fileaudit to $wkserver LPAR Start" >> $LOG
 	CHKSTATUS=`grep 'Failed' $CHKDIR/fileaudit.status| wc -l`
 
@@ -116,22 +124,54 @@ STEP3() {
 		CHKFILEERR=`ls -l $SELOG/log/safelog.*.fileattr.$DATE | wc -l 2>/dev/null`
 		if [ $CHKFILEERR -gt 0 ];then
 			cd $SELOG/log/
-			cat safelog.*.fileattr.$DATE > fileattr.summary.$DATE 2>/dev/null
-			tar -cf - fileattr.summary.$DATE  | gzip  > ${SITE}.fileattr.${DATE}.err.tar.gz 2>/dev/null
-#			tar -cf - safelog.*.fileattr.$DATE  | gzip  > ${SITE}.fileattr.${DATE}.err.tar.gz 2>/dev/null
+			tar -cf - safelog.*.fileattr.$DATE  | gzip  > ${SITE}.fileattr.${DATE}.err.tar.gz 2>/dev/null
 			chown useradm:security $SELOG/log/${SITE}.fileattr.${DATE}.err.tar.gz
-#			rm -f $SELOG/log/safelog.*.fileattr.$DATE 2>/dev/null
 			rm -f $SELOG/log/safelog.*.fileattr.$DATE 2>/dev/null
-			rm -f $SELOG/log/fileattr.summary.$DATE 2>/dev/null
 		fi
 
 			find $SELOG/log/ -type f -mtime +3 -name "${SITE}.fileattr.*.err.tar.gz" -exec rm {} \;
 	fi
     echo "Date: `date +%Y/%m/%d\ %H:%M:%S` scp fileaudit to $wkserver LPAR End" >> $LOG
 }
+#/*}}}*/
 
-STEP1
-STEP2
-STEP3
+#/*{{{*/setp4
+#-----------------------
+# Copy nmon to Working LPAR
+#-----------------------
+STEP4() {
+NMON_DIR="/home/se/chk/nmon"
+# year month day
+#  14   10   09	
+DATE1AGO="`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%y%m%d", localtime(time-86400));print $str'`"
 
-exit
+	tlog "Running STEP4 ....."    
+    echo "Date: `date +%Y/%m/%d\ %H:%M:%S` scp nmon to $wkserver LPAR Start" >> $LOG
+	if [ $hostname != "$wkserver" ];then
+		scp -P 2222 ${NMON_DIR}/${hostname}_${DATE1AGO}*.nmon ${wkserver}:${SELOG}/itm/ 2>/dev/null
+	else
+		CHKFILEERR=`ls -l $SELOG/itm/${hostname}_${DATE1AGO}*.nmon | wc -l 2>/dev/null`
+		if [ $CHKFILEERR -gt 0 ];then
+			cd $SELOG/itm/
+			tar -cf - ${hostname}_${DATE1AGO}*.nmon  | gzip  > ${SITE}.nmon.${DATE1AGO}.tar.gz 2>/dev/null
+			chown seadm:se $SELOG/itm/${SITE}.nmon.${DATE1AGO}.tar.gz
+			rm -f $SELOG/itm/${hostname}_${DATE1AGO}*.nmon 2>/dev/null
+		fi
+			find $SELOG/itm/ -type f -mtime +3 -name "${SITE}.nmon.${DATE1AGO}.tar.gz" -exec rm {} \;
+			cp ${NMON_DIR}/${hostname}_${DATE1AGO}*.nmon ${wkserver}:${SELOG}/itm/ 2>/dev/null
+	fi
+    echo "Date: `date +%Y/%m/%d\ %H:%M:%S` scp nmon to $wkserver LPAR End" >> $LOG
+}
+#/*}}}*/
+
+main () {
+
+	STEP1
+	STEP2
+	STEP3
+	STEP4
+
+	exit 0
+}
+
+main
