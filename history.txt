@@ -1,3 +1,37 @@
+commit be337c5943d7377f1a345a5ad9ff4e0d96639dd5
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Oct 27 11:09:28 2014 +0800
+
+    modified:account/mkalluser.sh
+    modified:dailycheck/daily_copy.sh
+    modified:dailycheck/fileaudit/filecheck.sh
+    modified:dailycheck/fileaudit/genbas_file_attr.sh
+    modified:dir_operator.sh
+    modified:fileaudit_base.menu.sh
+    modified:fileaudit_base.penu.sh
+    modified:m.sh
+    modified:p.sh
+    modified:sshkey_all.sh
+    modified:sshkey_all_auto.sh
+
+commit f18ff9baca6509d4d57da6e4fa34e696acad76de
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Oct 20 15:49:47 2014 +0800
+
+    modified:mkuser.sh
+
+commit f7afb117e11d800bd8978c50312c21272f926613
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Oct 20 13:56:11 2014 +0800
+
+    modified:mkalluser.sh , mkuser.sh
+
+commit dc7ac18d45407c3de103940da4b923919ff0c4e0
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Fri Aug 22 10:31:42 2014 +0800
+
+    version.txt history.txt
+
 commit 5bc2eec47e490f3731b93681703cea5b31008a29
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Fri Aug 22 10:22:53 2014 +0800
