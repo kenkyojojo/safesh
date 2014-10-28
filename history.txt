@@ -1,3 +1,17 @@
+commit a38179e05063d3813c8d21a0a4f17340e7cba56d
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Oct 28 14:24:00 2014 +0800
+
+    	modified:   fileaudit/filecheck.sh
+    	modified:   ../fileaudit_base.menu.sh
+    	modified:   ../fileaudit_base.penu.sh
+
+commit e53f3799d253d7c074cec6e6755540a4063bb5ce
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Mon Oct 27 11:15:50 2014 +0800
+
+    history.txt version.txt
+
 commit be337c5943d7377f1a345a5ad9ff4e0d96639dd5
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Mon Oct 27 11:09:28 2014 +0800
