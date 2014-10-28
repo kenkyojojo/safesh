@@ -300,6 +300,8 @@ if [ -f $EXISTBASE ]; then
 
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $CURRENT_EXIST > $TMP_EXISTCUR
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $EXISTBASE > $TMP_EXISTBASE
+   cat $CURRENT_EXIST | sort -o $CURRENT_EXIST
+   cat $EXISTBASE | sort -o $EXISTBASE
    #diff $CURRENT_EXIST $EXISTBASE | sed -e "/ \/etc$/d" > $TMP_EXISTCHANGE
    diff $CURRENT_EXIST $EXISTBASE  > $TMP_EXISTCHANGE
 
@@ -448,9 +450,12 @@ echo "#============================================================#"
 	##diff $CURRENT $BASEFILE  > $TMP_CHANGE   #creat origin difference file
 	#awk '$4 !~ /^l/' $TMP_CHANGE > $TMP_CHANGETWO #if the file is link file, then it take off.
 	#diff $CURRENT $BASEFILE | sed -e "/ \/etc$/d" > $TMP_CHANGE   #creat origin difference file
-
+	
  	#如無diff無異動時，直接離開該function
-   diff  $CURRENT $BASEFILE > /dev/null	#creat origin difference file
+	#diff  $CURRENT $BASEFILE > /dev/null	#creat origin difference file
+   sort $TMP_CUR -o $TMP_CUR
+   sort $TMP_BASE -o $TMP_BASE
+   diff  $TMP_CUR $TMP_BASE > /dev/null	#creat origin difference file
    rc=$?
    if [[ $rc = "0" ]];then
 	   echo 無異動檔案

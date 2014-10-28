@@ -3,13 +3,14 @@ hostname=`hostname`
 DATEM=`date +%Y%m`
 DATE1AGO=`perl -MPOSIX -le 'print strftime "%Y%m%d", localtime(time()-86400);'`
 USER=$(whoami)
-WKLPAR=WKLPART1
+WKLPAR=WKLPARB1
 MODE=$1
 TYPE=$2
 OLDIFS=$IFS
 SHDIR=/home/se/safechk/safesh
 LOGDIR=/home/se/safechk/safelog
 FILEDIR=/home/se/safechk/file/fileaudit
+PORT=2222
 
 if [[ $USER = "exadm" ]];then
 	SHDIR=/home/exc/excwk/apdir/shell
@@ -329,8 +330,8 @@ SSH_CMD() {
 				chkflag=0
 				for FILECHK in "${BASEDIR}/${hosts}${BASE}" "${CURRDIR}/${hosts}${CURR}" 
 				do
-#					$tlog "ssh -p 2222 ${USER}@${hosts} test -f  $FILECHK "$LOG
-					ssh -p 2222 ${USER}@${hosts} "test -f $FILECHK"
+#					$tlog "ssh -p $PORT ${USER}@${hosts} test -f  $FILECHK "$LOG
+					ssh -p $PORT ${USER}@${hosts} "test -f $FILECHK"
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "[Error] LPAR_Name:($hosts) $FILECHK file is not exist,Please to check. " $LOG
@@ -339,9 +340,9 @@ SSH_CMD() {
 					fi
 				done
 
-#				$tlog "ssh -p 2222 ${USER}@${hosts} cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE}" $LOG
-				ssh -p 2222 ${USER}@${hosts} "cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1"
-				result=$(ssh -p 2222 ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
+#				$tlog "ssh -p $PORT ${USER}@${hosts} cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE}" $LOG
+				ssh -p $PORT ${USER}@${hosts} "cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1"
+				result=$(ssh -p $PORT ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
 				$tlog "主機名稱： [$hosts] " $LOG
 				$tlog "檔案屬性：$result" $LOG
 			fi
@@ -435,8 +436,8 @@ SSH_CMD_RECOVER() {
 				chkflag=0
 				for FILECHK in "${BASEDIR}/${hosts}${CURR}" "${BASEDIR}/${hosts}${BASE}" 
 				do
-#					$tlog "ssh -p 2222 ${USER}@${hosts} test -f  $FILECHK " $LOG
-					ssh -p 2222 ${USER}@${hosts} "test -f $FILECHK"
+#					$tlog "ssh -p $PORT ${USER}@${hosts} test -f  $FILECHK " $LOG
+					ssh -p $PORT ${USER}@${hosts} "test -f $FILECHK"
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "" $LOG
@@ -446,11 +447,11 @@ SSH_CMD_RECOVER() {
 					fi
 				done
 
-#				$tlog "ssh -p 2222 ${USER}@${hosts} cp ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE}" $LOG
-#				$tlog "ssh -p 2222 ${USER}@${hosts} ls -l ${BASEDIR}/${hosts}${BASE}" $LOG
+#				$tlog "ssh -p $PORT ${USER}@${hosts} cp ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE}" $LOG
+#				$tlog "ssh -p $PORT ${USER}@${hosts} ls -l ${BASEDIR}/${hosts}${BASE}" $LOG
 				if [[ $chkflag -eq "0" ]];then
-				       ssh -p 2222 ${USER}@${hosts} "cp -p ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 "
-					   result=$(ssh -p 2222 ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
+				       ssh -p $PORT ${USER}@${hosts} "cp -p ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 "
+					   result=$(ssh -p $PORT ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
 					   $tlog "主機名稱： [$hosts] " $LOG
 					   $tlog "檔案屬性：$result" $LOG
 				fi
@@ -530,8 +531,8 @@ SSH_FILEAUDIT() {
 						$tlog "主機名稱： [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
-					$tlog "ssh -f -p 2222 ${USER}@${hosts} ${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 " $LOG > /dev/null
-					ssh -f -p 2222 ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 "
+					$tlog "ssh -f -p $PORT ${USER}@${hosts} ${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 " $LOG > /dev/null
+					ssh -f -p $PORT ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
 						$tlog "主機名稱： [$hosts]  OK" $LOG
@@ -598,7 +599,7 @@ SSH_FILEAUDIT_BASE() {
 						$tlog "主機名稱： [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
-					ssh -f -p 2222 ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1 "
+					ssh -f -p $PORT ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1 "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
 						$tlog "主機名稱： [$hosts]  OK" $LOG
@@ -665,8 +666,8 @@ SSH_FILEAUDIT_CAT() {
 						$tlog "主機名稱： [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
-					$tlog "ssh -p 2222 ${USER}@${hosts} cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG > /dev/null
-					ssh -p 2222 ${USER}@${hosts} "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` "
+					$tlog "ssh -p $PORT ${USER}@${hosts} cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG > /dev/null
+					ssh -p $PORT ${USER}@${hosts} "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
 						$tlog "主機名稱： [$hosts]  OK" $LOG
@@ -767,10 +768,10 @@ TYPE=$2
 					 	   fi
 						done
 					else
-						$tlog "scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
-						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
-						scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
-						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
+						$tlog "scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
+						$tlog "ssh -p $PORT ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
+						scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
+						ssh -p $PORT ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
 						IFS=";"
 						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
@@ -780,8 +781,8 @@ TYPE=$2
 						   else
 								GREPMODE="[[:space:]]"
 						   fi
-						   #modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "[0-9][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-					       modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+						   #modifiedstatus=$(ssh -p $PORT ${USER}@${hosts} grep "[0-9][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+					       modifiedstatus=$(ssh -p $PORT ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
 					       $tlog "檔案新增結果：$modifiedstatus" $LOG
 						done
 					fi
@@ -908,10 +909,10 @@ TYPE=$2
 					 	   fi
 						done
 					else
-						$tlog "scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
-						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
-						scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
-						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
+						$tlog "scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
+						$tlog "ssh -p $PORT ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
+						scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
+						ssh -p $PORT ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
 						IFS=";"
 						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
@@ -921,8 +922,8 @@ TYPE=$2
 						   else
 								GREPMODE="[[:space:]]"
 						   fi
-						   #modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "[0-9][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-					       modifiedstatus=$(ssh -p 2222 ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+						   #modifiedstatus=$(ssh -p $PORT ${USER}@${hosts} grep "[0-9][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+					       modifiedstatus=$(ssh -p $PORT ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
 					       $tlog "檔案異動結果：$modifiedstatus" $LOG
 						done
 					fi
@@ -1031,10 +1032,10 @@ TYPE=$2
 					       fi
 						done
 					else
-						$tlog "scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
-						$tlog "ssh -p 2222 ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
-						scp -P 2222 /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/
-						ssh -p 2222 ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &"
+						$tlog "scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
+						$tlog "ssh -p $PORT ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
+						scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/
+						ssh -p $PORT ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &"
 					fi
 				done
 			else
@@ -1163,7 +1164,7 @@ MENU_INPUT () {
 				   set -A HOSTLIST $(cat $HOSTDIR)
 				   ;;
 			   *)
-				   set -A HOSTLIST $(grep  $(echo ${HOSTN}$) $HOSTDIR)
+				   set -A HOSTLIST $(grep  ^$(echo ${HOSTN}$) $HOSTDIR)
 				   ;;
 			esac
 
