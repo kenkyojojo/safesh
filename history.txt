@@ -1,3 +1,22 @@
+commit 5598a9a96ee02507bbf106519c6e228f45f99796
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Nov 6 10:13:53 2014 +0800
+
+    On branch TSEOB1
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+    
+    	modified:   sshkey_all_auto.sh
+    	new file:   sshkey_all_auto_add_new_lpar.sh
+    	new file:   sshkey_auto_exchange_fixgw.sh
+    	new file:   sshkey_auto_exchange_otcfixgw.sh
+
+commit 80d5b45fce0cf8f5ad338fb048a4a305ccd33448
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Oct 28 14:26:27 2014 +0800
+
+    history.txt
+
 commit a38179e05063d3813c8d21a0a4f17340e7cba56d
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Tue Oct 28 14:24:00 2014 +0800
