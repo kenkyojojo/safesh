@@ -1,3 +1,15 @@
+commit 2959e6181bec3d305b11898bf5fe3f3657c700fa
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Nov 6 11:47:36 2014 +0800
+
+    modified:sedir.sh
+
+commit 484fc354deac8e50946d59f5aaeaf9eb67a124eb
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Nov 6 10:23:25 2014 +0800
+
+    history.txt
+
 commit 4445aed9f77ea6b7362b767bb9a9f53ef32d8e17
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Nov 6 10:22:24 2014 +0800
