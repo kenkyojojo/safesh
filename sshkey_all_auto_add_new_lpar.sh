@@ -49,6 +49,8 @@ if [ "$PASSWORD" == "$PASSWORD1" ]; then
       chown ${USER}:${GROUP} authorized_keys
       rm id_rsa.pub.*.${USER}
    done
+   cd $SSHDIR
+   cat authorized_keys | sort -u -o authorized_keys
 
    #----------------------------------
    # sync authorized_key file
