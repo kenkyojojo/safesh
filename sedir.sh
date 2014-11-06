@@ -15,13 +15,13 @@ mk_download_dir () {
 DOWNPATH="/home/download"
 if [ -d $HPATH ]; then
    mkdir -p $DOWNPATH
-   chown useradm:security $DOWNPATH
+   chown useradm:se $DOWNPATH
    chmod 777 $DOWNPATH
 
    for dir_type1 in file dir
    do
       mkdir -p $DOWNPATH/$dir_type1
-      chown useradm:security $DOWNPATH/$dir_type1
+      chown useradm:se $DOWNPATH/$dir_type1
       chmod 777 $DOWNPATH/$dir_type1
    done
 else
@@ -45,4 +45,4 @@ mk_excwk_dir
 #----------------------------------
 perl /home/se/safechk/safesh/syslog_need.pl
 
-exit
+exit 0
