@@ -1,3 +1,15 @@
+commit 4445aed9f77ea6b7362b767bb9a9f53ef32d8e17
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Nov 6 10:22:24 2014 +0800
+
+    M	sshkey_all_auto_add_new_lpar.sh
+
+commit a698a07bce5de78ffa46cc3d64a6c8f11816421e
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Nov 6 10:15:22 2014 +0800
+
+    history.txt,version.txt
+
 commit 5598a9a96ee02507bbf106519c6e228f45f99796
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Nov 6 10:13:53 2014 +0800
