@@ -150,8 +150,8 @@ DATE1AGO="`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%y%m%d", l
 	if [ $hostname != "$wkserver" ];then
 		scp -P 2222 ${NMON_DIR}/${hostname}_${DATE1AGO}*.nmon ${wkserver}:${SELOG}/itm/ 2>/dev/null
 	else
-		cp ${NMON_DIR}/${hostname}_${DATE1AGO}*.nmon ${SELOG}/itm/ 2>/dev/null
 		cd $SELOG/itm/
+		cp ${NMON_DIR}/${hostname}_${DATE1AGO}*.nmon ${SELOG}/itm/ 2>/dev/null
 		tar -cf - *${DATE1AGO}*.nmon  | gzip  > ${SITE}.nmon.${DATE1AGO}.tar.gz 2>/dev/null
 		chown seadm:se $SELOG/itm/${SITE}.nmon.${DATE1AGO}.tar.gz
 		rm -f $SELOG/itm/*${DATE1AGO}*.nmon 2>/dev/null
