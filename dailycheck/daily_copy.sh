@@ -150,15 +150,12 @@ DATE1AGO="`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%y%m%d", l
 	if [ $hostname != "$wkserver" ];then
 		scp -P 2222 ${NMON_DIR}/${hostname}_${DATE1AGO}*.nmon ${wkserver}:${SELOG}/itm/ 2>/dev/null
 	else
-		CHKFILEERR=`ls -l $SELOG/itm/${hostname}_${DATE1AGO}*.nmon | wc -l 2>/dev/null`
-		if [ $CHKFILEERR -gt 0 ];then
-			cd $SELOG/itm/
-			tar -cf - ${hostname}_${DATE1AGO}*.nmon  | gzip  > ${SITE}.nmon.${DATE1AGO}.tar.gz 2>/dev/null
-			chown seadm:se $SELOG/itm/${SITE}.nmon.${DATE1AGO}.tar.gz
-			rm -f $SELOG/itm/${hostname}_${DATE1AGO}*.nmon 2>/dev/null
-		fi
-			find $SELOG/itm/ -type f -mtime +3 -name "${SITE}.nmon.${DATE1AGO}.tar.gz" -exec rm {} \;
-			cp ${NMON_DIR}/${hostname}_${DATE1AGO}*.nmon ${wkserver}:${SELOG}/itm/ 2>/dev/null
+		cp ${NMON_DIR}/${hostname}_${DATE1AGO}*.nmon ${SELOG}/itm/ 2>/dev/null
+		cd $SELOG/itm/
+		tar -cf - *${DATE1AGO}*.nmon  | gzip  > ${SITE}.nmon.${DATE1AGO}.tar.gz 2>/dev/null
+		chown seadm:se $SELOG/itm/${SITE}.nmon.${DATE1AGO}.tar.gz
+		rm -f $SELOG/itm/*${DATE1AGO}*.nmon 2>/dev/null
+		find $SELOG/itm/ -type f -mtime +3 -name "${SITE}.nmon.${DATE1AGO}.tar.gz" -exec rm {} \;
 	fi
     echo "Date: `date +%Y/%m/%d\ %H:%M:%S` scp nmon to $wkserver LPAR End" >> $LOG
 }
