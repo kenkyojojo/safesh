@@ -1,3 +1,38 @@
+commit 2b360a8ab238184422c0451487a9b3a96fba7386
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Nov 20 09:41:03 2014 +0800
+
+    modified: p.sh
+
+commit c8e474f3e19a3e55b79f3e1e1f9d688fac027f3e
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Nov 11 16:22:57 2014 +0800
+
+    modified:daily_copy.sh
+
+commit b33bf79c90d7f8e0c7c5c8336325f188437d8f39
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Nov 11 15:17:30 2014 +0800
+
+    modified:daily_copy.sh
+
+commit 08c8336fdaf9b520ffd4a26d80bbf74e8092766e
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Nov 11 06:24:31 2014 +0800
+
+    On branch TSEOB1
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+    
+    	modified:   faillogin.sh
+    	modified:   lastlogin.sh
+
+commit 00d65ccc359421b3e3aece73a90e3bed5248150e
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Nov 6 12:00:19 2014 +0800
+
+    modified:history.txt
+
 commit 2959e6181bec3d305b11898bf5fe3f3657c700fa
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Nov 6 11:47:36 2014 +0800
