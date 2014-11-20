@@ -3,6 +3,23 @@ LOG=/home/se/safechk/safelog/penu.log
 USER=$(whoami)
 hostname=$(hostname)
 SHDIR=/home/se/safechk/safesh
+LISTHOST=/home/se/safechk/cfg/host.lst
+set -A OTC_USER otc otcexadm
+set -A TWSE_USER twse exadm
+
+for chkuser in ${OTC_USER[@]}
+do
+	if [[ $chkuser = $USER ]] ;then
+		LISTHOST=/home/se/safechk/cfg/otchost.lst
+	fi
+done
+
+for chkuser in ${TWSE_USER[@]}
+do
+	if [[ $chkuser = $USER ]] ;then
+		LISTHOST=/home/se/safechk/cfg/fasthost.lst
+	fi
+done
 
 #{{{create_log
 create_log () {
@@ -137,25 +154,25 @@ STARTB () {
 
        case $HOSTN in
            DAP)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^DAP`
+               HOSTLIST=`cat $LISTHOST | grep -i ^DAP`
                ;;
            DAR)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^DAR`
+               HOSTLIST=`cat $LISTHOST | grep -i ^DAR`
                ;;
            MDS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MDS`
+               HOSTLIST=`cat $LISTHOST | grep -i ^MDS`
                ;;
            LOG)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               HOSTLIST=`cat $LISTHOST | grep -i ^LOG`
                ;;
            FIX)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               HOSTLIST=`cat $LISTHOST | grep -i ^FIX`
                ;;
            OTC)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
+               HOSTLIST=`cat $LISTHOST | grep -i ^OTC`
                ;;
            ALL)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
+               HOSTLIST=`cat $LISTHOST |grep -i -v $hostname`
                ;;
            *)
                HOSTLIST=$HOSTN
@@ -299,25 +316,25 @@ STARTC () {
 
        case $HOSTN in
            DAP)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^DAP`
+               HOSTLIST=`cat $LISTHOST | grep -i ^DAP`
                ;;
            DAR)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^DAR`
+               HOSTLIST=`cat $LISTHOST | grep -i ^DAR`
                ;;
            MDS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MDS`
+               HOSTLIST=`cat $LISTHOST | grep -i ^MDS`
                ;;
            LOG)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               HOSTLIST=`cat $LISTHOST | grep -i ^LOG`
                ;;
            FIX)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               HOSTLIST=`cat $LISTHOST | grep -i ^FIX`
                ;;
            OTC)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
+               HOSTLIST=`cat $LISTHOST | grep -i ^OTC`
                ;;
            ALL)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
+               HOSTLIST=`cat $LISTHOST`
                ;;
            *)
                HOSTLIST=$HOSTN
@@ -425,25 +442,25 @@ STARTD () {
 
        case $HOSTN in
            DAP)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^DAP`
+               HOSTLIST=`cat $LISTHOST | grep -i ^DAP`
                ;;
            DAR)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^DAR`
+               HOSTLIST=`cat $LISTHOST | grep -i ^DAR`
                ;;
            MDS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MDS`
+               HOSTLIST=`cat $LISTHOST | grep -i ^MDS`
                ;;
            LOG)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               HOSTLIST=`cat $LISTHOST | grep -i ^LOG`
                ;;
            FIX)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               HOSTLIST=`cat $LISTHOST | grep -i ^FIX`
                ;;
            OTC)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
+               HOSTLIST=`cat $LISTHOST | grep -i ^OTC`
                ;;
            ALL)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
+               HOSTLIST=`cat $LISTHOST | grep -i -v $hostname`
                ;;
            *)
                HOSTLIST=$HOSTN
@@ -591,25 +608,25 @@ STARTE () {
 
        case $HOSTN in
            DAP)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^DAP`
+               HOSTLIST=`cat $LISTHOST | grep -i ^DAP`
                ;;
            DAR)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^DAR`
+               HOSTLIST=`cat $LISTHOST | grep -i ^DAR`
                ;;
            MDS)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MDS`
+               HOSTLIST=`cat $LISTHOST | grep -i ^MDS`
                ;;
            LOG)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
+               HOSTLIST=`cat $LISTHOST | grep -i ^LOG`
                ;;
            FIX)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
+               HOSTLIST=`cat $LISTHOST | grep -i ^FIX`
                ;;
            OTC)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
+               HOSTLIST=`cat $LISTHOST | grep -i ^OTC`
                ;;
            ALL)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
+               HOSTLIST=`cat $LISTHOST | grep -i -v $hostname`
                ;;
            *)
                HOSTLIST=$HOSTN
