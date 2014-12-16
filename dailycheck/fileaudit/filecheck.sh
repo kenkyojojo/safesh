@@ -300,8 +300,8 @@ if [ -f $EXISTBASE ]; then
 
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $CURRENT_EXIST > $TMP_EXISTCUR
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $EXISTBASE > $TMP_EXISTBASE
-   sort $CURRENT_EXIST  -o  $CURRENT_EXIST
-   sort $EXISTBASE -o $EXISTBASE
+   sort -k 4 $CURRENT_EXIST  -o  $CURRENT_EXIST
+   sort -k 4 $EXISTBASE -o $EXISTBASE
    #diff $CURRENT_EXIST $EXISTBASE | sed -e "/ \/etc$/d" > $TMP_EXISTCHANGE
    diff $CURRENT_EXIST $EXISTBASE  > $TMP_EXISTCHANGE
 
@@ -449,6 +449,7 @@ echo "#============================================================#"
    cat $CURRENT | eval $ALLEXCLUDE > ${CURRENT}.tmp #generate CURRENT status to compare with BASEFILE
    mv ${CURRENT}.tmp $CURRENT
    sort -k 11 $CURRENT -o $CURRENT
+   sort -k 11 $BASEFILE -o $BASEFILE
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT > $TMP_CUR
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $BASEFILE > $TMP_BASE
 #   awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT_MODI > $TMP_CUR_MODI
