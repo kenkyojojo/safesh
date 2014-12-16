@@ -1,3 +1,20 @@
+commit a115c95c5547fe87ea3d15ca44c8f262afee6cfe
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Dec 16 11:40:17 2014 +0800
+
+    On branch TSEOB1
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+    
+    	modified:   filecheck.sh
+    	modified:   genbas_file_attr.sh
+
+commit 8f8fe54bbe3dbad682ff532a022ef7389d8f76db
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Nov 20 09:41:20 2014 +0800
+
+    history
+
 commit 2b360a8ab238184422c0451487a9b3a96fba7386
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Nov 20 09:41:03 2014 +0800
