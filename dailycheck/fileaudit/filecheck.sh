@@ -300,8 +300,8 @@ if [ -f $EXISTBASE ]; then
 
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $CURRENT_EXIST > $TMP_EXISTCUR
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $EXISTBASE > $TMP_EXISTBASE
-   cat $CURRENT_EXIST | sort -o $CURRENT_EXIST
-   cat $EXISTBASE | sort -o $EXISTBASE
+   sort $CURRENT_EXIST  -o  $CURRENT_EXIST
+   sort $EXISTBASE -o $EXISTBASE
    #diff $CURRENT_EXIST $EXISTBASE | sed -e "/ \/etc$/d" > $TMP_EXISTCHANGE
    diff $CURRENT_EXIST $EXISTBASE  > $TMP_EXISTCHANGE
 
@@ -439,59 +439,64 @@ echo "#============================================================#"
    cat /dev/null > $RESULT #flush the check_status_file
    for DIRNAME in $DIR #import all dir_list from commandline prompt
    do
-	   find $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
-	   find $DIRNAME -mtime -14 -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT_MODI
+	   find $DIRNAME -exec ls -cdils {} \; 2>/dev/null >> $CURRENT 2>/dev/null
+#	   find $DIRNAME -mtime -14 -ls 2> /dev/null | eval $ALLEXCLUDE >> $CURRENT_MODI
+#	   find $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
+#	   find $DIRNAME -mtime -14 -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT_MODI
 #	   ${SHDIR}/sefind $DIRNAME -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT
 #	   ${SHDIR}/sefind $DIRNAME -mtime -14 -ls 2> /dev/null | eval $ALLEXCLUDE | sort -k2  >> $CURRENT_MODI
    done
+   cat $CURRENT | eval $ALLEXCLUDE > ${CURRENT}.tmp #generate CURRENT status to compare with BASEFILE
+   mv ${CURRENT}.tmp $CURRENT
+   sort -k 11 $CURRENT -o $CURRENT
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT > $TMP_CUR
    awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $BASEFILE > $TMP_BASE
-   awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT_MODI > $TMP_CUR_MODI
+#   awk '{if ($11~/\/dev\// || $12~/\/dev\//) if ($3~/c/ || $3~/b/) {print $12} else {print $11} else {print $11}}' $CURRENT_MODI > $TMP_CUR_MODI
 	##diff $CURRENT $BASEFILE  > $TMP_CHANGE   #creat origin difference file
 	#awk '$4 !~ /^l/' $TMP_CHANGE > $TMP_CHANGETWO #if the file is link file, then it take off.
-	#diff $CURRENT $BASEFILE | sed -e "/ \/etc$/d" > $TMP_CHANGE   #creat origin difference file
+	diff $CURRENT $BASEFILE | sed -e "/ \/etc$/d" > $TMP_CHANGE   #creat origin difference file
 	
  	#如無diff無異動時，直接離開該function
 	#diff  $CURRENT $BASEFILE > /dev/null	#creat origin difference file
-   sort $TMP_CUR -o $TMP_CUR
-   sort $TMP_BASE -o $TMP_BASE
-   diff  $TMP_CUR $TMP_BASE > /dev/null	#creat origin difference file
-   rc=$?
-   if [[ $rc = "0" ]];then
-	   echo 無異動檔案
-	   echo ---------------------------------------
-	   echo 無新增檔案
-	   echo ---------------------------------------
-	   echo 無檔案刪除
-	   echo ---------------------------------------
-	   return 0
-   fi
+#sort $CURRENT -o $CURRENT
+#   sort $BASEFILE -o $BASEFILE
+#   diff  $CURRENT $BASEFILE > /dev/null	#creat origin difference file
+#   rc=$?
+#   if [[ $rc = "0" ]];then
+#	   echo 無異動檔案
+#	   echo ---------------------------------------
+#	   echo 無新增檔案
+#	   echo ---------------------------------------
+#	   echo 無檔案刪除
+#	   echo ---------------------------------------
+#	   return 0
+#   fi
 
-   cat $TMP_CUR_MODI | sed -e "/\/etc$/d" > $TMP_CHANGE   #creat origin difference file, /etc 不檢查其時間異動
-   touch $TMP_CHANGETRE
-   for FILE_LST in `cat $TMP_CHANGE`
-   do
-	   FILE_A=`grep " ${FILE_LST}$" $BASEFILE`
-	   FILE_B=`grep " ${FILE_LST}$" $CURRENT`
-
-	   if [[ -z $FILE_A ]];then
-			continue
-	   fi
-
-	   if [[ $FILE_A != $FILE_B ]];then
-			echo "$FILE_LST" >> $TMP_CHANGETRE
-	   fi
-   done
-   mv $TMP_CHANGETRE $TMP_CHANGETWO
-   mv $TMP_CHANGETWO $TMP_CHANGE
+#   cat $TMP_CUR_MODI | sed -e "/\/etc$/d" > $TMP_CHANGE   #creat origin difference file, /etc 不檢查其時間異動
+#   touch $TMP_CHANGETRE
+#   for FILE_LST in `cat $TMP_CHANGE`
+#   do
+#	   FILE_A=`grep " ${FILE_LST}$" $BASEFILE`
+#	   FILE_B=`grep " ${FILE_LST}$" $CURRENT`
+#
+#	   if [[ -z $FILE_A ]];then
+#			continue
+#	   fi
+#
+#	   if [[ $FILE_A != $FILE_B ]];then
+#			echo "$FILE_LST" >> $TMP_CHANGETRE
+#	   fi
+#   done
+#   mv $TMP_CHANGETRE $TMP_CHANGETWO
+#   mv $TMP_CHANGETWO $TMP_CHANGE
 
 ####################################################################################
 # 檢查是否有檔案異動
 ####################################################################################
    if [ -s $TMP_CHANGE ]; then
 #      echo "Something are different comparing with the basefile:"
-#      awk '{print $12}' $TMP_CHANGE | sort | uniq -d | grep -v '^$' > $LIST_CHANGE
-	   awk '{print $1}' $TMP_CHANGE  > $LIST_CHANGE
+       awk '{print $12}' $TMP_CHANGE | sort | uniq -d | grep -v '^$' > $LIST_CHANGE
+#	   awk '{print $1}' $TMP_CHANGE  > $LIST_CHANGE
       if [ -s $LIST_CHANGE ]; then
 	      echo "MODIFIED Failed" > $RESULT #write faild log to result
           cat $LIST_CHANGE > $FILECHG 

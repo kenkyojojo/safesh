@@ -86,11 +86,15 @@ BACKUP_EXISTBASE=$FILEDIR/base/${hostname}_previous_file_exist.bas
 #----------------------------------
 
 creat_base(){
+#set -x 
 for DIRNAME in $DIR #import all dir_list from prompt
 do
    #${SHDIR}/sefind $DIRNAME -ls 2>/dev/null | eval $ALLEXCLUDE | sort -k2  >> $BASEFILE #generate CURRENT status to compare with BASEFILE
-   find $DIRNAME -ls 2>/dev/null | eval $ALLEXCLUDE | sort -k2  >> $BASEFILE #generate CURRENT status to compare with BASEFILE
+	find $DIRNAME -exec ls -cdils {} \; >> $BASEFILE 2>/dev/null
 done
+cat $BASEFILE | eval $ALLEXCLUDE > ${BASEFILE}.tmp #generate CURRENT status to compare with BASEFILE
+mv ${BASEFILE}.tmp ${BASEFILE}
+sort -k 11 ${BASEFILE} -o ${BASEFILE}
 }
 
 
