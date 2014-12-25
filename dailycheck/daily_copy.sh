@@ -21,7 +21,7 @@ FILECHG=$LOGDIR/${hostname}_`date +%Y%m%d_file_attr.chg`
 LOG=/home/se/safechk/safelog/dailycheck.log
 SELOG=/home/se/safechk/selog
 
-
+# {{{ tlog
 #-----------------------
 # Show running step status
 #-----------------------
@@ -32,8 +32,9 @@ tlog() {
 		echo "[${dt}] $msg" | tee -a $LOG
 	fi
 }
+# }}}
 
-#/*{{{*/setp1
+# /*{{{*/setp1
 #-----------------------
 # Copy logfile to Working LPAR
 #-----------------------
@@ -58,7 +59,7 @@ STEP1() {
 }
 #/*}}}*/
 
-#/*{{{*/setp2
+# /*{{{*/setp2
 #-----------------------
 # Clear logfile
 #-----------------------
@@ -90,7 +91,7 @@ STEP2() {
 }
 #/*}}}*/
 
-#/*{{{*/setp3
+# /*{{{*/setp3
 #-----------------------
 # Scp fileaudit detail file to WKLPAR if fileaudit check status is Failed.
 #-----------------------
@@ -135,7 +136,7 @@ STEP3() {
 }
 #/*}}}*/
 
-#/*{{{*/setp4
+# /*{{{*/setp4
 #-----------------------
 # Copy nmon to Working LPAR
 #-----------------------
@@ -161,14 +162,32 @@ DATE1AGO="`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%y%m%d", l
 }
 #/*}}}*/
 
+# {{{ main
 main () {
+PARA=$1
 
-	STEP1
-	STEP2
-	STEP3
-	STEP4
-
+	case $PARA in 
+		1)
+			STEP1
+		;;
+		2)
+			STEP2
+		;;
+		3)
+			STEP3
+		;;
+		4)
+			STEP4
+		;;
+		*)
+			STEP1
+			STEP2
+			STEP3
+			STEP4
+		;;
+	esac
 	exit 0
 }
+#}}}
 
-main
+main $1

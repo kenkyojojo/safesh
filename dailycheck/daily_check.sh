@@ -15,7 +15,7 @@ ACCOUNTSH=${SHDIR}/dailycheck/account
 FILEDIR=/home/se/safechk/file/fileaudit
 ACCOUNTDIR=/home/se/safechk/file/account
 
-
+# {{{STEP1
 #---------------------
 # Daily file check
 #---------------------
@@ -37,7 +37,9 @@ STEP1() {
    find $FILEDIR/err -type f -mtime +14 -exec rm {} \;
    echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'File Check End' >> $LOG
 }
+#}}}
 
+# {{{ STEP2
 #---------------------
 # User account check
 #---------------------
@@ -53,7 +55,9 @@ STEP2() {
    find $ACCOUNTDIR/err -type f -mtime +14 -exec rm {} \;
    echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'Account Check End' >> $LOG
 }
+#}}}
 
+# {{{ STEP3
 #----------------------
 # output to safelog
 #----------------------
@@ -63,22 +67,26 @@ STEP3() {
    chown useradm:security $LOGDIR/*.txt
    echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'safelog End' >> $LOG
 }
+#}}}
 
+# {{{ STEP4
+STEP4() {
 #----------------------
 # resort log to csv
 #----------------------
-STEP4() {
    echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'resort Start' >> $LOG
    $SHDIR/resort.sh
    chown useradm:security $LOGDIR/*.txt
    chown useradm:security $LOGDIR/*.csv
    echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'resort End' >> $LOG
 }
+#}}}
 
+# {{{ STEP5
+STEP5(){
 #-----------------------
 # Backup syslog and crontab(root)
 #-----------------------
-STEP5(){
    echo Date: `date +%Y/%m/%d\ %H:%M:%S` 'Backup syslog and crontab(root) Start' >> $LOG
    LOGPATH="/var/log/syslog"
    if [ -d $LOGPATH ]; then
@@ -92,20 +100,38 @@ STEP5(){
       echo Date: `date +%Y/%m/%d\ %H:%M:%S` '/var/log/syslog directory not exist' >> $LOG
    fi
 }
-#if time in 15 hourse ,then only exec fileaudit again.
+#}}}
+
+# {{{ main
 main () {
+PARA=$1
 
-	if [[ $DATEH -ne "15" ]];then
-		STEP1
-		STEP2
-		STEP3
-		STEP4
-		STEP5
-	else
-		STEP1
-	fi
-
+	case $PARA in 
+		1)
+			STEP1
+		;;
+		2)
+			STEP2
+		;;
+		3)
+			STEP3
+		;;
+		4)
+			STEP4
+		;;
+		5)
+			STEP5
+		;;
+		*)
+			STEP1
+			STEP2
+			STEP3
+			STEP4
+			STEP5
+		;;
+	esac
 	exit 0
 }
+#}}}
 
-main
+main $1
