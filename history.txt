@@ -1,3 +1,29 @@
+commit 5488dc1dbb01a268616428bf9037daa1ef413cc1
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Dec 25 16:09:50 2014 +0800
+
+    On branch TSEOB1
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+    
+    	modified:   daily_check.sh
+    	modified:   daily_copy.sh
+    
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+commit d190ded09d585cdb81dac5ddeb45221961414ed0
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Dec 25 13:50:24 2014 +0800
+
+    On branch TSEOB1
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+    
+    	modified:   history.txt
+    	modified:   userlimited.sh
+    	modified:   version.txt
+
 commit 6f2962a55bef5697c5e8db1b96e40f6b2d5bcb13
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Dec 25 13:36:49 2014 +0800
