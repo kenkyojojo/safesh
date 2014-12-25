@@ -240,7 +240,6 @@ case $Menu_No in
                 fi
 				;;
 	20)
-#if [ "$USER" == "root" ] || [ "$USER" == "bruce" ]; then
 				if [ "$USER" == "root" ] || [ "$USER" == "useradm" ]; then
                    STARTT
                 else
@@ -1154,8 +1153,8 @@ STARTM () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           OTC)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
@@ -1273,8 +1272,8 @@ STARTN () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           OTC)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -1438,8 +1437,8 @@ STARTO () {
            FIX)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^FIX`
                ;;
-           OTC)
-               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^OTC`
+           TS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^TS`
                ;;
            ALL)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i -v $hostname`
@@ -2221,7 +2220,7 @@ timestamp=`date +"%Y%m%d%H%M"`
 TOTLECOUNT=`cat $SHCFG/host.lst |awk '{print $1}'|wc -l `
 CHKFLG=0
 FNUM=1
-LNUM=7
+LNUM=8
 
 clear
 echo "          << FIX/FAST 檢核報表操作介面 (ALL AIX LPAR)>> "
@@ -2239,7 +2238,9 @@ echo "        5. 系統檢核結果(syschk)"
 echo ""
 echo "        6. 系統檔案檢核Base檔更新結果"
 echo ""
-echo "        7. 系統檔案檢核結果檔匯集至$WKLPAR執行結果"
+echo "        7. 系統檔案檢核結果檔匯集至${WKLPAR}執行結果"
+echo ""
+echo "        8. 執行系統檔案檢核結果(useradm's daily_check)" 
 echo ""
 echo "      (隨時可輸 q 以離開 )"
 echo ""
@@ -2259,7 +2260,7 @@ case $Menu_No in
 	   	;;
 
 	   2)
- 	    echo "			開始進行Client LPAR與$WKLPAR校時結果..."
+ 	    echo "			開始進行Client LPAR與${WKLPAR}校時結果..."
 		sleep 1
 		echo "			執行指令：$SECCMD 2"
 							      $SECCMD 2 
@@ -2314,10 +2315,21 @@ case $Menu_No in
 	   	;;
 
 	   7)
- 	    echo "			開始進行系統檔案檢核結果檔匯集至$WKLPAR執行結果..."
+ 	    echo "			開始進行系統檔案檢核結果檔匯集至${WKLPAR}執行結果..."
 		sleep 1
 		echo "			執行指令：$SECCMD 7"
 							      $SECCMD 7 
+ 	    echo "			指令完成(請確認結果.)"
+		echo ""
+		read ANSWR?"               按Enter鍵繼續 "
+		STARTT3
+	   	;;
+
+	   8)
+ 	    echo "			開系統檔案檢核結果(useradm's daily_check)"
+		sleep 1
+		echo "			執行指令：$SECCMD 8"
+							      $SECCMD 8 
  	    echo "			指令完成(請確認結果.)"
 		echo ""
 		read ANSWR?"               按Enter鍵繼續 "

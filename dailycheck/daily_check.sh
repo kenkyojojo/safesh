@@ -5,16 +5,16 @@
 #----------------------------------
 hostname=`hostname`
 DATE2=`date +%Y%m`
+TIMEH=`date +%H`
 DATE1AGO=`perl -MPOSIX -le 'print strftime "%Y%m%d", localtime(time()-86400);'`
 SHDIR=/home/se/safechk/safesh
 LOGDIR=/home/se/safechk/safelog
-LOG=/home/se/safechk/safelog/dailycheck.log
-FILESH=/home/se/safechk/safesh/dailycheck/fileaudit
-ACCOUNTSH=/home/se/safechk/safesh/dailycheck/account
+LOG=${LOGDIR}/dailycheck.log
+FILESH=${SHDIR}/dailycheck/fileaudit
+ACCOUNTSH=${SHDIR}/dailycheck/account
 FILEDIR=/home/se/safechk/file/fileaudit
 ACCOUNTDIR=/home/se/safechk/file/account
 
-echo "#======================daily_check.sh Start==================#" >> $LOG
 
 #---------------------
 # Daily file check
@@ -92,13 +92,20 @@ STEP5(){
       echo Date: `date +%Y/%m/%d\ %H:%M:%S` '/var/log/syslog directory not exist' >> $LOG
    fi
 }
+#if time in 15 hourse ,then only exec fileaudit again.
+main () {
 
+	if [[ $DATEH -ne "15" ]];then
+		STEP1
+		STEP2
+		STEP3
+		STEP4
+		STEP5
+	else
+		STEP1
+	fi
 
-STEP1
-STEP2
-STEP3
-STEP4
-STEP5
+	exit 0
+}
 
-echo "#======================daily_check.sh End====================#" >> $LOG
-exit
+main

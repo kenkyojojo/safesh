@@ -14,28 +14,25 @@ LOG=$LOGDIR/security_summar_chk.log
 WKLPAR="WKLPARB1"
 trailmod=1
 GARVG=$1
-TIME=10
+TIME=5
 
 echo "#-------------------------------------------------------------------------#" >> $LOG
 
-#{{{tlog
-tlog() {
 #---------------------------------------------------------------------
 # Show running step status
 #---------------------------------------------------------------------
+tlog() {
 	msg=$1
     if [ "$trailmod" = "1" ]; then
 	   	dt=`date +"%y/%m/%d %H:%M:%S"`
   		echo "$SITE [${dt}] $msg"
     fi 
 } 
-#}}}
 
-#{{{chk_pointfile
-chk_pointfile () {
 #---------------------------------------------------------------------
 #scp the TYPE_tmp file to wklpar for the check point.
 #---------------------------------------------------------------------
+chk_pointfile () {
 
 HST=`echo $HOSTNAME | cut -c1-3`
 TYPE=$1
@@ -48,13 +45,11 @@ TYPE=$1
 	  	rm -f /tmp/${HOSTNAME}.${TYPE}tmp
 	fi
 }
-#}}}
 
-#{{{syschk_diff.sh
-syschk_compare () {
 #---------------------------------------------------------------------
 #Run syschk_diff.sh
 #---------------------------------------------------------------------
+syschk_compare () {
 SYSLOG=/home/se/safechk/file/syschk
 	tlog "Step[2] $SHDIR/syschk_diff.sh Start" >> $LOG
 		  $SHDIR/syschk_diff.sh
@@ -62,24 +57,22 @@ SYSLOG=/home/se/safechk/file/syschk
 		  chk_pointfile sys
 	tlog "Step[2] $SHDIR/syschk_diff.sh Finished" >> $LOG
 }
-#}}}
 
-#{{{daily_check.sh
-daily_check (){
 #---------------------------------------------------------------------
 #Run daily_check.sh
 #---------------------------------------------------------------------
+daily_check (){
 	tlog "Step[3] $SHDIR/dailycheck/daily_check.sh Start" >> $LOG
 		  $SHDIR/dailycheck/daily_check.sh
+		  tail -2 $LOGDIR/dailycheck.log | head -2> $LOGDIR/daily.log
+		  chk_pointfile day
 	tlog "Step[3] $SHDIR/dailycheck/daily_check.sh Finished" >> $LOG
 }
-#}}}
 
-#{{{syschk_base.sh
-syschk_base (){
 #---------------------------------------------------------------------
 #Run syschk_base.sh
 #---------------------------------------------------------------------
+syschk_base (){
 BASDIR=/home/se/safechk/file/syschk/base
 	tlog "Step[4] $SHDIR/syschk_base.sh Start" >> $LOG
 		  $SHDIR/syschk_base.sh
@@ -87,13 +80,11 @@ BASDIR=/home/se/safechk/file/syschk/base
 		  chk_pointfile sba
 	tlog "Step[4] $SHDIR/syschk_base.sh Finished" >> $LOG
 }
-#}}}
 
-#{{{ntp
-ntp (){
 #---------------------------------------------------------------------
 #Run ntp 
 #---------------------------------------------------------------------
+ntp (){
 HST=`echo $HOSTNAME | cut -c1-3`
 
 	tlog "Step[5] $SHDIR/ntp_manual.sh Start" >> $LOG
@@ -108,13 +99,11 @@ HST=`echo $HOSTNAME | cut -c1-3`
 		fi
 	tlog "Step[5] $SHDIR/ntp_manual.sh Finished" >> $LOG
 }
-#}}}
 
-#{{{chk_status
-chk_status (){
 #---------------------------------------------------------------------
 #check the action finished status and summarize the report to safelog directoy in the wklpar.
 #---------------------------------------------------------------------
+chk_status (){
 
 #The chk's report file only in wklpar lpar.
 
@@ -124,12 +113,14 @@ aut_CHKLOG=$LOGDIR/aut_chk.${DATE}
 atr_CHKLOG=$LOGDIR/atr_chk.${DATE}
 adm_CHKLOG=$LOGDIR/adm_chk.${DATE}
 sba_CHKLOG=$LOGDIR/sba_chk.${DATE}
+day_CHKLOG=$LOGDIR/day_chk.${DATE}
 
 #The result's report file  are collect all lpar data. 
 
 ntp_RESULT=$LOGDIR/ntp.log
 sys_RESULT=$LOGDIR/syschk.log
 aut_RESULT=$LOGDIR/fileaudit_scopy.log
+day_RESULT=$LOGDIR/daily.log
 atr_RESULT=$LOGDIR/fileaudit_base.log 
 adm_RESULT=$LOGDIR/seadm_chk.log
 sba_RESULT=$LOGDIR/syschk_base.log
@@ -176,6 +167,13 @@ case $CHKTYPE in
 	RESULT=$sba_RESULT
 	cat /dev/null > $CHKLOG
     ;;        
+
+    day)
+	CHKLOG=$day_CHKLOG
+	RESULT=$day_RESULT
+	cat /dev/null > $CHKLOG
+    ;;        
+
 esac
 
 
@@ -184,7 +182,7 @@ esac
 			while [[ $COUNTNUM -lt $TOTLELPAR ]]
 			do
 #echo $CHKTYPE
-#rdware_chkecho $COUNTNUM:$TOTLELPAR
+#echo $COUNTNUM:$TOTLELPAR
 				for HOSTLST in `cd /tmp;ls -1 *.${CHKTYPE}tmp|awk -F '.' '{print $1}'`
 				do
 				echo "#-------------------------------------------------------------------------#" >> $CHKLOG
@@ -203,13 +201,11 @@ esac
 
 	tlog "Step[6] check_status $CHKTYPE Finished" >> $LOG
 }
-#}}}
 
-#{{{fileaudit base
-fileaudit_base (){
 #---------------------------------------------------------------------
 # Fileaudit cp current status to overwrite the base status ,and change the fileaudit.status to OK status.
 #---------------------------------------------------------------------
+fileaudit_base (){
 
 BASEFILE=$FILEDIR/base/${HOSTNAME}_file_attr.bas
 CURRENT=$FILEDIR/check/${HOSTNAME}_`date +%Y%m%d_file_attr.chk`
@@ -222,42 +218,36 @@ CURRENT=$FILEDIR/check/${HOSTNAME}_`date +%Y%m%d_file_attr.chk`
 		  chk_pointfile atr
 	tlog "Step[7] fileaudit current overwrite base Finished" >> $LOG
 }
-#}}}
 
-#{{{fileaudit scopy
-fileaudit_scopy (){
 #---------------------------------------------------------------------
 # scp fileaudit failed report file to wklpar use daily_coyp.sh script.
 #---------------------------------------------------------------------
+fileaudit_scopy (){
 
 	tlog "Step[8] $SHDIR/dailycheck/daily_copy.sh Start" >> $LOG
 		  $SHDIR/dailycheck/daily_copy.sh
-		  tail -3 $LOGDIR/dailycheck.log |head -2> $LOGDIR/fileaudit_scopy.log
+		  tail -2 $LOGDIR/dailycheck.log |head -2> $LOGDIR/fileaudit_scopy.log
 		  chk_pointfile aut
 	tlog "Step[8] $SHDIR/dailycheck/daily_copy.sh Finished" >> $LOG
 }
-#}}}
 
-#{{{Hardware_chk
-Hardware_chk (){
 #---------------------------------------------------------------------
 # su command to change the seadm user and running his cron job. It's execute the check.sh script in the /home/se/chk/ directory.
 #---------------------------------------------------------------------
+Hardware_chk (){
 
 	tlog "Step[9] Running seadm's Hardware_chk  Start" >> $LOG
-		  su - seadm -c "crontab -l |tail -1|cut -c 14-| ksh"
+		  #su - seadm -c "crontab -l |tail -1|cut -c 14-| ksh"
+		  su - seadm -c "/home/se/chk/script/combind.sh check"
 		  chk_pointfile adm
 	tlog "Step[9] Running seadm's Hardware_chk Finished" >> $LOG
 		  tail -2 $LOG > $LOGDIR/seadm_chk.log
 }
-#}}}
 
-#{{{ssh_rcmd
-ssh_rcmd () {
 #---------------------------------------------------------------------
 #Run ssh_rcmd to remte the lpar and execute the script use the ssh and add the -f pararmeter to running in the background .
 #---------------------------------------------------------------------
-
+ssh_rcmd () {
 ARGV=$1
 SARGV=$2
 COUNT=1
@@ -275,102 +265,122 @@ COUNT=1
 		done
     tlog "Step[1] Running remote command Finished" >> $LOG
 }
-#}}}
 
-#{{{usage
-usage () {
+#---------------------------------------------------------------------
+# Use the scp command to copy script to the ALL LPAR .
+#---------------------------------------------------------------------
+scp_cmd() {
+#set -x 
+
+	$tlog "Step[10] scp_cmd function Start" $LOG
+
+
+	for hosts in `cat /home/se/safechk/cfg/host.lst|grep -v $HOSTNAME`
+	do
+		$tlog "scp -P 2222 $SHDIR/security_summar_chk.sh $USER@$hosts:$SHDIR/security_summar_chk.sh " $LOG
+		       scp -P 2222 $SHDIR/security_summar_chk.sh $USER@$hosts:$SHDIR/security_summar_chk.sh > /dev/null 2>&1
+	done
+
+	$tlog "Step[10] scp_cmd function Finished" $LOG
+}
+
 #---------------------------------------------------------------------
 #The usage in the script, you  need to have the parameter,show the parameter use function
 #---------------------------------------------------------------------
+usage () {
 
 	tlog "Please insert boot/down/base/audit/Hardware_chk/ntp/sys/daily_check Parameter."
 	echo ""
-	echo "boot parameter: Run the ssh_rcmd, ntp , syschk_compare, daily_check, chk_status ntp ,chk_status sys function."
+	echo "boot parameter: Run the scp_cmd, ssh_rcmd, ntp , syschk_compare, daily_check, chk_status ntp ,chk_status sys function."
 	echo "Useage:security_summar_chk.sh boot"
 	echo ""
-	echo "down parameter: Run the ssh_rcmd, syschk_base , chk_status sba."
+	echo "down parameter: Run the sscp_cmd, sh_rcmd, syschk_base , chk_status sba."
 	echo "Useage:security_summar_chk.sh down"
 	echo ""
-	echo "base parameter: Run the ssh_rcmd, fileaudit_base."
+	echo "base parameter: Run the sscp_cmd, sh_rcmd, fileaudit_base."
 	echo "Useage:security_summar_chk.sh base"
 	echo ""
-	echo "audit parameter: Run the ssh_rcmd, fileaudit_scop."
+	echo "audit parameter: Run the ssscp_cmd, sh_rcmd, fileaudit_scop."
 	echo "Useage:security_summar_chk.sh audit"
 	echo ""
-	echo "hardware_chk parameter: Run the ssh_rcmd, hardware_chk."
+	echo "hardware_chk parameter: Run the ssscp_cmd, sh_rcmd, hardware_chk."
 	echo "Useage:security_summar_chk.sh hardware_chk"
 	echo ""
-	echo "ntp parameter: Run the ssh_rcmd, ntp"
+	echo "ntp parameter: Run the ssscp_cmd, sh_rcmd, ntp"
 	echo "Useage:security_summar_chk.sh ntp "
 	echo ""
-	echo "sys parameter: Run the ssh_rcmd, syschk_compare"
+	echo "sys parameter: Run the ssscp_cmd, sh_rcmd, syschk_compare"
 	echo "Useage:security_summar_chk.sh sys"
 	echo ""
-	echo "daily_check parameter: Run the ssh_rcmd, daily_check"
+	echo "daily_check parameter: Run the ssscp_cmd, sh_rcmd, daily_check"
 	echo "Useage:security_summar_chk.sh daily_check"
 
 	exit 1
 }
-#}}}
 
-#{{{main
-main () {
 #---------------------------------------------------------------------
 #Start Function 
 #---------------------------------------------------------------------
-
+main () {
 MODEARGV=$1
 HST=`echo $HOSTNAME | cut -c1-3`
 
 	case $MODEARGV in 
 		boot) #Run ntp.sh, syschk_diff.sh, daily_check.sh
 			if [[ $HST = "WKL" ]];then
+				scp_cmd > /dev/null 2>&1 
 				ssh_rcmd $SHDIR/security_summar_chk.sh boot
 				#
-				ntp > /dev/null 2>&1 &
-				syschk_compare > /dev/null 2>&1 & 	 
-				daily_check > /dev/null 2>&1 &
+				ntp > /dev/null 2>&1 
+				syschk_compare > /dev/null 2>&1  	 
+				daily_check > /dev/null 2>&1 
 				#
 				chk_status ntp > /dev/null 2>&1 &
 				chk_status sys > /dev/null 2>&1 &
 			else
-				ntp > /dev/null 2>&1 &
-				syschk_compare > /dev/null 2>&1 &	
-				daily_check > /dev/null 2>&1  &
+				ntp > /dev/null 2>&1 
+				syschk_compare > /dev/null 2>&1 	
+				daily_check > /dev/null 2>&1  
 			fi
 		;;
 		down) #Run syschk_base.sh, Update syschk_base status
 			if [[ $HST = "WKL" ]];then
+				scp_cmd > /dev/null 2>&1 
 				ssh_rcmd $SHDIR/security_summar_chk.sh down
-				syschk_base > /dev/null 2>&1 & 
+				syschk_base > /dev/null 2>&1  
 				chk_status sba > /dev/null 2>&1 &
 			else
-				syschk_base > /dev/null 2>&1 &	 
+				syschk_base > /dev/null 2>&1 	 
 			fi
 		;;
 		base) #Update fileauidt base status,and update combind.sh fileaudit stauts
 			if [[ $HST = "WKL" ]];then
+				scp_cmd > /dev/null 2>&1 
 				ssh_rcmd $SHDIR/security_summar_chk.sh base
-				fileaudit_base > /dev/null 2>&1 &	 
+				fileaudit_base > /dev/null 2>&1 	 
 				chk_status atr > /dev/null 2>&1 &
 			else
-				fileaudit_base > /dev/null 2>&1 &	 
+				fileaudit_base > /dev/null 2>&1 	 
 			fi
 		;;
 		audit) #Run daily_copy.sh
 			if [[ $HST = "WKL" ]];then
+				scp_cmd > /dev/null 2>&1 
 				ssh_rcmd $SHDIR/security_summar_chk.sh audit
-				fileaudit_scopy > /dev/null 2>&1 &
+				fileaudit_scopy > /dev/null 2>&1 
 				chk_status aut > /dev/null 2>&1 &
 				#chk_status aut &
 			else
-				fileaudit_scopy > /dev/null 2>&1 &	 
+				fileaudit_scopy > /dev/null 2>&1 	 
 			fi
 		;;	
 		hardware_chk) #Run seadm combind.sh
 			if [[ $HST = "WKL" ]];then
+				scp_cmd > /dev/null 2>&1 
 				ssh_rcmd $SHDIR/security_summar_chk.sh hardware_chk
 				Hardware_chk > /dev/null 2>&1 	 
+				sleep 3
+				/home/se/chk/script/DailySummary.sh > /dev/null 2>&1 	 
 				chk_status adm > /dev/null 2>&1 &
 				#chk_status adm &
 			else
@@ -379,8 +389,9 @@ HST=`echo $HOSTNAME | cut -c1-3`
 		;;
 		ntp) #Run ntp.sh
 			if [[ $HST = "WKL" ]];then
+				scp_cmd > /dev/null 2>&1 
 				ssh_rcmd $SHDIR/security_summar_chk.sh ntp
-				ntp > /dev/null 2>&1 &
+				ntp > /dev/null 2>&1 
 				chk_status ntp > /dev/null 2>&1 &
 			else
 				ntp > /dev/null 2>&1 &
@@ -388,30 +399,29 @@ HST=`echo $HOSTNAME | cut -c1-3`
 		;;
 		sys) #Run syschk_diff.sh
 			if [[ $HST = "WKL" ]];then
+				scp_cmd > /dev/null 2>&1 
 				ssh_rcmd $SHDIR/security_summar_chk.sh sys
-				syschk_compare > /dev/null 2>&1 & 	 
+				syschk_compare > /dev/null 2>&1 	 
 				chk_status sys > /dev/null 2>&1 &
 			else
-				syschk_compare > /dev/null 2>&1 & 	 
+				syschk_compare > /dev/null 2>&1 &	 
 			fi
 		;;
-
 		daily_check) #Run daily_check.sh 
 			if [[ $HST = "WKL" ]];then
+				scp_cmd > /dev/null 2>&1 
 				ssh_rcmd $SHDIR/security_summar_chk.sh daily_check
-				sleep 5
-				daily_check > /dev/null 2>&1 & 	 
+				sleep 3
+				daily_check > /dev/null 2>&1 
+				chk_status day > /dev/null 2>&1 &
 			else
-				daily_check > /dev/null 2>&1 & 	 
+				daily_check > /dev/null 2>&1 &
 			fi
 		;;
-
 		*)
 			usage
 		;;
-
 	esac
 }
-#}}}
 
 main $GARVG

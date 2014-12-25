@@ -13,7 +13,7 @@ $LOG="$LOGDIR/security_report.log";
 $WKLPAR="WKLPARB1";
 $trailmod=1;
 $FIRST=1;
-$END=7;
+$END=8;
 $TOTLELPAR=`wc -l $SHCFG/host.lst|awk '{print $1}'`;
 @Menu_no=@ARGV;
 
@@ -25,7 +25,6 @@ if ($#Menu_no != 0) {
 }
 
 
-#{{{raw data variable
 #---------------------------------------------------------------------
 # Set raw data variable
 #---------------------------------------------------------------------
@@ -35,15 +34,15 @@ if ($#Menu_no != 0) {
 #atr check fileaudit bas update status
 #adm check Hardware_chk running status
 #sba check syschk_base bas update status
+#day check daily_check running status
 $ntp_CHKLOG="$LOGDIR/ntp_chk.$DATE";
 $sys_CHKLOG="$LOGDIR/sys_chk.$DATE";
 $aut_CHKLOG="$LOGDIR/aut_chk.$DATE";
 $atr_CHKLOG="$LOGDIR/atr_chk.$DATE";
 $adm_CHKLOG="$LOGDIR/adm_chk.$DATE";
 $sba_CHKLOG="$LOGDIR/sba_chk.$DATE";
-#}}}
+$day_CHKLOG="$LOGDIR/day_chk.$DATE";
 
-#{{{report file variable
 #---------------------------------------------------------------------
 # Set report file variable
 #---------------------------------------------------------------------
@@ -55,9 +54,21 @@ $aut_REPORT="$REPORTDIR/aut_report.$DATE";
 $atr_REPORT="$REPORTDIR/atr_report.$DATE";
 $adm_REPORT="$REPORTDIR/adm_report.$DATE";
 $sba_REPORT="$REPORTDIR/sba_report.$DATE";
-#}}}
+$day_REPORT="$REPORTDIR/day_report.$DATE";
 
-#{{{comment lostcount cut
+#---------------------------------------------------------------------
+# Show running step status
+#---------------------------------------------------------------------
+
+sub count() {
+@ARGV=@_;
+$lines=undef;
+	open (FILE,"${SHCFG}/$ARGV[0]" ) or die "Can't open ${SHCFG}/$ARGV[0]:$!";
+		$lines++ while (<FILE>);
+	close FILE;
+	return ($lines);
+}
+
 =cut
 sub lostcount() {
 @ARGV=@_;
@@ -85,10 +96,51 @@ $lostlpar=undef;
 	close ROWFILE;
 
 }
-=cut
-#}}}
 
-#{{{comment ntp_report cut
+=cut
+
+sub tlog(){
+
+chomp (($msg)=@_);
+    if ( $trailmod == 1){
+	   	chomp ($dt=`date +"%y/%m/%d %H:%M:%S"`);
+#		print "$SITE [${dt}] $msg\n";
+		return "$SITE [${dt}] $msg\n";
+	}
+} 
+
+sub wk_ntp_report(){
+
+#---------------------------------------------------------------------
+#set the variable.
+#---------------------------------------------------------------------
+$TLOG=&tlog($HOSTNAME) ;
+$NTPSRV=`/usr/sbin/ntpq -p` ;
+
+#---------------------------------------------------------------------
+#	To creative the wklpar ntp report file in selog/log/wkl_report.$YYYYMMDD.
+#---------------------------------------------------------------------
+	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
+	open (REPORT, ">$wkl_REPORT") || die "Can't open the ntp.log:$!";
+		@LOG=<LOG>;
+		print REPORT "日  月    時間                                        校時主機           時間差","\n";
+		print REPORT "#","-"x73,"#","\n";		
+		print REPORT $TLOG;
+		print REPORT @LOG ,"\n";
+		print REPORT "$WKLPAR NTP Service Status","\n";
+		print REPORT "#","-"x73,"#","\n";		
+		print REPORT $NTPSRV;
+	close REPORT;
+	close LOG;
+
+#---------------------------------------------------------------------
+#	To print the wklpar ntp report file in selog/log/wkl_report.$YYYYMMDD.
+#---------------------------------------------------------------------
+	open (REPORT, "<$wkl_REPORT") || die "Can't open the ntp.log:$!";
+		print <REPORT>;
+	close REPORT;
+}
+
 =cut
 sub ntp_report(){
 
@@ -203,65 +255,7 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 	close REPORT;
 }
 =cut
-#}}}
 
-#{{{count
-sub count() {
-@ARGV=@_;
-$lines=undef;
-	open (FILE,"${SHCFG}/$ARGV[0]" ) or die "Can't open ${SHCFG}/$ARGV[0]:$!";
-		$lines++ while (<FILE>);
-	close FILE;
-	return ($lines);
-}
-#}}}
-
-#{{{tlog
-#---------------------------------------------------------------------
-# Show running step status
-#---------------------------------------------------------------------
-sub tlog(){
-
-chomp (($msg)=@_);
-    if ( $trailmod == 1){
-	   	chomp ($dt=`date +"%y/%m/%d %H:%M:%S"`);
-#		print "$SITE [${dt}] $msg\n";
-		return "$SITE [${dt}] $msg\n";
-	}
-} 
-#}}}
-
-#{{{wk_ntp_report
-sub wk_ntp_report(){
-
-#---------------------------------------------------------------------
-#set the variable.
-#---------------------------------------------------------------------
-$TLOG=&tlog($HOSTNAME) ;
-
-#---------------------------------------------------------------------
-#	To creative the wklpar ntp report file in selog/log/wkl_report.$YYYYMMDD.
-#---------------------------------------------------------------------
-	open (LOG, "$LOGDIR/ntp.log") || die "Can't open the ntp.log:$!";
-	open (REPORT, ">$wkl_REPORT") || die "Can't open the ntp.log:$!";
-		@LOG=<LOG>;
-		print REPORT "日  月    時間                                        校時主機           時間差","\n";
-		print REPORT "#","-"x73,"#","\n";		
-		print REPORT $TLOG;
-		print REPORT @LOG ;
-	close REPORT;
-	close LOG;
-
-#---------------------------------------------------------------------
-#	To print the wklpar ntp report file in selog/log/wkl_report.$YYYYMMDD.
-#---------------------------------------------------------------------
-	open (REPORT, "<$wkl_REPORT") || die "Can't open the ntp.log:$!";
-		print <REPORT>;
-	close REPORT;
-}
-#}}}
-
-#{{{report
 sub report(){
 
 #---------------------------------------------------------------------
@@ -325,6 +319,11 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 	elsif ( $MATCH eq "attr" ) {
 		print REPORT " 節點         時間         主機                                                  檔案","\n";
 	}
+	#Menu_no 7
+	elsif ( $MATCH eq "End" ) {
+		print REPORT " 節點         時間         主機                         狀態","\n";
+	}
+	#Menu_no 8
 	elsif ( $MATCH eq "End" ) {
 		print REPORT " 節點         時間         主機                         狀態","\n";
 	}
@@ -345,9 +344,7 @@ $DIFF=$TOTLELIST-$SUMLPAR;
 		print <REPORT>;
 	close REPORT;
 }
-#}}}
 
-#{{{main
 sub main(){
 $Menu_no2=@_[0];
 
@@ -371,14 +368,15 @@ $Menu_no2=@_[0];
 	}elsif ($Menu_no2 == 7){
 		$MATCH="End";
 		&report($aut_CHKLOG,$aut_REPORT,$MATCH) ;
+	}elsif ($Menu_no2 == 8){
+		$MATCH="End";
+		&report($day_CHKLOG,$day_REPORT,$MATCH) ;
 	}else{
 		print "Please input [$FIRST-$END] parameter \n";
 		exit ;
 	}
 }
-#}}}
 
-#{{{menu
 sub menu(){
 $Menu_no=@_[0];
 
@@ -391,10 +389,10 @@ $Menu_no=@_[0];
 	#Run combind.sh ,check Hardware_chk running status. User:seadm
 	}elsif ($Menu_no == 3){
 		&main(3) ;
-	#check syschk compare status.
+	#check syschk base update status.
 	}elsif ($Menu_no == 4){
 		&main(4) ;
-	#check syschk base update status.
+	#check syschk compare status.
 	}elsif ($Menu_no == 5){
 		&main(5) ;
 	#check fileaudit base update status.
@@ -403,11 +401,13 @@ $Menu_no=@_[0];
 	#aut check daily_copy running status
 	}elsif ($Menu_no == 7){
 		&main(7) ;
+	#day check daily_check running status
+	}elsif ($Menu_no == 8){
+		&main(8) ;
 	}else{ 
 		print "Please input [$FIRST-$END] parameter \n";
 		exit ;
 	}
 }
-#}}}
 
 &menu("@Menu_no");

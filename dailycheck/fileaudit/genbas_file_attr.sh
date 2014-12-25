@@ -57,13 +57,13 @@ case $HOSTN in
 		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.otc;sed -n '3p' $CONFIGDIR/dir.conf.otc;sed -n '4p' $CONFIGDIR/dir.conf.otc`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.otc | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
-#	X23)
-#		DIR=`head -1 $CONFIGDIR/dir.conf.x230`
-#		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.x230`
-#		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.x230`
-#		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.x230;sed -n '3p' $CONFIGDIR/dir.conf.x230;sed -n '4p' $CONFIGDIR/dir.conf.x230`
-#		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.x230 | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
-#		;;
+	X23)
+		DIR=`head -1 $CONFIGDIR/dir.conf.x230`
+		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.x230`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.x230`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.x230;sed -n '3p' $CONFIGDIR/dir.conf.x230;sed -n '4p' $CONFIGDIR/dir.conf.x230`
+		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.x230 | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
+		;;
 	*)
 		DIR=`head -1 $CONFIGDIR/dir.conf`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf`
@@ -90,7 +90,10 @@ creat_base(){
 for DIRNAME in $DIR #import all dir_list from prompt
 do
    #${SHDIR}/sefind $DIRNAME -ls 2>/dev/null | eval $ALLEXCLUDE | sort -k2  >> $BASEFILE #generate CURRENT status to compare with BASEFILE
-	find $DIRNAME -exec ls -cdils {} \; >> $BASEFILE 2>/dev/null
+	#find $DIRNAME -exec ls -cdils {} \; >> $BASEFILE 2>/dev/null
+	find $DIRNAME 2>/dev/null |xargs ls -lisd  >> $BASEFILE 2>/dev/null
+#find $DIRNAME -ls  >> $BASEFILE 2>/dev/null
+#find $DIRNAME | xargs sum >> ${BASEFILE}.sum
 done
 cat $BASEFILE | eval $ALLEXCLUDE > ${BASEFILE}.tmp #generate CURRENT status to compare with BASEFILE
 mv ${BASEFILE}.tmp ${BASEFILE}
