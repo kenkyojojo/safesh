@@ -4,14 +4,14 @@
 # Set variable
 #----------------------------------
 HOSTLIST=`cat /home/se/safechk/cfg/host.lst`
-LOG=/home/se/safechk/safelog/dailycheck.log
+LOG=/home/se/safechk/safesh/dailycheck/dailycheck.log
 USER=$(whoami)
 HOMEDIR=`lsuser $USER | awk '{print $5}' | cut -c6-`
 timestamp=`date +%Y%m%d`
 
-echo "#======================startcopy.sh   Start==================#" >> $LOG
 #----------------------------------
 # Start to rm file.attr.chk file.attr.chg
+# 
 #----------------------------------
 STEP1(){
 for file in chk chg 
@@ -24,8 +24,9 @@ done
 # Start remote copy filecheck file
 #----------------------------------
 STEP2(){
+PARA=$1
 for HOST in $HOSTLIST ; do
-   ssh -p 2222 $HOST "/home/se/safechk/safesh/dailycheck/daily_copy.sh"
+   ssh -p 2222 $HOST "/home/se/safechk/safesh/dailycheck/daily_copy.sh $PARA"
    execStatus=$?
    if [ $execStatus -eq 0 ]; then
       echo Date: `date +%Y/%m/%d\ %H:%M:%S` "$HOST COPY OK!" >> $LOG
@@ -46,8 +47,11 @@ STEP3(){
 }
 #exit 0
 
+main () {
+PARA=$1
 #STEP1 #It change to use  filechg.sh to rm the fileaudit's chk or chg file.
-STEP2
+	STEP2 $PARA
 #STEP3 #No 
+}
 
-echo "#======================startcopy.sh   End====================#" >> $LOG
+main $1
