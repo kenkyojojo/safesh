@@ -1,3 +1,30 @@
+commit 6f2962a55bef5697c5e8db1b96e40f6b2d5bcb13
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Dec 25 13:36:49 2014 +0800
+
+    On branch TSEOB1
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+    
+    	modified:   dailycheck/daily_check.sh
+    	modified:   dailycheck/fileaudit/filecheck.sh
+    	modified:   dailycheck/fileaudit/genbas_file_attr.sh
+    	modified:   m.sh
+    	modified:   security_report.pl
+    	modified:   security_summar_chk.sh
+
+commit 48d54f8615815d49afe20b8de9f600943a518d54
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Dec 16 14:53:50 2014 +0800
+
+    modified:filecheck.sh
+
+commit fe8173d4be142a4c556b3b3fe6e8c3490e6e42c5
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Dec 16 11:43:38 2014 +0800
+
+    history.txt version.txt
+
 commit a115c95c5547fe87ea3d15ca44c8f262afee6cfe
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Tue Dec 16 11:40:17 2014 +0800
