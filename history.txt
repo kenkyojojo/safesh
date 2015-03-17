@@ -1,3 +1,30 @@
+commit f3834f924a27943d1421b095523be15092e47baa
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Mar 17 15:26:31 2015 +0800
+
+    On branch TSEOT1
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+    
+    	modified:   dailycheck/daily_copy.sh
+    	modified:   fileaudit_base.menu.sh
+    	modified:   fileaudit_base.menu.sh.utf8
+    	modified:   fileaudit_base.penu.sh
+    	modified:   fileaudit_base.penu.sh.utf8
+    	modified:   m.sh
+    	modified:   m.sh.utf8
+    	modified:   p.sh
+    	modified:   p.sh.utf8
+    
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+commit b33d0d5a159159d3b35ade595422fc23a1ab7f7b
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Thu Dec 25 17:30:38 2014 +0800
+
+    history.txt version.txt
+
 commit 11281f523ff5c130c2326cad3ee8cd16dfc7bee0
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Thu Dec 25 17:28:52 2014 +0800
