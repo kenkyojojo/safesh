@@ -180,7 +180,7 @@ USER_CHECK
 
 	clear
 	FNUM=1
-	LNUM=4
+	LNUM=6
 	echo " << FIX/FAST 資訊傳輸系統系管控操作介面-[檔案檢核修改] (ALL AIX LPAR)>> "
 	echo ""
     echo "                  1:檔案檢核BASE檔內容變更(有時間屬性_attr)" 	
@@ -190,6 +190,10 @@ USER_CHECK
     echo "                  3:檔案檢核BASE檔內容刪除(有時間屬性_attr)" 	
 	echo ""
     echo "                  4:檔案檢核BASE檔內容刪除(無時間屬性_exist)" 	
+	echo ""
+    echo "                  5:檔案檢核BASE檔內容新增(有時間屬性_attr)" 	
+	echo ""
+    echo "                  6:檔案檢核BASE檔內容新增(無時間屬性_exist)" 	
 	echo ""
     echo "                  (隨時可輸 q 以離開 ) "
 	echo ""
@@ -214,6 +218,16 @@ USER_CHECK
 			BASE="_file_exist.bas"
 			CURR="_`date +%Y%m%d`_file_exist.chk"
           	MENU_INPUT	CNG_REMOVE EXIST
+			;;
+		5)
+			BASE="_file_attr.bas"
+			CURR="_`date +%Y%m%d`_file_attr.chk"
+          	MENU_INPUT	CNG_ADD ATTR
+			;;
+        6)
+			BASE="_file_exist.bas"
+			CURR="_`date +%Y%m%d`_file_exist.chk"
+          	MENU_INPUT	CNG_ADD EXIST
 			;;
         q|Q)
             main
@@ -292,8 +306,7 @@ SSH_CMD() {
 				chkflag=0
 				for FILECHK in "${BASEDIR}/${hosts}${BASE}" "${CURRDIR}/${hosts}${CURR}" 
 				do
-#					$tlog "test -f  $FILECHK "$LOG
-						   test -f  $FILECHK
+				    test -f  $FILECHK
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "" $LOG
@@ -303,7 +316,6 @@ SSH_CMD() {
 					fi
 				done
 
-#				$tlog "cp ${CURRDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE}" $LOG
 				if [[ $chkflag -eq "0" ]];then
 					cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 
 					result=$(ls -l ${BASEDIR}/${hosts}${BASE})
@@ -315,7 +327,6 @@ SSH_CMD() {
 				chkflag=0
 				for FILECHK in "${BASEDIR}/${hosts}${BASE}" "${CURRDIR}/${hosts}${CURR}" 
 				do
-#					$tlog "ssh -p $PORT ${USER}@${hosts} test -f  $FILECHK "$LOG
 					ssh -p $PORT ${USER}@${hosts} "test -f $FILECHK"
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
@@ -325,7 +336,6 @@ SSH_CMD() {
 					fi
 				done
 
-#				$tlog "ssh -p $PORT ${USER}@${hosts} cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE}" $LOG
 				ssh -p $PORT ${USER}@${hosts} "cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1"
 				result=$(ssh -p $PORT ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
 				$tlog "主機名稱： [$hosts] " $LOG
@@ -358,9 +368,8 @@ SSH_CMD() {
 			chkflag=0
 			for FILECHK in "${BASEDIR}/${hostname}${BASE}" "${CURRDIR}/${hostname}${CURR}" 
 			do
-#					$tlog "test -f  $FILECHK " $LOG
-						   test -f  $FILECHK
-				excstatus=$?
+			    test -f  $FILECHK
+			 	excstatus=$?
 				if [[ $excstatus -gt 0 ]];then
 					$tlog "" $LOG
 					$tlog "[Error] 主機名稱：[$hostname] $FILECHK file is not exist,Please to check. " $LOG
@@ -369,7 +378,6 @@ SSH_CMD() {
 				fi
 			done
 
-#			$tlog "cp ${CURRDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE}" $LOG
 			if [[ $chkflag -eq "0" ]];then
 				cp ${CURRDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE} > /dev/null 2>&1 
 				result=$(ls -l ${BASEDIR}/${hostname}${BASE})
@@ -399,8 +407,7 @@ SSH_CMD_RECOVER() {
 				chkflag=0
 				for FILECHK in "${BASEDIR}/${hosts}${CURR}" "${BASEDIR}/${hosts}${BASE}" 
 				do
-#					$tlog "test -f  $FILECHK " $LOG
-						   test -f  $FILECHK
+				    test -f  $FILECHK
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "" $LOG
@@ -421,7 +428,6 @@ SSH_CMD_RECOVER() {
 				chkflag=0
 				for FILECHK in "${BASEDIR}/${hosts}${CURR}" "${BASEDIR}/${hosts}${BASE}" 
 				do
-#					$tlog "ssh -p $PORT ${USER}@${hosts} test -f  $FILECHK " $LOG
 					ssh -p $PORT ${USER}@${hosts} "test -f $FILECHK"
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
@@ -432,13 +438,11 @@ SSH_CMD_RECOVER() {
 					fi
 				done
 
-#				$tlog "ssh -p $PORT ${USER}@${hosts} cp ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE}" $LOG
-#				$tlog "ssh -p $PORT ${USER}@${hosts} ls -l ${BASEDIR}/${hosts}${BASE}" $LOG
 				if [[ $chkflag -eq "0" ]];then
-				       ssh -p $PORT ${USER}@${hosts} "cp -p ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 "
-					   result=$(ssh -p $PORT ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
-					   $tlog "主機名稱： [$hosts] " $LOG
-					   $tlog "檔案屬性：$result" $LOG
+					ssh -p $PORT ${USER}@${hosts} "cp -p ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 "
+				    result=$(ssh -p $PORT ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
+				    $tlog "主機名稱： [$hosts] " $LOG
+				    $tlog "檔案屬性：$result" $LOG
 				fi
 			fi
 		done
@@ -468,8 +472,7 @@ SSH_CMD_RECOVER() {
 			chkflag=0
 			for FILECHK in "${BASEDIR}/${hostname}${CURR}" "${BASEDIR}/${hostname}${BASE}" 
 			do
-#					$tlog "test -f  $FILECHK " $LOG
-						   test -f  $FILECHK
+			    test -f  $FILECHK
 				excstatus=$?
 				if [[ $excstatus -gt 0 ]];then
 					$tlog "" $LOG
@@ -479,8 +482,6 @@ SSH_CMD_RECOVER() {
 				fi
 			done
 
-#			$tlog "cp ${BASEDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE}" $LOG
-#			$tlog "ls -l ${BASEDIR}/${hostname}${BASE}" $LOG
 			if [[ $chkflag -eq "0" ]];then
 				cp -p ${BASEDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE} > /dev/null 2>&1 
 				result=$(ls -l ${BASEDIR}/${hostname}${BASE})
@@ -695,6 +696,123 @@ SSH_FILEAUDIT_CAT() {
 }
 #}}}
 
+#{{{ MODIFIED_ADD_BASE
+MODIFIED_ADD_BASE(){
+#set -x
+MODE=$1
+TYPE=$2
+
+			$tlog "#=======================START to modified the add new line in base =================================#" $LOG
+
+			if [[ $hostname = $WKLPAR ]];then
+				for hosts in $(cat /tmp/lparlst${USER}.tmp)
+				do
+					if [[ $hosts = $WKLPAR ]];then
+						IFS=";"
+						chkflag=0
+						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
+						do
+						   $tlog "新增檔名: $FILENCHG " $LOG
+						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
+						   if [[ $FILECHK -eq 1 ]];then
+								GREPMODE="[[:digit:]][[:space:]]"
+						   else
+								GREPMODE="[[:space:]]"
+						   fi
+
+						   if [[ ! -f ${CURRDIR}/${hosts}${CURR} ]];then
+								$tlog "" $LOG
+								$tlog "[Error] ${CURRDIR}/${hosts}${CURR} file is not exist,Please to check."  $LOG
+								$tlog "" $LOG
+						   fi
+						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR}|wc -l |awk '{print $1}')
+						   if [[ $CHKFILEN -lt 1 ]]; then
+								$tlog "" $LOG
+								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
+								$tlog "" $LOG
+								chkflag=$(($chkflag + 1))
+						   fi
+
+						   if [[ $chkflag -eq "0" ]];then
+							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}
+							   modifiedstatus=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+							   $tlog "檔案新增結果：$modifiedstatus" $LOG
+					 	   fi
+						done
+					else
+						$tlog "scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
+						$tlog "ssh -p $PORT ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
+						scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
+						ssh -p $PORT ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
+						IFS=";"
+						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
+						do
+						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
+						   if [[ $FILECHK -eq 1 ]];then
+								GREPMODE="[[:digit:]][[:space:]]"
+						   else
+								GREPMODE="[[:space:]]"
+						   fi
+					       modifiedstatus=$(ssh -p $PORT ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
+					       $tlog "檔案新增結果：$modifiedstatus" $LOG
+						done
+					fi
+				done
+			else
+					if [[ ${#HOSTLIST[@]} -eq 1 ]];then
+						if [[ $hostname != $HOSTLIST ]];then
+								$tlog "" $LOG
+								$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
+								$tlog "" $LOG
+								read ANSWR?"               按Enter鍵繼續 "
+								main
+						fi
+					fi
+					# If hostlist arrary great than 1 and lpar name is not wklpar than show Error.
+					if [[ ${#HOSTLIST[@]} -gt 1 ]];then
+							$tlog "" $LOG
+							$tlog "[Error] Local lpar name:$hostname is not WKLPAR " $LOG
+							$tlog "" $LOG
+							read ANSWR?"               按Enter鍵繼續 "
+							main
+					fi
+					IFS=";"
+					chkflag=0
+					for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
+					do
+						  $tlog "新增檔名: $FILENCHG " $LOG
+						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
+						   if [[ $FILECHK -eq 1 ]];then
+								GREPMODE="[[:digit:]][[:space:]]"
+						   else
+								GREPMODE="[[:space:]]"
+						   fi
+
+						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR}|wc -l |awk '{print $1}')
+						   if [[ $CHKFILEN -lt 1 ]]; then
+								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
+								$tlog "" $LOG
+								chkflag=$(($chkflag + 1))
+						   fi
+
+						   if [[ ! -f ${CURRDIR}/${hostname}${CURR} ]];then
+								$tlog "" $LOG
+								$tlog "[Error] ${CURRDIR}/${hostname}${CURR} file is not exist,Please to check. " $LOG
+								$tlog "" $LOG
+								chkflag=$(($chkflag + 1))
+						   fi
+
+						   if [[ $chkflag -eq "0" ]];then
+							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}
+							   modifiedstatus=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE})
+							   $tlog "檔案新增結果：$modifiedstatus" $LOG
+						   fi
+					 done
+			fi
+			$tlog "#=======================End  to modified the add new line in base =================================#" $LOG
+}
+#}}}
+
 #{{{ MODIFIED_DEATIL_BASE
 MODIFIED_BASE(){
 #set -x
@@ -719,7 +837,7 @@ TYPE=$2
 								GREPMODE="[[:space:]]"
 						   fi
 
-						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
+						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
 								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
@@ -735,18 +853,12 @@ TYPE=$2
 
 						   if [[ $chkflag -eq "0" ]];then
 							   TOLLNUM=$(wc -l ${BASEDIR}/${hosts}${BASE} | awk '{print $1}')
-#CNGLNUM=$(grep -n "[:digit:][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| awk -F : '{print $1}' )
 							   CNGLNUM=$( grep -n "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} | awk -F : '{print $1}' )
 							   HEDLNUM=$(( $CNGLNUM - 1 ))
 							   TAILNUM=$(( $TOLLNUM - $CNGLNUM ))
-							  #$tlog head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
-							  #$tlog grep ${FILENCHG}$ ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
-#grep "[0-9][[:space:]]${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}.tmp
 							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}.tmp
-							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hosts}${BASE}.tmp
-							  #$tlog mv -f ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
 							   mv -f ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
 							   modifiedstatus=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
 							   $tlog "檔案異動結果：$modifiedstatus" $LOG
@@ -766,7 +878,6 @@ TYPE=$2
 						   else
 								GREPMODE="[[:space:]]"
 						   fi
-						   #modifiedstatus=$(ssh -p $PORT ${USER}@${hosts} grep "[0-9][[:space:]]${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
 					       modifiedstatus=$(ssh -p $PORT ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
 					       $tlog "檔案異動結果：$modifiedstatus" $LOG
 						done
@@ -821,13 +932,9 @@ TYPE=$2
 							   CNGLNUM=$( grep -n "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}| awk -F : '{print $1}' )
 							   HEDLNUM=$(( $CNGLNUM - 1 ))
 							   TAILNUM=$(( $TOLLNUM - $CNGLNUM ))
-							  #$tlog head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
-							  #$tlog grep ${FILENCHG}$ ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
-							  #$tlog tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp $LOG
 							   tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp
-							  #$tlog mv -f ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE} $LOG
 							   mv -f ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
 						   fi
 					 done
@@ -867,6 +974,7 @@ TYPE=$2
 								$tlog "" $LOG
 								$tlog "[Error] ${FILENCHG} 輸入為空值 " $LOG
 								$tlog "" $LOG
+								$tlog "flag1" $LOG
 								chkflag=$(($chkflag + 1))
 						   fi
 
@@ -956,7 +1064,6 @@ MENU_INPUT () {
        echo "#                                                          #"
        echo "# 全部主機請輸入: ALL                                      #"
        echo "#==========================================================#"
-#read  -A HOSTN?"輸入欲變更Base的主機名稱 : "
        read  HOSTN?"輸入欲執行的主機名稱 : "
 
 	   if [[ "$HOSTN" == "q" ]] || [[ "$HOSTN" == "Q" ]]; then
@@ -995,6 +1102,9 @@ MENU_INPUT () {
 			   MDS)
 				   set -A HOSTLIST $(cat $HOSTDIR | grep -i ^MDS)
 				   ;;
+			   MIS)
+				   set -A HOSTLIST $(cat $HOSTDIR | grep -i ^MIS)
+				   ;;
 			   LOG)
 				   set -A HOSTLIST $(cat $HOSTDIR | grep -i ^LOG)
 				   ;;
@@ -1023,13 +1133,12 @@ MENU_INPUT () {
 			echo ${HOSTLIST[@]} >> /tmp/lparlst${USER}.tmp
 	   done
 
-		if [[ $MODE = "CNG_DETAL" || $MODE = "CNG_REMOVE" ]];then
+		if [[ $MODE = "CNG_DETAL" ]] || [[ $MODE = "CNG_REMOVE" ]] || [[ $MODE = "CNG_ADD" ]];then
 			echo "                  (隨時可輸 q 以離開 ) "
 			echo "#============================================================#"
 			echo "# 輸入欲變更的目錄或檔案(每個徑或檔案以;做為分隔)如下:       #"
 			echo "# /etc/passwd;/etc/group;/etc/profile;/etc/environment;/tmp  #"
 			echo "#============================================================#"
-#read -A FILEN?"輸入欲變更的目錄或檔案: "
 			read FILEN?"輸入欲變更的目錄或檔案: "
 
 			if [[ "$FILEN" == "q" ]] || [[ "$FILEN" == "Q" ]]; then
@@ -1070,6 +1179,22 @@ MENU_INPUT () {
 				 		;;
 					y|Y)                                          
 						MODIFIED_BASE $MODE $TYPE
+				 		;;
+					*)                                          
+						echo "		[Error]  輸入錯誤, 請輸入(Y/N)"
+				        read ANSWR?"               按Enter鍵繼續 "
+				 		main
+				 		;;
+				esac
+		elif [[ $MODE = "CNG_ADD" ]];then
+				echo ""
+				read ANSWER?"     請確認是否執行(Y/N): "
+				case $ANSWER in
+					n|N)                                          
+				 		main
+				 		;;
+					y|Y)                                          
+						MODIFIED_ADD_BASE $MODE $TYPE
 				 		;;
 					*)                                          
 						echo "		[Error]  輸入錯誤, 請輸入(Y/N)"
@@ -1148,10 +1273,19 @@ Begin () {
 				CURR="_`date +%Y%m%d_file_exist.chk`"
 				MODIFIED_REMOVE_BASE $MODE $TYPE
 			fi
+		elif [[ $MODE = "CNG_ADD" ]];then
+			if [[ $TYPE = "ATTR" ]];then
+				BASE="_file_attr.bas"
+				CURR="_`date +%Y%m%d_file_attr.chk`"
+				MODIFIED_ADD_BASE $MODE $TYPE
+			else
+				BASE="_file_exist.bas"
+				CURR="_`date +%Y%m%d_file_exist.chk`"
+				MODIFIED_ADD_BASE $MODE $TYPE
+			fi
 		fi
 	fi
 }
 #}}}
-
 
 Begin

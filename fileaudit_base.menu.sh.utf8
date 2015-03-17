@@ -3,31 +3,20 @@ hostname=`hostname`
 DATEM=`date +%Y%m`
 DATE1AGO=`perl -MPOSIX -le 'print strftime "%Y%m%d", localtime(time()-86400);'`
 USER=$(whoami)
+SHDIR=/home/se/safechk/safesh
+tlog=${SHDIR}/tlog.sh
 WKLPAR=WKLPARB1
 MODE=$1
 TYPE=$2
 OLDIFS=$IFS
-SHDIR=/home/se/safechk/safesh
 LOGDIR=/home/se/safechk/safelog
+LOG=${LOGDIR}/fileaudit_base.menu.sh.log
 FILEDIR=/home/se/safechk/file/fileaudit
-PORT=2222
-
-if [[ $USER = "exadm" ]];then
-	SHDIR=/home/exc/excwk/apdir/shell
-	FILEDIR=/home/exc/excwk/apdir/fileaudit
-	LOGDIR=/home/exc/excwk/apdir/log
-fi
-if [[ $USER = "otcexadm" ]];then
-	SHDIR=/home/otcexc/otcexcwk/apdir/shell
-	FILEDIR=/home/otcexc/otcexcwk/apdir/fileaudit
-	LOGDIR=/home/otcexc/otcexcwk/apdir/log
-fi
-tlog=${SHDIR}/tlog.sh
-LOG=${LOGDIR}/fileaudit_base.penu.sh.log
 BASEDIR=${FILEDIR}/base
 CURRDIR=${FILEDIR}/check
+PORT=2222
 
-set -A MUSER root seadm se02 exadm otcexadm 
+set -A MUSER root useradm
 #===============================================================#
 
 #{{{create_log
@@ -35,16 +24,13 @@ create_log () {
    if [[ ! -f $LOG ]]; then 
 		   if [[ $USER = "root" ]];then
 				   touch $LOG
-				   chown seadm:se $LOG
+				   chown useradm:security $LOG
 				   chmod 666 $LOG
-		   elif [[ $USER = "seadm" ]]; then
-				   touch $LOG
-				   chmod 666 $LOG
-		   elif [[ $USER = "exadm" ]]; then
+		   elif [[ $USER = "useradm" ]]; then
 				   touch $LOG
 				   chmod 666 $LOG
 		   else
-				   echo "create_log:Please use the exadm or root user to running the script first"
+				   echo "create_log:Please use the useradm or root user to running the script first"
 				   exit 1
 		   fi
    fi
@@ -59,20 +45,19 @@ main () {
 	FNUM=1
 	LNUM=4
 	clear
-	echo " << FIX/FAST ¸ê°T¶Ç¿é¨t²Î¨tºŞ±±¾Ş§@¤¶­±-[ÀÉ®×ÀË®Ö] (ALL AIX LPAR)>> "
+	echo " << FIX/FAST è³‡è¨Šå‚³è¼¸ç³»çµ±ç³»ç®¡æ§æ“ä½œä»‹é¢-[æª”æ¡ˆæª¢æ ¸] (ALL AIX LPAR)>> "
 	echo ""
-    echo "                  1:ÀÉ®×ÀË®ÖBASEÀÉ§ó·s "
+    echo "                  1:æª”æ¡ˆæª¢æ ¸BASEæª”æ›´æ–° "
 	echo ""
-    echo "                  2:ÀÉ®×ÀË®ÖBASEÀÉÁÙ­ì "
+    echo "                  2:æª”æ¡ˆæª¢æ ¸BASEæª”é‚„åŸ "
 	echo ""
-    echo "                  3:ÀÉ®×ÀË®ÖBASEÀÉÅÜ§ó "
+    echo "                  3:æª”æ¡ˆæª¢æ ¸BASEæª”è®Šæ›´ "
 	echo ""
-    echo "                  4:¤â°Ê°õ¦æÀÉ®×ÀË®Ö "
+    echo "                  4:æ‰‹å‹•åŸ·è¡Œæª”æ¡ˆæª¢æ ¸ "
 	echo ""
-    echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+    echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
 	echo ""
-    read Menu_No?"½Ğ¿ï¾Ü¿ï¶µ(${FNUM}-${LNUM}) : "
-
+    read Menu_No?"è«‹é¸æ“‡é¸é …(${FNUM}-${LNUM}) : "
 
     case $Menu_No in  
         1)
@@ -88,13 +73,13 @@ main () {
 			STARTD
 			;;
         q|Q)
-			/home/se/safechk/safesh/p.sh
+			$SHDIR/m.sh
 			exit
             ;;
         *)
             echo "" 
-			echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J (${FNUM}-${LNUM})ªº¿ï¶µ"
-			read Answer?"  «öEnterÁäÄ~Äò "
+			echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥ (${FNUM}-${LNUM})çš„é¸é …"
+			read Answer?"  æŒ‰Enteréµç¹¼çºŒ "
 			main
             ;;
 	esac
@@ -110,15 +95,15 @@ USER_CHECK
 	clear
 	FNUM=1
 	LNUM=2
-	echo " << FIX/FAST ¸ê°T¶Ç¿é¨t²Î¨tºŞ±±¾Ş§@¤¶­±-[ÀÉ®×ÀË®Ö§ó·s] (ALL AIX LPAR)>> "
+	echo " << FIX/FAST è³‡è¨Šå‚³è¼¸ç³»çµ±ç³»ç®¡æ§æ“ä½œä»‹é¢-[æª”æ¡ˆæª¢æ ¸æ›´æ–°] (ALL AIX LPAR)>> "
 	echo ""
-    echo "                  1:ÀÉ®×ÀË®ÖBASEÀÉ§ó·s(¦³®É¶¡Äİ©Ê_attr)"
+    echo "                  1:æª”æ¡ˆæª¢æ ¸BASEæª”æ›´æ–°(æœ‰æ™‚é–“å±¬æ€§_attr)"
 	echo ""
-    echo "                  2:ÀÉ®×ÀË®ÖBASEÀÉ§ó·s(µL®É¶¡Äİ©Ê_exist)"
+    echo "                  2:æª”æ¡ˆæª¢æ ¸BASEæª”æ›´æ–°(ç„¡æ™‚é–“å±¬æ€§_exist)"
 	echo ""
-    echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+    echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
 	echo ""
-    read Menu_No?"½Ğ¿ï¾Ü¿ï¶µ(${FNUM}-${LNUM}) : "
+    read Menu_No?"è«‹é¸æ“‡é¸é …(${FNUM}-${LNUM}) : "
     case $Menu_No in  
         1)
 			BASE="_file_attr.bas"
@@ -135,8 +120,8 @@ USER_CHECK
             ;;
         *)
             echo "" 
-			echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J (${FNUM}-${LNUM})ªº¿ï¶µ"
-			read Answer?"  «öEnterÁäÄ~Äò "
+			echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥ (${FNUM}-${LNUM})çš„é¸é …"
+			read Answer?"  æŒ‰Enteréµç¹¼çºŒ "
 			STARTA
             ;;
     esac
@@ -153,15 +138,15 @@ USER_CHECK
 	clear
 	FNUM=1
 	LNUM=2
-	echo " << FIX/FAST ¸ê°T¶Ç¿é¨t²Î¨tºŞ±±¾Ş§@¤¶­±-[ÀÉ®×ÀË®ÖÁÙ­ì] (ALL AIX LPAR)>> "
+	echo " << FIX/FAST è³‡è¨Šå‚³è¼¸ç³»çµ±ç³»ç®¡æ§æ“ä½œä»‹é¢-[æª”æ¡ˆæª¢æ ¸é‚„åŸ] (ALL AIX LPAR)>> "
 	echo ""
-	echo "                  1:ÀÉ®×ÀË®ÖBASEÀÉÁÙ­ì(¦³®É¶¡Äİ©Ê_attr)"
+	echo "                  1:æª”æ¡ˆæª¢æ ¸BASEæª”é‚„åŸ(æœ‰æ™‚é–“å±¬æ€§_attr)"
 	echo ""
-    echo "                  2:ÀÉ®×ÀË®ÖBASEÀÉÁÙ­ì(µL®É¶¡Äİ©Ê_exist)"
+    echo "                  2:æª”æ¡ˆæª¢æ ¸BASEæª”é‚„åŸ(ç„¡æ™‚é–“å±¬æ€§_exist)"
 	echo ""
-    echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+    echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
 	echo ""
-    read Menu_No?"½Ğ¿ï¾Ü¿ï¶µ(${FNUM}-${LNUM}) : "
+    read Menu_No?"è«‹é¸æ“‡é¸é …(${FNUM}-${LNUM}) : "
     case $Menu_No in  
         1)
 			BASE="_file_attr.bas"
@@ -178,8 +163,8 @@ USER_CHECK
             ;;
         *)
             echo "" 
-			echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J (${FNUM}-${LNUM})ªº¿ï¶µ"
-			read Answer?"  «öEnterÁäÄ~Äò "
+			echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥ (${FNUM}-${LNUM})çš„é¸é …"
+			read Answer?"  æŒ‰Enteréµç¹¼çºŒ "
 			STARTB
             ;;
     esac
@@ -196,23 +181,23 @@ USER_CHECK
 	clear
 	FNUM=1
 	LNUM=6
-	echo " << FIX/FAST ¸ê°T¶Ç¿é¨t²Î¨tºŞ±±¾Ş§@¤¶­±-[ÀÉ®×ÀË®Ö­×§ï] (ALL AIX LPAR)>> "
+	echo " << FIX/FAST è³‡è¨Šå‚³è¼¸ç³»çµ±ç³»ç®¡æ§æ“ä½œä»‹é¢-[æª”æ¡ˆæª¢æ ¸ä¿®æ”¹] (ALL AIX LPAR)>> "
 	echo ""
-    echo "                  1:ÀÉ®×ÀË®ÖBASEÀÉ¤º®eÅÜ§ó(¦³®É¶¡Äİ©Ê_attr)" 	
+    echo "                  1:æª”æ¡ˆæª¢æ ¸BASEæª”å…§å®¹è®Šæ›´(æœ‰æ™‚é–“å±¬æ€§_attr)" 	
 	echo ""
-    echo "                  2:ÀÉ®×ÀË®ÖBASEÀÉ¤º®eÅÜ§ó(µL®É¶¡Äİ©Ê_exist)" 	
+    echo "                  2:æª”æ¡ˆæª¢æ ¸BASEæª”å…§å®¹è®Šæ›´(ç„¡æ™‚é–“å±¬æ€§_exist)" 	
 	echo ""
-    echo "                  3:ÀÉ®×ÀË®ÖBASEÀÉ¤º®e§R°£(¦³®É¶¡Äİ©Ê_attr)" 	
+    echo "                  3:æª”æ¡ˆæª¢æ ¸BASEæª”å…§å®¹åˆªé™¤(æœ‰æ™‚é–“å±¬æ€§_attr)" 	
 	echo ""
-    echo "                  4:ÀÉ®×ÀË®ÖBASEÀÉ¤º®e§R°£(µL®É¶¡Äİ©Ê_exist)" 	
+    echo "                  4:æª”æ¡ˆæª¢æ ¸BASEæª”å…§å®¹åˆªé™¤(ç„¡æ™‚é–“å±¬æ€§_exist)" 	
 	echo ""
-    echo "                  5:ÀÉ®×ÀË®ÖBASEÀÉ¤º®e·s¼W(¦³®É¶¡Äİ©Ê_attr)" 	
+    echo "                  5:æª”æ¡ˆæª¢æ ¸BASEæª”å…§å®¹æ–°å¢(æœ‰æ™‚é–“å±¬æ€§_attr)" 	
 	echo ""
-    echo "                  6:ÀÉ®×ÀË®ÖBASEÀÉ¤º®e·s¼W(µL®É¶¡Äİ©Ê_exist)" 	
+    echo "                  6:æª”æ¡ˆæª¢æ ¸BASEæª”å…§å®¹æ–°å¢(ç„¡æ™‚é–“å±¬æ€§_exist)" 	
 	echo ""
-    echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+    echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
 	echo ""
-    read Menu_No?"½Ğ¿ï¾Ü¿ï¶µ(${FNUM}-${LNUM}) : "
+    read Menu_No?"è«‹é¸æ“‡é¸é …(${FNUM}-${LNUM}) : "
     case $Menu_No in  
         1)
 			BASE="_file_attr.bas"
@@ -249,8 +234,8 @@ USER_CHECK
             ;;
         *)
             echo "" 
-			echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J (${FNUM}-${LNUM})ªº¿ï¶µ"
-			read Answer?"  «öEnterÁäÄ~Äò "
+			echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥ (${FNUM}-${LNUM})çš„é¸é …"
+			read Answer?"  æŒ‰Enteréµç¹¼çºŒ "
 			STARTC
             ;;
     esac
@@ -267,17 +252,17 @@ USER_CHECK
 	clear
 	FNUM=1
 	LNUM=3
-	echo " << FIX/FAST ¸ê°T¶Ç¿é¨t²Î¨tºŞ±±¾Ş§@¤¶­±-[ÀÉ®×ÀË®Ö°õ¦æ] (ALL AIX LPAR)>> "
+	echo " << FIX/FAST è³‡è¨Šå‚³è¼¸ç³»çµ±ç³»ç®¡æ§æ“ä½œä»‹é¢-[æª”æ¡ˆæª¢æ ¸åŸ·è¡Œ] (ALL AIX LPAR)>> "
 	echo ""
-    echo "                  1:²£¥ÍÀÉ®×ÀË®ÖBASEÀÉ "
+    echo "                  1:ç”¢ç”Ÿæª”æ¡ˆæª¢æ ¸BASEæª” "
 	echo ""
-    echo "                  2:°õ¦æÀÉ®×ÀË®Ö "
+    echo "                  2:åŸ·è¡Œæª”æ¡ˆæª¢æ ¸ "
 	echo ""
-    echo "                  3:½T»{ÀÉ®×ÀË®Öµ²ªG "
+    echo "                  3:ç¢ºèªæª”æ¡ˆæª¢æ ¸çµæœ "
 	echo ""
-    echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+    echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
 	echo ""
-    read Menu_No?"½Ğ¿ï¾Ü¿ï¶µ(${FNUM}-${LNUM}) : "
+    read Menu_No?"è«‹é¸æ“‡é¸é …(${FNUM}-${LNUM}) : "
     case $Menu_No in  
         1)
           	MENU_INPUT SSH_FILEAUDIT_BASE
@@ -293,8 +278,8 @@ USER_CHECK
             ;;
         *)
             echo ""
-	    echo "[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J (${FNUM}-${LNUM})ªº¿ï¶µ"
-	    read Answer?"  «öEnterÁäÄ~Äò "
+	    echo "[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥ (${FNUM}-${LNUM})çš„é¸é …"
+	    read Answer?"  æŒ‰Enteréµç¹¼çºŒ "
 	    STARTD
             ;;
     esac
@@ -309,7 +294,7 @@ SSH_CMD() {
 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "Base ÀÉ§ó·s¶}©l....." $LOG
+	$tlog "Base æª”æ›´æ–°é–‹å§‹....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
@@ -325,7 +310,7 @@ SSH_CMD() {
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "" $LOG
-						$tlog "[Error] ¥D¾÷¦WºÙ¡G[$hosts] $FILECHK file is not exist,Please to check. " $LOG
+						$tlog "[Error] ä¸»æ©Ÿåç¨±ï¼š[$hosts] $FILECHK file is not exist,Please to check. " $LOG
 						$tlog "" $LOG
 						chkflag=$(($chkflag + 1))
 					fi
@@ -334,8 +319,8 @@ SSH_CMD() {
 				if [[ $chkflag -eq "0" ]];then
 					cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 
 					result=$(ls -l ${BASEDIR}/${hosts}${BASE})
-					$tlog "¥D¾÷¦WºÙ¡G [$hosts] " $LOG
-					$tlog "ÀÉ®×Äİ©Ê¡G$result" $LOG
+					$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts] " $LOG
+					$tlog "æª”æ¡ˆå±¬æ€§ï¼š$result" $LOG
 				fi
 			else # If lpar equal the lparlist.
 				# Check the fileaudit base and current files 
@@ -350,10 +335,11 @@ SSH_CMD() {
 						chkflag=$(($chkflag + 1))
 					fi
 				done
+
 				ssh -p $PORT ${USER}@${hosts} "cp ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1"
 				result=$(ssh -p $PORT ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
-				$tlog "¥D¾÷¦WºÙ¡G [$hosts] " $LOG
-				$tlog "ÀÉ®×Äİ©Ê¡G$result" $LOG
+				$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts] " $LOG
+				$tlog "æª”æ¡ˆå±¬æ€§ï¼š$result" $LOG
 			fi
 		done
 	else # If lpar is not wklpar.
@@ -365,7 +351,7 @@ SSH_CMD() {
 							$tlog "" $LOG
 							$tloag "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 							$tlog "" $LOG
-							read ANSWR?"               «öEnterÁäÄ~Äò "
+							read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 							main
 					fi
 				fi
@@ -374,7 +360,7 @@ SSH_CMD() {
 						$tlog "" $LOG
 						$tlog "[Error] Local lpar name:$hostname is not WKLPAR" $LOG
 						$tlog "" $LOG
-						read ANSWR?"               «öEnterÁäÄ~Äò "
+						read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 						main
 				fi
 			done
@@ -383,10 +369,10 @@ SSH_CMD() {
 			for FILECHK in "${BASEDIR}/${hostname}${BASE}" "${CURRDIR}/${hostname}${CURR}" 
 			do
 			    test -f  $FILECHK
-				excstatus=$?
+			 	excstatus=$?
 				if [[ $excstatus -gt 0 ]];then
 					$tlog "" $LOG
-					$tlog "[Error] ¥D¾÷¦WºÙ¡G[$hostname] $FILECHK file is not exist,Please to check. " $LOG
+					$tlog "[Error] ä¸»æ©Ÿåç¨±ï¼š[$hostname] $FILECHK file is not exist,Please to check. " $LOG
 					$tlog "" $LOG
 					chkflag=$(($chkflag + 1))
 				fi
@@ -395,11 +381,11 @@ SSH_CMD() {
 			if [[ $chkflag -eq "0" ]];then
 				cp ${CURRDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE} > /dev/null 2>&1 
 				result=$(ls -l ${BASEDIR}/${hostname}${BASE})
-				$tlog "¥D¾÷¦WºÙ¡G [$hostname] " $LOG
-				$tlog "ÀÉ®×Äİ©Ê¡G$result" $LOG
+				$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hostname] " $LOG
+				$tlog "æª”æ¡ˆå±¬æ€§ï¼š$result" $LOG
 			fi
 	fi
-	$tlog "Base ÀÉ§ó·sµ²§ô....." $LOG
+	$tlog "Base æª”æ›´æ–°çµæŸ....." $LOG
 }
 #}}}
 
@@ -409,7 +395,7 @@ SSH_CMD_RECOVER() {
 # set -x 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "Base ÀÉÁÙ­ì¶}©l....." $LOG
+	$tlog "Base æª”é‚„åŸé–‹å§‹....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then
@@ -425,7 +411,7 @@ SSH_CMD_RECOVER() {
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "" $LOG
-						$tlog "[Error] ¥D¾÷¦WºÙ¡G[$hosts] $FILECHK file is not exist,Please to check. " $LOG
+						$tlog "[Error] ä¸»æ©Ÿåç¨±ï¼š[$hosts] $FILECHK file is not exist,Please to check. " $LOG
 						$tlog "" $LOG
 						chkflag=$(($chkflag + 1))
 					fi
@@ -434,8 +420,8 @@ SSH_CMD_RECOVER() {
 				if [[ $chkflag -eq "0" ]];then
 					cp -p ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 
 					result=$(ls -l ${BASEDIR}/${hostname}${BASE})
-					$tlog "¥D¾÷¦WºÙ¡G [$hosts] " $LOG
-					$tlog "ÀÉ®×Äİ©Ê¡G$result" $LOG
+					$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts] " $LOG
+					$tlog "æª”æ¡ˆå±¬æ€§ï¼š$result" $LOG
 				fi
 			else
 				# Check the fileaudit base and current files 
@@ -446,17 +432,17 @@ SSH_CMD_RECOVER() {
 			 		excstatus=$?
 					if [[ $excstatus -gt 0 ]];then
 						$tlog "" $LOG
-						$tlog "[Error] ¥D¾÷¦WºÙ¡G[$hosts] $FILECHK file is not exist,Please to check. " $LOG
+						$tlog "[Error] ä¸»æ©Ÿåç¨±ï¼š[$hosts] $FILECHK file is not exist,Please to check. " $LOG
 						$tlog "" $LOG
 						chkflag=$(($chkflag + 1))
 					fi
 				done
 
 				if [[ $chkflag -eq "0" ]];then
-					ssh -p $PORT ${USER}@${hosts} "cp -p ${BASEDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 "
-					result=$(ssh -p $PORT ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
-				    $tlog "¥D¾÷¦WºÙ¡G [$hosts] " $LOG
-				    $tlog "ÀÉ®×Äİ©Ê¡G$result" $LOG
+					ssh -p $PORT ${USER}@${hosts} "cp -p ${CURRDIR}/${hosts}${CURR} ${BASEDIR}/${hosts}${BASE} > /dev/null 2>&1 "
+				    result=$(ssh -p $PORT ${USER}@${hosts} "ls -l ${BASEDIR}/${hosts}${BASE}")
+				    $tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts] " $LOG
+				    $tlog "æª”æ¡ˆå±¬æ€§ï¼š$result" $LOG
 				fi
 			fi
 		done
@@ -469,7 +455,7 @@ SSH_CMD_RECOVER() {
 							$tlog "" $LOG
 							$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 							$tlog "" $LOG
-							read ANSWR?"               «öEnterÁäÄ~Äò "
+							read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 							main
 					fi
 				fi
@@ -478,7 +464,7 @@ SSH_CMD_RECOVER() {
 						$tlog "" $LOG
 						echo "[Error] Local lpar name:$hostname is not WKLPAR"
 						$tlog "" $LOG
-						read ANSWR?"               «öEnterÁäÄ~Äò "
+						read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 						main
 				fi
 			done
@@ -486,27 +472,24 @@ SSH_CMD_RECOVER() {
 			chkflag=0
 			for FILECHK in "${BASEDIR}/${hostname}${CURR}" "${BASEDIR}/${hostname}${BASE}" 
 			do
-#					$tlog "test -f  $FILECHK " $LOG
-						   test -f  $FILECHK
+			    test -f  $FILECHK
 				excstatus=$?
 				if [[ $excstatus -gt 0 ]];then
 					$tlog "" $LOG
-					echo "[Error] ¥D¾÷¦WºÙ¡G[$hostname] $FILECHK file is not exist,Please to check. "
+					echo "[Error] ä¸»æ©Ÿåç¨±ï¼š[$hostname] $FILECHK file is not exist,Please to check. "
 					$tlog "" $LOG
 					chkflag=$(($chkflag + 1))
 				fi
 			done
 
-#			$tlog "cp ${BASEDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE}" $LOG
-#			$tlog "ls -l ${BASEDIR}/${hostname}${BASE}" $LOG
 			if [[ $chkflag -eq "0" ]];then
 				cp -p ${BASEDIR}/${hostname}${CURR} ${BASEDIR}/${hostname}${BASE} > /dev/null 2>&1 
 				result=$(ls -l ${BASEDIR}/${hostname}${BASE})
-				$tlog "¥D¾÷¦WºÙ¡G [$hostname] " $LOG
-				$tlog "ÀÉ®×Äİ©Ê¡G$result" $LOG
+				$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hostname] " $LOG
+				$tlog "æª”æ¡ˆå±¬æ€§ï¼š$result" $LOG
 			fi
 	fi
-	$tlog "Base ÀÉÁÙ­ìµ²§ô....." $LOG
+	$tlog "Base æª”é‚„åŸçµæŸ....." $LOG
 }
 #}}}
 
@@ -517,7 +500,7 @@ SSH_FILEAUDIT() {
 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "ÀÉ®×ÀË®Ö¶}©l°õ¦æ....." $LOG
+	$tlog "æª”æ¡ˆæª¢æ ¸é–‹å§‹åŸ·è¡Œ....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
@@ -529,18 +512,18 @@ SSH_FILEAUDIT() {
 					${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  OK" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  OK" $LOG
 					else
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  FAILED" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
 					$tlog "ssh -f -p $PORT ${USER}@${hosts} ${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 " $LOG > /dev/null
 					ssh -f -p $PORT ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1 "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  OK" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  OK" $LOG
 					else
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  FAILED" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  FAILED" $LOG
 					fi
 			fi
 		done
@@ -553,7 +536,7 @@ SSH_FILEAUDIT() {
 							$tlog "" $LOG
 							echo "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST"
 							$tlog "" $LOG
-							read ANSWR?"               «öEnterÁäÄ~Äò "
+							read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 							main
 					fi
 				fi
@@ -562,7 +545,7 @@ SSH_FILEAUDIT() {
 						$tlog "" $LOG
 						echo "[Error] Local lpar name:$hostname is not WKLPAR"
 						$tlog "" $LOG
-						read ANSWR?"               «öEnterÁäÄ~Äò "
+						read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 						main
 				fi
 			done
@@ -570,12 +553,12 @@ SSH_FILEAUDIT() {
 					${SHDIR}/dailycheck/fileaudit/main.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "¥D¾÷¦WºÙ¡G [$hostname]  OK" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hostname]  OK" $LOG
 					else
-						$tlog "¥D¾÷¦WºÙ¡G [$hostname]  FAILED" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hostname]  FAILED" $LOG
 					fi
 	fi
-	$tlog "ÀÉ®×ÀË®Ö°õ¦æ§¹¦¨....." $LOG
+	$tlog "æª”æ¡ˆæª¢æ ¸åŸ·è¡Œå®Œæˆ....." $LOG
 }
 #}}}
 
@@ -586,7 +569,7 @@ SSH_FILEAUDIT_BASE() {
 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "ÀÉ®×ÀË®ÖBaseÀÉ¶}©l....." $LOG
+	$tlog "æª”æ¡ˆæª¢æ ¸Baseæª”é–‹å§‹....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
@@ -597,17 +580,17 @@ SSH_FILEAUDIT_BASE() {
 					${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  OK" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  OK" $LOG
 					else
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  FAILED" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
 					ssh -f -p $PORT ${USER}@${hosts} "${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1 "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  OK" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  OK" $LOG
 					else
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  FAILED" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  FAILED" $LOG
 					fi
 			fi
 		done
@@ -620,7 +603,7 @@ SSH_FILEAUDIT_BASE() {
 							$tlog "" $LOG
 							echo "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST"
 							$tlog "" $LOG
-							read ANSWR?"               «öEnterÁäÄ~Äò "
+							read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 							main
 					fi
 				fi
@@ -629,19 +612,19 @@ SSH_FILEAUDIT_BASE() {
 						$tlog "" $LOG
 						echo "[Error] Local lpar name:$hostname is not WKLPAR"
 						$tlog "" $LOG
-						read ANSWR?"               «öEnterÁäÄ~Äò "
+						read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 						main
 				fi
 			done
 					${SHDIR}/dailycheck/fileaudit/genbas_file_attr.sh > /dev/null 2>&1  &
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "¥D¾÷¦WºÙ¡G [$hostname]  OK" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hostname]  OK" $LOG
 					else
-						$tlog "¥D¾÷¦WºÙ¡G [$hostname]  FAILED" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hostname]  FAILED" $LOG
 					fi
 	fi
-	$tlog "ÀÉ®×ÀË®ÖBaseÀÉ§¹¦¨....." $LOG
+	$tlog "æª”æ¡ˆæª¢æ ¸Baseæª”å®Œæˆ....." $LOG
 }
 #}}}
 
@@ -652,7 +635,7 @@ SSH_FILEAUDIT_CAT() {
 
 
 	$tlog "#===============================================================#" $LOG
-	$tlog "½T»{ÀÉ®×ÀË®Ö°õ¦æµ²ªG....." $LOG
+	$tlog "ç¢ºèªæª”æ¡ˆæª¢æ ¸åŸ·è¡Œçµæœ....." $LOG
 
 
 	if [[ $hostname = $WKLPAR ]];then	# If lpar is wklpar.
@@ -664,18 +647,18 @@ SSH_FILEAUDIT_CAT() {
 					cat $LOGDIR/safelog.${hostname}.fileattr.`date +%Y%m%d`
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  OK" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  OK" $LOG
 					else
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  FAILED" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  FAILED" $LOG
 					fi
 			else # If lpar equal the lparlist.
 					$tlog "ssh -p $PORT ${USER}@${hosts} cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` " $LOG > /dev/null
 					ssh -p $PORT ${USER}@${hosts} "cat $LOGDIR/safelog.${hosts}.fileattr.`date +%Y%m%d` "
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  OK" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  OK" $LOG
 					else
-						$tlog "¥D¾÷¦WºÙ¡G [$hosts]  FAILED" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hosts]  FAILED" $LOG
 					fi
 			fi
 		done
@@ -688,7 +671,7 @@ SSH_FILEAUDIT_CAT() {
 							$tlog "" $LOG
 							echo "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST"
 							$tlog "" $LOG
-							read ANSWR?"               «öEnterÁäÄ~Äò "
+							read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 							main
 					fi
 				fi
@@ -697,7 +680,7 @@ SSH_FILEAUDIT_CAT() {
 						$tlog "" $LOG
 						echo "[Error] Local lpar name:$hostname is not WKLPAR"
 						$tlog "" $LOG
-						read ANSWR?"               «öEnterÁäÄ~Äò "
+						read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 						main
 				fi
 			done
@@ -705,9 +688,9 @@ SSH_FILEAUDIT_CAT() {
 					cat $LOGDIR/safelog.${hostname}.fileattr.`date +%Y%m%d`
 			 		excstatus=$?
 					if [[ $excstatus -eq 0 ]];then
-						$tlog "¥D¾÷¦WºÙ¡G [$hostname]  OK" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hostname]  OK" $LOG
 					else
-						$tlog "¥D¾÷¦WºÙ¡G [$hostname]  FAILED" $LOG
+						$tlog "ä¸»æ©Ÿåç¨±ï¼š [$hostname]  FAILED" $LOG
 					fi
 	fi
 }
@@ -729,7 +712,7 @@ TYPE=$2
 						chkflag=0
 						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
-						   $tlog "·s¼WÀÉ¦W: $FILENCHG " $LOG
+						   $tlog "æ–°å¢æª”å: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
 								GREPMODE="[[:digit:]][[:space:]]"
@@ -745,7 +728,7 @@ TYPE=$2
 						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
-								$tlog "[Error] ${FILENCHG} ¿é¤J¬°ªÅ­È " $LOG
+								$tlog "[Error] ${FILENCHG} è¼¸å…¥ç‚ºç©ºå€¼ " $LOG
 								$tlog "" $LOG
 								chkflag=$(($chkflag + 1))
 						   fi
@@ -753,7 +736,7 @@ TYPE=$2
 						   if [[ $chkflag -eq "0" ]];then
 							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}
 							   modifiedstatus=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-							   $tlog "ÀÉ®×·s¼Wµ²ªG¡G$modifiedstatus" $LOG
+							   $tlog "æª”æ¡ˆæ–°å¢çµæœï¼š$modifiedstatus" $LOG
 					 	   fi
 						done
 					else
@@ -771,7 +754,7 @@ TYPE=$2
 								GREPMODE="[[:space:]]"
 						   fi
 					       modifiedstatus=$(ssh -p $PORT ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-					       $tlog "ÀÉ®×·s¼Wµ²ªG¡G$modifiedstatus" $LOG
+					       $tlog "æª”æ¡ˆæ–°å¢çµæœï¼š$modifiedstatus" $LOG
 						done
 					fi
 				done
@@ -781,7 +764,7 @@ TYPE=$2
 								$tlog "" $LOG
 								$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 								$tlog "" $LOG
-								read ANSWR?"               «öEnterÁäÄ~Äò "
+								read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 								main
 						fi
 					fi
@@ -790,14 +773,14 @@ TYPE=$2
 							$tlog "" $LOG
 							$tlog "[Error] Local lpar name:$hostname is not WKLPAR " $LOG
 							$tlog "" $LOG
-							read ANSWR?"               «öEnterÁäÄ~Äò "
+							read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 							main
 					fi
 					IFS=";"
 					chkflag=0
 					for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 					do
-						  $tlog "·s¼WÀÉ¦W: $FILENCHG " $LOG
+						  $tlog "æ–°å¢æª”å: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
 								GREPMODE="[[:digit:]][[:space:]]"
@@ -807,7 +790,7 @@ TYPE=$2
 
 						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
-								$tlog "[Error] ${FILENCHG} ¿é¤J¬°ªÅ­È " $LOG
+								$tlog "[Error] ${FILENCHG} è¼¸å…¥ç‚ºç©ºå€¼ " $LOG
 								$tlog "" $LOG
 								chkflag=$(($chkflag + 1))
 						   fi
@@ -822,7 +805,7 @@ TYPE=$2
 						   if [[ $chkflag -eq "0" ]];then
 							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}
 							   modifiedstatus=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE})
-							   $tlog "ÀÉ®×·s¼Wµ²ªG¡G$modifiedstatus" $LOG
+							   $tlog "æª”æ¡ˆæ–°å¢çµæœï¼š$modifiedstatus" $LOG
 						   fi
 					 done
 			fi
@@ -846,7 +829,7 @@ TYPE=$2
 						chkflag=0
 						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
-						   $tlog "²§°ÊÀÉ¦W: $FILENCHG " $LOG
+						   $tlog "ç•°å‹•æª”å: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
 								GREPMODE="[[:digit:]][[:space:]]"
@@ -857,7 +840,7 @@ TYPE=$2
 						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
-								$tlog "[Error] ${FILENCHG} ¿é¤J¬°ªÅ­È " $LOG
+								$tlog "[Error] ${FILENCHG} è¼¸å…¥ç‚ºç©ºå€¼ " $LOG
 								$tlog "" $LOG
 								chkflag=$(($chkflag + 1))
 						   fi
@@ -876,16 +859,16 @@ TYPE=$2
 							   head -n $HEDLNUM ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
 							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hosts}${CURR} >> ${BASEDIR}/${hosts}${BASE}.tmp
 							   tail -n $TAILNUM ${BASEDIR}/${hosts}${BASE} >> ${BASEDIR}/${hosts}${BASE}.tmp
-							   mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
+							   mv -f ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
 							   modifiedstatus=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-							   $tlog "ÀÉ®×²§°Êµ²ªG¡G$modifiedstatus" $LOG
+							   $tlog "æª”æ¡ˆç•°å‹•çµæœï¼š$modifiedstatus" $LOG
 					 	   fi
 						done
 					else
 						$tlog "scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
-						$tlog "ssh -p $PORT ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
+						$tlog "ssh -p $PORT ${USER}@${hosts} ${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
 						scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/ > /dev/null 2>&1 
-						ssh -p $PORT ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
+						ssh -p $PORT ${USER}@${hosts} "${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" > /dev/null 2>&1
 						IFS=";"
 						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
@@ -896,7 +879,7 @@ TYPE=$2
 								GREPMODE="[[:space:]]"
 						   fi
 					       modifiedstatus=$(ssh -p $PORT ${USER}@${hosts} grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE})
-					       $tlog "ÀÉ®×²§°Êµ²ªG¡G$modifiedstatus" $LOG
+					       $tlog "æª”æ¡ˆç•°å‹•çµæœï¼š$modifiedstatus" $LOG
 						done
 					fi
 				done
@@ -906,7 +889,7 @@ TYPE=$2
 								$tlog "" $LOG
 								$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 								$tlog "" $LOG
-								read ANSWR?"               «öEnterÁäÄ~Äò "
+								read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 								main
 						fi
 					fi
@@ -915,14 +898,14 @@ TYPE=$2
 							$tlog "" $LOG
 							$tlog "[Error] Local lpar name:$hostname is not WKLPAR " $LOG
 							$tlog "" $LOG
-							read ANSWR?"               «öEnterÁäÄ~Äò "
+							read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 							main
 					fi
 					IFS=";"
 					chkflag=0
 					for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 					do
-						  $tlog "²§°ÊÀÉ¦W: $FILENCHG " $LOG
+						  $tlog "ç•°å‹•æª”å: $FILENCHG " $LOG
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
 								GREPMODE="[[:digit:]][[:space:]]"
@@ -932,7 +915,7 @@ TYPE=$2
 
 						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
-								$tlog "[Error] ${FILENCHG} ¿é¤J¬°ªÅ­È " $LOG
+								$tlog "[Error] ${FILENCHG} è¼¸å…¥ç‚ºç©ºå€¼ " $LOG
 								$tlog "" $LOG
 								chkflag=$(($chkflag + 1))
 						   fi
@@ -952,7 +935,7 @@ TYPE=$2
 							   head -n $HEDLNUM ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
 							   grep "${GREPMODE}${FILENCHG}$" ${CURRDIR}/${hostname}${CURR} >> ${BASEDIR}/${hostname}${BASE}.tmp
 							   tail -n $TAILNUM ${BASEDIR}/${hostname}${BASE} >> ${BASEDIR}/${hostname}${BASE}.tmp
-							   mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+							   mv -f ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
 						   fi
 					 done
 			fi
@@ -977,7 +960,7 @@ TYPE=$2
 						chkflag=0
 						for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 						do
-						  $tlog "²M°£ÀÉ¦W: $FILENCHG " $LOG
+						  $tlog "æ¸…é™¤æª”å: $FILENCHG " $LOG
 
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
@@ -989,21 +972,22 @@ TYPE=$2
 						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE}| wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tlog "" $LOG
-								$tlog "[Error] ${FILENCHG} ¿é¤J¬°ªÅ­È " $LOG
+								$tlog "[Error] ${FILENCHG} è¼¸å…¥ç‚ºç©ºå€¼ " $LOG
 								$tlog "" $LOG
+								$tlog "flag1" $LOG
 								chkflag=$(($chkflag + 1))
 						   fi
 
 						   if [[ $chkflag -eq "0" ]];then
 							    grep -v "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hosts}${BASE} > ${BASEDIR}/${hosts}${BASE}.tmp
-							    mv ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
+							    mv -f ${BASEDIR}/${hosts}${BASE}.tmp ${BASEDIR}/${hosts}${BASE}
 					       fi
 						done
 					else
 						$tlog "scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/" $LOG
-						$tlog "ssh -p $PORT ${USER}@${hosts} ${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
+						$tlog "ssh -p $PORT ${USER}@${hosts} ${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &" $LOG
 						scp -P $PORT /tmp/filechg${USER}.tmp ${USER}@${hosts}:/tmp/
-						ssh -p $PORT ${USER}@${hosts} "${SHDIR}/fileaudit_base.penu.sh $MODE $TYPE > /dev/null 2>&1 &"
+						ssh -p $PORT ${USER}@${hosts} "${SHDIR}/fileaudit_base.menu.sh $MODE $TYPE > /dev/null 2>&1 &"
 					fi
 				done
 			else
@@ -1012,7 +996,7 @@ TYPE=$2
 								$tlog "" $LOG
 								$tlog "[Error] Local lpar name:$hostname are not equal input lpar name:$HOSTLIST" $LOG
 								$tlog "" $LOG
-								read ANSWR?"               «öEnterÁäÄ~Äò "
+								read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 								main
 						fi
 					fi
@@ -1021,14 +1005,14 @@ TYPE=$2
 							$tlog "" $LOG
 							$tlog "[Error] Local lpar name:$hostname is not WKLPAR" $LOG
 							$tlog "" $LOG
-							read ANSWR?"               «öEnterÁäÄ~Äò "
+							read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 							main
 					fi
 					IFS=";"
 					chkflag=0
 					for FILENCHG in $(cat /tmp/filechg${USER}.tmp)
 					do
-						   $tlog "²M°£ÀÉ¦W: $FILENCHG " $LOG
+						   $tlog "æ¸…é™¤æª”å: $FILENCHG " $LOG
 
 						   FILECHK=$(echo $BASE | grep attr | wc -l | awk '{print $1}') 
 						   if [[ $FILECHK -eq 1 ]];then
@@ -1040,14 +1024,14 @@ TYPE=$2
 						   CHKFILEN=$( grep "${GREPMODE}${FILENCHG}$" ${BASEDIR}/${hostname}${BASE}|wc -l |awk '{print $1}')
 						   if [[ $CHKFILEN -lt 1 ]]; then
 								$tog "" $LOG
-								$tlog "[Error] ${FILENCHG} ¿é¤J¬°ªÅ­È " $LOG
+								$tlog "[Error] ${FILENCHG} è¼¸å…¥ç‚ºç©ºå€¼ " $LOG
 								$tog "" $LOG
 								chkflag=$(($chkflag + 1))
 						   fi
 
 						   if [[ $chkflag -eq "0" ]];then
 							    grep -v "${GREPMODE}${FILENCHG}" ${BASEDIR}/${hostname}${BASE} > ${BASEDIR}/${hostname}${BASE}.tmp
-							    mv ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
+							    mv -f ${BASEDIR}/${hostname}${BASE}.tmp ${BASEDIR}/${hostname}${BASE}
 						   fi
 					 done
 			fi
@@ -1072,15 +1056,15 @@ MENU_INPUT () {
 
    if [[ "$HOSTN" == "" ]]; then
        echo ""
-       echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+       echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
        echo "#==========================================================#"
-       echo "# ¿é¤J®æ¦¡(¨C¥x¥D¾÷¥HªÅ®æ°µ¬°¤À¹j): DAP1-1 DAR1-1 LOG1 MDS1#"
+       echo "# è¼¸å…¥æ ¼å¼(æ¯å°ä¸»æ©Ÿä»¥ç©ºæ ¼åšç‚ºåˆ†éš”): DAP1-1 DAR1-1 LOG1 MDS1#"
        echo "#                                                          #"
-       echo "# ¸s²Õ¿é¤J®æ¦¡: DAP (¤@¦¸¤@­Ó¸s²Õ)                         #"
+       echo "# ç¾¤çµ„è¼¸å…¥æ ¼å¼: DAP (ä¸€æ¬¡ä¸€å€‹ç¾¤çµ„)                         #"
        echo "#                                                          #"
-       echo "# ¥ş³¡¥D¾÷½Ğ¿é¤J: ALL                                      #"
+       echo "# å…¨éƒ¨ä¸»æ©Ÿè«‹è¼¸å…¥: ALL                                      #"
        echo "#==========================================================#"
-       read  HOSTN?"¿é¤J±ı°õ¦æªº¥D¾÷¦WºÙ : "
+       read  HOSTN?"è¼¸å…¥æ¬²åŸ·è¡Œçš„ä¸»æ©Ÿåç¨± : "
 
 	   if [[ "$HOSTN" == "q" ]] || [[ "$HOSTN" == "Q" ]]; then
 		   main
@@ -1088,19 +1072,19 @@ MENU_INPUT () {
 
 	   if [[ -z "$HOSTN" ]]; then
 			echo ""
-			echo "               [Error] ½Ğ­«·s¿é¤J¥D¾÷¦W"
+			echo "               [Error] è«‹é‡æ–°è¼¸å…¥ä¸»æ©Ÿå"
 			echo ""
-			read ANSWR?"               «öEnterÁäÄ~Äò "
+			read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 			main
 	   fi
 
 	   # check input more then 2 characters 
-	   # [:alpha:]¥Nªí­^¤å¤j¤p¼g¦r¤¸¡A¥ç§YA-Z, a-z
-	   # [:alnum:]¥Nªí­^¤å¤j¤p¼g¦r¤¸¤Î¼Æ¦r¡A¥ç§Y 0-9, A-Z, a-z
+	   # [:alpha:]ä»£è¡¨è‹±æ–‡å¤§å°å¯«å­—å…ƒï¼Œäº¦å³A-Z, a-z
+	   # [:alnum:]ä»£è¡¨è‹±æ–‡å¤§å°å¯«å­—å…ƒåŠæ•¸å­—ï¼Œäº¦å³ 0-9, A-Z, a-z
 	   if [[ $HOSTN != [[:alpha:]][[:alnum:]]* ]]; then
-				echo "               [Error] ${HOSTN} ¿é¤J¬°ªÅ­È"
+				echo "               [Error] ${HOSTN} è¼¸å…¥ç‚ºç©ºå€¼"
 				echo ""
-				read ANSWR?"               «öEnterÁäÄ~Äò "
+				read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 				main
 	   fi	
 
@@ -1140,9 +1124,9 @@ MENU_INPUT () {
 
 		    if [[ -z "$HOSTLIST" ]]; then
 				echo ""
-				echo "               [Error] ${HOSTN} ¿é¤J¬°ªÅ­È "
+				echo "               [Error] ${HOSTN} è¼¸å…¥ç‚ºç©ºå€¼ "
 				echo ""
-				read ANSWR?"               «öEnterÁäÄ~Äò "
+				read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 				main
 		    fi
 
@@ -1150,21 +1134,21 @@ MENU_INPUT () {
 	   done
 
 		if [[ $MODE = "CNG_DETAL" ]] || [[ $MODE = "CNG_REMOVE" ]] || [[ $MODE = "CNG_ADD" ]];then
-			echo "                  (ÀH®É¥i¿é q ¥HÂ÷¶} ) "
+			echo "                  (éš¨æ™‚å¯è¼¸ q ä»¥é›¢é–‹ ) "
 			echo "#============================================================#"
-			echo "# ¿é¤J±ıÅÜ§óªº¥Ø¿ı©ÎÀÉ®×(¨C­Ó®|©ÎÀÉ®×¥H;°µ¬°¤À¹j)¦p¤U:       #"
+			echo "# è¼¸å…¥æ¬²è®Šæ›´çš„ç›®éŒ„æˆ–æª”æ¡ˆ(æ¯å€‹å¾‘æˆ–æª”æ¡ˆä»¥;åšç‚ºåˆ†éš”)å¦‚ä¸‹:       #"
 			echo "# /etc/passwd;/etc/group;/etc/profile;/etc/environment;/tmp  #"
 			echo "#============================================================#"
-			read FILEN?"¿é¤J±ıÅÜ§óªº¥Ø¿ı©ÎÀÉ®×: "
+			read FILEN?"è¼¸å…¥æ¬²è®Šæ›´çš„ç›®éŒ„æˆ–æª”æ¡ˆ: "
 
 			if [[ "$FILEN" == "q" ]] || [[ "$FILEN" == "Q" ]]; then
 			   main
 			fi
 			if [[ -z "$FILEN" ]]; then
 				echo ""
-				echo "               [Error] ½Ğ¿é¿é¤J±ıÅÜ§óªº¥Ø¿ı©ÎÀÉ®×"
+				echo "               [Error] è«‹è¼¸è¼¸å…¥æ¬²è®Šæ›´çš„ç›®éŒ„æˆ–æª”æ¡ˆ"
 				echo ""
-				read ANSWR?"               «öEnterÁäÄ~Äò "
+				read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 				main
 		    fi
 			echo ${FILEN[@]} > /tmp/filechg${USER}.tmp
@@ -1172,7 +1156,7 @@ MENU_INPUT () {
 
 		if [[ $MODE = "CNG_REMOVE" ]];then
 				echo ""
-				read ANSWER?"     ½Ğ½T»{¬O§_°õ¦æ(Y/N): "
+				read ANSWER?"     è«‹ç¢ºèªæ˜¯å¦åŸ·è¡Œ(Y/N): "
 				case $ANSWER in
 					n|N)                                          
 				 		main
@@ -1181,14 +1165,14 @@ MENU_INPUT () {
 						MODIFIED_REMOVE_BASE $MODE $TYPE
 				 		;;
 					*)                                          
-						echo "		[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-				        read ANSWR?"               «öEnterÁäÄ~Äò "
+						echo "		[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+				        read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 				 		main
 				 		;;
 				esac
 		elif [[ $MODE = "CNG_DETAL" ]];then
 				echo ""
-				read ANSWER?"     ½Ğ½T»{¬O§_°õ¦æ(Y/N): "
+				read ANSWER?"     è«‹ç¢ºèªæ˜¯å¦åŸ·è¡Œ(Y/N): "
 				case $ANSWER in
 					n|N)                                          
 				 		main
@@ -1197,14 +1181,14 @@ MENU_INPUT () {
 						MODIFIED_BASE $MODE $TYPE
 				 		;;
 					*)                                          
-						echo "		[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-				        read ANSWR?"               «öEnterÁäÄ~Äò "
+						echo "		[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+				        read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 				 		main
 				 		;;
 				esac
 		elif [[ $MODE = "CNG_ADD" ]];then
 				echo ""
-				read ANSWER?"     ½Ğ½T»{¬O§_°õ¦æ(Y/N): "
+				read ANSWER?"     è«‹ç¢ºèªæ˜¯å¦åŸ·è¡Œ(Y/N): "
 				case $ANSWER in
 					n|N)                                          
 				 		main
@@ -1213,14 +1197,14 @@ MENU_INPUT () {
 						MODIFIED_ADD_BASE $MODE $TYPE
 				 		;;
 					*)                                          
-						echo "		[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-				        read ANSWR?"               «öEnterÁäÄ~Äò "
+						echo "		[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+				        read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 				 		main
 				 		;;
 				esac
 		else
 				echo ""
-				read ANSWER?"     ½Ğ½T»{¬O§_°õ¦æ(Y/N): "
+				read ANSWER?"     è«‹ç¢ºèªæ˜¯å¦åŸ·è¡Œ(Y/N): "
 				case $ANSWER in
 					n|N)                                          
 				 		main
@@ -1229,14 +1213,14 @@ MENU_INPUT () {
 						$MODE
 						;;
 					*)                                          
-						echo "		[Error]  ¿é¤J¿ù»~, ½Ğ¿é¤J(Y/N)"
-				        read ANSWR?"               «öEnterÁäÄ~Äò "
+						echo "		[Error]  è¼¸å…¥éŒ¯èª¤, è«‹è¼¸å…¥(Y/N)"
+				        read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 				 		main
 				 		;;
 				esac
 		fi
 
-		read ANSWR?"               «öEnterÁäÄ~Äò "
+		read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 		main
     fi
 }
@@ -1256,9 +1240,9 @@ USER_CHECK (){
 	done
 
 	if [[ $userflag -eq 0 ]];then 
-		echo "               [Error]  ¨Ï¥ÎªÌÅv­­¤£²Å¦X"
+		echo "               [Error]  ä½¿ç”¨è€…æ¬Šé™ä¸ç¬¦åˆ"
 		echo ""
-		read ANSWR?"               «öEnterÁäÄ~Äò "
+		read ANSWR?"               æŒ‰Enteréµç¹¼çºŒ "
 		main 
 	fi
 }

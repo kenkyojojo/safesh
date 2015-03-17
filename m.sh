@@ -855,6 +855,9 @@ STARTI () {
            MDS)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MDS`
                ;;
+           MIS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MIS`
+               ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
                ;;
@@ -1147,6 +1150,9 @@ STARTM () {
            MDS)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MDS`
                ;;
+           MIS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MIS`
+               ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
                ;;
@@ -1430,6 +1436,9 @@ STARTO () {
                ;;
            MDS)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MDS`
+               ;;
+           MIS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MIS`
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
@@ -1796,6 +1805,9 @@ STARTS () {
                ;;
            MDS)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MDS`
+               ;;
+           MIS)
+               HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^MIS`
                ;;
            LOG)
                HOSTLIST=`cat /home/se/safechk/cfg/host.lst | grep -i ^LOG`
