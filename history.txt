@@ -1,3 +1,56 @@
+commit c897350503632a68ac8fee1556cedb14fd066ded
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Wed Aug 10 08:02:39 2016 +0800
+
+    On branch TSEOB1
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+    
+    	modified:   dailycheck/daily_check.sh
+    	modified:   dailycheck/fileaudit/filecheck.sh
+    	modified:   dailycheck/fileaudit/genbas_file_attr.sh
+    	modified:   faillogin.sh
+    	modified:   lastlogin.sh
+    	modified:   log2csv.sh
+    	modified:   pwlog.sh
+    	modified:   remote_fast.sh
+    	modified:   resort.sh
+    	modified:   safelog.sh
+
+commit 84b7c20e282773b8f4b532c07e19c9d71aed2352
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Wed Aug 10 08:00:22 2016 +0800
+
+    On branch TSEOB1
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+    
+    	new file:   Network_test.sh
+    	new file:   clear_sys_info.sh
+    	new file:   remote_fast.sh
+    	new file:   sample.sh
+    
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+    
+    	modified:   dailycheck/daily_check.sh
+    	modified:   dailycheck/fileaudit/filecheck.sh
+    	modified:   dailycheck/fileaudit/genbas_file_attr.sh
+    	modified:   faillogin.sh
+    	modified:   lastlogin.sh
+    	modified:   log2csv.sh
+    	modified:   pwlog.sh
+    	modified:   remote_fast.sh
+    	modified:   resort.sh
+    	modified:   safelog.sh
+
+commit 90efda13ef033105a5c70dceced7a9be3fa6e03c
+Author: Bruce Hsiao <kenkyojojo@gmail.com>
+Date:   Tue Mar 17 15:28:16 2015 +0800
+
+    history.txt version.txt
+
 commit f3834f924a27943d1421b095523be15092e47baa
 Author: Bruce Hsiao <kenkyojojo@gmail.com>
 Date:   Tue Mar 17 15:26:31 2015 +0800
