@@ -38,8 +38,10 @@ DATAPATH="/home/se/safechk/safelog"
 now_year=`date +"%Y"`	
 now_month=`date +"%m"`	
 now_tt=`/usr/bin/perl -e 'print time'`
-cur_ymd=`date +"%Y%m%d"`
-cur_ym=`date +"%Y%m"`
+#cur_ymd=`date +"%Y%m%d"`
+cur_ymd=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%Y%m%d", localtime(time-86400));print $str'`
+#cur_ym=`date +"%Y%m"`
+cur_ym=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%Y%m", localtime(time-86400));print $str'`
 timestamp=`date +"%Y%m%d%H%M%S"`
 outfile0=""
 outfile1="${DATAPATH}/safelog.${hostname}.logs.$timestamp.csv"

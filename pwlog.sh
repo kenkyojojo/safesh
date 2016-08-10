@@ -38,9 +38,10 @@ if [ -n "$*" ]; then
 	want_users="$*"
 fi
 
-timestamp=`date +"%Y%m%d%H%M%S"`
-logfile1="/home/se/safechk/safelog/${ApName}.${hostname}.last.$timestamp.txt"
-logfile2="/home/se/safechk/safelog/${ApName}.${hostname}.expire.$timestamp.txt"
+#timestamp=`date +"%Y%m%d%H%M%S"`
+timestamp=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%Y%m%d%H%M%S", localtime(time-86400));print $str'`
+logfile1="/home/se/safechk/safelog/${ApName}.${hostname}.last.${timestamp}.txt"
+logfile2="/home/se/safechk/safelog/${ApName}.${hostname}.expire.${timestamp}.txt"
 tmpfile="/tmp/${ApName}.tmp"
 mon_dd=`date +"%b %d"`	# Mar 29
 mm_dd=`date +"%m/%d"`	# 03/29

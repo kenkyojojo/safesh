@@ -6,12 +6,13 @@
 ApName="lastlogin"
 ApVers="1.1a"
 hostname=`hostname`
-timestamp=`date +"%Y%m%d%H%M%S"`
-dt=`date +"%y/%m/%d %H:%M:%S"`
-loginfile="/home/se/safechk/safelog/safelog.${hostname}.login.$timestamp.txt"
 yt1=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%b %m %d", localtime(time-86400));print $str'`
 y_mon=`echo $yt1 | awk '{printf("%s",$1)}'`
 y_day=`echo $yt1 | awk '{printf("%s",$3)}'`
+dt=`date +"%y/%m/%d %H:%M:%S"`
+#timestamp=`date +"%Y%m%d%H%M%S"`
+timestamp=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%Y%m%d%H%M%S", localtime(time-86400));print $str'`
+loginfile="/home/se/safechk/safelog/safelog.${hostname}.login.${timestamp}.txt"
 flag_file="/home/se/safechk/safelog/lastlogin.flag"
 
 #----------------------------------

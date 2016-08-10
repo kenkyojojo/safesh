@@ -6,7 +6,8 @@
 ApName="faillogin"
 ApVers="1.0"
 hostname=`hostname`
-timestamp=`date +"%Y%m%d%H%M%S"`
+#timestamp=`date +"%Y%m%d%H%M%S"`
+timestamp=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%Y%m%d%H%M%S", localtime(time-86400));print $str'`
 dt=`date +"%y/%m/%d %H:%M:%S"`
 loginfile="/home/se/safechk/safelog/safelog.${hostname}.faillogin.$timestamp.txt"
 yt1=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%b %m %d", localtime(time-86400));print $str'`

@@ -38,7 +38,7 @@ main (){
 
 	scopy
 	fast	
-	sleep 15
+	sleep 20
 	check_log
 }
 main

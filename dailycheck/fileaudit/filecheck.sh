@@ -31,46 +31,28 @@ LOG=$LOGDIR/${DATEM}.${hostname}.${SHELL}.log
 HOSTN=$(echo $hostname | cut -c 1-3)
 
 case $HOSTN in
-	DAP)
-		DIR=`head -1 $CONFIGDIR/dir.conf.dap`
-		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.dap`
-		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.dap`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.dap;sed -n '3p' $CONFIGDIR/dir.conf.dap;sed -n '4p' $CONFIGDIR/dir.conf.dap`
-		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.dap | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
-		;;
-	DAR)
-		DIR=`head -1 $CONFIGDIR/dir.conf.dar`
-		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.dar`
-		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.dar`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.dar;sed -n '3p' $CONFIGDIR/dir.conf.dar;sed -n '4p' $CONFIGDIR/dir.conf.dar`
-		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.dar | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
-		;;
-	LOG)
-		DIR=`head -1 $CONFIGDIR/dir.conf.log`
-		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.log`
-		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.log`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.log;sed -n '3p' $CONFIGDIR/dir.conf.log;sed -n '4p' $CONFIGDIR/dir.conf.log`
-		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.log | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
-		;;
-	MDS)
-		DIR=`head -1 $CONFIGDIR/dir.conf.mds`
-		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.mds`
-		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.mds`
-		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.mds;sed -n '3p' $CONFIGDIR/dir.conf.mds;sed -n '4p' $CONFIGDIR/dir.conf.mds`
-		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.mds | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
-		;;
 	WKL)
 		DIR=`head -1 $CONFIGDIR/dir.conf.wkl`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.wkl`
 		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.wkl`
 		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.wkl;sed -n '3p' $CONFIGDIR/dir.conf.wkl;sed -n '4p' $CONFIGDIR/dir.conf.wkl`
+		NOCHECK_E=`sed -n '2p' $CONFIGDIR/dir.conf.wkl;sed -n '4p' $CONFIGDIR/dir.conf.wkl`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.wkl | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
+		;;
+	MIS)
+		DIR=`head -1 $CONFIGDIR/dir.conf.mis`
+		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.mis`
+		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.mis`
+		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.mis;sed -n '3p' $CONFIGDIR/dir.conf.mis;sed -n '4p' $CONFIGDIR/dir.conf.mis`
+		NOCHECK_E=`sed -n '2p' $CONFIGDIR/dir.conf.mis;sed -n '4p' $CONFIGDIR/dir.conf.mis`
+		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.mis | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 	OTC)
 		DIR=`head -1 $CONFIGDIR/dir.conf.otc`
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.otc`
 		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.otc`
 		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.otc;sed -n '3p' $CONFIGDIR/dir.conf.otc;sed -n '4p' $CONFIGDIR/dir.conf.otc`
+		NOCHECK_E=`sed -n '2p' $CONFIGDIR/dir.conf.otc;sed -n '4p' $CONFIGDIR/dir.conf.otc`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.otc | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 	FIX)
@@ -78,6 +60,7 @@ case $HOSTN in
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf.fix`
 		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf.fix`
 		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf.fix;sed -n '3p' $CONFIGDIR/dir.conf.fix;sed -n '4p' $CONFIGDIR/dir.conf.fix`
+		NOCHECK_E=`sed -n '2p' $CONFIGDIR/dir.conf.fix;sed -n '4p' $CONFIGDIR/dir.conf.fix`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf.fix | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 	*)
@@ -85,11 +68,13 @@ case $HOSTN in
 		EXIST=`sed -n '2p' $CONFIGDIR/dir.conf`
 		DIRNOTIME=`sed -n '3p' $CONFIGDIR/dir.conf`
 		NOCHECK=`sed -n '2p' $CONFIGDIR/dir.conf;sed -n '3p' $CONFIGDIR/dir.conf;sed -n '4p' $CONFIGDIR/dir.conf`
+		NOCHECK_E=`sed -n '2p' $CONFIGDIR/dir.conf;sed -n '4p' $CONFIGDIR/dir.conf`
 		EXCLUDE=`tail -1 /home/se/safechk/cfg/dir.conf | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 		;;
 esac
 
 ALLEXCLUDE=`echo $NOCHECK | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
+ALLEXCLUDE_E=`echo $NOCHECK_E | sed -e 's#\/#\\\/#g' -e 's/ /\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 EXCLUDE_EXIST=`echo $EXIST | sed -e 's#\/#\\\/#g' -e 's/ /\$\/d\" -e \"\//g' -e 's/^/sed -e "\//' -e 's/$/\/d"/'`
 
 
@@ -258,12 +243,14 @@ if [ -f $EXISTBASE ]; then
 
    for DIRNAME in $DIRNOTIME #Recursive list dir, but don't list the file and directory time.
    do
-		find $DIRNAME -ls 2>/dev/null | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
+		find $DIRNAME -ls 2>/dev/null | eval $EXCLUDE | eval $ALLEXCLUDE_E | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
 		#${SHDIR}/sefind $DIRNAME -ls 2>/dev/null | eval $EXCLUDE | awk '{print $5,$6,$3,$NF}'  >> $CURRENT_EXIST
    done
 
+
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $CURRENT_EXIST > $TMP_EXISTCUR
    awk '{if ($4~/\/dev\// || $5~/\/dev\//) if ($1~/c/ || $1~/b/) {print $4} else {print $4} else {print $4}}' $EXISTBASE > $TMP_EXISTBASE
+
    sort -k 4 $CURRENT_EXIST  -o  $CURRENT_EXIST
    sort -k 4 $EXISTBASE -o $EXISTBASE
    diff $CURRENT_EXIST $EXISTBASE  > $TMP_EXISTCHANGE

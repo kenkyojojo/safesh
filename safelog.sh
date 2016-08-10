@@ -18,23 +18,25 @@ hostname=`hostname`
 # skip users when doing history cmd, please keep pre-,post-blank space!
 skip_users="[ daemon bin sys adm uucp guest nobody lpd lp snapp ipsec nuucp pconsole invscout esaadmin sshd ]"
 
-timestamp=`date +"%Y%m%d%H%M%S"`
-logfile1="/home/se/safechk/safelog/safelog.${hostname}.wtmp.$timestamp.txt"
-logfile2="/home/se/safechk/safelog/safelog.${hostname}.sulog.$timestamp.txt"
-logfile3="/home/se/safechk/safelog/safelog.${hostname}.history.$timestamp.txt"
+#timestamp=`date +"%Y%m%d%H%M%S"`
+timestamp=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%Y%m%d%H%M%S", localtime(time-86400));print $str'`
+logfile1="/home/se/safechk/safelog/safelog.${hostname}.wtmp.${timestamp}.txt"
+logfile2="/home/se/safechk/safelog/safelog.${hostname}.sulog.${timestamp}.txt"
+logfile3="/home/se/safechk/safelog/safelog.${hostname}.history.${timestamp}.txt"
 tmpfile="/tmp/safelog.tmp"
 mon_dd=`date +"%b %d"`	# Mar 29
 mm_dd=`date +"%m/%d"`	# 03/29
-yt1=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%b %m %d", localtime(time-86400));print $str'`
+yt1=`/usr/bin/perl -e 'use POSIX qw(strftime);$str = strftime( "%b %m %d %Y", localtime(time-86400));print $str'`
 y_mon_dd=`echo $yt1 | awk '{printf("%s %s", $1, $3)}'`
-y_mm_dd=`echo $yt1 | awk '{printf("%s/%s", $2, $3)}'`
+#y_mm_dd=`echo $yt1 | awk '{printf("%s/%s", $2, $3)}'`
+y_mm_dd=`echo $yt1 | awk '{printf("%s/%s/%s", $4, $2, $3)}'`
 
 
 #----------------------------------
 # step 1/3: who /var/adm/wtmp
 #----------------------------------
 
-dt=`date +"%y/%m/%d %H:%M:%S"`
+dt=`date +"%Y/%m/%d %H:%M:%S"`
 echo "" >> $logfile1
 echo "App: $ApName v${ApVers} @ $hostname" >> $logfile1
 echo "Now: $dt" >> $logfile1
@@ -49,7 +51,7 @@ eval $cmd1 >> $logfile1
 # step 2/3: cat /var/adm/sulog
 #----------------------------------
 
-dt=`date +"%y/%m/%d %H:%M:%S"`
+dt=`date +"%Y/%m/%d %H:%M:%S"`
 echo "" >> $logfile2
 echo "App: $ApName v${ApVers} @ $hostname" >> $logfile2
 echo "Now: $dt" >> $logfile2
@@ -64,7 +66,7 @@ eval $cmd2 >> $logfile2
 # step 3/3: history -t
 #----------------------------------
 
-dt=`date +"%y/%m/%d %H:%M:%S"`
+dt=`date +"%Y/%m/%d %H:%M:%S"`
 echo "" >> $logfile3
 echo "App: $ApName v${ApVers} @ $hostname" >> $logfile3
 echo "Now: $dt" >> $logfile3

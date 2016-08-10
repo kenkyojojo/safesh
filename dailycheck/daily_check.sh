@@ -127,7 +127,7 @@ PARA=$1
 			STEP2
 			STEP3
 			STEP4
-			STEP5
+#			STEP5
 		;;
 	esac
 	exit 0
